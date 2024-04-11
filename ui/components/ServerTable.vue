@@ -98,7 +98,7 @@ function confirmDeleteServer(event, server) {
 
     <template #header>
       <div class="flex justify-content-between flex-column sm:flex-row gap-2 sm:gap-0">
-        <Button label="New" icon="pi pi-plus" severity="success" @click="openNew"/>
+        <Button label="Add" icon="pi pi-plus" severity="success" @click="openNew"/>
         <IconField iconPosition="left">
           <InputIcon class="pi pi-search"/>
           <InputText v-model="filters['global'].value" placeholder="Keyword Search" style="width: 100%"/>
@@ -109,9 +109,11 @@ function confirmDeleteServer(event, server) {
     <template #loading> Loading servers...</template>
 
 
-    <Column field="name" header="Server">
+    <Column field="name" header="Name">
       <template #body="{ data }">
-        {{ data.name }}
+        <b>
+          {{ data.name }}
+        </b>
       </template>
     </Column>
 
