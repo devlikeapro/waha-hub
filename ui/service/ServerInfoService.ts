@@ -1,7 +1,12 @@
-class ServerInfo {
-    constructor(public id: string, public name: string) {
+interface ServerConnection {
+    url: string;
+    key?: string;
+}
 
-    }
+interface ServerInfo {
+    id: string,
+    name: string,
+    connection: ServerConnection,
 }
 
 interface IServerInfoService {
@@ -34,5 +39,26 @@ class ServerInfoService implements IServerInfoService {
         if (server) {
             server.name = data.name;
         }
+    }
+
+    fakeData() {
+        this.servers = [
+            {
+                id: '1',
+                name: 'Server 1',
+                connection: {
+                    url: 'http://localhost:3000',
+                    key: '123',
+                },
+            },
+            {
+                id: '2',
+                name: 'Server 2',
+                connection: {
+                    url: 'http://localhost:3001',
+                    key: '123',
+                },
+            },
+        ];
     }
 }

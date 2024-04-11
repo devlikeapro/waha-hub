@@ -24,6 +24,8 @@ const statuses = ref([
 
 const productService = ProductService;
 const serverInfoService = new ServerInfoService()
+// TODO: Remove fakeData
+serverInfoService.fakeData()
 
 const getBadgeSeverity = (inventoryStatus) => {
   switch (inventoryStatus.toLowerCase()) {
