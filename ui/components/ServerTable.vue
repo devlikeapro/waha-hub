@@ -139,10 +139,12 @@ function confirmDeleteServer(event, server) {
 
     <Column>
       <template #body="{data}">
-        <Button icon="pi pi-pencil" class="mr-2" severity="success" rounded @click="editServer(data)"/>
-        <ConfirmPopup></ConfirmPopup>
-        <Button icon="pi pi-trash" class="mt-2" severity="warning" rounded
-                @click="confirmDeleteServer($event, data)"/>
+        <div class="text-right">
+          <Button icon="pi pi-pencil" class="mr-2" severity="success" rounded outlined @click="editServer(data)"/>
+          <ConfirmPopup></ConfirmPopup>
+          <Button icon="pi pi-trash" class="mt-2" severity="warning" rounded outlined
+                  @click="confirmDeleteServer($event, data)"/>
+        </div>
       </template>
     </Column>
   </DataTable>
