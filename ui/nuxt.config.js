@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     ssr: false,
     app: {
         head: {
-            title: 'Sakai Vue',
+            title: 'WAHA HUB',
             link: [
                 {
                     id: 'theme-css',
