@@ -64,6 +64,7 @@ export const useServerStore = defineStore('counter', () => {
 
     async function deleteServer(id: string) {
         await serverInfoService.remove(id)
+        sessions.delete(id)
         await refresh()
     }
 
@@ -76,9 +77,9 @@ export const useServerStore = defineStore('counter', () => {
     const connectedServers = computed(() => servers.value.filter(server => server.connected === true))
     const allSessions = computed(() => {
             const result = new Array<Session>()
-            for (const sessionsForServer of sessions.values()) {
-                result.push(...sessionsForServer)
-            }
+            sessions.forEach((value, key) => {
+                result.push(...value)
+            })
             return result
         }
     )
