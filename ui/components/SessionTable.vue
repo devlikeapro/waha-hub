@@ -85,7 +85,7 @@ function clearFilter() {
   <DataTable
       :value="sessions.length > 0 ? sessions : []"
       :paginator="true"
-      :rows="10"
+      :rows="20"
       :dataKey="(data) => `${data.name}-${data.server.id}`"
       :rowHover="true"
       v-model:filters="filters"
@@ -126,9 +126,10 @@ function clearFilter() {
         ></SessionStatusTag>
       </template>
 
-      <template #filter="{ filterModel }">
+      <template #filter="{ filterModel, filterCallback }">
         <Dropdown
             v-model="filterModel.value" :options="SessionStatuses"
+            @change="filterCallback()"
             placeholder="Any" class="p-column-filter"
             :showClear="true"
         >
