@@ -14,25 +14,6 @@ const {servers} = storeToRefs(serverStore)
 const dt = ref(null);
 const filters = ref({});
 const loading = ref(null);
-const statuses = ref([
-  {label: 'INSTOCK', value: 'instock'},
-  {label: 'LOWSTOCK', value: 'lowstock'},
-  {label: 'OUTOFSTOCK', value: 'outofstock'}
-]);
-
-
-const getBadgeSeverity = (inventoryStatus) => {
-  switch (inventoryStatus.toLowerCase()) {
-    case 'instock':
-      return 'success';
-    case 'lowstock':
-      return 'warning';
-    case 'outofstock':
-      return 'danger';
-    default:
-      return 'info';
-  }
-};
 
 onBeforeMount(() => {
   initFilters()
@@ -141,10 +122,9 @@ function confirmDeleteServer(event, server) {
     <Column header="Sessions">
       <template #body="{ data }">
         <div class="flex gap-1">
-          <Tag value="Working: 5" severity="success"></Tag>
-          <Tag value="Stopped: 0" severity="secondary"></Tag>
-          <Tag value="QR Code: 0" severity="warning"></Tag>
-          <Tag value="Failed: 0" severity="danger"></Tag>
+          <ServerSessionSummary
+              :sessions="serverStore.sessions.get(data.id)"
+          ></ServerSessionSummary>
         </div>
       </template>
     </Column>

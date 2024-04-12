@@ -9,7 +9,7 @@ export const useServerStore = defineStore('counter', () => {
     const serverInfoService = new InMemoryServerService()
 
     const servers = ref<ServerInfo[]>([])
-    const sessions: Map<string, Session[]> = new Map()
+    const sessions = reactive(new Map<string, Session[]>())
 
     async function fetchServers() {
         console.log('fetchServers')
@@ -46,5 +46,5 @@ export const useServerStore = defineStore('counter', () => {
         return true
     }
 
-    return {servers, refresh}
+    return {servers, sessions, refresh}
 })

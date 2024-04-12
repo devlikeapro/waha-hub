@@ -7026,6 +7026,7 @@ __metadata:
     eslint-plugin-nuxt: "npm:^4.0.0"
     eslint-plugin-prettier: "npm:^4.2.1"
     eslint-plugin-vue: "npm:^9.4.0"
+    lodash: "npm:^4.17.21"
     nuxt: "npm:^3.9.0"
     nuxt-primevue: "npm:^0.3.1"
     pinia: "npm:^2.1.7"
