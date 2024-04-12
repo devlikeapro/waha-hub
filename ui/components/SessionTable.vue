@@ -91,7 +91,7 @@ function clearFilter() {
       :value="sessions.length > 0 ? sessions : []"
       :paginator="true"
       :rows="20"
-      :dataKey="(data) => `${data.name}-${data.server.id}`"
+      :dataKey="(data) => `${data.name}-${data.server.id}-${data.status}`"
       :rowHover="true"
       v-model:filters="filters"
       filterDisplay="row"
@@ -105,8 +105,7 @@ function clearFilter() {
     <template #header>
       <div class="flex justify-content-between flex-column sm:flex-row gap-2 sm:gap-0">
         <div class="flex gap-2">
-          <Button label="Add" icon="pi pi-plus" severity="success" @click="openNew"/>
-          <Button type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="clearFilter()"/>
+          <Button label="Start" icon="pi pi-plus" severity="success" @click="openNew"/>
         </div>
         <IconField iconPosition="left">
           <InputIcon class="pi pi-search"/>
@@ -148,7 +147,7 @@ function clearFilter() {
       </template>
     </Column>
 
-    <Column field="server.name" header="Server">
+    <Column field="server.name" header="Server" :showFilterMenu="false">
       <template #filter="{ filterModel, filterCallback }">
         <Dropdown
             v-model="filterModel.value" :options="allServerName"

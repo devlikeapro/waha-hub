@@ -65,8 +65,8 @@ function hide() {
     <template #footer>
       <Button label="Cancel" icon="pi pi-times" text="" @click="hide" severity="secondary"/>
       <Button
-          :label="server.id? 'Save': 'Add' "
-          :icon="{'pi pi-check': !!server.id, 'pi pi-plus': !server.id}"
+          :label="server.id? 'Save': 'Connect' "
+          :icon="{'pi pi-check': !!server.id, 'pi pi-link': !server.id}"
           text="" @click="saveServer"
       />
     </template>

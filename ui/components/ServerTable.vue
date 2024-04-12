@@ -95,7 +95,7 @@ function refreshServers() {
 
     <template #header>
       <div class="flex justify-content-between flex-column sm:flex-row gap-2 sm:gap-0">
-        <Button label="Add" icon="pi pi-plus" severity="success" @click="openNew"/>
+        <Button label="Connect" icon="pi pi-link" severity="success" @click="openNew"/>
         <IconField iconPosition="left">
           <InputIcon class="pi pi-search"/>
           <InputText v-model="filters['global'].value" placeholder="Keyword Search" style="width: 100%"/>
