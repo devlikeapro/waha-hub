@@ -12,7 +12,7 @@ const toast = useToast();
 const confirmPopup = useConfirm();
 
 const store = useServerStore()
-const {allSessions} = storeToRefs(store)
+const {allSessions, refreshing} = storeToRefs(store)
 const sessions = allSessions
 const session = ref({})
 const sessionDialog = ref(false)
@@ -67,7 +67,7 @@ function confirmDeleteSession(event, session) {
 }
 
 function refreshServers() {
-  useAsyncData('store', () => store.refresh())
+  useAsyncData('store', async () => await store.refresh())
 }
 
 function clearFilter() {
@@ -83,7 +83,7 @@ function clearFilter() {
       Sessions
     </h5>
     <div>
-      <Button icon="pi pi-refresh" rounded text="" @click="refreshServers"/>
+      <RefreshButton :refreshing="refreshing" @click="refreshServers"/>
     </div>
   </div>
 
