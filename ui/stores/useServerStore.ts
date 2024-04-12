@@ -15,9 +15,20 @@ export const useServerStore = defineStore('counter', () => {
         console.log('fetchServers')
         servers.value = await serverInfoService.list()
         servers.value.forEach(server => {
-            fetchVersion(server)
-            fetchSessions(server.id)
+            refreshServer(server.id)
         })
+    }
+
+    async function refreshServer(id: string) {
+        console.log('refreshServer', id)
+        const server = servers.value.find(server => server.id === id)
+        if (!server) {
+            return
+        }
+        await Promise.all([
+            fetchVersion(server),
+            fetchSessions(server.id)
+        ])
     }
 
     async function fetchSessions(id: string) {

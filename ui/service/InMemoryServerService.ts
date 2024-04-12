@@ -32,6 +32,9 @@ export class InMemoryServerService implements IServerService {
     }
 
     async getVersion(id: string): Promise<string> {
+        if (id.endsWith("111")) {
+            return "1.1.1";
+        }
         return "1.0.0";
     }
 
