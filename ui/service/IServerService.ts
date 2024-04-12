@@ -12,7 +12,14 @@ export interface ServerInfo {
     version?: string,
 }
 
+export interface CreateServerInfo {
+    name: string,
+    connection: ServerConnection,
+}
+
 export interface IServerService {
+    add(data: CreateServerInfo): Promise<void>;
+
     get(id: string): Promise<ServerInfo>;
 
     list(): Promise<ServerInfo[]>;

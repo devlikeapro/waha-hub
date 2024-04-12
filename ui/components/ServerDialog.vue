@@ -1,4 +1,6 @@
 <script setup>
+import {useServerStore} from "../stores/useServerStore";
+
 const props = defineProps({
   server: {
     type: Object,
@@ -13,10 +15,16 @@ const props = defineProps({
 });
 const visible = defineModel("visible");
 const toast = useToast();
-const server = reactive({...props.server});
+const server = ref({...props.server});
 
-function saveServer() {
-  toast.add({severity: 'success', summary: 'Success', detail: 'Server Saved', life: 3000});
+const serverStore = useServerStore()
+
+async function saveServer() {
+  if (server.value.id) {
+    toast.add({severity: 'info', summary: 'Server Edited', detail: server.value.name, life: 3000});
+  } else {
+    await serverStore.addServer(server.value)
+  }
   hide()
 }
 

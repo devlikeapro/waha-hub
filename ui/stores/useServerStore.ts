@@ -46,5 +46,10 @@ export const useServerStore = defineStore('counter', () => {
         return true
     }
 
-    return {servers, sessions, refresh}
+    async function addServer(server: ServerInfo) {
+        await serverInfoService.add(server)
+        await refresh()
+    }
+
+    return {servers, sessions, refresh, addServer}
 })

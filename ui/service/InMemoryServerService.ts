@@ -13,6 +13,12 @@ export class InMemoryServerService implements IServerService {
 
     private servers: ServerInfo[] = [];
 
+    async add(data: ServerInfo): Promise<void> {
+        const server = lodash.cloneDeep(data)
+        server.id = `waha_${Math.random().toString().slice(2)}`
+        this.servers.push(server)
+    }
+
     async get(id: string): Promise<ServerInfo> {
         const server = this.servers.find(server => server.id === id);
         if (!server) {
