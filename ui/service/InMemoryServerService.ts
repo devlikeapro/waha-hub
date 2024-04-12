@@ -49,6 +49,7 @@ export class InMemoryServerService implements IServerService {
     async getVersion(id: string): Promise<string> {
         const failed = id.endsWith("000");
         if (failed) {
+            await sleep(3000)
             throw new Error('Getting version failed');
         }
         await sleep(1000)
@@ -62,6 +63,7 @@ export class InMemoryServerService implements IServerService {
         await sleep(1000)
         const failed = id.endsWith("000");
         if (failed) {
+            await sleep(3000)
             throw new Error('Getting sessions failed');
         }
         const differentStatuses = id.endsWith("111");

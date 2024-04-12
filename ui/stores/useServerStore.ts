@@ -3,6 +3,7 @@ import {ref} from "vue"
 import type {ServerInfo} from "../service/IServerService";
 import {InMemoryServerService} from "../service/InMemoryServerService";
 import type {Session} from "../service/Session";
+import {computed} from "../.nuxt/imports";
 
 export const useServerStore = defineStore('counter', () => {
     // TODO: implement the store
@@ -69,5 +70,16 @@ export const useServerStore = defineStore('counter', () => {
         await refresh()
     }
 
-    return {servers, sessions, refresh, addServer, deleteServer, editServer}
+    const notConnectedServers = computed(() => servers.value.filter(server => server.connected === false))
+    const connectedServers = computed(() => servers.value.filter(server => server.connected === true))
+    return {
+        servers,
+        sessions,
+        refresh,
+        addServer,
+        deleteServer,
+        editServer,
+        notConnectedServers,
+        connectedServers,
+    }
 })
