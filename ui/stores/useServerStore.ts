@@ -14,9 +14,6 @@ export const useServerStore = defineStore('counter', () => {
     async function fetchServers() {
         console.log('fetchServers')
         servers.value = await serverInfoService.list()
-        servers.value.forEach(server => {
-            refreshServer(server.id)
-        })
     }
 
     async function refreshServer(id: string) {
@@ -25,10 +22,17 @@ export const useServerStore = defineStore('counter', () => {
         if (!server) {
             return
         }
-        await Promise.all([
+        const requests = [
             fetchVersion(server),
             fetchSessions(server.id)
-        ])
+        ]
+        // Await all, set connected based on the result
+        try {
+            await Promise.all(requests)
+            server.connected = true
+        } catch (e) {
+            server.connected = false
+        }
     }
 
     async function fetchSessions(id: string) {
@@ -42,8 +46,12 @@ export const useServerStore = defineStore('counter', () => {
     }
 
     async function refresh() {
+        console.log('refresh')
         await fetchServers()
-        return true
+        const requests = servers.value.map(server => {
+            refreshServer(server.id)
+        })
+        await Promise.all(requests)
     }
 
     async function addServer(server: ServerInfo) {

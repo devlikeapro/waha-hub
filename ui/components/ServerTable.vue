@@ -5,6 +5,7 @@ import {FilterMatchMode} from "primevue/api";
 import {useConfirm} from "primevue/useconfirm";
 import {useServerStore} from "../stores/useServerStore";
 import lodash from "lodash";
+import {useAsyncData} from "nuxt/app";
 
 const toast = useToast();
 const confirmPopup = useConfirm();
@@ -21,7 +22,9 @@ const loading = ref(null);
 
 onBeforeMount(() => {
   initFilters()
-  useAsyncData('serverStore', () => serverStore.refresh())
+  useAsyncData('serverStore', () =>
+      serverStore.refresh()
+  )
 });
 onMounted(() => {
 });
@@ -62,10 +65,19 @@ function confirmDeleteServer(event, server) {
   });
 }
 
+function refreshServers() {
+  useAsyncData('serverStore', () => serverStore.refresh())
+}
+
 </script>
 
 <template>
-  <h5>Servers</h5>
+  <div class="flex justify-content-between align-items-center mb-2">
+    <h5 class="m-0">Servers</h5>
+    <div>
+      <Button icon="pi pi-refresh" rounded text="" @click="refreshServers"/>
+    </div>
+  </div>
 
   <DataTable
       :value="servers"
@@ -107,8 +119,7 @@ function confirmDeleteServer(event, server) {
     <Column header="API">
       <template #body="{ data }">
         <div>
-          <i class="pi"
-             :class="{ 'text-green-500 pi-check-circle': data.connected, 'text-pink-500 pi-times-circle': !data.connected }"></i>
+          <ServerConnectionIcon :connected="data.connected"></ServerConnectionIcon>
           <a
               class="ml-1"
               :href="data.connection.url" target="_blank">
@@ -120,8 +131,8 @@ function confirmDeleteServer(event, server) {
 
     <Column field="version" header="Version">
       <template #body="{ data }">
-        <Skeleton v-if="data.version === undefined" width="9rem">
-        </Skeleton>
+        <Skeleton v-if="data.connected === undefined" width="9rem"></Skeleton>
+        <ServerConnectionIcon v-if="data.connected===false" :connected="data.connected"></ServerConnectionIcon>
         <code v-else>
           {{ data.version }}
         </code>
@@ -132,9 +143,10 @@ function confirmDeleteServer(event, server) {
       <template #body="{ data }">
         <div class="flex gap-1">
           <Skeleton
-              v-if="serverStore.sessions.get(data.id) === undefined"
+              v-if="data.connected===undefined"
               width="10rem">
           </Skeleton>
+          <ServerConnectionIcon v-if="data.connected===false" :connected="data.connected"></ServerConnectionIcon>
           <ServerSessionSummary
               :sessions="serverStore.sessions.get(data.id)"
           ></ServerSessionSummary>

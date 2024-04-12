@@ -10,6 +10,7 @@ export interface ServerInfo {
     name: string,
     connection: ServerConnection,
     version?: string,
+    connected?: boolean,
 }
 
 export interface CreateServerInfo {
