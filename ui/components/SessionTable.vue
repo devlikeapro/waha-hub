@@ -45,9 +45,6 @@ function openNew() {
   sessionDialog.value = true;
 }
 
-function rowClick(event) {
-  toast.add({severity: 'info', summary: 'Session Selected', detail: event.data.name, life: 3000});
-}
 
 function editSession(selected) {
   session.value = lodash.cloneDeep(selected);
@@ -98,7 +95,6 @@ function clearFilter() {
       :loading="loading"
       :globalFilterFields="['name', 'server.name', 'status']"
       showGridlines
-      @row-click="rowClick"
   >
 
     <template #header>
