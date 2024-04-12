@@ -99,7 +99,6 @@ function clearFilter() {
       :globalFilterFields="['name', 'server.name', 'status']"
       showGridlines
       @row-click="rowClick"
-      class="p-datatable--clickable"
   >
 
     <template #header>
