@@ -124,9 +124,14 @@ function clearFilter() {
 
     <Column field="status" header="Status" :showFilterMenu="false" style="max-width: 5rem">
       <template #body="{ data }">
-        <SessionStatusTag
-            :status="data.status"
-        ></SessionStatusTag>
+        <div class="flex gap-2">
+          <ScreenshotButton></ScreenshotButton>
+          <div class="my-auto">
+            <SessionStatusTag
+                :status="data.status"
+            ></SessionStatusTag>
+          </div>
+        </div>
       </template>
 
       <template #filter="{ filterModel, filterCallback }">
