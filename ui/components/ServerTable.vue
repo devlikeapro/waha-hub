@@ -10,8 +10,8 @@ import {useAsyncData} from "nuxt/app";
 const toast = useToast();
 const confirmPopup = useConfirm();
 
-const serverStore = useServerStore()
-const {servers} = storeToRefs(serverStore)
+const store = useServerStore()
+const {servers} = storeToRefs(store)
 const server = ref({connection: {}}
 );
 const serverDialog = ref(false)
@@ -22,8 +22,8 @@ const loading = ref(null);
 
 onBeforeMount(() => {
   initFilters()
-  useAsyncData('serverStore', () =>
-      serverStore.refresh()
+  useAsyncData('store', () =>
+      store.refresh()
   )
 });
 onMounted(() => {
@@ -58,7 +58,7 @@ function confirmDeleteServer(event, server) {
     message: `Delete '${server.name}'?`,
     icon: 'pi pi-exclamation-triangle',
     accept: () => {
-      return serverStore.deleteServer(server.id)
+      return store.deleteServer(server.id)
     },
     reject: () => {
     }
@@ -66,7 +66,7 @@ function confirmDeleteServer(event, server) {
 }
 
 function refreshServers() {
-  useAsyncData('serverStore', () => serverStore.refresh())
+  useAsyncData('store', () => store.refresh())
 }
 
 </script>
@@ -141,7 +141,7 @@ function refreshServers() {
             {{ data.version.engine }}
           </code>
           <code> (</code>
-          <code :class="{'text-orange-400': data.version.version !==serverStore.latestVersion}">
+          <code :class="{'text-orange-400': data.version.version !==store.latestVersion}">
             {{ data.version.version }}
           </code>
           <code>)</code>
@@ -158,7 +158,7 @@ function refreshServers() {
           </Skeleton>
           <ServerConnectionIcon v-if="data.connected===false" :connected="data.connected"></ServerConnectionIcon>
           <ServerSessionSummary
-              :sessions="serverStore.sessions.get(data.id)"
+              :sessions="store.sessions.get(data.id)"
           ></ServerSessionSummary>
         </div>
       </template>
