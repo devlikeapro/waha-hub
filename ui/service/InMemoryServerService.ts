@@ -1,5 +1,10 @@
 import type {IServerService, ServerInfo} from "./IServerService";
+import lodash from 'lodash'
 import type {Session} from "./Session";
+
+function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 export class InMemoryServerService implements IServerService {
     constructor() {
@@ -32,6 +37,7 @@ export class InMemoryServerService implements IServerService {
     }
 
     async getVersion(id: string): Promise<string> {
+        await sleep(1000)
         if (id.endsWith("111")) {
             return "1.1.1";
         }
@@ -39,6 +45,8 @@ export class InMemoryServerService implements IServerService {
     }
 
     async getSessions(id: string): Promise<Session[]> {
+        await sleep(1000)
+        const differentStatuses = id.endsWith("111");
         return [
             {
                 name: `Session 1 - ${id}`,
@@ -47,22 +55,22 @@ export class InMemoryServerService implements IServerService {
             },
             {
                 name: `Session 2 - ${id}`,
-                status: id.endsWith("111") ? 'STOPPED' : "WORKING",
+                status: differentStatuses ? 'STOPPED' : "WORKING",
                 config: {},
             },
             {
                 name: `Session 3 - ${id}`,
-                status: id.endsWith("111") ? 'SCAN_QR_CODE' : "WORKING",
+                status: differentStatuses ? 'SCAN_QR_CODE' : "WORKING",
                 config: {},
             },
             {
                 name: `Session 4 - ${id}`,
-                status: id.endsWith("111") ? 'FAILED' : "WORKING",
+                status: differentStatuses ? 'FAILED' : "WORKING",
                 config: {},
             },
             {
                 name: `Session 5 - ${id}`,
-                status: id.endsWith("111") ? 'STARTING' : "WORKING",
+                status: differentStatuses ? 'STARTING' : "WORKING",
                 config: {},
             }
         ];

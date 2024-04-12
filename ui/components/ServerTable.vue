@@ -113,8 +113,10 @@ function confirmDeleteServer(event, server) {
 
     <Column field="version" header="Version">
       <template #body="{ data }">
-        <code>
-          {{ data.version || "-" }}
+        <Skeleton v-if="data.version === undefined" width="9rem">
+        </Skeleton>
+        <code v-else>
+          {{ data.version }}
         </code>
       </template>
     </Column>
@@ -122,6 +124,10 @@ function confirmDeleteServer(event, server) {
     <Column header="Sessions">
       <template #body="{ data }">
         <div class="flex gap-1">
+          <Skeleton
+              v-if="serverStore.sessions.get(data.id) === undefined"
+              width="10rem">
+          </Skeleton>
           <ServerSessionSummary
               :sessions="serverStore.sessions.get(data.id)"
           ></ServerSessionSummary>
