@@ -50,7 +50,7 @@ function editServer(selected) {
 function confirmDeleteServer(event, server) {
   confirmPopup.require({
     target: event.target,
-    message: `Delete '${server.name}'?`,
+    message: `Disconnect ${server.name}?`,
     icon: 'pi pi-exclamation-triangle',
     accept: () => {
       return store.deleteServer(server.id)
@@ -162,7 +162,7 @@ function refreshServers() {
         <div class="text-right">
           <Button icon="pi pi-pencil" class="mr-2" severity="success" rounded outlined @click="editServer(data)"/>
           <ConfirmPopup></ConfirmPopup>
-          <Button icon="pi pi-trash" class="mt-2" severity="warning" rounded outlined
+          <Button icon="pi pi-times" class="mt-2" severity="warning" rounded outlined
                   @click="confirmDeleteServer($event, data)"/>
         </div>
       </template>

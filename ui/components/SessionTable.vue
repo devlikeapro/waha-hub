@@ -105,7 +105,7 @@ function clearFilter() {
     <template #header>
       <div class="flex justify-content-between flex-column sm:flex-row gap-2 sm:gap-0">
         <div class="flex gap-2">
-          <Button label="Start" icon="pi pi-plus" severity="success" @click="openNew"/>
+          <Button label="Start" icon="pi pi-play" severity="success" @click="openNew"/>
         </div>
         <IconField iconPosition="left">
           <InputIcon class="pi pi-search"/>
