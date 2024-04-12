@@ -6,7 +6,7 @@ const visible = defineModel("visible");
 const server = defineModel("server");
 
 const toast = useToast();
-const serverStore = useServerStore()
+const store = useServerStore()
 
 const submitted = ref(false);
 const validConnectionUrl = computed(
@@ -24,10 +24,10 @@ async function saveServer() {
   }
 
   if (server.value.id) {
-    await serverStore.editServer(server.value.id, server.value)
+    await store.editServer(server.value.id, server.value)
     toast.add({severity: 'success', summary: 'Successful', detail: 'Updated', life: 3000});
   } else {
-    await serverStore.addServer(server.value)
+    await store.addServer(server.value)
     toast.add({severity: 'success', summary: 'Successful', detail: 'Created', life: 3000});
   }
   hide()
