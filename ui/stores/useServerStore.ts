@@ -51,5 +51,15 @@ export const useServerStore = defineStore('counter', () => {
         await refresh()
     }
 
-    return {servers, sessions, refresh, addServer}
+    async function deleteServer(id: string) {
+        await serverInfoService.remove(id)
+        await refresh()
+    }
+
+    async function editServer(id: string, server: ServerInfo) {
+        await serverInfoService.edit(id, server)
+        await refresh()
+    }
+
+    return {servers, sessions, refresh, addServer, deleteServer, editServer}
 })

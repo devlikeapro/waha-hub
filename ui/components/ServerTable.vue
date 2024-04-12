@@ -53,10 +53,9 @@ function confirmDeleteServer(event, server) {
     message: `Delete '${server.name}'?`,
     icon: 'pi pi-exclamation-triangle',
     accept: () => {
-      toast.add({severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000});
+      return serverStore.deleteServer(server.id)
     },
     reject: () => {
-      toast.add({severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000});
     }
   });
 }
