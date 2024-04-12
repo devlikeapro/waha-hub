@@ -1,7 +1,7 @@
 <script setup>
 import {ref, onBeforeMount} from 'vue';
 import {useToast} from 'primevue/usetoast';
-import {FilterMatchMode} from "primevue/api";
+import {FilterMatchMode, FilterOperator} from "primevue/api";
 import {useConfirm} from "primevue/useconfirm";
 import {useServerStore} from "../stores/useServerStore";
 import lodash from "lodash";
@@ -30,8 +30,13 @@ const initFilters = () => {
   filters.value = {
     global: {value: null, matchMode: FilterMatchMode.CONTAINS},
     status: {value: null, matchMode: FilterMatchMode.EQUALS},
+    'server.name': {value: null, matchMode: FilterMatchMode.EQUALS},
+    name: {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
   };
 };
+const allServerName = computed(() => {
+  return lodash.uniq(store.servers.map(server => server.name)).sort()
+});
 
 function openNew() {
   session.value = {
@@ -143,9 +148,15 @@ function clearFilter() {
       </template>
     </Column>
 
-    <Column field="server" header="Server">
-      <template #body="{ data }">
-        {{ data.server.name }}
+    <Column field="server.name" header="Server">
+      <template #filter="{ filterModel, filterCallback }">
+        <Dropdown
+            v-model="filterModel.value" :options="allServerName"
+            @change="filterCallback()"
+            placeholder="Any" class="p-column-filter"
+            :showClear="true"
+        >
+        </Dropdown>
       </template>
     </Column>
 
