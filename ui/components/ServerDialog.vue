@@ -2,18 +2,12 @@
 import {useServerStore} from "../stores/useServerStore";
 import {ref} from "vue";
 
-const props = defineProps({
-  server: {
-    type: Object,
-    required: true
-  },
-});
 const visible = defineModel("visible");
+const server = defineModel("server");
 
 const toast = useToast();
 const serverStore = useServerStore()
 
-const server = ref({...props.server});
 const submitted = ref(false);
 
 
@@ -27,8 +21,8 @@ async function saveServer() {
     await serverStore.addServer(server.value)
     toast.add({severity: 'success', summary: 'Successful', detail: 'Created', life: 3000});
   }
-
   hide()
+  server.value = {connection: {}}
 }
 
 function hide() {
@@ -59,8 +53,12 @@ function hide() {
     </div>
 
     <template #footer>
-      <Button label="Cancel" icon="pi pi-times" text="" @click="hide"/>
-      <Button label="Save" icon="pi pi-check" text="" @click="saveServer"/>
+      <Button label="Cancel" icon="pi pi-times" text="" @click="hide" severity="secondary"/>
+      <Button
+          :label="server.id? 'Save': 'Add' "
+          :icon="{'pi pi-check': !!server.id, 'pi pi-plus': !server.id}"
+          text="" @click="saveServer"
+      />
     </template>
   </Dialog>
 

@@ -4,6 +4,7 @@ import {useToast} from 'primevue/usetoast';
 import {FilterMatchMode} from "primevue/api";
 import {useConfirm} from "primevue/useconfirm";
 import {useServerStore} from "../stores/useServerStore";
+import lodash from "lodash";
 
 const toast = useToast();
 const confirmPopup = useConfirm();
@@ -43,8 +44,8 @@ function rowClick(event) {
   toast.add({severity: 'info', summary: 'Server Selected', detail: event.data.name, life: 3000});
 }
 
-function editServer(server) {
-  server.value = {...server};
+function editServer(selected) {
+  server.value = lodash.cloneDeep(selected);
   serverDialog.value = true;
 }
 
@@ -154,7 +155,7 @@ function confirmDeleteServer(event, server) {
   </DataTable>
   <ServerDialog
       v-model:visible="serverDialog"
-      :server="server"
+      v-model:server="server"
   ></ServerDialog>
 </template>
 
