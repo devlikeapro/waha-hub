@@ -111,6 +111,14 @@ function refreshServers() {
       </template>
     </Column>
 
+    <Column field="status" header="Status">
+      <template #body="{ data }">
+        <SessionStatusTag
+            :status="data.status"
+        ></SessionStatusTag>
+      </template>
+    </Column>
+
     <Column field="server" header="Server">
       <template #body="{ data }">
         {{ store.getServer(data.server).name }}
