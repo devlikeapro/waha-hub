@@ -1,9 +1,11 @@
 import {IServerService, ServerInfo} from "./IServerService";
+import {Session} from "./Session";
 
 export class InMemoryServerService implements IServerService {
     constructor() {
         this.fakeData();
     }
+
     private servers: ServerInfo[] = [];
 
     async get(id: string): Promise<ServerInfo> {
@@ -23,6 +25,40 @@ export class InMemoryServerService implements IServerService {
         if (server) {
             server.name = data.name;
         }
+    }
+
+    async getVersion(id: string): Promise<String> {
+        return "1.0.0";
+    }
+
+    async getSessions(id: string): Promise<Session[]> {
+        return [
+            {
+                name: `Session 1 - ${id}`,
+                status: 'WORKING',
+                config: {},
+            },
+            {
+                name: `Session 2 - ${id}`,
+                status: id.endsWith("111") ? 'STOPPED' : "WORKING",
+                config: {},
+            },
+            {
+                name: `Session 3 - ${id}`,
+                status: id.endsWith("111") ? 'SCAN_QR_CODE' : "WORKING",
+                config: {},
+            },
+            {
+                name: `Session 4 - ${id}`,
+                status: id.endsWith("111") ? 'FAILED' : "WORKING",
+                config: {},
+            },
+            {
+                name: `Session 5 - ${id}`,
+                status: id.endsWith("111") ? 'STARTING' : "WORKING",
+                config: {},
+            }
+        ];
     }
 
     fakeData() {

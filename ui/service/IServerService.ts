@@ -1,3 +1,5 @@
+import {Session} from "./Session";
+
 export interface ServerConnection {
     url: string;
     key?: string;
@@ -17,4 +19,8 @@ export interface IServerService {
     remove(id: string): Promise<void>;
 
     edit(id: string, data: ServerInfo): Promise<void>;
+
+    getVersion(id: string): Promise<String>;
+
+    getSessions(id: string): Promise<Session[]>;
 }
