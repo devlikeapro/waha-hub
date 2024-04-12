@@ -1,7 +1,7 @@
 <script setup>
 import {ref, onMounted, onBeforeMount} from 'vue';
 import {useToast} from 'primevue/usetoast';
-import {ServerInfoService} from "../service/ServerInfoService";
+import {InMemoryServerService} from "../service/InMemoryServerService";
 import {FilterMatchMode} from "primevue/api";
 import {useConfirm} from "primevue/useconfirm";
 
@@ -18,7 +18,7 @@ const statuses = ref([
   {label: 'OUTOFSTOCK', value: 'outofstock'}
 ]);
 
-const serverInfoService = new ServerInfoService()
+const serverInfoService = new InMemoryServerService()
 
 const getBadgeSeverity = (inventoryStatus) => {
   switch (inventoryStatus.toLowerCase()) {

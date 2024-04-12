@@ -1,25 +1,6 @@
-export interface ServerConnection {
-    url: string;
-    key?: string;
-}
+import {IServerService, ServerInfo} from "./IServerService";
 
-export interface ServerInfo {
-    id: string,
-    name: string,
-    connection: ServerConnection,
-}
-
-interface IServerInfoService {
-    get(id: string): Promise<ServerInfo>;
-
-    list(): Promise<ServerInfo[]>;
-
-    remove(id: string): Promise<void>;
-
-    edit(id: string, data: ServerInfo): Promise<void>;
-}
-
-export class ServerInfoService implements IServerInfoService {
+export class InMemoryServerService implements IServerService {
     constructor() {
         this.fakeData();
     }
