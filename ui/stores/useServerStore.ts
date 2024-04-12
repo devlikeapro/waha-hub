@@ -1,22 +1,23 @@
 import {defineStore} from 'pinia'
-import {ref} from "vue"
+import {ref, reactive} from "vue"
 import type {ServerInfo} from "../service/IServerService";
 import {InMemoryServerService} from "../service/InMemoryServerService";
 import type {Session} from "../service/Session";
 import {computed} from "../.nuxt/imports";
 
-export const useServerStore = defineStore('counter', () => {
+
+export const useServerStore = defineStore('serverStore', () => {
     // TODO: implement the store
     const serverInfoService = new InMemoryServerService()
     const latestVersion = ref('2024.3.1')
 
     const servers = ref<ServerInfo[]>([])
     const sessions = reactive(new Map<string, Session[]>())
-    const toast = useToast();
 
     async function fetchServers() {
         console.log('fetchServers')
-        servers.value = await serverInfoService.list()
+        const data = await serverInfoService.list()
+        servers.value = data.map(server => reactive(server))
     }
 
     async function refreshServer(id: string) {
@@ -73,8 +74,6 @@ export const useServerStore = defineStore('counter', () => {
         await refresh()
     }
 
-    const notConnectedServers = computed(() => servers.value.filter(server => server.connected === false))
-    const connectedServers = computed(() => servers.value.filter(server => server.connected === true))
     const allSessions = computed(() => {
             const result = new Array<Session>()
             sessions.forEach((value, key) => {
@@ -92,7 +91,5 @@ export const useServerStore = defineStore('counter', () => {
         deleteServer,
         editServer,
         latestVersion,
-        notConnectedServers,
-        connectedServers,
     }
 })

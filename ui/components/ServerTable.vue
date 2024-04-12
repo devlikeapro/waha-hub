@@ -80,7 +80,7 @@ function refreshServers() {
   </div>
 
   <DataTable
-      :value="servers"
+      :value="servers.length > 0 ? servers : []"
       :paginator="true"
       :rows="10"
       dataKey="id"

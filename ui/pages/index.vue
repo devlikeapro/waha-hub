@@ -1,13 +1,17 @@
 <script setup>
 import {onMounted} from 'vue';
 import {useServerStore} from "../stores/useServerStore";
+import {computed} from "../.nuxt/imports";
 
 
 const store = useServerStore()
-const badSessions = computed(() => store.allSessions.filter(s => s.status !== "WORKING" && s.status !== "STOPPED"))
+const notConnectedServers = computed(() => {
+  console.log("store.servers", store.servers)
+  return store.servers.filter(server => server.connected === false)
+})
+const connectedServers = computed(() => store.servers.filter(server => server.connected === true))
 const serversRequireUpdates = computed(() => store.servers.filter(s => s.version && s.version.version !== store.latestVersion))
-
-
+const badSessions = computed(() => store.allSessions.filter(s => s.status !== "WORKING" && s.status !== "STOPPED"))
 </script>
 
 <template>
@@ -27,12 +31,12 @@ const serversRequireUpdates = computed(() => store.servers.filter(s => s.version
           </div>
         </div>
         <div>
-          <template v-if="store.notConnectedServers.length > 0">
-            <span class="text-red-500 font-medium">{{ store.notConnectedServers.length }}</span>
+          <template v-if="notConnectedServers.length > 0">
+            <span class="text-red-500 font-medium">{{ notConnectedServers.length }}</span>
             <span class="text-900"> not connected</span>
             <span> / </span>
           </template>
-          <span class="text-green-500 font-medium">{{ store.connectedServers.length }}</span>
+          <span class="text-green-500 font-medium">{{ connectedServers.length }}</span>
           <span class="text-500"> connected</span>
         </div>
       </div>
