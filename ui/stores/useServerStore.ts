@@ -12,6 +12,7 @@ export const useServerStore = defineStore('counter', () => {
 
     const servers = ref<ServerInfo[]>([])
     const sessions = reactive(new Map<string, Session[]>())
+    const toast = useToast();
 
     async function fetchServers() {
         console.log('fetchServers')
