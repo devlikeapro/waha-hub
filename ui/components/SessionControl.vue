@@ -6,11 +6,33 @@ const toast = useToast();
 const refreshScreenshot = () => {
   toast.add({severity: 'info', summary: 'Screenshot', detail: 'Refreshing screenshot'});
 }
+const response = ref(null)
+
+async function copyResponse(event) {
+  await navigator.clipboard.writeText(this.response);
+  event.preventDefault();
+}
+
+// TODO: For test
+const data = {
+  "id": 1,
+  "name": "Session 1",
+  "status": "RUNNING",
+  "server": {
+    "id": 1,
+    "name": "Server 1",
+    "connection": {
+      "url": "http://localhost:8080"
+    }
+  }
+
+}
+response.value = JSON.stringify(data, null, 2)
 
 </script>
 
 <template>
-  <Splitter style="min-height: 300px" class="mb-5">
+  <Splitter style="min-height: 75%" class="mb-5">
     <SplitterPanel :size="40">
       <div class="px-4 pb-4">
         <div class="flex justify-content-center align-items-center">
@@ -19,9 +41,11 @@ const refreshScreenshot = () => {
               @click="refreshScreenshot"
           ></RefreshButton>
         </div>
-        <img src="/demo/images/nature/nature9.jpg" alt="Nature 9"
-             style=" width:100%; height:100%"
-        />
+        <div>
+          <img src="/demo/images/nature/nature9.jpg" alt="Nature 9"
+               style=" width:100%; height:100%"
+          />
+        </div>
       </div>
     </SplitterPanel>
 
@@ -35,10 +59,21 @@ const refreshScreenshot = () => {
           </div>
         </SplitterPanel>
         <SplitterPanel :size="50">
-          <div class="p-4 pt-3">
+          <div class="p-4 pt-0 flex flex-column h-full">
             <div class="flex justify-content-center align-items-center">
-              <h5>Response</h5>
+              <h5 class="m-0">Response</h5>
+              <Button
+                  rounded
+                  text=""
+                  v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
+                  :tabindex="0"
+                  icon="pi pi-copy"
+                  @click="copyResponse($event)">
+              </Button>
             </div>
+            <CodeHighlight class="m-0 p-4">
+              {{ response }}
+            </CodeHighlight>
           </div>
         </SplitterPanel>
       </Splitter>
