@@ -183,7 +183,7 @@ function clearFilter() {
     </Column>
     <template #expansion="slotProps">
       <div class="p-3">
-        <h5>Orders for</h5>
+        <SessionControl :session="slotProps.data"></SessionControl>
       </div>
     </template>
   </DataTable>
