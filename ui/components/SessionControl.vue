@@ -1,5 +1,6 @@
 <script setup>
 import {useToast} from "primevue/usetoast";
+import {useServerStore} from "../stores/useServerStore";
 
 const props = defineProps(['session'])
 const toast = useToast();
