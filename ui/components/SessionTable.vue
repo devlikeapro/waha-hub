@@ -30,13 +30,10 @@ const initFilters = () => {
   filters.value = {
     global: {value: null, matchMode: FilterMatchMode.CONTAINS},
     status: {value: null, matchMode: FilterMatchMode.EQUALS},
-    'server.name': {value: null, matchMode: FilterMatchMode.EQUALS},
+    'server.id': {value: null, matchMode: FilterMatchMode.EQUALS},
     name: {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
   };
 };
-const allServerName = computed(() => {
-  return lodash.uniq(store.servers.map(server => server.name)).sort()
-});
 
 function openNew() {
   session.value = {
@@ -91,7 +88,7 @@ function clearFilter() {
       v-model:filters="filters"
       filterDisplay="row"
       :loading="loading"
-      :globalFilterFields="['name', 'server.name', 'status']"
+      :globalFilterFields="['name', 'server.id', 'server.name', 'server.connection.url', 'status']"
       showGridlines
   >
 
@@ -145,14 +142,25 @@ function clearFilter() {
       </template>
     </Column>
 
-    <Column field="server.name" header="Server" :showFilterMenu="false">
+    <Column field="server.name" filterField='server.id' header="Server" :showFilterMenu="false">
       <template #filter="{ filterModel, filterCallback }">
         <Dropdown
-            v-model="filterModel.value" :options="allServerName"
+            v-model="filterModel.value" :options="store.servers"
             @change="filterCallback()"
             placeholder="Any" class="p-column-filter"
             :showClear="true"
         >
+          <template #value="slotProps">
+            <template v-if="slotProps.value">
+              <ServerConnectionIcon :connected="slotProps.value.connected"></ServerConnectionIcon>
+              <span class="ml-1">{{ slotProps.value.name }} </span>
+            </template>
+            <span v-else>{{ slotProps.placeholder }}</span>
+          </template>
+          <template #option="slotProps">
+            <ServerConnectionIcon :connected="slotProps.option.connected"></ServerConnectionIcon>
+            <span class="ml-1">{{ slotProps.option.name }} ({{slotProps.option.connection.url}}) </span>
+          </template>
         </Dropdown>
       </template>
     </Column>
