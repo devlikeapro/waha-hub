@@ -1,13 +1,20 @@
 <script setup>
 import {useToast} from "primevue/usetoast";
 
-defineProps(['session'])
+const props = defineProps(['session'])
 const toast = useToast();
 const refreshScreenshot = () => {
   toast.add({severity: 'info', summary: 'Screenshot', detail: 'Refreshing screenshot'});
 }
-const request = computed(() => "TODO")
 const response = ref(null)
+const requestMethod = ref('POST')
+const requestEndpoint = ref('/api/sendText')
+const requestExample = {
+  "chatId": "11111111111@c.us",
+  "text": "Hi there!",
+  "session": props.session.value,
+}
+const requestBody = ref(JSON.stringify(requestExample, null, 2))
 
 async function copyResponse(event) {
   await navigator.clipboard.writeText(response.value);
@@ -15,9 +22,11 @@ async function copyResponse(event) {
 }
 
 async function copyRequest(event) {
-  await navigator.clipboard.writeText(request.value);
+  const value = `${requestMethod.value} ${requestEndpoint.value}\n` + requestBody.value
+  await navigator.clipboard.writeText(value);
   event.preventDefault();
 }
+
 
 // TODO: For test
 const data = {
@@ -31,8 +40,8 @@ const data = {
       "url": "http://localhost:8080"
     }
   }
-
 }
+const methods = ['GET', 'POST', 'PUT', 'DELETE', "PATCH"]
 response.value = JSON.stringify(data, null, 2)
 
 </script>
@@ -58,7 +67,7 @@ response.value = JSON.stringify(data, null, 2)
     <SplitterPanel :size="100">
       <Splitter layout="vertical">
         <SplitterPanel :size="50">
-          <div class="p-4 pt-0">
+          <div class="p-4 pt-0 h-full flex flex-column">
             <div class="flex justify-content-center align-items-center">
               <h5 class="m-0">Request</h5>
               <Button
@@ -70,8 +79,27 @@ response.value = JSON.stringify(data, null, 2)
                   @click="copyRequest($event)">
               </Button>
             </div>
+            <div class="flex flex-column justify-content-between h-full">
+              <div class="flex flex-column gap-2">
+                <div class="flex gap-2">
+                  <Dropdown
+                      v-model="requestMethod"
+                      :options="methods"
+                  />
+                  <InputText type="text" class="w-full" v-model="requestEndpoint"/>
+                </div>
+                <div class="text-center">
+                  <div class="mb-2">Body</div>
+                  <Textarea v-model="requestBody" autoResize class="w-full"/>
+                </div>
+              </div>
+              <div class="text-center">
+                <Button><b>Execute</b></Button>
+              </div>
+            </div>
           </div>
         </SplitterPanel>
+
         <SplitterPanel :size="50">
           <div class="p-4 pt-0 flex flex-column h-full">
             <div class="flex justify-content-center align-items-center">
