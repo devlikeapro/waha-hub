@@ -145,6 +145,7 @@ function clearFilter() {
     <Column field="server.name" filterField='server.id' header="Server" :showFilterMenu="false">
       <template #filter="{ filterModel, filterCallback }">
         <Dropdown
+            optionValue="id"
             v-model="filterModel.value" :options="store.servers"
             @change="filterCallback()"
             placeholder="Any" class="p-column-filter"
@@ -152,8 +153,8 @@ function clearFilter() {
         >
           <template #value="slotProps">
             <template v-if="slotProps.value">
-              <ServerConnectionIcon :connected="slotProps.value.connected"></ServerConnectionIcon>
-              <span class="ml-1">{{ slotProps.value.name }} </span>
+              <ServerConnectionIcon :connected="store.getServer(slotProps.value).connected"></ServerConnectionIcon>
+              <span class="ml-1">{{ store.getServer(slotProps.value).name }} </span>
             </template>
             <span v-else>{{ slotProps.placeholder }}</span>
           </template>
