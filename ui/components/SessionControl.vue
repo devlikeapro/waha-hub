@@ -12,7 +12,7 @@ const requestEndpoint = ref('/api/sendText')
 const requestExample = {
   "chatId": "11111111111@c.us",
   "text": "Hi there!",
-  "session": props.session.value,
+  "session": props.session.name,
 }
 const requestBody = ref(JSON.stringify(requestExample, null, 2))
 
@@ -90,7 +90,7 @@ response.value = JSON.stringify(data, null, 2)
                 </div>
                 <div class="text-center">
                   <div class="mb-2">Body</div>
-                  <Textarea v-model="requestBody" autoResize class="w-full"/>
+                  <Textarea v-model="requestBody" rows=8 class="w-full"/>
                 </div>
               </div>
               <div class="text-center">
