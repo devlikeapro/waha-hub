@@ -6,10 +6,16 @@ const toast = useToast();
 const refreshScreenshot = () => {
   toast.add({severity: 'info', summary: 'Screenshot', detail: 'Refreshing screenshot'});
 }
+const request = computed(() => "TODO")
 const response = ref(null)
 
 async function copyResponse(event) {
-  await navigator.clipboard.writeText(this.response);
+  await navigator.clipboard.writeText(response.value);
+  event.preventDefault();
+}
+
+async function copyRequest(event) {
+  await navigator.clipboard.writeText(request.value);
   event.preventDefault();
 }
 
@@ -52,9 +58,17 @@ response.value = JSON.stringify(data, null, 2)
     <SplitterPanel :size="100">
       <Splitter layout="vertical">
         <SplitterPanel :size="50">
-          <div class="p-4 pt-3">
+          <div class="p-4 pt-0">
             <div class="flex justify-content-center align-items-center">
-              <h5>Request</h5>
+              <h5 class="m-0">Request</h5>
+              <Button
+                  rounded
+                  text=""
+                  v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
+                  :tabindex="0"
+                  icon="pi pi-copy"
+                  @click="copyRequest($event)">
+              </Button>
             </div>
           </div>
         </SplitterPanel>
