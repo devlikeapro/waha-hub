@@ -33,9 +33,9 @@ async function saveSession() {
   } finally {
     loading.value = false
   }
-
-  hide()
+  toast.add({severity: 'success', summary: 'Successful', detail: 'Session Started', life: 3000});
   session.value = undefined
+  hide()
 }
 
 function hide() {
