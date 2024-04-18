@@ -1,8 +1,8 @@
 import {defineStore} from 'pinia'
 import {ref, reactive} from "vue"
-import type {ServerAPI, ServerInfo} from "../service/ServerAPI";
+import type {ServerAPI, ServerId, ServerInfo} from "../service/ServerAPI";
 import {InMemoryServerAPI} from "../service/inmemory/InMemoryServerAPI";
-import type {Session} from "../service/Session";
+import type {Session, SessionStartRequest} from "../service/Session";
 import {computed} from "../.nuxt/imports";
 // @ts-ignore
 import lodash from "lodash";
@@ -93,6 +93,21 @@ export const useServerStore = defineStore('serverStore', () => {
         return servers.value.filter(server => server.id === id)?.[0]
     }
 
+    async function startSession(id: ServerId, body: SessionStartRequest): Promise<void> {
+        await serverRPCService.startSession(id, body)
+        await fetchSessions(id)
+    }
+
+    async function stopSession(id: ServerId, sessionName: string, logout: boolean): Promise<void> {
+        await serverRPCService.stopSession(id, sessionName, logout)
+        await fetchSessions(id)
+    }
+
+    async function logoutSession(id: ServerId, sessionName: string): Promise<void> {
+        await serverRPCService.logoutSession(id, sessionName)
+        await fetchSessions(id)
+    }
+
     const allSessions = computed(() => {
             const result = new Array<Session>()
             sessions.forEach((value, key) => {
@@ -107,6 +122,7 @@ export const useServerStore = defineStore('serverStore', () => {
             return result
         }
     )
+
     return {
         servers,
         sessions,
@@ -117,6 +133,9 @@ export const useServerStore = defineStore('serverStore', () => {
         deleteServer,
         editServer,
         getServer,
+        startSession,
+        stopSession,
+        logoutSession,
         latestVersion,
     }
 })
