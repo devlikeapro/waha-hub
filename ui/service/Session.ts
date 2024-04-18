@@ -20,3 +20,8 @@ export interface Session {
     config: SessionConfig;
     server?: ServerInfo;
 }
+
+export interface SessionStartRequest {
+    name: SessionName;
+    config: SessionConfig;
+}

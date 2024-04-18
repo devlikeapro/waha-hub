@@ -8,7 +8,6 @@ export class InMemoryRPCApi implements RPCApiClient {
         if (request.uri === '/api/sessions' && request.method === 'GET') {
             return this.getSessions(serverId);
         }
-        throw new Error(`Unknown request ${request.uri}`);
     }
 
     async getSessions(id: ServerId): Promise<Session[]> {
