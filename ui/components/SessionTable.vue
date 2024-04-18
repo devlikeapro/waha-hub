@@ -12,7 +12,7 @@ const toast = useToast();
 const confirmPopup = useConfirm();
 
 const store = useServerStore()
-const {allSessions, refreshing} = storeToRefs(store)
+const {allSessions, refreshing, servers} = storeToRefs(store)
 const sessions = allSessions
 
 const session = ref({
@@ -42,7 +42,20 @@ const initFilters = () => {
 };
 
 function openNew() {
+  // Get first connected server
+  const server = servers.value.find(s => s.connected)
+  if (!server) {
+    toast.add({
+      severity: 'error',
+      summary: 'No connected server',
+      detail: 'Please connect to a server first',
+      life: 3000
+    });
+    return
+  }
+
   session.value = {
+    server: server.id,
     config: {
       webhooks: [],
     },
