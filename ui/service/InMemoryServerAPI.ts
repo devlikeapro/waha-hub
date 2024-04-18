@@ -66,7 +66,7 @@ export class InMemoryServerAPI implements IServerAPI {
         }
     }
 
-    async getSessions(id: string): Promise<Session[]> {
+    async getSessions(id: ServerId): Promise<Session[]> {
         await sleep(1000)
         const failed = id.endsWith("000");
         if (failed) {

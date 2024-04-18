@@ -32,7 +32,7 @@ export interface IServerAPI {
 
     list(): Promise<ServerInfo[]>;
 
-    remove(id: ServerInfo): Promise<void>;
+    remove(id: ServerId): Promise<void>;
 
     edit(id: ServerId, data: ServerInfo): Promise<void>;
 
