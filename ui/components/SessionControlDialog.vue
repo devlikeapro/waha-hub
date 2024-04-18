@@ -16,15 +16,16 @@ function hide() {
   <Dialog
       v-model:visible="visible"
       :modal="true"
+      maximizable
   >
     <template #header>
       <div class="p-dialog-title flex gap-2 align-items-center">
         <span>
           {{ session?.name }}
         </span>
-          <SessionStatusTag
-              :status="session.status"
-          ></SessionStatusTag>
+        <SessionStatusTag
+            :status="session.status"
+        ></SessionStatusTag>
         <div>
           <span>(</span>
           <ServerConnectionIcon :connected="session.server.connected"></ServerConnectionIcon>

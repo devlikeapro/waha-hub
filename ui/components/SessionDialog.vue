@@ -2,6 +2,7 @@
 import {useServerStore} from "../stores/useServerStore";
 import {ref, toRaw} from "vue";
 import lodash from "lodash";
+import {useAsyncData} from "nuxt/app";
 
 const visible = defineModel("visible");
 const session = defineModel("session");
@@ -10,6 +11,8 @@ const toast = useToast();
 const store = useServerStore()
 
 const submitted = ref(false);
+const loading = ref(false);
+
 const sessionStartRequest = computed(
     () => {
       return {
@@ -24,7 +27,13 @@ async function saveSession() {
     return
   }
 
-  await store.startSession(session.value.server, sessionStartRequest.value)
+  try {
+    loading.value = true
+    await store.startSession(session.value.server, sessionStartRequest.value)
+  } finally {
+    loading.value = false
+  }
+
   hide()
   session.value = undefined
 }
@@ -37,7 +46,10 @@ function hide() {
 </script>
 
 <template>
-  <Dialog v-model:visible="visible" :style="{ width: '450px' }" header="Session" :modal="true" class="p-fluid">
+  <Dialog
+      v-model:visible="visible" :style="{ width: '450px' }" header="Session" :modal="true" class="p-fluid"
+      maximizable
+  >
     <div class="field">
       <label for="server">Server</label>
       <ServerDropdown
@@ -81,10 +93,11 @@ function hide() {
     <template #footer>
       <Button label="Cancel" icon="pi pi-times" text="" @click="hide" severity="secondary"/>
       <Button
-          :label="session.server? 'Start': 'Start New' "
+          :label="false? 'Start': 'Start New' "
           :icon="{'pi pi-check': !!session.server, 'pi pi-plus': !session.server}"
           text=""
           @click="saveSession"
+          :loading="loading"
       />
     </template>
   </Dialog>

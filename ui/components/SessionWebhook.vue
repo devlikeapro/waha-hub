@@ -31,7 +31,6 @@ const events = [
           v-model="webhook.events"
           :options="events"
           placeholder="Select Events"
-          class="w-25rem"
       />
     </div>
 
