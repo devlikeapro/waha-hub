@@ -47,9 +47,15 @@ function hide() {
       <small class="p-invalid" v-if="submitted && !session.name">Name is required.</small>
     </div>
 
+    <div class="field">
+      <SessionWebhooksField
+          v-model:webhooks="session.config.webhooks"
+      ></SessionWebhooksField>
+    </div>
+
     <div class="field flex justify-content-between align-items-center">
       <div>
-        <label for="debug">Debug Mode: </label>
+        <label for="debug">Debug Mode</label>
       </div>
       <ToggleButton
           v-model="session.config.debug"

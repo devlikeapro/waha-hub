@@ -15,7 +15,11 @@ const store = useServerStore()
 const {allSessions, refreshing} = storeToRefs(store)
 const sessions = allSessions
 
-const session = ref({})
+const session = ref({
+  config: {
+    webhooks: [],
+  },
+})
 const sessionDialog = ref(false)
 const sessionControlDialog = ref(false)
 
@@ -39,8 +43,9 @@ const initFilters = () => {
 
 function openNew() {
   session.value = {
-    config: {},
-    webhooks: [],
+    config: {
+      webhooks: [],
+    },
   };
   sessionDialog.value = true;
 }
