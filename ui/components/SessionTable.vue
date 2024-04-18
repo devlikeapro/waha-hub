@@ -39,7 +39,8 @@ const initFilters = () => {
 
 function openNew() {
   session.value = {
-    connection: {}
+    config: {},
+    webhooks: [],
   };
   sessionDialog.value = true;
 }

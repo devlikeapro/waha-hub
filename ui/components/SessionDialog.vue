@@ -47,12 +47,25 @@ function hide() {
       <small class="p-invalid" v-if="submitted && !session.name">Name is required.</small>
     </div>
 
+    <div class="field flex justify-content-between align-items-center">
+      <div>
+        <label for="debug">Debug Mode: </label>
+      </div>
+      <ToggleButton
+          v-model="session.config.debug"
+          onLabel="Debug Enabled"
+          offLabel="Debug Disabled"
+          onIcon="pi pi-check"
+      />
+    </div>
+
     <template #footer>
       <Button label="Cancel" icon="pi pi-times" text="" @click="hide" severity="secondary"/>
       <Button
           :label="session.server? 'Start': 'Start New' "
           :icon="{'pi pi-check': !!session.server, 'pi pi-plus': !session.server}"
-          text="" @click="saveSession"
+          text=""
+          @click="saveSession"
       />
     </template>
   </Dialog>
