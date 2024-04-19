@@ -73,7 +73,7 @@ onBeforeMount(() => {
       <div class="card mb-0">
         <div class="flex justify-content-between mb-3">
           <div>
-            <span class="block text-900 font-medium mb-3">Updates</span>
+            <span class="block text-900 font-medium mb-3">Latest Version</span>
             <div>
               <span class="text-900 font-medium text-xl">{{ store.latestVersion }}</span>
             </div>
