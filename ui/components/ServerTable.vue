@@ -52,8 +52,12 @@ function editServer(selected) {
 function confirmDeleteServer(event, server) {
   confirmPopup.require({
     target: event.target,
-    message: `Disconnect ${server.name}?`,
+    message: `Disconnect '${server.name}?'`,
     icon: 'pi pi-exclamation-triangle',
+    rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
+    acceptClass: 'p-button-warning p-button-sm',
+    rejectLabel: 'No',
+    acceptLabel: 'Yes, Disconnect',
     accept: () => {
       return store.deleteServer(server.id)
     },
