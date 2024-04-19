@@ -57,7 +57,19 @@ function openNew() {
   session.value = {
     server: server.id,
     config: {
-      webhooks: [],
+      webhooks: [
+        {
+          url: "https://",
+          events: ["session.status", "message", "message.reaction"],
+          hmac: {
+            key: null,
+          },
+          retries: {
+            delaySeconds: 2,
+            attempts: 15,
+          }
+        }
+      ],
     },
   };
   sessionDialog.value = true;

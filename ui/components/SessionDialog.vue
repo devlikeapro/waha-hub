@@ -1,8 +1,7 @@
 <script setup>
 import {useServerStore} from "../stores/useServerStore";
-import {ref, toRaw} from "vue";
+import {ref} from "vue";
 import lodash from "lodash";
-import {useAsyncData} from "nuxt/app";
 
 const visible = defineModel("visible");
 const session = defineModel("session");
@@ -47,7 +46,10 @@ function hide() {
 
 <template>
   <Dialog
-      v-model:visible="visible" :style="{ width: '450px' }" header="Session" :modal="true" class="p-fluid"
+      v-model:visible="visible"
+      header="Session"
+      :modal="true"
+      class="p-fluid"
       maximizable
   >
     <div class="field">
@@ -70,6 +72,7 @@ function hide() {
 
     <div class="field">
       <SessionWebhooksField
+          ref="webhooks"
           v-model:webhooks="session.config.webhooks"
       ></SessionWebhooksField>
     </div>

@@ -42,7 +42,7 @@ function hide() {
 </script>
 
 <template>
-  <Dialog v-model:visible="visible" :style="{ width: '450px' }" header="Server" :modal="true" class="p-fluid">
+  <Dialog v-model:visible="visible" header="Server" :modal="true" class="p-fluid">
     <img :src="'/demo/images/product/' + server.image" :alt="server.image" v-if="server.image" width="150"
          class="mt-0 mx-auto mb-5 block shadow-2"/>
     <div class="field">

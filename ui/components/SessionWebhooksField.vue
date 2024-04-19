@@ -2,17 +2,19 @@
 const webhooks = defineModel("webhooks");
 
 function add() {
-  webhooks.value.push({
-    url: "https://",
-    events: ["session.status", "message", "message.reaction"],
-    hmac: {
-      key: null,
-    },
-    retries: {
-      delaySeconds: 2,
-      attempts: 15,
-    }
-  })
+  webhooks.value.push(
+      {
+        url: "https://",
+        events: ["session.status", "message", "message.reaction"],
+        hmac: {
+          key: null,
+        },
+        retries: {
+          delaySeconds: 2,
+          attempts: 15,
+        }
+      }
+  )
 }
 
 function remove(index) {
