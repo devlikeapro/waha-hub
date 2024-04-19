@@ -155,6 +155,11 @@ function openSessionControl(data) {
   session.value = data
 }
 
+const globalFilterFields = [
+  'name',
+  'me.id',
+]
+
 </script>
 
 <template>
@@ -184,7 +189,7 @@ function openSessionControl(data) {
       v-model:filters="filters"
       filterDisplay="row"
       :loading="loading"
-      :globalFilterFields="['name', 'server.id', 'server.name', 'server.connection.url', 'status']"
+      :globalFilterFields="globalFilterFields"
       @row-click="rowClick"
       showGridlines
       class="p-datatable--clickable"
@@ -197,7 +202,7 @@ function openSessionControl(data) {
         </div>
         <IconField iconPosition="left">
           <InputIcon class="pi pi-search"/>
-          <InputText v-model="filters['global'].value" placeholder="Keyword Search" style="width: 100%"/>
+          <InputText v-model="filters['global'].value" placeholder="Search by name or phone number" style="width: 100%"/>
         </IconField>
       </div>
     </template>
