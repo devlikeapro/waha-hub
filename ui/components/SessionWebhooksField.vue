@@ -30,16 +30,6 @@ function remove(index) {
     <div>
       <label>Webhooks</label>
     </div>
-    <div>
-      <Button
-          label="Add Webhook"
-          icon="pi pi-plus"
-          text=""
-          @click="add"
-          severity="secondary"
-          :disabled="disabled"
-      />
-    </div>
 
     <template v-if="webhooks.length === 0">
       <div class="text-300 text-center">
@@ -54,7 +44,16 @@ function remove(index) {
           :disabled="disabled"
       ></SessionWebhook>
     </template>
-
+    <div>
+      <Button
+          label="Add Webhook"
+          icon="pi pi-plus"
+          text=""
+          @click="add"
+          severity="secondary"
+          :disabled="disabled"
+      />
+    </div>
   </div>
 </template>
 
