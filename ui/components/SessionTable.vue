@@ -202,7 +202,8 @@ const globalFilterFields = [
         </div>
         <IconField iconPosition="left">
           <InputIcon class="pi pi-search"/>
-          <InputText v-model="filters['global'].value" placeholder="Search by name or phone number" style="width: 100%"/>
+          <InputText v-model="filters['global'].value" placeholder="Search by name or phone number"
+                     style="width: 100%"/>
         </IconField>
       </div>
     </template>
@@ -214,6 +215,7 @@ const globalFilterFields = [
         <div class="flex gap-2 align-items-center">
           <Button icon="pi pi-info" severity="secondary" rounded outlined @click="openSessionControl(data)"/>
           <span> {{ data.name }} </span>
+          <SessionChip :session="data"></SessionChip>
         </div>
       </template>
     </Column>
