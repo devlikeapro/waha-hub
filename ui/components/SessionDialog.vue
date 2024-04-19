@@ -38,7 +38,7 @@ async function saveSession() {
 
   try {
     loading.value = true
-    await store.startSession(session.value.server, sessionStartRequest.value)
+    await store.startSession(session.value.server.id, sessionStartRequest.value)
   } finally {
     loading.value = false
   }
@@ -62,11 +62,15 @@ function hide() {
       class="p-fluid"
       maximizable
   >
+    <template #header v-if="!modeNew">
+      <SessionHeader :session="session"></SessionHeader>
+    </template>
+
     <div class="field">
       <label for="server">Server</label>
       <ServerDropdown
           placeholder="Select Server"
-          v-model="session.server"
+          v-model="session.server.id"
           :showClear="false"
           :required="true"
           :invalid="submitted && !session.server"
@@ -79,7 +83,7 @@ function hide() {
       <label for="name">Name</label>
       <InputText
           id="name" v-model.trim="session.name" required="true" autofocus :invalid="submitted && !session.name"
-          :disabled="disabled"
+          :disabled="!modeNew"
       />
       <small class="p-invalid" v-if="submitted && !session.name">Name is required.</small>
     </div>

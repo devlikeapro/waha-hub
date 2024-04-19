@@ -73,17 +73,19 @@ export class InMemoryRPCApi implements RPCApiClient {
         if (sessions === undefined) {
             throw new Error(`Server ${serverId} not found`)
         }
-        const exist = sessions.find(session => session.name === body.name)
-        if (exist !== undefined && (exist.status !== <SessionStatus>'STOPPED' || exist.status != <SessionStatus>'FAILED')) {
-            throw new Error(`Session ${body.name} already ${exist.status}`)
+        let session = sessions.find(session => session.name === body.name)
+        if (session) {
+            session.status = "STARTING"
+            session.config = body.config
+        } else {
+            session = {
+                name: body.name,
+                status: <SessionStatus>'STARTING',
+                config: body.config,
+            }
+            sessions.push(session)
         }
 
-        const session = {
-            name: body.name,
-            status: <SessionStatus>'STARTING',
-            config: body.config,
-        }
-        sessions.push(session)
 
         // Simulate session starting
         const delay = Math.random() * 2000

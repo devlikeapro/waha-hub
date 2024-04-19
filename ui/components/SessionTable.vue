@@ -56,7 +56,7 @@ function openNew() {
   }
 
   session.value = {
-    server: server.id,
+    server: server,
     // Generate UUID
     name: 'session_' + Math.random().toString(36).substring(7),
     config: {
@@ -81,21 +81,23 @@ function openNew() {
 
 
 function showSessionConfig(selected) {
-  session.value = {
+  session.value = lodash.cloneDeep({
     name: selected.name,
-    server: selected.server.id,
+    status: selected.status,
+    server: selected.server,
     config: selected.config,
-  };
+  });
   sessionDialogMode.value = "view"
   sessionDialog.value = true;
 }
 
 function startSession(selected) {
-  session.value = {
+  session.value = lodash.cloneDeep({
     name: selected.name,
-    server: selected.server.id,
+    status: selected.status,
+    server: selected.server,
     config: selected.config,
-  };
+  });
   sessionDialogMode.value = "start"
   sessionDialog.value = true;
 }
@@ -106,7 +108,7 @@ function confirmStopSession(event, session) {
     message: `Stop '${session.name}' session?\n`,
     icon: 'pi pi-exclamation-triangle',
     rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
-    acceptClass: 'p-button-danger p-button-sm',
+    acceptClass: 'p-button-warning p-button-sm',
     rejectLabel: 'No',
     acceptLabel: 'Yes, Stop',
     accept: async () => {
@@ -258,9 +260,9 @@ function openSessionControl(data){
         <div class="text-right">
           <Button icon="pi pi-cog" class="mr-2" severity="secondary" rounded outlined @click="showSessionConfig(data)"/>
           <Button icon="pi pi-play" class="mr-2" rounded outlined @click="startSession(data)"/>
-          <Button icon="pi pi-pause" class="mr-2" severity="secondary" rounded outlined
+          <Button icon="pi pi-stop" class="mr-2" severity="warning" rounded outlined
                   @click="confirmStopSession($event, data)"/>
-          <Button icon="pi pi-stop" class="mt-2" severity="danger" rounded outlined
+          <Button icon="pi pi-trash" class="mt-2" severity="danger" rounded outlined
                   @click="confirmLogoutSession($event, data)"/>
         </div>
       </template>
