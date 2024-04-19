@@ -213,7 +213,7 @@ const globalFilterFields = [
     <Column field="name" header="Name" sortable>
       <template #body="{ data }">
         <div class="flex gap-2 align-items-center">
-          <Button icon="pi pi-info" severity="secondary" rounded outlined @click="openSessionControl(data)"/>
+          <Button icon="pi pi-info" rounded outlined @click="openSessionControl(data)"/>
           <span> {{ data.name }} </span>
           <SessionChip :session="data"></SessionChip>
         </div>
@@ -267,7 +267,7 @@ const globalFilterFields = [
       <template #body="{data}">
         <div class="text-right">
           <Button icon="pi pi-cog" class="mr-2" severity="secondary" rounded outlined @click="showSessionConfig(data)"/>
-          <Button icon="pi pi-play" class="mr-2" rounded outlined @click="startSession(data)"/>
+          <Button icon="pi pi-play" class="mr-2" severity="success" rounded outlined @click="startSession(data)"/>
           <Button icon="pi pi-stop" class="mr-2" severity="warning" rounded outlined
                   @click="confirmStopSession($event, data)"/>
           <Button icon="pi pi-trash" class="mt-2" severity="danger" rounded outlined
