@@ -143,8 +143,11 @@ function clearFilter() {
 }
 
 function rowClick(event) {
+  openSessionControl(event.data)
+}
+function openSessionControl(data){
   sessionControlDialog.value = true;
-  session.value = event.data
+  session.value = data
 }
 
 </script>
@@ -198,7 +201,10 @@ function rowClick(event) {
 
     <Column field="name" header="Name" sortable>
       <template #body="{ data }">
-        {{ data.name }}
+        <div class="flex gap-2 align-items-center">
+          <Button icon="pi pi-info" severity="secondary" rounded outlined @click="openSessionControl(data)"/>
+          <span> {{ data.name }} </span>
+        </div>
       </template>
     </Column>
 
