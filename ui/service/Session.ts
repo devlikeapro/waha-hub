@@ -1,9 +1,13 @@
-import {ServerInfo} from "./ServerAPI";
+import type {ServerInfo} from "./ServerAPI";
 
 export interface SessionConfig {
 }
 
 export type SessionStatus = "STOPPED" | "STARTING" | "SCAN_QR_CODE" | "WORKING" | "FAILED";
+export type SessionMe = {
+    id: string;
+    pushName: string
+}
 
 export const SessionStatuses = [
     "WORKING",
@@ -20,6 +24,7 @@ export interface Session {
     status: SessionStatus;
     config: SessionConfig;
     server?: ServerInfo;
+    me?: SessionMe;
 }
 
 export interface SessionStartRequest {

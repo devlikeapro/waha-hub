@@ -1,5 +1,5 @@
-import {RPCApiClient, RPCRequest} from "../ServerRPCService";
-import {ServerId} from "../ServerAPI";
+import type {RPCApiClient, RPCRequest} from "../ServerRPCService";
+import type {ServerId} from "../ServerAPI";
 import type {Session, SessionStartRequest, SessionStatus} from "../Session";
 import {sleep} from "./utils";
 import {random} from "lodash";
@@ -45,6 +45,10 @@ export class InMemoryRPCApi implements RPCApiClient {
                     name: `Session ${newSessions.length + 1}`,
                     status: statuses[Math.floor(Math.random() * statuses.length)],
                     config: {},
+                    me: {
+                        id: '7213213213@c.us',
+                        pushName: 'John Doe',
+                    }
                 })
             }
             // this.sessions.set(id, newSessions)
@@ -73,11 +77,15 @@ export class InMemoryRPCApi implements RPCApiClient {
         if (sessions === undefined) {
             throw new Error(`Server ${serverId} not found`)
         }
-        let session = sessions.find(session => session.name === body.name)
-        let finalStatus
+        let session = sessions.find(session => session.name === body.name);
+        let finalStatus;
         if (session) {
             session.status = "STARTING"
             session.config = body.config
+            session.me = {
+                id: '7213213213@c.us',
+                pushName: 'John Doe',
+            }
             finalStatus = "WORKING"
         } else {
             session = {
@@ -94,6 +102,12 @@ export class InMemoryRPCApi implements RPCApiClient {
         const delay = Math.random() * 2000
         setTimeout(() => {
             session.status = finalStatus
+            if (finalStatus === 'WORKING') {
+                session.me = {
+                    id: '7213213213@c.us',
+                    pushName: 'John Doe',
+                }
+            }
         }, delay)
     }
 
