@@ -49,19 +49,32 @@ response.value = JSON.stringify(exampleResponse, null, 2)
 <template>
   <Splitter style="min-height: 75%" class="mb-5">
     <SplitterPanel :size="50">
-      <div class="px-4 pb-4">
-        <div class="flex justify-content-center align-items-center">
-          <h5 class="m-0">Screenshot</h5>
-          <RefreshButton
-              @click="refreshScreenshot"
-          ></RefreshButton>
-        </div>
-        <div>
-          <img src="/demo/images/nature/nature9.jpg" alt="Nature 9"
-               style=" width:100%; height:100%"
-          />
-        </div>
-      </div>
+      <Splitter layout="vertical">
+        <SplitterPanel :size="50">
+          <div class="px-4 pb-4">
+            <div class="flex justify-content-center align-items-center">
+              <h5 class="m-0">Screenshot</h5>
+              <RefreshButton
+                  @click="refreshScreenshot"
+              ></RefreshButton>
+            </div>
+            <div>
+              <img src="/demo/images/nature/nature9.jpg" alt="Nature 9"
+                   style=" width:100%; height:100%"
+              />
+            </div>
+          </div>
+        </SplitterPanel>
+        <SplitterPanel :size="50">
+          <div class="px-4 py-3">
+            <div class="flex justify-content-center align-items-center">
+              <h5 class="m-0">Info</h5>
+            </div>
+            <div>
+            </div>
+          </div>
+        </SplitterPanel>
+      </Splitter>
     </SplitterPanel>
 
     <SplitterPanel :size="50">
