@@ -1,3 +1,5 @@
+import {sleep} from "./mock/utils";
+
 export class WAHAGithubAPI {
     private versionFile = "https://raw.githubusercontent.com/devlikeapro/whatsapp-http-api/core/src/version.ts"
 

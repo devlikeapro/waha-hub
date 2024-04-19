@@ -75,7 +75,8 @@ onBeforeMount(() => {
           <div>
             <span class="block text-900 font-medium mb-3">Latest Version</span>
             <div>
-              <span class="text-900 font-medium text-xl">{{ store.latestVersion }}</span>
+              <Skeleton v-if="!store.latestVersion" width="4rem"></Skeleton>
+              <span v-else class="text-900 font-medium text-xl">{{ store.latestVersion }}</span>
             </div>
           </div>
           <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
