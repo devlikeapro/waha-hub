@@ -56,7 +56,7 @@ function openNew() {
   }
 
   session.value = {
-    server: server,
+    server: server.id,
     // Generate UUID
     name: 'session_' + Math.random().toString(36).substring(7),
     config: {
@@ -84,7 +84,7 @@ function showSessionConfig(selected) {
   session.value = lodash.cloneDeep({
     name: selected.name,
     status: selected.status,
-    server: selected.server,
+    server: selected.server.id,
     config: selected.config,
   });
   sessionDialogMode.value = "view"
@@ -95,7 +95,7 @@ function startSession(selected) {
   session.value = lodash.cloneDeep({
     name: selected.name,
     status: selected.status,
-    server: selected.server,
+    server: selected.server.id,
     config: selected.config,
   });
   sessionDialogMode.value = "start"
@@ -149,7 +149,8 @@ function clearFilter() {
 function rowClick(event) {
   openSessionControl(event.data)
 }
-function openSessionControl(data){
+
+function openSessionControl(data) {
   sessionControlDialog.value = true;
   session.value = data
 }

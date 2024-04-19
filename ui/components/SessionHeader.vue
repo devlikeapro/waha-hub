@@ -1,5 +1,18 @@
 <script setup>
-defineProps(["session"])
+import {computed} from "vue";
+import {useServerStore} from "../stores/useServerStore";
+
+const props = defineProps(["session"])
+const store = useServerStore()
+
+const server = computed(
+    () => {
+      if (props.session.server.id) {
+        return props.session.server
+      }
+      return store.getServer(props.session.server)
+    }
+)
 
 </script>
 
@@ -13,8 +26,8 @@ defineProps(["session"])
     ></SessionStatusTag>
     <div>
       <span>(</span>
-      <ServerConnectionIcon :connected="session.server.connected"></ServerConnectionIcon>
-      <span class="ml-1">{{ session.server.name }} </span>
+      <ServerConnectionIcon :connected="server.connected"></ServerConnectionIcon>
+      <span class="ml-1">{{ server.name }} </span>
       <span>)</span>
     </div>
   </div>

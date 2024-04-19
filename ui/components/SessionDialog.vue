@@ -38,7 +38,7 @@ async function saveSession() {
 
   try {
     loading.value = true
-    await store.startSession(session.value.server.id, sessionStartRequest.value)
+    await store.startSession(session.value.server, sessionStartRequest.value)
   } finally {
     loading.value = false
   }
@@ -70,7 +70,7 @@ function hide() {
       <label for="server">Server</label>
       <ServerDropdown
           placeholder="Select Server"
-          v-model="session.server.id"
+          v-model="session.server"
           :showClear="false"
           :required="true"
           :invalid="submitted && !session.server"
