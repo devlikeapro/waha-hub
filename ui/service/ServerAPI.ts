@@ -1,12 +1,12 @@
-import {ServerId} from "./IServerAPI";
+import {ServerId} from "./IHubServerAPI";
 import {Session, SessionStartRequest} from "./Session";
-import {SessionAPIClient} from "./SessionAPIClient";
+import {ServerAPIClient} from "./ServerAPIClient";
 import {HTTPRequest} from "./HTTPRequest";
 
-export class SessionAPI {
-    private api: SessionAPIClient;
+export class ServerAPI {
+    private api: ServerAPIClient;
 
-    constructor(api: SessionAPIClient) {
+    constructor(api: ServerAPIClient) {
         this.api = api;
     }
 
@@ -59,6 +59,15 @@ export class SessionAPI {
             method: 'GET',
             uri: `/api/screenshot`,
             params: {session: sessionName},
+        });
+    }
+
+    // @ts-ignore
+    getVersion(serverId: ServerId): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/version`,
+            params: {},
         });
     }
 }

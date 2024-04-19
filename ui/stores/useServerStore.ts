@@ -1,20 +1,20 @@
 import {defineStore} from 'pinia'
 import {ref, reactive} from "vue"
-import type {IServerAPI, ServerId, ServerInfo} from "../service/IServerAPI";
+import type {IHubServerAPI, ServerId, ServerInfo} from "../service/IHubServerAPI";
 import type {Session, SessionStartRequest} from "../service/Session";
 import {computed} from "../.nuxt/imports";
 // @ts-ignore
 import lodash from "lodash";
-import {SessionAPI} from "../service/SessionAPI";
-import {ServerAPIMock} from "../service/mock/ServerAPIMock";
-import {SessionAPIClientMock} from "../service/mock/SessionAPIClientMock";
+import {ServerAPI} from "../service/ServerAPI";
+import {HubServerAPIMock} from "../service/mock/HubServerAPIMock";
+import {ServerAPIClientMock} from "../service/mock/ServerAPIClientMock";
 
 
 export const useServerStore = defineStore('serverStore', () => {
-    const serverInfoAPI: IServerAPI = new ServerAPIMock()
-    const sessionAPIClient = new SessionAPIClientMock()
+    const hubServerAPI: IHubServerAPI = new HubServerAPIMock()
+    const serverAPIClient = new ServerAPIClientMock()
 
-    const serverRPCService = new SessionAPI(sessionAPIClient)
+    const serverAPI = new ServerAPI(serverAPIClient)
     const latestVersion = ref('2024.3.1')
     const refreshing = ref(false)
 
@@ -23,7 +23,7 @@ export const useServerStore = defineStore('serverStore', () => {
 
     async function fetchServers() {
         console.log('fetchServers')
-        const data = await serverInfoAPI.list()
+        const data = await hubServerAPI.list()
         servers.value = data.map(server => reactive(server))
     }
 
@@ -49,12 +49,12 @@ export const useServerStore = defineStore('serverStore', () => {
 
     async function fetchSessions(id: string) {
         console.log('fetchSessions', id)
-        sessions.set(id, await serverRPCService.getSessions(id))
+        sessions.set(id, await serverAPI.getSessions(id))
     }
 
     async function fetchVersion(server: ServerInfo) {
         console.log('fetchVersion', server.id)
-        server.version = await serverInfoAPI.getVersion(server.id)
+        server.version = await serverAPI.getVersion(server.id)
     }
 
     async function refresh() {
@@ -74,18 +74,18 @@ export const useServerStore = defineStore('serverStore', () => {
     }
 
     async function addServer(server: ServerInfo) {
-        await serverInfoAPI.add(server)
+        await hubServerAPI.add(server)
         await refresh()
     }
 
     async function deleteServer(id: string) {
-        await serverInfoAPI.remove(id)
+        await hubServerAPI.remove(id)
         sessions.delete(id)
         await refresh()
     }
 
     async function editServer(id: string, server: ServerInfo) {
-        await serverInfoAPI.edit(id, server)
+        await hubServerAPI.edit(id, server)
         await refresh()
     }
 
@@ -94,17 +94,17 @@ export const useServerStore = defineStore('serverStore', () => {
     }
 
     async function startSession(id: ServerId, body: SessionStartRequest): Promise<void> {
-        await serverRPCService.startSession(id, body)
+        await serverAPI.startSession(id, body)
         refresh()
     }
 
     async function stopSession(id: ServerId, sessionName: string, logout: boolean): Promise<void> {
-        await serverRPCService.stopSession(id, sessionName, logout)
+        await serverAPI.stopSession(id, sessionName, logout)
         refresh()
     }
 
     async function logoutSession(id: ServerId, sessionName: string): Promise<void> {
-        await serverRPCService.logoutSession(id, sessionName)
+        await serverAPI.logoutSession(id, sessionName)
         refresh()
     }
 

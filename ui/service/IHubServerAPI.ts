@@ -25,7 +25,7 @@ export interface Version {
     engine: string;
 }
 
-export interface IServerAPI {
+export interface IHubServerAPI {
     add(data: CreateServerInfo): Promise<void>;
 
     get(id: ServerId): Promise<ServerInfo>;
@@ -35,6 +35,4 @@ export interface IServerAPI {
     remove(id: ServerId): Promise<void>;
 
     edit(id: ServerId, data: ServerInfo): Promise<void>;
-
-    getVersion(id: ServerId): Promise<Version>;
 }

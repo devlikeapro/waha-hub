@@ -1,10 +1,10 @@
-import type {IServerAPI, ServerId, ServerInfo, Version} from "../IServerAPI";
+import type {IHubServerAPI, ServerId, ServerInfo, Version} from "../IHubServerAPI";
 import type {Session, SessionStatus} from "../Session";
 // @ts-ignore
 import lodash from 'lodash'
 import {sleep} from "./utils";
 
-export class ServerAPIMock implements IServerAPI {
+export class HubServerAPIMock implements IHubServerAPI {
     constructor() {
         this.fakeData();
     }
@@ -44,24 +44,6 @@ export class ServerAPIMock implements IServerAPI {
         this.servers[this.servers.indexOf(server)] = data;
     }
 
-    async getVersion(id: ServerId): Promise<Version> {
-        const failed = id.endsWith("000");
-        if (failed) {
-            await sleep(3000)
-            throw new Error('Getting version failed');
-        }
-        await sleep(1000)
-        if (id.endsWith("111")) {
-            return {
-                version: "2024.3.1",
-                engine: "WEBJS",
-            };
-        }
-        return {
-            version: "2024.3.0",
-            engine: "NOWEB",
-        }
-    }
 
     fakeData() {
         this.servers = [

@@ -1,15 +1,15 @@
-import type {ServerId} from "../IServerAPI";
+import type {ServerId, Version} from "../IHubServerAPI";
 import type {Session, SessionStartRequest, SessionStatus} from "../Session";
 import {sleep} from "./utils";
 import {random} from "lodash";
-import {SessionAPIClient} from "../SessionAPIClient";
+import {ServerAPIClient} from "../ServerAPIClient";
 import {HTTPRequest} from "../HTTPRequest";
 
-export class SessionAPIClientMock implements SessionAPIClient {
+export class ServerAPIClientMock implements ServerAPIClient {
     private sessions = new Map<ServerId, Session[]>()
 
     async call(serverId: ServerId, request: HTTPRequest): Promise<any> {
-        console.log('SessionAPIClientMock.call', {serverId, request})
+        console.log('ServerAPIClientMock.call', {serverId, request})
         const failed = serverId.endsWith("000");
         if (failed) {
             const delay = Math.random() * 3000
@@ -29,6 +29,8 @@ export class SessionAPIClientMock implements SessionAPIClient {
             return this.stopSession(serverId, request.body.session, request.params.logout);
         } else if (request.uri === '/api/sessions/logout' && request.method === 'POST') {
             return this.logoutSession(serverId, request.body.session);
+        } else if (request.uri === '/api/version' && request.method === 'GET') {
+            return this.getVersion(serverId);
         } else {
             throw new Error(`Unknown request ${request.method} ${request.uri}`)
         }
@@ -121,10 +123,29 @@ export class SessionAPIClientMock implements SessionAPIClient {
     }
 
     async logoutSession(serverId: ServerId, sessionName: string): Promise<void> {
-        console.log('SessionAPIClientMock.logoutSession', {serverId, sessionName})
+        console.log('ServerAPIClientMock.logoutSession', {serverId, sessionName})
         const session = this.getSession(serverId, sessionName, [], true)
         const sessions = this.sessions.get(serverId)
         const index = sessions.indexOf(session)
         sessions.splice(index, 1)
+    }
+
+    async getVersion(id: ServerId): Promise<Version> {
+        const failed = id.endsWith("000");
+        if (failed) {
+            await sleep(3000)
+            throw new Error('Getting version failed');
+        }
+        await sleep(1000)
+        if (id.endsWith("111")) {
+            return {
+                version: "2024.3.1",
+                engine: "WEBJS",
+            };
+        }
+        return {
+            version: "2024.3.0",
+            engine: "NOWEB",
+        }
     }
 }
