@@ -19,7 +19,9 @@ function hide() {
       maximizable
   >
     <template #header>
-      <SessionHeader :session="session"></SessionHeader>
+      <SessionHeader
+          :session="session"
+      ></SessionHeader>
     </template>
     <SessionControl :session="session"></SessionControl>
   </Dialog>

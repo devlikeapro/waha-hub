@@ -2,8 +2,12 @@
 import {computed} from "vue";
 import {useServerStore} from "../stores/useServerStore";
 
-const props = defineProps(["session"])
+const props = defineProps({
+  session: Object,
+  refresh: Boolean,
+})
 const store = useServerStore()
+const {refreshing} = storeToRefs(store)
 
 const server = computed(
     () => {
@@ -13,6 +17,9 @@ const server = computed(
       return store.getServer(props.session.server)
     }
 )
+async function refreshServers() {
+  await store.refresh()
+}
 
 </script>
 
@@ -30,6 +37,12 @@ const server = computed(
       <span class="ml-1">{{ server.name }} </span>
       <span>)</span>
     </div>
+    <button
+        v-if="refresh"
+        @click="refreshServers()" class="p-link layout-topbar-button" :disabled="refreshing">
+      <i class="pi pi-refresh"></i>
+    </button>
+    <RefreshIcon :refreshing="refreshing"/>
   </div>
 </template>
 
