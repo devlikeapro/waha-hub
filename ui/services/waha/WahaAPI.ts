@@ -62,7 +62,7 @@ export class WahaAPI {
             params: {},
             body: {
                 logout: logout,
-                session: sessionName,
+                name: sessionName,
             },
         });
     }
@@ -73,7 +73,7 @@ export class WahaAPI {
             uri: `/api/sessions/logout`,
             params: {},
             body: {
-                session: sessionName,
+                name: sessionName,
             },
         });
     }
