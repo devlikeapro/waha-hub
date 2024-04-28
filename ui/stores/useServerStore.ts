@@ -10,11 +10,17 @@ import {HubServerMockAPI} from "../services/impl/hub/HubServerMockAPI";
 import {WahaAPIMockClient} from "../services/impl/waha/WahaAPIMockClient";
 import {WahaGlobalVersionAPI} from "../services/WahaGlobalVersionAPI";
 import {HubServerLocalAPI} from "../services/impl/hub/HubServerLocalAPI";
+import {WahaAPIDirectClient} from "../services/impl/waha/WahaAPIDirectClient";
 
 
 export const useServerStore = defineStore('serverStore', () => {
+    // Mock
+    // const hubServerAPI: IHubServerAPI = new HubServerLocalAPI()
+    // const serverAPIClient = new WahaAPIMockClient()
+
+    // Local
     const hubServerAPI: IHubServerAPI = new HubServerLocalAPI()
-    const serverAPIClient = new WahaAPIMockClient()
+    const serverAPIClient = new WahaAPIDirectClient(hubServerAPI)
 
     const serverAPI = new WahaAPI(serverAPIClient)
     const latestVersion = ref(undefined)

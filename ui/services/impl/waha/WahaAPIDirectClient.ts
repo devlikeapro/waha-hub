@@ -1,21 +1,25 @@
 import {IWahaAPIClient} from "../../waha/IWahaAPIClient";
 import {HTTPRequest} from "../../waha/HTTPRequest";
-import {ServerConnection} from "../../hub/IHubServerAPI";
+import {IHubServerAPI, ServerConnection, ServerId, ServerInfo} from "../../hub/IHubServerAPI";
 
 
 interface ServerResolver {
-    resolve(serverId: string): Promise<ServerConnection>
+    get(id: ServerId): Promise<ServerInfo>
 }
 
 /**
  * Call directly API using axios
  */
-class WahaAPIDirectClient implements IWahaAPIClient {
+export class WahaAPIDirectClient implements IWahaAPIClient {
     constructor(private resolver: ServerResolver) {
     }
 
+    async resolve(id: ServerId): Promise<ServerConnection> {
+        return this.resolver.get(id).then(server => server.connection)
+    }
+
     async call(serverId: string, request: HTTPRequest): Promise<any> {
-        const connection = await this.resolver.resolve(serverId)
+        const connection = await this.resolve(serverId)
         const url = new URL(request.uri, connection.url).toString()
         const headers = {
             'Content-Type': 'application/json',
