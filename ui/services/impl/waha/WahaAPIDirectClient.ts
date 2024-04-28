@@ -20,7 +20,11 @@ export class WahaAPIDirectClient implements IWahaAPIClient {
 
     async call(serverId: string, request: HTTPRequest): Promise<any> {
         const connection = await this.resolve(serverId)
-        const url = new URL(request.uri, connection.url).toString()
+        let url = new URL(request.uri, connection.url).toString()
+        if (request.params) {
+            const params = new URLSearchParams(request.params)
+            url = `${url}?${params.toString()}`
+        }
         const headers = {
             'Content-Type': 'application/json',
         }

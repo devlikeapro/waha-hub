@@ -25,7 +25,7 @@ export class WahaAPI {
     startSession(serverId: ServerId, body: SessionStartRequest): Promise<void> {
         return this.api.call(serverId, {
             method: 'POST',
-            uri: '/api/sessions',
+            uri: '/api/sessions/start',
             params: {},
             body: body,
         });
