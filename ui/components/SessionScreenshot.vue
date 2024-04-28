@@ -11,10 +11,8 @@ const {
   pending,
   error,
   refresh
-} = useAsyncData(async () => {
-  const result = await store.getScreenshot(props.session.server.id, props.session.name)
-  console.log(result)
-  return result
+} = useAsyncData(() => {
+  return store.getScreenshot(props.session.server.id, props.session.name)
 })
 
 defineExpose({

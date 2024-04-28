@@ -7,11 +7,12 @@ import {useServerStore} from "../stores/useServerStore";
 import lodash from "lodash";
 import {useAsyncData} from "nuxt/app";
 import {useRouter} from "vue-router";
+import useShowToastOnResult from "../composables/useShowToastOnResult";
 
-const toast = useToast();
 const confirmPopup = useConfirm();
 const router = useRouter();
 const store = useServerStore()
+const req = useShowToastOnResult()
 
 const {servers, refreshing} = storeToRefs(store)
 const server = ref({connection: {}}
@@ -59,7 +60,11 @@ function confirmDeleteServer(event, server) {
     rejectLabel: 'No',
     acceptLabel: 'Yes, Disconnect',
     accept: () => {
-      return store.deleteServer(server.id)
+      return req(
+          store.deleteServer(server.id),
+          "Disconnected",
+          "Failed to disconnect server",
+      )
     },
     reject: () => {
     }

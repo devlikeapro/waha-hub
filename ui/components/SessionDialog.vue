@@ -2,6 +2,7 @@
 import {useServerStore} from "../stores/useServerStore";
 import {ref, computed} from "vue";
 import lodash from "lodash";
+import useShowToastOnResult from "../composables/useShowToastOnResult";
 
 const visible = defineModel("visible");
 const session = defineModel("session");
@@ -16,7 +17,7 @@ const disabled = computed(() => modeView.value)
 const disabledServer = computed(() => disabled.value || modeStart.value)
 
 
-const toast = useToast();
+const req = useShowToastOnResult()
 const store = useServerStore()
 
 const submitted = ref(false);
@@ -38,7 +39,11 @@ async function saveSession() {
 
   try {
     loading.value = true
-    await store.startSession(session.value.server, sessionStartRequest.value)
+    await req(
+        store.startSession(session.value.server, sessionStartRequest.value),
+        "Session Started",
+        "Failed to start session",
+    )
   } finally {
     loading.value = false
   }

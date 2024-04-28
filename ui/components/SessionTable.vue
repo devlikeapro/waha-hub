@@ -7,6 +7,7 @@ import {useServerStore} from "../stores/useServerStore";
 import lodash from "lodash";
 import {useAsyncData} from "nuxt/app";
 import {SessionStatuses} from "../services/waha/dtos";
+import useShowToastOnResult from "../composables/useShowToastOnResult.ts";
 
 const toast = useToast();
 const confirmPopup = useConfirm();
@@ -14,6 +15,7 @@ const confirmPopup = useConfirm();
 const store = useServerStore()
 const {allSessions, refreshing, servers} = storeToRefs(store)
 const sessions = allSessions
+const req = useShowToastOnResult()
 
 const session = ref({
   config: {
@@ -112,8 +114,11 @@ function confirmStopSession(event, session) {
     rejectLabel: 'No',
     acceptLabel: 'Yes, Stop',
     accept: async () => {
-      await store.stopSession(session.server.id, session.name, false)
-      toast.add({severity: 'success', summary: 'Stopped', detail: '', life: 3000});
+      await req(
+          store.stopSession(session.server.id, session.name, false),
+          "Stopped",
+          "Failed to stop session",
+      )
     },
     reject: () => {
     }
@@ -130,8 +135,11 @@ function confirmLogoutSession(event, session) {
     rejectLabel: 'No',
     acceptLabel: 'Yes, Logout',
     accept: async () => {
-      await store.logoutSession(session.server.id, session.name)
-      toast.add({severity: 'success', summary: 'Logged out', detail: '', life: 3000});
+      await req(
+          store.logoutSession(session.server.id, session.name),
+          "Logged out",
+          "Failed to logout session",
+      )
     },
     reject: () => {
     }

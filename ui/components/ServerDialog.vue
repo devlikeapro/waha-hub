@@ -1,12 +1,13 @@
 <script setup>
 import {useServerStore} from "../stores/useServerStore";
 import {ref} from "vue";
+import useShowToastOnResult from "../composables/useShowToastOnResult";
 
 const visible = defineModel("visible");
 const server = defineModel("server");
 
-const toast = useToast();
 const store = useServerStore()
+const req = useShowToastOnResult()
 
 const submitted = ref(false);
 const validConnectionUrl = computed(
@@ -24,11 +25,17 @@ async function saveServer() {
   }
 
   if (server.value.id) {
-    await store.editServer(server.value.id, server.value)
-    toast.add({severity: 'success', summary: 'Successful', detail: 'Updated', life: 3000});
+    await req(
+        store.editServer(server.value.id, server.value),
+        "Server updated",
+        "Failed to update server",
+    )
   } else {
-    await store.addServer(server.value)
-    toast.add({severity: 'success', summary: 'Successful', detail: 'Created', life: 3000});
+    await req(
+        store.addServer(server.value),
+        "Server added",
+        "Failed to add server",
+    )
   }
   hide()
   server.value = {connection: {}}
