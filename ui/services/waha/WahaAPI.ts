@@ -23,21 +23,24 @@ export class WahaAPI {
     }
 
     processSession(session: Session) {
-        if (session.config === undefined) {
+        if (!session.config) {
             session.config = {webhooks: []}
         }
-        if (session.config.webhooks === undefined) {
+        if (!session.config.webhooks) {
             session.config.webhooks = []
         }
         for (const webhook of session.config.webhooks) {
-            if (webhook.retries === undefined) {
+            if (!webhook.retries) {
                 webhook.retries = {attempts: 15, delaySeconds: 2}
             }
-            if (webhook.retries.attempts === undefined) {
+            if (webhook.retries.attempts === null || webhook.retries.attempts === undefined) {
                 webhook.retries.attempts = 15
             }
-            if (webhook.retries.delaySeconds === undefined) {
+            if (webhook.retries.delaySeconds === null || webhook.retries.delaySeconds === undefined) {
                 webhook.retries.delaySeconds = 2
+            }
+            if (!webhook.hmac || !webhook.hmac.key) {
+                webhook.hmac = {key: null}
             }
         }
         return session
