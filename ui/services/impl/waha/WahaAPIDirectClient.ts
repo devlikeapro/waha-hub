@@ -1,6 +1,7 @@
 import {IWahaAPIClient} from "../../waha/IWahaAPIClient";
 import {HTTPRequest} from "../../waha/HTTPRequest";
-import {IHubServerAPI, ServerConnection, ServerId, ServerInfo} from "../../hub/IHubServerAPI";
+import {ServerConnection, ServerId, ServerInfo} from "../../hub/IHubServerAPI";
+import axios from "axios";
 
 
 interface ServerResolver {
@@ -21,21 +22,19 @@ export class WahaAPIDirectClient implements IWahaAPIClient {
     async call(serverId: string, request: HTTPRequest): Promise<any> {
         const connection = await this.resolve(serverId)
         let url = new URL(request.uri, connection.url).toString()
-        if (request.params) {
-            const params = new URLSearchParams(request.params)
-            url = `${url}?${params.toString()}`
-        }
         const headers = {
             'Content-Type': 'application/json',
         }
         if (connection.key) {
             headers['Authorization'] = `Bearer ${connection.key}`
         }
-        const response = await fetch(url, {
+
+        return axios({
             method: request.method,
+            url: url,
             headers: headers,
-            body: JSON.stringify(request.body),
-        })
-        return await response.json()
+            data: request.body,
+            params: request.params,
+        }).then(response => response.data)
     }
 }

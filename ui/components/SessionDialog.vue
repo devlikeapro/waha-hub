@@ -71,7 +71,7 @@ const canNotStartSession = computed(() => {
     </template>
     <div class="mb-2">
       <InlineMessage severity="info" v-if="modeStart">
-        To change the server or name - please logout from the session and run again.
+        To change the <b>Server</b> or <b>Name</b> - please logout from the session and run again.
       </InlineMessage>
     </div>
 
