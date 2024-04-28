@@ -8,7 +8,7 @@ import lodash from "lodash";
 import {ServerAPI} from "../service/ServerAPI";
 import {HubServerAPIMock} from "../service/mock/HubServerAPIMock";
 import {ServerAPIClientMock} from "../service/mock/ServerAPIClientMock";
-import {WAHAGithubAPI} from "../service/WAHAGithubAPI";
+import {WahaGlobalVersionAPI} from "../service/WahaGlobalVersionAPI";
 
 
 export const useServerStore = defineStore('serverStore', () => {
@@ -18,7 +18,7 @@ export const useServerStore = defineStore('serverStore', () => {
     const serverAPI = new ServerAPI(serverAPIClient)
     const latestVersion = ref(undefined)
     const refreshing = ref(false)
-    const wahaGithubAPI = new WAHAGithubAPI()
+    const wahaGithubAPI = new WahaGlobalVersionAPI()
 
     const servers = ref<ServerInfo[]>([])
     const sessions = reactive(new Map<string, Session[]>())
