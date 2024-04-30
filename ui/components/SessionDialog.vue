@@ -1,6 +1,6 @@
 <script setup>
 import {useServerStore} from "../stores/useServerStore";
-import {ref, computed} from "vue";
+import {ref, computed, watch} from "vue";
 import lodash from "lodash";
 import useShowToastOnResult from "../composables/useShowToastOnResult";
 
@@ -20,7 +20,10 @@ const disabledServer = computed(() => disabled.value || modeStart.value)
 const req = useShowToastOnResult()
 const store = useServerStore()
 
-const proxyEnabled = ref(session.value.config?.proxy?.server)
+const proxyEnabled = ref(!!session.value.config?.proxy?.server)
+watch(session, async (newSession, _) => {
+  proxyEnabled.value = !!newSession.config?.proxy?.server
+})
 const submitted = ref(false);
 const loading = ref(false);
 const startConfig = computed(
@@ -219,9 +222,16 @@ async function copyRequest(event) {
               v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
               :tabindex="0"
               icon="pi pi-copy"
+              severity="secondary"
               @click="copyRequest($event)">
           </Button>
-          <Button :label="modeView ? 'Close' : 'Cancel'" icon="pi pi-times" text="" @click="hide" severity="secondary"/>
+          <Button
+              :label="modeView ? 'Close' : 'Cancel'"
+              icon="pi pi-times"
+              text=""
+              severity="secondary"
+              @click="hide"
+          />
           <Button
               v-if="!modeView"
               :label="modeNew? 'Start New': 'Start' "
