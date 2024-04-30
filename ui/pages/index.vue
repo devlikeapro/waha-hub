@@ -79,7 +79,7 @@ onBeforeMount(() => {
             <div>
               <Skeleton v-if="!store.latestVersion" width="4rem"></Skeleton>
               <span v-else class="text-900 font-medium text-xl">
-              <a href="https://github.com/devlikeapro/whatsapp-http-api-plus/releases" target="_blank">
+              <a href="https://waha.devlike.pro/docs/overview/changelog/" target="_blank">
                 {{ store.latestVersion }}
                 <i class="pi pi-external-link"></i>
               </a>
