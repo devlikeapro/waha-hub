@@ -12,6 +12,8 @@ const notConnectedServers = computed(() => {
 const connectedServers = computed(() => store.servers.filter(server => server.connected === true))
 const serversRequireUpdates = computed(() => store.servers.filter(s => store.latestVersion && s.version && s.version.version !== store.latestVersion))
 const badSessions = computed(() => store.allSessions.filter(s => s.status !== "WORKING" && s.status !== "STOPPED"))
+const workingSessions = computed(() => store.allSessions.filter(s => s.status === "WORKING"))
+const stoppedSessions = computed(() => store.allSessions.filter(s => s.status === "STOPPED"))
 
 onBeforeMount(() => {
   store.refresh()
@@ -32,13 +34,17 @@ onBeforeMount(() => {
             <i class="pi pi-whatsapp text-green-500 text-xl"></i>
           </div>
         </div>
+        <span class="text-green-500 font-medium">{{ workingSessions.length }}</span>
+        <span class="text-500"> working</span>
         <template v-if="badSessions.length > 0">
+          <span class="text-500">, </span>
           <span class="text-orange-400 font-medium">{{ badSessions.length }}</span>
           <span class="text-500"> requires attention</span>
         </template>
-        <template v-else>
-          <span class="text-green-500 font-medium">{{ store.allSessions.length }}</span>
-          <span class="text-500"> working</span>
+        <template v-if="stoppedSessions.length >0">
+          <span class="text-500">, </span>
+          <span class="text-gray-400 font-medium">{{ stoppedSessions.length }}</span>
+          <span class="text-500"> stopped</span>
         </template>
       </div>
     </div>
