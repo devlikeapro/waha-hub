@@ -2,10 +2,11 @@
 import {computed} from "vue";
 import {useToast} from "primevue/usetoast";
 import {useServerStore} from "../stores/useServerStore";
+import useShowToastOnResult from "../composables/useShowToastOnResult";
 
 const store = useServerStore()
 const props = defineProps(['session'])
-const toast = useToast();
+const req = useShowToastOnResult()
 const screenshot = ref(null)
 
 const refreshScreenshot = () => {
@@ -62,6 +63,15 @@ const exampleResponse =
       }
     }
 response.value = JSON.stringify(exampleResponse, null, 2)
+
+async function sendRequest() {
+  const data = await req(
+      store.callServerAPI(props.session.server.id, rpcRequest.value),
+      "Success",
+      "Failed",
+  )
+  response.value = JSON.stringify(data, null, 2)
+}
 </script>
 
 <template>
@@ -127,7 +137,7 @@ response.value = JSON.stringify(exampleResponse, null, 2)
                 </div>
               </div>
               <div class="text-center">
-                <Button><b>Send</b></Button>
+                <Button @click="sendRequest"><b>Send</b></Button>
               </div>
             </div>
           </div>
