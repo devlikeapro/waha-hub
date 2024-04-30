@@ -11,10 +11,20 @@ export class HubServerLocalAPI implements IHubServerAPI {
         localStorage.setItem(this.localStorageKey, JSON.stringify(servers));
     }
 
+    /**
+     * Get the current website address and add it as WAHA server
+     */
+
     private load(): ServerInfo[] {
         const data = localStorage.getItem(this.localStorageKey);
         if (!data) {
-            return [];
+            return [{
+                id: `waha_000000000000000001`,
+                name: 'WAHA',
+                connection: {
+                    url: window.location.origin,
+                }
+            }]
         }
         return JSON.parse(data);
     }
