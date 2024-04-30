@@ -106,58 +106,57 @@ async function sendRequest() {
 
 
     <div class="col-12 sm:col-6 h-full">
-      <div class="grid">
-        <div class="col-12">
-          <div class="h-full flex flex-column">
-            <div class="flex justify-content-center align-items-center">
-              <h5 class="m-0">Request</h5>
-              <Button
-                  rounded
-                  text=""
-                  v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
-                  :tabindex="0"
-                  icon="pi pi-copy"
-                  @click="copyRequest($event)">
-              </Button>
+      <div>
+        <div class="h-full flex flex-column">
+          <div class="flex justify-content-center align-items-center">
+            <h5 class="m-0">Request</h5>
+            <Button
+                rounded
+                text=""
+                v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
+                :tabindex="0"
+                icon="pi pi-copy"
+                @click="copyRequest($event)">
+            </Button>
+          </div>
+          <div class="flex flex-column justify-content-between h-full">
+            <div class="flex flex-column gap-2">
+              <div class="flex gap-2">
+                <Dropdown
+                    v-model="requestMethod"
+                    :options="methods"
+                />
+                <InputText type="text" class="w-full" v-model="requestEndpoint"/>
+              </div>
+              <div class="text-center">
+                <div class="mb-2">Body</div>
+                <Textarea v-model="requestBody" rows=8 class="w-full"/>
+              </div>
             </div>
-            <div class="flex flex-column justify-content-between h-full">
-              <div class="flex flex-column gap-2">
-                <div class="flex gap-2">
-                  <Dropdown
-                      v-model="requestMethod"
-                      :options="methods"
-                  />
-                  <InputText type="text" class="w-full" v-model="requestEndpoint"/>
-                </div>
-                <div class="text-center">
-                  <div class="mb-2">Body</div>
-                  <Textarea v-model="requestBody" rows=8 class="w-full"/>
-                </div>
-              </div>
-              <div class="text-center mt-2">
-                <Button @click="sendRequest"><b>Send</b></Button>
-              </div>
+            <div class="text-center mt-2">
+              <Button @click="sendRequest"><b>Send</b></Button>
             </div>
           </div>
         </div>
+      </div>
+      <Divider/>
 
-        <div class="col-12">
-          <div class="flex flex-column h-full">
-            <div class="flex justify-content-center align-items-center">
-              <h5 class="m-0">Response</h5>
-              <Button
-                  rounded
-                  text=""
-                  v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
-                  :tabindex="0"
-                  icon="pi pi-copy"
-                  @click="copyResponse($event)">
-              </Button>
-            </div>
-            <CodeHighlight class="m-0 p-4" style="text-wrap: pretty;">
-              {{ response }}
-            </CodeHighlight>
+      <div>
+        <div class="flex flex-column h-full">
+          <div class="flex justify-content-center align-items-center">
+            <h5 class="m-0">Response</h5>
+            <Button
+                rounded
+                text=""
+                v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
+                :tabindex="0"
+                icon="pi pi-copy"
+                @click="copyResponse($event)">
+            </Button>
           </div>
+          <CodeHighlight class="m-0 p-4" style="text-wrap: pretty;">
+            {{ response }}
+          </CodeHighlight>
         </div>
       </div>
     </div>
