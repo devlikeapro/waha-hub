@@ -20,14 +20,24 @@ const disabledServer = computed(() => disabled.value || modeStart.value)
 const req = useShowToastOnResult()
 const store = useServerStore()
 
+const proxyEnabled = ref(session.value.config?.proxy?.server)
 const submitted = ref(false);
 const loading = ref(false);
+const startConfig = computed(
+    () => {
+      const config = lodash.cloneDeep(session.value.config)
+      if (!proxyEnabled) {
+        delete config.proxy
+      }
+      return config
+    }
+)
 
 const sessionStartRequest = computed(
     () => {
       return {
         name: session.value.name,
-        config: lodash.cloneDeep(session.value.config),
+        config: startConfig.value,
       }
     })
 
@@ -109,6 +119,61 @@ const canNotStartSession = computed(() => {
       ></SessionWebhooksField>
     </div>
 
+    <div>
+      <div class="field flex justify-content-between align-items-center">
+        <div>
+          <label for="debug">Proxy</label>
+        </div>
+        <ToggleButton
+            v-model="proxyEnabled"
+            onLabel="Proxy On"
+            offLabel="Proxy Off"
+            :disabled="disabled"
+        >
+          <template #icon>
+            <font-awesome-icon icon="fa-solid fa-server" class="mr-2"/>
+          </template>
+        </ToggleButton>
+      </div>
+
+      <div v-if="proxyEnabled" class="card">
+        <div class="field">
+          <label for="proxy-server">Server</label>
+          <InputText
+              id="proxy-server"
+              v-model.trim="session.config.proxy.server"
+              required="true"
+              autofocus
+              :invalid="submitted && !session.config.proxy.server"
+              :disabled="modeView"
+              placeholder="address:port"
+          />
+          <small class="p-invalid" v-if="submitted && !session.config.proxy.server">Server is required.</small>
+        </div>
+        <div class="flex gap-3">
+          <div class="field">
+            <label for="proxy-username">Username (optional)</label>
+            <InputText
+                id="proxy-username"
+                v-model.trim="session.config.proxy.username"
+                :disabled="modeView"
+            />
+          </div>
+          <div class="field">
+            <label for="proxy-password">Password (optional)</label>
+            <Password
+                id="proxy-password"
+                v-model.trim="session.config.proxy.password"
+                :disabled="modeView"
+                :feedback="false"
+                toggleMask
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="field flex justify-content-between align-items-center">
       <div>
         <label for="debug">Debug Mode</label>
@@ -124,8 +189,6 @@ const canNotStartSession = computed(() => {
           <font-awesome-icon icon="fa-solid fa-bug" class="mr-2"/>
         </template>
       </ToggleButton>
-    </div>
-    <div>
     </div>
 
     <template #footer>

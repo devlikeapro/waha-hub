@@ -18,6 +18,7 @@ export interface Webhook {
 
 export interface SessionConfig {
     webhooks: Webhook[];
+    proxy: any;
 }
 
 export type SessionStatus = "STOPPED" | "STARTING" | "SCAN_QR_CODE" | "WORKING" | "FAILED";

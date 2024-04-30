@@ -75,6 +75,7 @@ function openNew() {
           }
         }
       ],
+      proxy: {},
     },
   };
   sessionDialogMode.value = "new"

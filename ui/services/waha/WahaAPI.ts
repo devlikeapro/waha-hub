@@ -25,7 +25,10 @@ export class WahaAPI {
 
     processSession(session: Session) {
         if (!session.config) {
-            session.config = {webhooks: []}
+            session.config = {
+                webhooks: [],
+                proxy: {},
+            }
         }
         if (!session.config.webhooks) {
             session.config.webhooks = []
@@ -43,6 +46,9 @@ export class WahaAPI {
             if (!webhook.hmac || !webhook.hmac.key) {
                 webhook.hmac = {key: null}
             }
+        }
+        if (!session.config.proxy) {
+            session.config.proxy = { }
         }
         return session
     }
