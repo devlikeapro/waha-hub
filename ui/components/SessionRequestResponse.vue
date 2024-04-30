@@ -8,6 +8,7 @@ const requestMethod = ref('POST')
 const requestEndpoint = ref('/api/sendText')
 const requestBody = ref("")
 const fetching = ref(false)
+const responseFailed = ref(false)
 
 function stringify(obj) {
   return JSON.stringify(obj, null, 2)
@@ -43,10 +44,12 @@ async function copyRequest(event) {
 
 async function sendRequest() {
   try {
+    responseFailed.value = false
     fetching.value = true
     const data = await store.callServerAPI(props.session.server.id, rpcRequest.value)
     response.value = stringify(data)
   } catch (e) {
+    responseFailed.value = true
     if (e.response) {
       response.value = stringify(e.response.data)
     } else {
@@ -121,7 +124,7 @@ onMounted(() => {
             @click="copyResponse($event)">
         </Button>
       </div>
-      <CodeHighlight class="m-0 p-4 pretty">
+      <CodeHighlight class="m-0 p-4 pretty" :invalid="responseFailed">
         {{ response }}
       </CodeHighlight>
     </div>
