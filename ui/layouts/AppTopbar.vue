@@ -94,10 +94,10 @@ const {refreshing} = storeToRefs(store)
         <i class="pi pi-refresh"></i>
         <span>Refresh</span>
       </button>
-      <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
-        <i class="pi pi-user"></i>
-        <span>Profile</span>
-      </button>
+<!--      <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">-->
+<!--        <i class="pi pi-user"></i>-->
+<!--        <span>Profile</span>-->
+<!--      </button>-->
       <!--            <button @click="onSettingsClick()" class="p-link layout-topbar-button">-->
       <!--                <i class="pi pi-cog"></i>-->
       <!--                <span>Settings</span>-->
