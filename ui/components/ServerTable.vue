@@ -177,9 +177,9 @@ function refreshServers() {
     <Column>
       <template #body="{data}">
         <div class="text-right">
-          <Button icon="pi pi-pencil" class="mr-2" severity="success" rounded outlined @click="editServer(data)"/>
+          <Button icon="pi pi-pencil" severity="success" rounded outlined @click="editServer(data)"/>
           <ConfirmPopup></ConfirmPopup>
-          <Button icon="pi pi-times" class="mt-2" severity="warning" rounded outlined
+          <Button icon="pi pi-times" severity="warning" rounded outlined
                   @click="confirmDeleteServer($event, data)"/>
         </div>
       </template>

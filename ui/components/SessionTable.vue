@@ -206,9 +206,7 @@ const globalFilterFields = [
 
     <template #header>
       <div class="flex justify-content-between flex-column sm:flex-row gap-2 sm:gap-0">
-        <div class="flex gap-2">
-          <Button label="Start New" icon="pi pi-plus" severity="success" @click="openNew"/>
-        </div>
+        <Button label="Start New" icon="pi pi-plus" severity="success" @click="openNew"/>
         <IconField iconPosition="left">
           <InputIcon class="pi pi-search"/>
           <InputText v-model="filters['global'].value" placeholder="Search by name or phone number"
