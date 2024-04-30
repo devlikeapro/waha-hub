@@ -26,8 +26,9 @@ export class WahaAPIDirectClient implements IWahaAPIClient {
             'Content-Type': 'application/json',
             "Accept": "application/json",
         }
+        console.log('connection', connection)
         if (connection.key) {
-            headers['Authorization'] = `Bearer ${connection.key}`
+            headers['X-Api-Key'] = connection.key
         }
 
         return axios({
