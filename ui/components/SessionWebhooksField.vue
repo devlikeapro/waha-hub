@@ -7,7 +7,7 @@ const props = defineProps({
 function add() {
   webhooks.value.push(
       {
-        url: "https://",
+        url: "https://httpbin.org/post",
         events: ["session.status", "message", "message.reaction"],
         hmac: {
           key: null,
