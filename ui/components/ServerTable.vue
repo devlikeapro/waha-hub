@@ -110,6 +110,7 @@ function refreshServers() {
       showGridlines
       @row-click="rowClick"
       class="p-datatable--clickable"
+      style="white-space: nowrap;"
   >
 
     <template #header>
@@ -178,11 +179,10 @@ function refreshServers() {
 
     <Column>
       <template #body="{data}">
-        <div class="flex flex-column sm:flex-row gap-2 justify-content-end ">
+        <div class="flex flex-row gap-2 justify-content-end">
           <Button icon="pi pi-pencil" severity="success" rounded outlined @click="editServer(data)"/>
           <ConfirmPopup></ConfirmPopup>
-          <Button icon="pi pi-times" severity="warning" rounded outlined
-                  @click="confirmDeleteServer($event, data)"/>
+          <Button icon="pi pi-times" severity="warning" rounded outlined @click="confirmDeleteServer($event, data)"/>
         </div>
       </template>
     </Column>

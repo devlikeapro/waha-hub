@@ -17,7 +17,7 @@ const refreshScreenshot = () => {
 <template>
   <Button :disabled="disabled" type="button" icon="pi pi-camera" @click="toggle" rounded outlined/>
   <OverlayPanel ref="op" appendTo="body" :showCloseIcon="true">
-    <div class="">
+    <div class="" style="min-width:20rem;">
       <div class="flex justify-content-center align-items-center">
         <h5 class="m-0">Screenshot</h5>
         <RefreshButton @click="refreshScreenshot"></RefreshButton>

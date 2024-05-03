@@ -202,6 +202,7 @@ const globalFilterFields = [
       @row-click="rowClick"
       showGridlines
       class="p-datatable--clickable"
+      style="white-space: nowrap;"
   >
 
     <template #header>
@@ -272,7 +273,7 @@ const globalFilterFields = [
 
     <Column>
       <template #body="{data}">
-        <div class="flex flex-column sm:flex-row gap-2 justify-content-end ">
+        <div class="flex flex-row gap-2 justify-content-end">
           <Button icon="pi pi-cog" severity="secondary" rounded outlined @click="showSessionConfig(data)"/>
           <Button icon="pi pi-play" severity="success" rounded outlined @click="startSession(data)"/>
           <Button icon="pi pi-stop" severity="warning" rounded outlined @click="confirmStopSession($event, data)"/>
