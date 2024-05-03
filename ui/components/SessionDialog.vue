@@ -234,7 +234,7 @@ async function copyRequest(event) {
           <Button
               v-if="!modeView"
               :label="modeNew? 'Start New': 'Start' "
-              :icon="{'pi pi-play': modeStart, 'pi pi-plus': modeNew}"
+              icon="pi pi-play"
               text=""
               @click="saveSession"
               :loading="loading"
