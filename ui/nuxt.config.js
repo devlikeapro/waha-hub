@@ -13,6 +13,11 @@ export default defineNuxtConfig({
                     rel: 'stylesheet',
                     type: 'text/css',
                     href: '/dashboard/themes/lara-dark-green/theme.css'
+                },
+                {
+                    rel: 'icon',
+                    type: 'image/x-icon',
+                    href: '/dashboard/favicon.ico'
                 }
             ]
         }
