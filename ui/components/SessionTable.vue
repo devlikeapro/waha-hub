@@ -228,7 +228,7 @@ const globalFilterFields = [
       </template>
     </Column>
 
-    <Column field="status" header="Status" :showFilterMenu="false" style="max-width: 9rem">
+    <Column field="status" header="Status" :showFilterMenu="false" style="width: 9rem">
       <template #body="{ data }">
         <div class="flex gap-2">
           <div>
