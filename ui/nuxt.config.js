@@ -37,16 +37,6 @@ export default defineNuxtConfig({
             strategy: 'lazyOnload',
             src: 'https://www.googletagmanager.com/gtag/js?id=UA-93461466-1'
         },
-        {
-            id: 'ga-analytics',
-            strategy: 'lazyOnload',
-            children: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'UA-93461466-1');
-            `
-        }
     ],
     css: [
         // PrimeVue
