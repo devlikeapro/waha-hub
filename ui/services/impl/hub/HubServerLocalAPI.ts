@@ -5,7 +5,6 @@ import type {CreateServerInfo, IHubServerAPI, ServerId, ServerInfo} from "../../
  */
 export class HubServerLocalAPI implements IHubServerAPI {
     private localStorageKey = 'servers';
-    private limit = 1;
 
     private save(servers: ServerInfo[]) {
         localStorage.setItem(this.localStorageKey, JSON.stringify(servers));
@@ -31,9 +30,6 @@ export class HubServerLocalAPI implements IHubServerAPI {
 
     async add(data: CreateServerInfo): Promise<void> {
         const servers = this.load();
-        if (servers.length >= this.limit) {
-            throw new Error("The WAHA Dashboard is designed to work with only one server. If you require centralized management, please use WAHA Hub instead.");
-        }
         servers.push({
             id: `waha_${Math.random().toString().slice(2)}`,
             ...data
