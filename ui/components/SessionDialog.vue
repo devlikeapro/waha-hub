@@ -149,7 +149,7 @@ async function copyRequest(event) {
           <!-- Store -->
           <div class="flex flex-column gap-2">
             <div>
-              <b>Store</b> allows you to store contacts, chats, messages in the database, so you can get it in API.
+              <a href="https://waha.devlike.pro/docs/engines/noweb" target="_blank">Read more about NOWEB settings</a>
             </div>
             <div>
               <ToggleButton
