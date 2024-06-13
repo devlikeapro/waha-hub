@@ -1,6 +1,6 @@
 
 export class WahaGlobalVersionAPI {
-    private versionFile = "https://raw.githubusercontent.com/devlikeapro/whatsapp-http-api/core/src/version.ts"
+    private versionFile = "https://raw.githubusercontent.com/devlikeapro/waha/core/src/version.ts"
 
     /**
      * Fetch version file, find "version: '2024.4.3'" and return it
