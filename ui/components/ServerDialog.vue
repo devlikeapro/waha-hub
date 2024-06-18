@@ -82,6 +82,18 @@ const isCurrentConnectionSecure = computed(() => {
       <small class="p-invalid" v-if="submitted && !server.connection.url">URL is required.</small>
       <small class="p-invalid" v-if="submitted && !validConnectionUrl">URL is not correct.</small>
       <InlineMessage
+          severity="error"
+          v-if="isCurrentConnectionSecure && isNotSecureConnection"
+          class="mt-2"
+      >
+        You're using <b>https://</b> connection but server is using <b>http://</b> connection.
+        <br/>
+        It's not possible to use it due to
+        <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content#developer_console" target="_blank">
+          Mixed Content
+        </a>
+      </InlineMessage>
+      <InlineMessage
           severity="warn"
           v-if="isNotSecureConnection"
           class="mt-2"
@@ -97,19 +109,6 @@ const isCurrentConnectionSecure = computed(() => {
       <label for="connection-key">API Key (optional)</label>
       <Password id="connection-key" v-model.trim="server.connection.key" :feedback="false" toggleMask/>
     </div>
-
-    <InlineMessage
-        severity="error"
-        v-if="isCurrentConnectionSecure && isNotSecureConnection"
-        class="mt-2"
-    >
-      You're using <b>https://</b> connection but server is using <b>http://</b> connection.
-      <br/>
-      It's not possible to use it due to
-      <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content#developer_console" target="_blank">
-        Mixed Content
-      </a>
-    </InlineMessage>
 
     <template #footer>
       <Button label="Cancel" icon="pi pi-times" text="" @click="hide" severity="secondary"/>
