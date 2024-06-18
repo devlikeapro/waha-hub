@@ -90,7 +90,7 @@ const isCurrentConnectionSecure = computed(() => {
         <br/>
         Kindly configure HTTPS Connection.
         <br/>
-        Read more about <a href="https://waha.devlike.pro/docs/how-to/security/" target="_blank">🔒 Security -></a>
+        Read more about <a href="https://waha.devlike.pro/docs/how-to/security/#https" target="_blank">🔒 Security -></a>
       </InlineMessage>
     </div>
     <div class="field">
