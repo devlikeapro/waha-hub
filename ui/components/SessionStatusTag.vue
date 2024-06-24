@@ -21,7 +21,8 @@ const severity = computed(() => {
     working: 'success',
     failed: 'danger',
     stopped: 'secondary',
-    pending: 'warning'
+    pending: 'warning',
+    starting: 'info',
   };
   return map[status] || "warning";
 })
