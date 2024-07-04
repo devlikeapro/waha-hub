@@ -6,7 +6,7 @@ export class WahaGlobalVersionAPI {
      * Fetch version file, find "version: '2024.4.3'" and return it
      */
     async getLatestVersion(): Promise<string> {
-        const response = await fetch(this.versionFile)
+        const response = await fetch(this.versionFile, {cache: "no-store"})
         const text = await response.text()
         const version = text.match(/version: '(\d+\.\d+\.\d+)'/)
         if (!version) {
