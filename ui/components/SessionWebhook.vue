@@ -22,9 +22,9 @@ const events = [
   "call.accepted",
   "call.rejected",
   "label.upsert",
-  "label.removed",
+  "label.deleted",
   "label.chat.added",
-  "label.chat.removed",
+  "label.chat.deleted",
 ]
 
 </script>
