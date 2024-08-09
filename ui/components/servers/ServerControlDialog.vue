@@ -36,6 +36,9 @@ const {
 } = useAsyncData(
     `server-environment-${props.server.id}`,
     async () => {
+      if (!props.server.id){
+        return []
+      }
       const data = await req(
           store.getServerEnvironment(props.server.id, showAll.value),
           undefined,
