@@ -9,7 +9,6 @@ import {WahaAPI} from "../services/waha/WahaAPI";
 import {WahaGlobalVersionAPI} from "../services/WahaGlobalVersionAPI";
 import {HubServerLocalAPI} from "../services/impl/hub/HubServerLocalAPI";
 import {WahaAPIDirectClient} from "../services/impl/waha/WahaAPIDirectClient";
-import {sleep} from "../services/utils";
 import {useToast} from "primevue/usetoast";
 import {WebSocketClient} from "../services/WebSocketService";
 
@@ -165,6 +164,10 @@ export const useServerStore = defineStore('serverStore', () => {
         return wahaAPI.getScreenshot(serverId, sessionName)
     }
 
+    async function getServerEnvironment(serverId: ServerId, all: boolean): Promise<any> {
+        return wahaAPI.getServerEnvironment(serverId, all)
+    }
+
     async function getProfilePicture(serverId: ServerId, sessionName: string, contactId: string): Promise<string> {
         return wahaAPI.getProfilePicture(serverId, sessionName, contactId)
     }
@@ -203,6 +206,7 @@ export const useServerStore = defineStore('serverStore', () => {
         logoutSession,
         getScreenshot,
         getProfilePicture,
+        getServerEnvironment,
         callServerAPI,
         latestVersion,
     }

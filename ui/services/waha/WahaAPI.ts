@@ -51,7 +51,7 @@ export class WahaAPI {
             }
         }
         if (!session.config.proxy) {
-            session.config.proxy = { }
+            session.config.proxy = {}
         }
         return session
     }
@@ -110,6 +110,14 @@ export class WahaAPI {
             method: 'GET',
             uri: `/api/version`,
             params: {},
+        });
+    }
+
+    getServerEnvironment(serverId: ServerId, all: boolean): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/server/environment`,
+            params: {all: all},
         });
     }
 }

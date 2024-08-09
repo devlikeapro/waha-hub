@@ -16,6 +16,7 @@ const {servers, refreshing} = storeToRefs(store)
 const server = ref({connection: {}}
 );
 const serverDialog = ref(false)
+const serverControlDialog = ref(false)
 
 const dt = ref(null);
 const filters = ref({});
@@ -40,7 +41,12 @@ function openNew() {
 }
 
 function rowClick(event) {
-  editServer(event.data)
+  openServerControl(event.data)
+}
+
+function openServerControl(selected) {
+  server.value = lodash.cloneDeep(selected);
+  serverControlDialog.value = true;
 }
 
 function editServer(selected) {
@@ -189,6 +195,11 @@ function refreshServers() {
       v-model:visible="serverDialog"
       v-model:server="server"
   ></ServerDialog>
+  <ServerControlDialog
+      v-model:visible="serverControlDialog"
+      v-model:server="server"
+  >
+  </ServerControlDialog>
 </template>
 
 <style lang="scss">
