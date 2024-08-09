@@ -1,6 +1,5 @@
 <script setup>
 import {onMounted} from "vue";
-import {useServerStore} from "../stores/useServerStore";
 
 const store = useServerStore()
 const props = defineProps(['session'])

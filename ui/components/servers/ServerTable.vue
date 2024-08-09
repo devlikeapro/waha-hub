@@ -3,11 +3,9 @@ import {ref, onBeforeMount} from 'vue';
 import {useToast} from 'primevue/usetoast';
 import {FilterMatchMode} from "primevue/api";
 import {useConfirm} from "primevue/useconfirm";
-import {useServerStore} from "../stores/useServerStore";
 import lodash from "lodash";
 import {useAsyncData} from "nuxt/app";
 import {useRouter} from "vue-router";
-import useShowToastOnResult from "../composables/useShowToastOnResult";
 
 const confirmPopup = useConfirm();
 const router = useRouter();

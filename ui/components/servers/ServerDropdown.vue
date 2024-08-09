@@ -1,6 +1,4 @@
 <script setup>
-import {useServerStore} from "../stores/useServerStore";
-
 const server = defineModel("server");
 defineProps(
     {

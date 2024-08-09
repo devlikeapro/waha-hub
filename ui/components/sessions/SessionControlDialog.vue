@@ -1,7 +1,5 @@
 <script setup>
 
-import {useServerStore} from "../stores/useServerStore";
-
 const visible = defineModel("visible");
 const session = defineModel("session");
 

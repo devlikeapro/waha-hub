@@ -1,6 +1,5 @@
 <script setup>
 import {onBeforeMount} from "vue";
-import {useServerStore} from "../stores/useServerStore";
 
 const store = useServerStore()
 onBeforeMount(() => {

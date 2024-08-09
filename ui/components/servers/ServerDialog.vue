@@ -1,7 +1,5 @@
 <script setup>
-import {useServerStore} from "../stores/useServerStore";
 import {ref} from "vue";
-import useShowToastOnResult from "../composables/useShowToastOnResult";
 
 const visible = defineModel("visible");
 const server = defineModel("server");

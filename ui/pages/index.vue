@@ -1,10 +1,7 @@
 <script setup>
-import {onBeforeMount, onMounted} from 'vue';
+import {onBeforeMount} from 'vue';
 import {useServerStore} from "../stores/useServerStore";
 import {computed} from "../.nuxt/imports";
-import {useAsyncData} from "nuxt/app";
-import ServerTable from "../components/servers/ServerTable.vue";
-import SessionTable from "../components/sessions/SessionTable.vue";
 
 
 const store = useServerStore()

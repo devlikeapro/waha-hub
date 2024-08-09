@@ -3,11 +3,9 @@ import {ref, onBeforeMount} from 'vue';
 import {useToast} from 'primevue/usetoast';
 import {FilterMatchMode, FilterOperator} from "primevue/api";
 import {useConfirm} from "primevue/useconfirm";
-import {useServerStore} from "../stores/useServerStore";
 import lodash from "lodash";
 import {useAsyncData} from "nuxt/app";
-import {SessionStatuses} from "../services/waha/dtos";
-import useShowToastOnResult from "../composables/useShowToastOnResult.ts";
+import {SessionStatuses} from "../../services/waha/dtos";
 
 const toast = useToast();
 const confirmPopup = useConfirm();

@@ -1,7 +1,5 @@
 <script setup>
-import {watch} from 'vue';
-import {useServerStore} from "../stores/useServerStore";
-import {sleep} from "../services/utils";
+import {sleep} from "../../services/utils";
 
 const store = useServerStore()
 const props = defineProps({

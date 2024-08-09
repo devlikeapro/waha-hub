@@ -1,6 +1,5 @@
 <script setup>
 import {computed} from "vue";
-import {useServerStore} from "../stores/useServerStore";
 
 const props = defineProps({
   session: Object,
