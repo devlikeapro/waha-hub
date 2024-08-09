@@ -225,12 +225,11 @@ const globalFilterFields = [
     <template #loading> Loading sessions...</template>
 
     <Column field="name" header="Name" sortable>
+    </Column>
+
+    <Column header="Me">
       <template #body="{ data }">
-        <div class="flex gap-2 align-items-center">
-          <Button icon="pi pi-info" rounded outlined @click="openSessionControl(data)"/>
-          <span> {{ data.name }} </span>
-          <SessionChip :session="data"></SessionChip>
-        </div>
+        <SessionChip :session="data"></SessionChip>
       </template>
     </Column>
 
