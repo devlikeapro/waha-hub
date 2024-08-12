@@ -54,23 +54,25 @@ const sessionStartRequest = computed(() => {
   return {
     name: session.value.name,
     config: config,
-    start: true,
   }
 })
 
-async function saveSession() {
+async function saveSession(start) {
   submitted.value = true;
 
   try {
     loading.value = true
+    const body = lodash.cloneDeep(sessionStartRequest.value)
+    body.start = start
     const result = await req(
-        store.createSession(session.value.server, sessionStartRequest.value),
+        store.createSession(session.value.server, body),
         undefined,
         "Failed to start session",
     )
+    const summary = start ? 'Started' : 'Created'
     toast.add({
       severity: 'success',
-      summary: `Started`,
+      summary: summary,
       detail: result.name,
       life: 3000
     });
@@ -297,10 +299,19 @@ async function copyRequest(event) {
           />
           <Button
               v-if="!modeView"
-              :label="modeNew? 'Start New': 'Start' "
+              label="Create"
+              icon="pi pi-plus"
+              text=""
+              @click="saveSession(false)"
+              :loading="loading"
+              :disabled="canNotStartSession"
+          />
+          <Button
+              v-if="!modeView"
+              label="Create & Start"
               icon="pi pi-play"
               text=""
-              @click="saveSession"
+              @click="saveSession(true)"
               :loading="loading"
               :disabled="canNotStartSession"
           />
