@@ -71,7 +71,7 @@ const isOutsideClicked = (event) => {
         <app-config></app-config>
         <div class="layout-mask"></div>
     </div>
-    <Toast position="bottom-right"/>
+    <Toast position="top-right"/>
 </template>
 
 <style lang="scss" scoped></style>
