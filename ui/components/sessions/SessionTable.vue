@@ -153,7 +153,7 @@ const globalFilterFields = [
       :value="sessions.length > 0 ? sessions : []"
       :paginator="true"
       :rows="20"
-      :dataKey="(data) => `${data.name}-${data.server.id}-${data.status}`"
+      :dataKey="(data) => `${data.server.id}-${data.name}`"
       :rowHover="true"
       v-model:filters="filters"
       filterDisplay="row"
@@ -196,6 +196,7 @@ const globalFilterFields = [
           <div class="my-auto">
             <SessionStatusTag
                 :status="data.status"
+                :value="data.status.toUpperCase()"
             ></SessionStatusTag>
           </div>
         </div>

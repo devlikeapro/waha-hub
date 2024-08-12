@@ -29,6 +29,7 @@ async function refreshServers() {
         </span>
     <SessionStatusTag
         :status="session.status"
+        :value="session.status?.toUpperCase()"
     ></SessionStatusTag>
     <div>
       <span>(</span>

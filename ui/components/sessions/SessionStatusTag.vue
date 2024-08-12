@@ -8,10 +8,7 @@ const props = defineProps({
   },
   value: {
     type: String,
-    required: false,
-    default: function (props) {
-      return props.status.toUpperCase();
-    }
+    required: true,
   },
 })
 
