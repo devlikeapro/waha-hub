@@ -323,14 +323,6 @@ async function copyRequest(event) {
               :loading="loading"
           />
           <Button
-              v-if="!modeUpdate"
-              label="Create & Start"
-              icon="pi pi-play"
-              text=""
-              @click="createSession(true)"
-              :loading="loading"
-          />
-          <Button
               v-if="modeUpdate"
               label="Save"
               icon="pi pi-save"
