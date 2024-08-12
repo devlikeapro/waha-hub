@@ -96,7 +96,7 @@ async function copyRequest(event) {
   await navigator.clipboard.writeText(JSON.stringify(
       {
         method: "POST",
-        uri: "/api/sessions/start",
+        uri: "/api/sessions",
         body: sessionStartRequest.value,
       },
       null,
