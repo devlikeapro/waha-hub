@@ -70,7 +70,8 @@ async function saveSession() {
     )
     toast.add({
       severity: 'success',
-      summary: `Started - '${result.name}'`,
+      summary: `Started`,
+      detail: result.name,
       life: 3000
     });
   } finally {

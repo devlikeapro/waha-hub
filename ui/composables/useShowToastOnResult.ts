@@ -3,13 +3,21 @@ import {useToast} from 'primevue/usetoast';
 const useShowToastOnResult = () => {
     const toast = useToast();
 
-    function req(promise, successHeader?: string, errorHeader?: string, rethrow = true) {
+    function req(
+        promise,
+        successHeader?: string,
+        errorHeader?: string,
+        successDetail?: string,
+        errorDetail?: string,
+        rethrow = true,
+    ) {
         return promise
             .then((result) => {
-                if (successHeader){
+                if (successHeader) {
                     toast.add({
                         severity: 'success',
                         summary: successHeader,
+                        detail: successDetail,
                         life: 3000
                     });
                 }
@@ -18,6 +26,9 @@ const useShowToastOnResult = () => {
             .catch((error) => {
                 if (errorHeader) {
                     let details = []
+                    if (errorDetail) {
+                        details.push(errorDetail)
+                    }
                     if (error.response?.data?.message) {
                         details.push(`Message: ${error.response.data.message}`)
                     }

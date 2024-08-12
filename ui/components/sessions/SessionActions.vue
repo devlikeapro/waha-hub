@@ -26,8 +26,10 @@ async function startSession() {
   starting.value = true
   await req(
       store.startSession(session.server.id, session.name),
-      `Started - '${session.name}'`,
-      `Failed to start session - '${session.name}'`,
+      `Started`,
+      `Failed to start session`,
+      session.name,
+      session.name
   ).finally(
       () => starting.value = false
   )
@@ -46,13 +48,16 @@ function confirmRestartSession(event) {
       stopping.value = true
       toast.add({
         severity: 'info',
-        summary: `Restarting - '${session.name}'...`,
+        summary: `Restarting...`,
+        detail: session.name,
         life: 3000
       });
       await req(
           store.restartSession(session.server.id, session.name),
-          `Restarted - '${session.name}'`,
-          `Failed to restart session - '${session.name}'`,
+          `Restarted`,
+          `Failed to restart session`,
+          session.name,
+          session.name
       ).finally(
           () => stopping.value = false
       )
@@ -76,13 +81,16 @@ function confirmStopSession(event) {
       stopping.value = true
       toast.add({
         severity: 'info',
-        summary: `Stopping - '${session.name}'...`,
+        summary: `Stopping...`,
+        detail: session.name,
         life: 3000
       });
       await req(
           store.stopSession(session.server.id, session.name),
-          `Stopped - '${session.name}'`,
-          `Failed to stop session - '${session.name}'`,
+          `Stopped`,
+          `Failed to stop session`,
+          session.name,
+          session.name
       ).finally(
           () => stopping.value = false
       )
@@ -107,12 +115,15 @@ function confirmLogoutSession(event) {
       toast.add({
         severity: 'info',
         summary: `Logging out - '${session.name}'...`,
+        detail: session.name,
         life: 3000
       });
       await req(
           store.logoutSession(session.server.id, session.name),
-          `Logged out - '${session.name}'`,
-          `Failed to logout session - '${session.name}'`,
+          `Logged out`,
+          `Failed to logout session`,
+          session.name,
+          session.name
       ).finally(
           () => loggingOut.value = false
       )
@@ -141,8 +152,10 @@ function confirmRemoveSession(event) {
       });
       await req(
           store.deleteSession(session.server.id, session.name),
-          `Removed - '${session.name}'`,
-          `Failed to delete session - '${session.name}'`,
+          `Removed`,
+          `Failed to delete session`,
+          session.name,
+          session.name
       ).finally(
           () => removing.value = false
       )

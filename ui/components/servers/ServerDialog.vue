@@ -27,12 +27,16 @@ async function saveServer() {
         store.editServer(server.value.id, server.value),
         "Server updated",
         "Failed to update server",
+        server.value.name,
+        server.value.name,
     )
   } else {
     await req(
         store.addServer(server.value),
         "Connected to server",
         "Failed to connect to server",
+        server.value.name,
+        server.value.name,
     )
   }
   hide()

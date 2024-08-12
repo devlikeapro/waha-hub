@@ -41,6 +41,8 @@ const {
           store.getServerEnvironment(props.server.id, showAll.value),
           undefined,
           "Failed to fetch server environment",
+          undefined,
+          props.server.name,
       )
       // convert from key-value to {name: key, value: value}
       const vars = Object.keys(data).map(key => ({name: key, value: data[key]}))
