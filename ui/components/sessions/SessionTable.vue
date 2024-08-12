@@ -8,12 +8,10 @@ import {useAsyncData} from "nuxt/app";
 import {SessionStatuses} from "../../services/waha/dtos";
 
 const toast = useToast();
-const confirmPopup = useConfirm();
 
 const store = useServerStore()
 const {allSessions, refreshing, servers} = storeToRefs(store)
 const sessions = allSessions
-const req = useShowToastOnResult()
 
 const session = ref({
   config: {
@@ -109,47 +107,6 @@ function startSession(selected) {
   sessionDialog.value = true;
 }
 
-function confirmStopSession(event, session, loading) {
-  confirmPopup.require({
-    target: event.target,
-    message: `Stop '${session.name}' session?\n`,
-    icon: 'pi pi-exclamation-triangle',
-    rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
-    acceptClass: 'p-button-warning p-button-sm',
-    rejectLabel: 'No',
-    acceptLabel: 'Yes, Stop',
-    accept: async () => {
-      await req(
-          store.stopSession(session.server.id, session.name, false),
-          `Stopped - '${session.name}'`,
-          `Failed to stop session - '${session.name}'`,
-      )
-    },
-    reject: () => {
-    }
-  });
-}
-
-function confirmLogoutSession(event, session) {
-  confirmPopup.require({
-    target: event.target,
-    message: `Logout '${session.name}' session?\n`,
-    icon: 'pi pi-exclamation-triangle',
-    rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
-    acceptClass: 'p-button-danger p-button-sm',
-    rejectLabel: 'No',
-    acceptLabel: 'Yes, Logout',
-    accept: async () => {
-      await req(
-          store.logoutSession(session.server.id, session.name),
-          `Logged out - '${session.name}'`,
-          `Failed to logout session - '${session.name}'`,
-      )
-    },
-    reject: () => {
-    }
-  });
-}
 
 function refreshServers() {
   useAsyncData('store', async () => await store.refresh())
@@ -276,17 +233,11 @@ const globalFilterFields = [
 
     <Column>
       <template #body="{data}">
-        <div class="flex flex-row gap-2 justify-content-end">
-          <Button icon="pi pi-cog" severity="secondary" rounded outlined @click="showSessionConfig(data)"/>
-          <Button icon="pi pi-play" severity="success" rounded outlined @click="startSession(data)"/>
-          <Button
-              icon="pi pi-stop"
-              severity="warning"
-              rounded outlined
-              @click="confirmStopSession($event, data)"
-          />
-          <Button icon="pi pi-trash" severity="danger" rounded outlined @click="confirmLogoutSession($event, data)"/>
-        </div>
+        <SessionActions
+            :session="data"
+            @view="showSessionConfig"
+            @start="startSession"
+        />
       </template>
     </Column>
   </DataTable>

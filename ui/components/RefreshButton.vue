@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(['refreshing'])
+defineProps(['refreshing'])
 const icon = computed(() => props.refreshing ? 'pi pi-refresh pi-spin' : 'pi pi-refresh')
 </script>
 
