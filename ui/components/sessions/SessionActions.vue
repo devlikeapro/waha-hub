@@ -8,21 +8,27 @@ const store = useServerStore()
 const confirmPopup = useConfirm();
 const req = useShowToastOnResult()
 
+const stopping = ref(false)
+const loggingOut = ref(false)
+
 function confirmStopSession(event) {
   const session = props.session
   confirmPopup.require({
     target: event.target,
-    message: `Stop '${session.name}' session?\nIt'll take 5 seconds`,
+    message: `Stop '${session.name}' session?`,
     icon: 'pi pi-exclamation-triangle',
     rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
     acceptClass: 'p-button-warning p-button-sm',
     rejectLabel: 'No',
     acceptLabel: 'Yes, Stop',
     accept: async () => {
+      stopping.value = true
       await req(
           store.stopSession(session.server.id, session.name, false),
           `Stopped - '${session.name}'`,
           `Failed to stop session - '${session.name}'`,
+      ).finally(
+          () => stopping.value = false
       )
     },
     reject: () => {
@@ -41,10 +47,13 @@ function confirmLogoutSession(event) {
     rejectLabel: 'No',
     acceptLabel: 'Yes, Logout',
     accept: async () => {
+      loggingOut.value = true
       await req(
           store.logoutSession(session.server.id, session.name),
           `Logged out - '${session.name}'`,
           `Failed to logout session - '${session.name}'`,
+      ).finally(
+          () => loggingOut.value = false
       )
     },
     reject: () => {
@@ -75,6 +84,7 @@ function confirmLogoutSession(event) {
         severity="warning"
         rounded outlined
         @click="confirmStopSession($event, session)"
+        :loading="stopping"
     />
     <Button
         icon="pi pi-trash"
@@ -82,6 +92,7 @@ function confirmLogoutSession(event) {
         rounded
         outlined
         @click="confirmLogoutSession($event, session)"
+        :loading="loggingOut"
     />
   </div>
 </template>

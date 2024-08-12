@@ -2,7 +2,6 @@
 import {ref, onBeforeMount} from 'vue';
 import {useToast} from 'primevue/usetoast';
 import {FilterMatchMode, FilterOperator} from "primevue/api";
-import {useConfirm} from "primevue/useconfirm";
 import lodash from "lodash";
 import {useAsyncData} from "nuxt/app";
 import {SessionStatuses} from "../../services/waha/dtos";
