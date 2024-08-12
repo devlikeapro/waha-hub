@@ -1,5 +1,5 @@
 import {ServerId} from "../hub/IHubServerAPI";
-import {Session, SessionStartRequest} from "./dtos";
+import {Session, SessionConfig, SessionStartRequest} from "./dtos";
 import {IWahaAPIClient} from "./IWahaAPIClient";
 import {HTTPRequest} from "./HTTPRequest";
 
@@ -56,35 +56,61 @@ export class WahaAPI {
         return session
     }
 
-    startSession(serverId: ServerId, body: SessionStartRequest): Promise<void> {
+    createSession(serverId: ServerId, body: SessionStartRequest): Promise<void> {
         return this.api.call(serverId, {
             method: 'POST',
-            uri: '/api/sessions/start',
+            uri: `/api/sessions/`,
             params: {},
             body: body,
         });
     }
 
-    stopSession(serverId: ServerId, sessionName: string, logout: boolean): Promise<void> {
+    updateSession(serverId: ServerId, sessionName: string, config: SessionConfig): Promise<void> {
+        return this.api.call(serverId, {
+            method: 'PUT',
+            uri: `/api/sessions/${sessionName}`,
+            params: {},
+            body: {config: config},
+        });
+    }
+
+    deleteSession(serverId: ServerId, sessionName: string): Promise<void> {
+        return this.api.call(serverId, {
+            method: 'DELETE',
+            uri: `/api/sessions/${sessionName}`,
+            params: {},
+        });
+    }
+
+    startSession(serverId: ServerId, sessionName: string): Promise<void> {
         return this.api.call(serverId, {
             method: 'POST',
-            uri: `/api/sessions/stop`,
+            uri: `/api/sessions/${sessionName}/start`,
             params: {},
-            body: {
-                logout: logout,
-                name: sessionName,
-            },
+        });
+    }
+
+    stopSession(serverId: ServerId, sessionName: string): Promise<void> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: `/api/sessions/${sessionName}/stop`,
+            params: {},
+        });
+    }
+
+    restartSession(serverId: ServerId, sessionName: string): Promise<void> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: `/api/sessions/${sessionName}/restart`,
+            params: {},
         });
     }
 
     logoutSession(serverId: ServerId, sessionName: string): Promise<void> {
         return this.api.call(serverId, {
             method: 'POST',
-            uri: `/api/sessions/logout`,
+            uri: `/api/sessions/${sessionName}/logout`,
             params: {},
-            body: {
-                name: sessionName,
-            },
         });
     }
 

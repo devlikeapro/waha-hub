@@ -51,6 +51,7 @@ const sessionStartRequest = computed(() => {
   return {
     name: session.value.name,
     config: config,
+    start: true,
   }
 })
 
@@ -63,7 +64,7 @@ async function saveSession() {
   try {
     loading.value = true
     await req(
-        store.startSession(session.value.server, sessionStartRequest.value),
+        store.createSession(session.value.server, sessionStartRequest.value),
         "Session Started",
         "Failed to start session",
     )

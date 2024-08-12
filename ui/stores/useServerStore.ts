@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia'
 import {reactive, ref} from "vue"
 import type {IHubServerAPI, ServerId, ServerInfo} from "../services/hub/IHubServerAPI";
-import type {Session, SessionStartRequest} from "../services/waha/dtos";
+import type {Session, SessionConfig, SessionStartRequest} from "../services/waha/dtos";
 import {computed} from "../.nuxt/imports";
 // @ts-ignore
 import lodash from "lodash";
@@ -145,13 +145,34 @@ export const useServerStore = defineStore('serverStore', () => {
         return servers.value.filter(server => server.id === id)?.[0]
     }
 
-    async function startSession(id: ServerId, body: SessionStartRequest): Promise<void> {
-        await wahaAPI.startSession(id, body)
+    async function createSession(id: ServerId, body: SessionStartRequest) {
+        await wahaAPI.createSession(id, body)
         refresh()
     }
 
-    async function stopSession(id: ServerId, sessionName: string, logout: boolean): Promise<void> {
-        await wahaAPI.stopSession(id, sessionName, logout)
+    async function updateSession(id: ServerId, name: string, config: SessionConfig) {
+        await wahaAPI.updateSession(id, name, config)
+        refresh()
+    }
+
+    async function deleteSession(id: ServerId, name: string) {
+        await wahaAPI.deleteSession(id, name)
+        refresh()
+    }
+
+
+    async function startSession(id: ServerId, name: string): Promise<void> {
+        await wahaAPI.startSession(id, name)
+        refresh()
+    }
+
+    async function stopSession(id: ServerId, sessionName: string): Promise<void> {
+        await wahaAPI.stopSession(id, sessionName)
+        refresh()
+    }
+
+    async function restartSession(id: ServerId, sessionName: string): Promise<void> {
+        await wahaAPI.restartSession(id, sessionName)
         refresh()
     }
 
@@ -201,8 +222,12 @@ export const useServerStore = defineStore('serverStore', () => {
         deleteServer,
         editServer,
         getServer,
+        createSession,
+        updateSession,
+        deleteSession,
         startSession,
         stopSession,
+        restartSession,
         logoutSession,
         getScreenshot,
         getProfilePicture,

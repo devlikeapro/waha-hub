@@ -56,6 +56,7 @@ export interface Session {
 }
 
 export interface SessionStartRequest {
-    name: SessionName;
+    name?: SessionName;
     config: SessionConfig;
+    start: boolean
 }
