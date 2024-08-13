@@ -324,7 +324,7 @@ async function copyRequest(event) {
           />
           <Button
               v-if="modeUpdate"
-              label="Save"
+              label="Update"
               icon="pi pi-save"
               text=""
               @click="updateSession"
