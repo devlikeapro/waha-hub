@@ -8,17 +8,22 @@ const sessionInfoLabel = computed(
       if (!props.session.me) {
         return undefined
       }
-      return `${props.session.me.pushName} (${props.session.me.id})`
+      return `${props.session.me.id}`
     }
 )
 </script>
 
 <template>
-  <Chip
-      v-if="sessionInfoLabel"
-      :label="sessionInfoLabel"
-      :image="image"
-  ></Chip>
+  <div>
+    <Chip
+        v-if="sessionInfoLabel"
+        :label="sessionInfoLabel"
+        :image="image"
+    ></Chip>
+    <div class="text-center p-1">
+      <b class="text-center">{{ props.session?.me?.pushName }}</b>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

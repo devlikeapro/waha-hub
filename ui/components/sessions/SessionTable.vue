@@ -117,6 +117,7 @@ const globalFilterFields = computed(
       return [
         'name',
         'me.id',
+        "me.pushName",
       ]
     }
 )
@@ -186,7 +187,9 @@ const globalFilterFields = computed(
 
     <Column header="Me">
       <template #body="{ data }">
-        <SessionChip :session="data"></SessionChip>
+        <div class="text-center">
+          <SessionChip :session="data"></SessionChip>
+        </div>
       </template>
     </Column>
 
