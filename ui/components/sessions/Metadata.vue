@@ -8,7 +8,7 @@ const props = defineProps(['metadata'])
 
 <template>
   <div class="metadata">
-    <pre v-for="(value, key) in metadata" :key="key">{{ key }}={{ value }}</pre>
+    <pre v-for="(value, key) in metadata" :key="key">{{ key }} = {{ value }}</pre>
   </div>
 
 </template>
