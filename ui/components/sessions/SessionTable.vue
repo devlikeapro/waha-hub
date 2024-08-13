@@ -169,6 +169,14 @@ const globalFilterFields = [
     <Column field="name" header="Name" sortable>
     </Column>
 
+    <Column header="Metadata">
+      <template #body="{ data }">
+        <Metadata
+            :metadata="data.config?.metadata"
+        ></Metadata>
+      </template>
+    </Column>
+
     <Column header="Me">
       <template #body="{ data }">
         <SessionChip :session="data"></SessionChip>

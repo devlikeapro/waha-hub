@@ -26,6 +26,7 @@ export interface NowebConfig {
 }
 
 export interface SessionConfig {
+    metadata: any,
     webhooks: Webhook[];
     proxy: any;
     noweb?: NowebConfig;
