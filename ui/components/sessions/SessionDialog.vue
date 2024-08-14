@@ -6,6 +6,7 @@ import lodash from "lodash";
 const toast = useToast();
 import useShowToastOnResult from "../composables/useShowToastOnResult";
 import {useToast} from "primevue/usetoast";
+import {convertKeyValueToList} from "../../utils/objects";
 
 const visible = defineModel("visible");
 const session = defineModel("session");
@@ -28,9 +29,12 @@ const server = computed(() => {
 const isNOWEB = computed(() => server.value?.version?.engine === 'NOWEB')
 const isWEBJS = computed(() => server.value?.version?.engine === 'WEBJS')
 
+const metadataKeyValue = ref([])
+
 const proxyEnabled = ref(!!session.value.config?.proxy?.server)
 watch(session, async (newSession, _) => {
   proxyEnabled.value = newSession?.config?.proxy?.server
+  metadataKeyValue.value = convertKeyValueToList(newSession.config?.metadata)
 })
 const submitted = ref(false);
 const loading = ref(false);
@@ -40,6 +44,7 @@ const sessionConfig = computed(
       if (!proxyEnabled.value) {
         config.proxy = undefined
       }
+      config.metadata = convertListToKeyValue(metadataKeyValue.value)
       return config
     }
 )
@@ -216,7 +221,18 @@ async function copyRequest(event) {
       </Accordion>
     </div>
 
-    <div class="field">
+    <div>
+      <div>
+        <h5>Metadata</h5>
+      </div>
+
+      <KeyValueTable
+          v-model="metadataKeyValue"
+          key-column-name="Key"
+      ></KeyValueTable>
+    </div>
+
+    <div class="field mt-4">
       <SessionWebhooksField
           ref="webhooks"
           v-model:webhooks="session.config.webhooks"
