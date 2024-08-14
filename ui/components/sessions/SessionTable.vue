@@ -36,15 +36,24 @@ const columns = ref([
   {field: "status", header: "Status"},
   {field: "server", header: "Server"},
 ])
-const selectedColumns = ref(columns.value)
+
+function loadHiddenColumns() {
+  return JSON.parse(localStorage.getItem("sessions.table.columns.hidden")) || []
+}
+
+const hiddenColumnsSaved = loadHiddenColumns()
+
+// Difference by "field"
+const selectedColumns = ref(lodash.differenceBy(columns.value, hiddenColumnsSaved, 'field'))
 const onToggle = (val) => {
   selectedColumns.value = columns.value.filter(col => val.includes(col));
 };
+
 function isEnabled(field) {
-  if (!selectedColumns.value){
+  if (!selectedColumns.value) {
     return true
   }
-  if (!selectedColumns.value.length === 0){
+  if (selectedColumns.value.length === 0) {
     return true
   }
   return lodash.find(selectedColumns.value, {field})
@@ -56,6 +65,11 @@ const isMeEnabled = computed(() => isEnabled("me"))
 const isStatusEnabled = computed(() => isEnabled("status"))
 const isServerEnabled = computed(() => isEnabled("server"))
 
+// on hidden columns change - save it in "localstorage[sessions.table.columns.hidden]"
+const hiddenColumns = computed(() => lodash.differenceBy(columns.value, selectedColumns.value, "field"))
+watch(() => hiddenColumns.value, (val) => {
+  localStorage.setItem("sessions.table.columns.hidden", JSON.stringify(val))
+}, {deep: true})
 
 
 const initFilters = () => {
@@ -207,7 +221,7 @@ const globalFilterFields = computed(
                 :options="columns"
                 optionLabel="header"
                 selectedItemsLabel="Columns"
-                maxSelectedLabels="1"
+                :maxSelectedLabels="1"
                 @update:modelValue="onToggle"
             />
           </div>
