@@ -15,14 +15,14 @@ const sessionInfoLabel = computed(
 
 <template>
   <div>
+    <div class="text-center p-1">
+      <b class="text-center">{{ props.session?.me?.pushName }}</b>
+    </div>
     <Chip
         v-if="sessionInfoLabel"
         :label="sessionInfoLabel"
         :image="image"
     ></Chip>
-    <div class="text-center p-1">
-      <b class="text-center">{{ props.session?.me?.pushName }}</b>
-    </div>
   </div>
 </template>
 
