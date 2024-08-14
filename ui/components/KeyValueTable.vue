@@ -60,12 +60,16 @@ function deleteRow(index) {
       <Column
           field="key"
           header="Name"
+          style="width: 40%"
       >
         <template #editor="{ data, field }">
           <InputText v-model="data[field]"/>
         </template>
       </Column>
-      <Column field="value" header="Value">
+      <Column
+          style="width: 40%"
+          field="value" header="Value"
+      >
         <template #editor="{ data, field }">
           <InputText v-model="data[field]"/>
         </template>
