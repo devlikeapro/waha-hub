@@ -156,11 +156,18 @@ export class WahaAPI {
         });
     }
 
-    // @ts-ignore
-    getVersion(serverId: ServerId): Promise<any> {
+    getServerVersion(serverId: ServerId): Promise<any> {
         return this.api.call(serverId, {
             method: 'GET',
-            uri: `/api/version`,
+            uri: `/api/server/version`,
+            params: {},
+        });
+    }
+
+    getServerStatus(serverId: ServerId): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/server/status`,
             params: {},
         });
     }

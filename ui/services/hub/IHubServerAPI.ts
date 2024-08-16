@@ -10,6 +10,7 @@ export interface ServerInfo {
     name: string,
     connection: ServerConnection,
     version?: Version,
+    status?: ServerStatus,
     connected?: boolean,
 }
 
@@ -21,6 +22,11 @@ export interface CreateServerInfo {
 export interface Version {
     version: string;
     engine: string;
+}
+
+export interface ServerStatus {
+    startTimestamp: number,
+    uptime: number,
 }
 
 export interface IHubServerAPI {

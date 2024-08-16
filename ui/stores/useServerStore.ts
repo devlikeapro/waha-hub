@@ -83,6 +83,7 @@ export const useServerStore = defineStore('serverStore', () => {
         }
         const requests = [
             fetchVersion(server),
+            fetchStatus(server),
             fetchSessions(server.id)
         ]
         // Await all, set connected based on the result
@@ -106,7 +107,11 @@ export const useServerStore = defineStore('serverStore', () => {
     }
 
     async function fetchVersion(server: ServerInfo) {
-        server.version = await wahaAPI.getVersion(server.id)
+        server.version = await wahaAPI.getServerVersion(server.id)
+    }
+
+    async function fetchStatus(server: ServerInfo) {
+        server.status = await wahaAPI.getServerStatus(server.id)
     }
 
     async function refresh() {
