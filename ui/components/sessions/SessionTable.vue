@@ -22,9 +22,29 @@ const sessionDialog = ref(false)
 const sessionDialogMode = ref(undefined)
 const sessionControlDialog = ref(false)
 
+const rows = ref(10)
 const dt = ref(null);
 const filters = ref({});
 const loading = ref(null);
+const selectedSessions = ref([])
+const selectedVisibleSessions = computed(() => {
+  // only those with visible actions
+  return selectedSessions.value.filter(session => actions.value[`session-action-${session.server.id}-${session.name}`])
+})
+const actions = ref({})
+
+function performAction(action) {
+  // Iterate over selected sessions
+  // and call the action for appropriate ref
+  selectedVisibleSessions.value.forEach(session => {
+    const ref = actions.value[`session-action-${session.server.id}-${session.name}`]
+    ref[action]()
+  })
+}
+
+onBeforeUpdate(() => {
+  actions.value = []
+})
 
 onBeforeMount(() => {
   initFilters()
@@ -194,9 +214,10 @@ const globalFilterFields = computed(
   </div>
 
   <DataTable
+      v-model:selection="selectedSessions"
       :value="sessions.length > 0 ? sessions : []"
       :paginator="true"
-      :rows="10"
+      :rows="rows"
       :rowsPerPageOptions="[5, 10, 20, 50, 100, 500]"
       :dataKey="(data) => `${data.server.id}-${data.name}`"
       :rowHover="true"
@@ -306,7 +327,11 @@ const globalFilterFields = computed(
 
     <Column
         v-if="isServerEnabled"
-        field="server.name" filterField='server.id' header="Server" :showFilterMenu="false">
+        field="server.name"
+        filterField='server.id'
+        header="Server"
+        :showFilterMenu="false"
+    >
       <template #filter="{ filterModel, filterCallback }">
         <ServerDropdown
             placeholder="Any"
@@ -318,10 +343,29 @@ const globalFilterFields = computed(
       </template>
     </Column>
 
-    <Column>
+    <Column
+        :showFilterMenu="false"
+    >
+      <template #filter>
+        <div class="flex flex-row gap-2 justify-content-end" style="order: 2;">
+          <SessionActionButtons
+              group="dialog"
+              :name="`'${selectedVisibleSessions.length}' sessions`"
+              :all-disabled="selectedVisibleSessions.length===0"
+              :hide-actions="['view']"
+              @start="performAction('startSession')"
+              @restart="performAction('restartSession')"
+              @stop="performAction('stopSession')"
+              @logout="performAction('logoutSession')"
+              @delete="performAction('deleteSession')"
+          />
+        </div>
+      </template>
       <template #body="{data}">
         <SessionActions
+            :ref="el => { actions[`session-action-${data.server.id}-${data.name}`] = el }"
             :session="data"
+            :disabled="selectedVisibleSessions.length!==0"
             @view="showSessionConfig"
         />
       </template>
@@ -340,4 +384,7 @@ const globalFilterFields = computed(
 </template>
 
 <style lang="scss">
+.p-column-filter-clear-button {
+  display: none;
+}
 </style>

@@ -1,8 +1,8 @@
 <script setup>
-import {useConfirm} from "primevue/useconfirm";
-import {useToast} from "primevue/usetoast";
-
-const props = defineProps(['session'])
+const props = defineProps([
+    'session',
+    "disabled"
+])
 
 
 const store = useServerStore()
@@ -15,7 +15,7 @@ const starting = ref(false)
 const restarting = ref(false)
 const allDisabled = computed(
     () => {
-      return stopping.value || loggingOut.value || removing.value || starting.value || restarting.value
+      return props.disabled || stopping.value || loggingOut.value || removing.value || starting.value || restarting.value
     }
 )
 
@@ -89,11 +89,20 @@ async function deleteSession() {
   )
 }
 
+defineExpose({
+  startSession,
+  restartSession,
+  stopSession,
+  logoutSession,
+  deleteSession
+})
+
 </script>
 
 <template>
   <div class="flex flex-row gap-2 justify-content-end">
     <SessionActionButtons
+        group="popup"
         :name="`'${session.name}' session`"
         @view="$emit('view', session)"
         @start="startSession"
@@ -108,7 +117,7 @@ async function deleteSession() {
         :is-removing="removing"
         :all-disabled="allDisabled"
         :hide-actions="[]"
-      />
+    />
   </div>
 </template>
 

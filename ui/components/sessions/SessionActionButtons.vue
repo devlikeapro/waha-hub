@@ -11,7 +11,8 @@ const props = defineProps([
   "isLoggingOut",
   "isRemoving",
   "allDisabled",
-  "hideActions"
+  "hideActions",
+  "group",
 ])
 const emit = defineEmits([
   "view",
@@ -25,8 +26,9 @@ const emit = defineEmits([
 async function startSession() {
   emit("start")
 }
+
 const shouldShowConfiguration = computed(() => {
-  if (!props.hideActions){
+  if (!props.hideActions) {
     return true
   }
   return !props.hideActions.includes('view')
@@ -35,6 +37,7 @@ const shouldShowConfiguration = computed(() => {
 
 function confirmRestartSession(event) {
   confirm.require({
+    group: props.group,
     target: event.target,
     message: `Restart ${props.name}?`,
     icon: 'pi pi-exclamation-triangle',
@@ -52,6 +55,7 @@ function confirmRestartSession(event) {
 
 function confirmStopSession(event) {
   confirm.require({
+    group: props.group,
     target: event.target,
     message: `Stop ${props.name}?`,
     icon: 'pi pi-exclamation-triangle',
@@ -70,6 +74,7 @@ function confirmStopSession(event) {
 
 function confirmLogoutSession(event) {
   confirm.require({
+    group: props.group,
     target: event.target,
     message: `Logout ${props.name}?`,
     icon: 'pi pi-exclamation-triangle',
@@ -87,6 +92,7 @@ function confirmLogoutSession(event) {
 
 function confirmRemoveSession(event) {
   confirm.require({
+    group: props.group,
     target: event.target,
     message: `Delete ${props.name}?`,
     icon: 'pi pi-exclamation-triangle',
@@ -165,6 +171,14 @@ function confirmRemoveSession(event) {
         :disabled="allDisabled"
     />
   </div>
+  <ConfirmPopup
+      v-if="group==='popup'"
+      group="popup"
+  ></ConfirmPopup>
+  <ConfirmDialog
+      v-if="group==='dialog'"
+      group="dialog"
+  ></ConfirmDialog>
 </template>
 
 <style scoped lang="scss">
