@@ -115,7 +115,7 @@ export const useServerStore = defineStore('serverStore', () => {
         server.status = await wahaAPI.getServerStatus(server.id)
     }
 
-    async function refresh() {
+    async function _refresh() {
         fetchLatestWAHAVersion()
         refreshing.value = true
         await fetchServers()
@@ -130,6 +130,7 @@ export const useServerStore = defineStore('serverStore', () => {
             refreshing.value = false
         }
     }
+    const refresh = lodash.debounce(_refresh, 1_000)
 
     async function addServer(server: ServerInfo) {
         await hubServerAPI.add(server)
