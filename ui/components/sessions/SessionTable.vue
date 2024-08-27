@@ -225,9 +225,7 @@ const globalFilterFields = computed(
       filterDisplay="row"
       :loading="loading"
       :globalFilterFields="globalFilterFields"
-      @row-click="rowClick"
       showGridlines
-      class="p-datatable--clickable"
       style="white-space: nowrap;"
   >
 
@@ -298,6 +296,16 @@ const globalFilterFields = computed(
         <div class="flex gap-2">
           <div>
             <ScreenshotButton :session="data"></ScreenshotButton>
+          </div>
+          <div>
+            <Button
+                icon="pi pi-whatsapp"
+                v-tooltip.top="'Send Request'"
+                severity=""
+                rounded
+                outlined
+                @click="openSessionControl(data)"
+            />
           </div>
           <div class="my-auto">
             <SessionStatusTag

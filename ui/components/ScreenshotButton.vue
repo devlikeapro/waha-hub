@@ -17,7 +17,14 @@ const refreshScreenshot = () => {
 <template>
   <Button
       v-tooltip.top="'Screenshot / QR'"
-      :disabled="disabled" type="button" icon="pi pi-camera" @click="toggle" rounded outlined/>
+      :disabled="disabled"
+      type="button"
+      icon="pi pi-camera"
+      @click="toggle"
+      rounded
+      outlined
+      severity="help"
+  />
   <OverlayPanel ref="op" appendTo="body" :showCloseIcon="true">
     <div class="" style="min-width:20rem;">
       <div class="flex justify-content-center align-items-center">
