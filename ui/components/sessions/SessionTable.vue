@@ -227,6 +227,8 @@ const globalFilterFields = computed(
       :globalFilterFields="globalFilterFields"
       showGridlines
       style="white-space: nowrap;"
+      sortField="name"
+      :sortOrder="1"
   >
 
     <template #header>
