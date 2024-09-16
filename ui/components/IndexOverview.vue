@@ -9,9 +9,9 @@ const notConnectedServers = computed(() => {
 })
 const connectedServers = computed(() => store.servers.filter(server => server.connected === true))
 const serversRequireUpdates = computed(() => store.servers.filter(s => store.latestVersion && s.version && s.version.version !== store.latestVersion))
-const badSessions = computed(() => store.allSessions.filter(s => s.status !== "WORKING" && s.status !== "STOPPED"))
-const workingSessions = computed(() => store.allSessions.filter(s => s.status === "WORKING"))
-const stoppedSessions = computed(() => store.allSessions.filter(s => s.status === "STOPPED"))
+const badSessions = computed(() => store.visibleSessions.filter(s => s.status !== "WORKING" && s.status !== "STOPPED"))
+const workingSessions = computed(() => store.visibleSessions.filter(s => s.status === "WORKING"))
+const stoppedSessions = computed(() => store.visibleSessions.filter(s => s.status === "STOPPED"))
 
 onBeforeMount(() => {
   store.refresh()
@@ -25,11 +25,16 @@ onBeforeMount(() => {
       <div class="flex justify-content-between mb-3">
         <div>
           <span class="block text-900 font-medium mb-3">Sessions</span>
-          <div class="text-900 font-medium text-xl">{{ store.allSessions.length }}</div>
+          <div class="text-900 font-medium text-xl">{{ store.visibleSessions.length }}</div>
         </div>
-        <div class="flex align-items-center justify-content-center bg-green-50 border-round"
-             style="width: 2.5rem; height: 2.5rem">
-          <i class="pi pi-whatsapp text-green-500 text-xl"></i>
+        <div class="flex">
+          <div>
+            <HideDuplicates></HideDuplicates>
+          </div>
+          <div class="flex align-items-center justify-content-center bg-green-50 border-round"
+               style="width: 2.5rem; height: 2.5rem">
+            <i class="pi pi-whatsapp text-green-500 text-xl"></i>
+          </div>
         </div>
       </div>
       <span class="text-green-500 font-medium">{{ workingSessions.length }}</span>

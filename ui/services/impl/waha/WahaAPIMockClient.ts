@@ -178,12 +178,12 @@ export class WahaAPIMockClient implements IWahaAPIClient {
                     pushName: "Session 2",
                 }
             },
-            {
-                name: 'Session - Worker BOTH',
-                status: 'STOPPED',
-                config: null,
-                me: null,
-            },
+            // {
+            //     name: 'Session - Worker BOTH',
+            //     status: 'STOPPED',
+            //     config: null,
+            //     me: null,
+            // },
             {
                 name: 'Session - NONE',
                 status: 'FAILED',
@@ -195,12 +195,12 @@ export class WahaAPIMockClient implements IWahaAPIClient {
             },
         ])
         this.sessions.set("waha_222222222222222222222222222", [
-                {
-                    name: 'Session - Worker BOTH',
-                    status: 'STOPPED',
-                    config: null,
-                    me: null,
-                },
+                // {
+                //     name: 'Session - Worker BOTH',
+                //     status: 'STOPPED',
+                //     config: null,
+                //     me: null,
+                // },
                 {
                     name: 'Session - Worker 2',
                     status: 'WORKING',
@@ -240,15 +240,15 @@ export class WahaAPIMockClient implements IWahaAPIClient {
                     pushName: "Session DEDICATED",
                 }
             },
-            {
-                name: 'Session - STOPPED',
-                status: 'STOPPED',
-                config: null,
-                me: {
-                    id: '7777@c.us',
-                    pushName: "Session STOPPED",
-                }
-            },
+            // {
+            //     name: 'Session - STOPPED',
+            //     status: 'STOPPED',
+            //     config: null,
+            //     me: {
+            //         id: '7777@c.us',
+            //         pushName: "Session STOPPED",
+            //     }
+            // },
         ])
     }
 }
