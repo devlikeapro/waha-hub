@@ -17,6 +17,31 @@ import {IWahaAPIClient} from "../services/waha/IWahaAPIClient";
 import {useRuntimeConfig} from "nuxt/app";
 import {HubServerMockAPI} from "../services/impl/hub/HubServerMockAPI";
 
+function filterSessions(sessions) {
+    // Group by session name and me.id to identify "theSame" sessions
+    const groupedSessions = lodash.groupBy(sessions, session => `${session.name}-${session.me?.id}`);
+
+    // The result array
+    const filteredSessions = [];
+
+    // Iterate over each group
+    for (const key in groupedSessions) {
+        const group = groupedSessions[key];
+
+        // Separate STOPPED and non-STOPPED sessions
+        const stoppedSessions = group.filter(session => session.status === "STOPPED");
+        const nonStoppedSessions = group.filter(session => session.status !== "STOPPED");
+
+        if (nonStoppedSessions.length > 0) {
+            // If there are non-STOPPED sessions, choose all non-STOPPED session
+            filteredSessions.push(...nonStoppedSessions);
+        } else {
+            // If all are STOPPED, include all
+            filteredSessions.push(...stoppedSessions);
+        }
+    }
+    return filteredSessions;
+}
 
 export const useServerStore = defineStore('serverStore', () => {
     const toast = useToast();
@@ -44,6 +69,8 @@ export const useServerStore = defineStore('serverStore', () => {
     const servers = ref<ServerInfo[]>([])
     const sessions = reactive(new Map<string, Session[]>())
     let websocketClients: Map<string, WebSocketClient> = new Map()
+
+    const hideDuplicatedSessions = ref(true)
 
     async function fetchServers() {
         const data = await hubServerAPI.list()
@@ -238,6 +265,14 @@ export const useServerStore = defineStore('serverStore', () => {
         }
     )
 
+    const visibleSessions = computed(() => {
+        if (!hideDuplicatedSessions.value) {
+            return allSessions.value
+        }
+
+        return filterSessions(allSessions.value)
+    })
+
     return {
         servers,
         sessions,
@@ -261,5 +296,7 @@ export const useServerStore = defineStore('serverStore', () => {
         getServerEnvironment,
         callServerAPI,
         latestVersion,
+        hideDuplicatedSessions,
+        visibleSessions,
     }
 })

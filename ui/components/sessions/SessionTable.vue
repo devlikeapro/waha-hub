@@ -9,8 +9,7 @@ import {SessionStatuses} from "../../services/waha/dtos";
 const toast = useToast();
 
 const store = useServerStore()
-const {allSessions, refreshing, servers} = storeToRefs(store)
-const sessions = allSessions
+const {visibleSessions, refreshing, servers} = storeToRefs(store)
 
 
 const session = ref({
@@ -215,7 +214,7 @@ const globalFilterFields = computed(
 
   <DataTable
       v-model:selection="selectedSessions"
-      :value="sessions.length > 0 ? sessions : []"
+      :value="visibleSessions.length > 0 ? visibleSessions : []"
       :paginator="true"
       :rows="rows"
       :rowsPerPageOptions="[5, 10, 20, 50, 100, 500]"
@@ -237,6 +236,7 @@ const globalFilterFields = computed(
           <Button label="Start New" icon="pi pi-play" severity="success" @click="openNew"/>
         </div>
         <div class="flex justify-content-between flex-column sm:flex-row gap-2 sm:gap-2">
+          <HideDuplicates></HideDuplicates>
           <div style="text-align:left" class="flex flex-column">
             <MultiSelect
                 placeholder="Columns"
@@ -350,6 +350,9 @@ const globalFilterFields = computed(
             :showClear="true"
             :required="false"
         ></ServerDropdown>
+      </template>
+      <template #body="{ data }">
+        {{ data.server.name }}
       </template>
     </Column>
 
