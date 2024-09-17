@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     ssr: false,
     runtimeConfig: {
         public: {
-            mockData: "false",
+            mockData: false,
         }
     },
     app: {
