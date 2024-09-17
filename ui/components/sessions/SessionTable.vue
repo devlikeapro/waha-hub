@@ -5,16 +5,11 @@ import {FilterMatchMode, FilterOperator} from "primevue/api";
 import lodash from "lodash";
 import {useAsyncData} from "nuxt/app";
 import {SessionStatuses} from "../../services/waha/dtos";
-import {saveHideDuplicatedSessions} from "../../stores/useServerStore";
 
 const toast = useToast();
 
 const store = useServerStore()
 const {visibleSessions, refreshing, servers} = storeToRefs(store)
-
-store.$subscribe((mutation, state) => {
-  saveHideDuplicatedSessions(state.hideDuplicatedSessions)
-})
 
 
 const session = ref({

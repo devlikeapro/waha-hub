@@ -1,6 +1,12 @@
 <script setup>
+import {saveHideDuplicatedSessions} from "../../stores/useServerStore";
+
 const store = useServerStore()
 const {hideDuplicatedSessions} = storeToRefs(store)
+
+store.$subscribe((mutation, state) => {
+  saveHideDuplicatedSessions(state.hideDuplicatedSessions)
+})
 
 </script>
 
