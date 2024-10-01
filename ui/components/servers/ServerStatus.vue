@@ -1,4 +1,6 @@
 <script setup>
+import {dashboard} from "../../services/utils";
+
 const props = defineProps(['server'])
 const store = useServerStore()
 const isNewVersionAvailable = computed(() => {
@@ -43,7 +45,7 @@ const isNewVersionAvailable = computed(() => {
         Dashboard URL:
       </div>
       <div>
-        <a :href="server.connection?.url + 'dashboard' " target="_blank" class="ml-2">{{ server.connection?.url + '/dashboard' }}
+        <a :href="dashboard(server.connection?.url)" target="_blank" class="ml-2">{{ dashboard(server.connection?.url) }}
           <i class="pi pi-external-link"></i>
         </a>
       </div>
