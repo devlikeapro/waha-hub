@@ -4,6 +4,7 @@ import {FilterMatchMode} from "primevue/api";
 import {useConfirm} from "primevue/useconfirm";
 import lodash from "lodash";
 import {useAsyncData} from "nuxt/app";
+import {dashboard} from "../../services/utils";
 
 
 const confirm = useConfirm();
@@ -152,7 +153,9 @@ function refreshServers() {
 
     <Column field="name" header="Name">
       <template #body="{ data }">
-        {{ data.name }}
+        <div>
+          {{ data.name }}
+        </div>
       </template>
     </Column>
 
@@ -164,6 +167,12 @@ function refreshServers() {
               class="ml-1"
               :href="data.connection.url" target="_blank">
             {{ data.connection.url }}
+          </a>
+        </div>
+        <div class="mt-1">
+          <a :href="dashboard(data.connection?.url)" target="_blank">
+            Dashboard
+            <i class="pi pi-external-link"></i>
           </a>
         </div>
       </template>
