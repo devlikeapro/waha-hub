@@ -14,6 +14,7 @@ const events = [
   "message.any",
   "message.reaction",
   "message.ack",
+  "message.waiting",
   "message.revoked",
   "chat.archive",
   "group.join",
