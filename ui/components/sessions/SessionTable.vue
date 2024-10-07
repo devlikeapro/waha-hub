@@ -31,15 +31,48 @@ const selectedVisibleSessions = computed(() => {
   // only those with visible actions
   return selectedSessions.value.filter(session => actions.value[`session-action-${session.server.id}-${session.name}`])
 })
+
+const isBatchStarting = ref(false)
+const isBatchRestarting = ref(false)
+const isBatchStopping = ref(false)
+const isBatchLoggingOut = ref(false)
+const isBatchRemoving = ref(false)
+
 const actions = ref({})
 
-function performAction(action) {
+function setBatchStatus(action, value) {
+  switch (action) {
+    case "startSession":
+      isBatchStarting.value = value
+      break
+    case "restartSession":
+      isBatchRestarting.value = value
+      break
+    case "stopSession":
+      isBatchStopping.value = value
+      break
+    case "logoutSession":
+      isBatchLoggingOut.value = value
+      break
+    case "deleteSession":
+      isBatchRemoving.value = value
+      break
+
+  }
+}
+
+async function performAction(action) {
+  setBatchStatus(action, true)
   // Iterate over selected sessions
   // and call the action for appropriate ref
-  selectedVisibleSessions.value.forEach(session => {
-    const ref = actions.value[`session-action-${session.server.id}-${session.name}`]
-    ref[action]()
-  })
+  try {
+    for (const session of selectedVisibleSessions.value) {
+      const ref = actions.value[`session-action-${session.server.id}-${session.name}`]
+      await ref[action]()
+    }
+  } finally {
+    setBatchStatus(action, false)
+  }
 }
 
 onBeforeUpdate(() => {
@@ -374,6 +407,11 @@ const globalFilterFields = computed(
               :name="`'${selectedVisibleSessions.length}' sessions`"
               :all-disabled="selectedVisibleSessions.length===0"
               :hide-actions="['view']"
+              :is-starting="isBatchStarting"
+              :is-restarting="isBatchRestarting"
+              :is-stopping="isBatchStopping"
+              :is-logging-out="isBatchLoggingOut"
+              :is-removing="isBatchRemoving"
               @start="performAction('startSession')"
               @restart="performAction('restartSession')"
               @stop="performAction('stopSession')"
