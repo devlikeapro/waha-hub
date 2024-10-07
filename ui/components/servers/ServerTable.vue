@@ -155,12 +155,11 @@ function refreshServers() {
       <template #body="{ data }">
         <div>
           {{ data.name }}
-        </div>
-        <div
-            v-if="data.status?.worker?.id && data.status?.worker?.id !== data.name"
-            class="mt-1"
-        >
-          Worker ID: {{ data.status?.worker?.id }}
+          <i
+              v-if="data.status?.worker?.id && data.status?.worker?.id !== data.name"
+              v-tooltip='`Worker ID does not match. Rename the worker to match it.\n\n👉 Worker ID: ${ data.status?.worker?.id }`'
+              class="pi pi-info-circle text-orange-400"
+          ></i>
         </div>
       </template>
     </Column>
