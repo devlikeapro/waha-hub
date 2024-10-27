@@ -15,9 +15,10 @@ const sessionsByStatus = computed(() => {
 const statusWeight = {
   WORKING: 1,
   SCAN_QR_CODE: 2,
-  STARTING: 3,
-  FAILED: 4,
-  STOPPED: 5
+  UNPAIRING: 3,
+  STARTING: 4,
+  FAILED: 5,
+  STOPPED: 6
 }
 const sessionsByStatusSorted = computed(() => {
   return lodash.sortBy(Object.entries(sessionsByStatus.value), ([status, sessions]) => {

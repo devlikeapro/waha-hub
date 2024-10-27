@@ -34,7 +34,7 @@ export interface SessionConfig {
     noweb?: NowebConfig;
 }
 
-export type SessionStatus = "STOPPED" | "STARTING" | "SCAN_QR_CODE" | "WORKING" | "FAILED";
+export type SessionStatus = "STOPPED" | "STARTING" | "SCAN_QR_CODE" | "UNPAIRING" | "WORKING" | "FAILED";
 export type SessionMe = {
     id: string;
     pushName: string
@@ -45,6 +45,7 @@ export const SessionStatuses = [
     "FAILED",
     "STARTING",
     "SCAN_QR_CODE",
+    "UNPAIRING",
     "STOPPED",
 ];
 
