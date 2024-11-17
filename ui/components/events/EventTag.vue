@@ -15,12 +15,25 @@ const style = computed(() => {
   }
 })
 
+const value = computed(() => {
+  const event = props.event
+  switch (event) {
+    case "message":
+    case "message.any":
+      return `${event} ✉️`
+    case "message.ack":
+      return `${event} 👀`
+    default:
+      return props.event
+  }
+})
+
 </script>
 
 <template>
   <Tag
       :style="style"
-      :value="props.event"
+      :value="value"
   >
   </Tag>
 </template>

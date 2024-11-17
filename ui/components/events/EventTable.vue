@@ -194,13 +194,13 @@ function download(event) {
         </div>
         <div class="flex justify-content-between flex-column sm:flex-row gap-2 sm:gap-2">
           <Button
-              label="Clean Events" icon="pi pi-trash" severity="secondary"
-              @click="clearEvents"
-          />
-          <Button
               v-tooltip="'Download all events as JSON'"
               icon="pi pi-download" label="Download"
               @click="download($event)"
+          />
+          <Button
+              label="Clean Events" icon="pi pi-trash" severity="secondary"
+              @click="clearEvents"
           />
           <IconField iconPosition="left">
             <InputIcon class="pi pi-search"/>

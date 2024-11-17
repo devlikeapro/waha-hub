@@ -16,11 +16,12 @@ const values = computed(() => {
     case "message.ack":
     case "message.reaction":
       return [
+        payload.fromMe ? "📤" : "📥",
         payload.id,
         payload.body,
         event === "message.ack" ? payload.ackName : null,
         payload.reaction?.text,
-        payload.media?.url ? "🖼️" : null,
+        payload.media?.url ? "🖼" : null,
       ]
     case "presence.update":
       return [
