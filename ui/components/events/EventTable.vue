@@ -247,7 +247,13 @@ function download(event) {
           <i class="pi pi-spin pi-spinner"></i>
         </template>
         <template v-else>
-          <span> Connect to a server to start listening for events </span>
+          <Button
+              v-if="!listening"
+              label="Listen"
+              icon="pi pi-play"
+              severity="success"
+              @click="startListening"
+          />
         </template>
       </div>
     </template>
