@@ -16,7 +16,6 @@ const values = computed(() => {
     case "message.ack":
     case "message.reaction":
       return [
-        payload.fromMe ? "📤" : "📥",
         payload.id,
         payload.body,
         event === "message.ack" ? payload.ackName : null,
