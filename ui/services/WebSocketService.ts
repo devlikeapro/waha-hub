@@ -1,4 +1,12 @@
 import type {ServerInfo} from "./hub/IHubServerAPI";
+
+export enum ClientStatus {
+    CONNECTING = "CONNECTING...",
+    CONNECTED = "LISTENING...",
+    DISCONNECTED = "DISCONNECTED",
+    ERROR = "ERROR",
+}
+
 import EventEmitter from "eventemitter3";
 
 export class WebSocketClient {

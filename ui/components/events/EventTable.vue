@@ -6,7 +6,7 @@ import EventDataViewer from "./EventDataViewer.vue";
 import {FilterMatchMode, FilterOperator} from "primevue/api";
 import {WAHAEvents} from "../../services/WAHAEvents";
 import Expand from "./expand.vue";
-import {WebSocketClient} from "../../services/WebSocketService";
+import {ClientStatus, WebSocketClient} from "../../services/WebSocketService";
 import WebSocketStatus from "./WebSocketStatus.vue";
 import {sleep} from "../../services/utils";
 import downloadjs from "downloadjs"
@@ -26,8 +26,6 @@ onMounted(async () => {
   }
   if (servers.value.length > 0) {
     selectedServer.value = servers.value?.[0].id
-  }
-  if (servers.value.length === 1) {
     startListening()
   }
 });
@@ -55,15 +53,8 @@ watch(selectedServer, () => {
   }
 })
 
-const ClientStatus = {
-  NO: "",
-  CONNECTING: "CONNECTING...",
-  CONNECTED: "LISTENING...",
-  DISCONNECTED: "DISCONNECTED",
-  ERROR: "ERROR",
-}
 let client = null
-const clientStatus = ref(ClientStatus.NO)
+const clientStatus = ref(ClientStatus.DISCONNECTED)
 
 const expandedRows = ref({});
 const toggleRow = (event) => {
@@ -78,6 +69,14 @@ const toggleRow = (event) => {
 }
 
 const startListening = () => {
+  listening.value = true
+  startClient()
+}
+
+function startClient() {
+  if (!listening.value) {
+    return
+  }
   if (!selectedServer.value) {
     toast.add({severity: 'warn', summary: 'No server selected', detail: 'Please select a server to start listening'})
     return
@@ -86,7 +85,7 @@ const startListening = () => {
     toast.add({
       severity: 'warn',
       summary: 'Already listening',
-      detail: 'Please stop the current listener before starting a new one'
+      detail: 'Please stop the current listener before starting a new one or refresh the page'
     })
     return
   }
@@ -99,26 +98,31 @@ const startListening = () => {
   })
   client.on("close", () => {
     clientStatus.value = ClientStatus.DISCONNECTED
-    stopListening()
+    restartClient()
   })
   client.on("error", () => {
     clientStatus.value = ClientStatus.ERROR
-    toast.add({
-      severity: 'error',
-      summary: 'Websocket Error',
-      detail: 'An error occurred while connecting to the server. Try again'
-    })
-    listening.value = false
+    restartClient()
   })
   client.on("event", addEvent)
-  listening.value = true
+}
+
+function restartClient() {
+  stopClient()
+  setTimeout(() => {
+    startClient()
+  }, 1000)
+}
+
+function stopClient() {
+  client?.stop()
+  client = null
 }
 
 const stopListening = () => {
-  client?.stop()
-  client = null
-  clientStatus.value = ClientStatus.DISCONNECTED
   listening.value = false
+  stopClient()
+  clientStatus.value = ClientStatus.DISCONNECTED
 }
 const clearEvents = () => {
   events.value = []
