@@ -111,7 +111,7 @@ function restartClient() {
   stopClient()
   setTimeout(() => {
     startClient()
-  }, 1000)
+  }, 300)
 }
 
 function stopClient() {
