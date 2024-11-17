@@ -16,6 +16,8 @@ const toast = useToast();
 const store = useServerStore()
 const {servers} = storeToRefs(store)
 const selectedServer = ref(null)
+
+
 onMounted(async () => {
   const timeout = 100
   const retries = 30
@@ -31,6 +33,7 @@ onMounted(async () => {
 });
 
 const events = ref([])
+
 const filters = ref({
   global: {value: null, matchMode: FilterMatchMode.CONTAINS},
   event: {value: WAHAEvents, matchMode: FilterMatchMode.IN},
@@ -47,6 +50,15 @@ function addEvent(event) {
 }
 
 watch(selectedServer, () => {
+  if (listening.value) {
+    stopListening()
+    startListening()
+  }
+})
+const includeEngineEvents = computed(() => {
+  return events.value.filter(e => e === "engine.event")
+})
+watch(includeEngineEvents, () => {
   if (listening.value) {
     stopListening()
     startListening()
@@ -90,7 +102,11 @@ function startClient() {
     return
   }
   const server = store.getServer(selectedServer.value)
-  client = new WebSocketClient(server, ['*'])
+  const listenEvents = ['*']
+  if (includeEngineEvents.value) {
+    listenEvents.push('engine.event')
+  }
+  client = new WebSocketClient(server, listenEvents)
   client.connect()
   clientStatus.value = ClientStatus.CONNECTING
   client.on("open", () => {

@@ -14,6 +14,11 @@ const values = computed(() => {
     case "message":
     case "message.any":
     case "message.ack":
+    case "engine.event":
+      return [
+        payload.event,
+        payload.data,
+      ]
     case "message.reaction":
       return [
         payload.fromMe ? "📤" : "📥",

@@ -19,6 +19,7 @@ export const WAHAEvents = [
     "label.deleted",
     "label.chat.added",
     "label.chat.deleted",
+    "engine.event",
 ]
 export const WAHAEventColor = {
     "session.status": "#64c4ff",
@@ -40,5 +41,6 @@ export const WAHAEventColor = {
     "label.upsert": "#b5ebff",
     "label.deleted": "#9ba6ff",
     "label.chat.added": "#9368cf",
-    "label.chat.deleted": "#64c4ff"
+    "label.chat.deleted": "#64c4ff",
+    "engine.event": "#ff9dff",
 }
