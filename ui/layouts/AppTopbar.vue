@@ -67,6 +67,10 @@ function refreshServers() {
   useAsyncData('store', async () => await store.refresh())
 }
 
+function eventMonitor(){
+  router.push('/event-monitor')
+}
+
 const {refreshing} = storeToRefs(store)
 </script>
 
@@ -87,12 +91,12 @@ const {refreshing} = storeToRefs(store)
     </button>
 
     <div class="layout-topbar-menu" :class="topbarMenuClasses">
-      <router-link to="/event-monitor" class="layout-topbar-button">
-        <i class="pi pi-eye"
-           style="color: #459e74"
-           v-tooltip.bottom="'Event Monitor'"
-        ></i>
-      </router-link>
+      <button
+          v-tooltip.bottom="'Event Monitor'"
+          @click="eventMonitor" class="p-link layout-topbar-button">
+        <i class="pi pi-eye" style="color: #459e74" ></i>
+        <span>Event Monitor</span>
+      </button>
       <div class="m-auto">
         <RefreshIcon :refreshing="refreshing"/>
       </div>
