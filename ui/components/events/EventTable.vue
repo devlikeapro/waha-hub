@@ -203,19 +203,21 @@ function download(event) {
   >
     <template #header>
       <div class="flex justify-content-between align-items-center flex-column sm:flex-row gap-2 sm:gap-0">
-        <div class="flex gap-2">
-          <Button v-if="!listening" label="Listen" icon="pi pi-play" severity="success"
-                  @click="startListening"
-          />
-          <Button v-else label="Pause" icon="pi pi-pause" severity="secondary"
-                  @click="stopListening"
-          />
-          <ServerDropdown
-              placeholder="Select Server"
-              v-model="selectedServer"
-              :showClear="false"
-          ></ServerDropdown>
-          <div class="flex align-items-center">
+        <div class="flex flex-column sm:flex-row gap-2">
+          <div class="flex gap-2">
+            <Button v-if="!listening" label="Listen" icon="pi pi-play" severity="success"
+                    @click="startListening"
+            />
+            <Button v-else label="Pause" icon="pi pi-pause" severity="secondary"
+                    @click="stopListening"
+            />
+            <ServerDropdown
+                placeholder="Select Server"
+                v-model="selectedServer"
+                :showClear="false"
+            ></ServerDropdown>
+          </div>
+          <div class="flex align-items-center justify-content-center">
             <WebSocketStatus :status="clientStatus"></WebSocketStatus>
           </div>
         </div>
