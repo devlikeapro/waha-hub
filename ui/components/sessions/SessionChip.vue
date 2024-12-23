@@ -1,29 +1,18 @@
 <script setup>
+import ContactChip from "./ContactChip.vue";
+
 const props = defineProps({
   session: Object,
   image: String,
 })
-const sessionInfoLabel = computed(
-    () => {
-      if (!props.session.me) {
-        return undefined
-      }
-      return `${props.session.me.id}`
-    }
-)
 </script>
 
 <template>
-  <div>
-    <div class="text-center p-1">
-      <b class="text-center">{{ props.session?.me?.pushName }}</b>
-    </div>
-    <Chip
-        v-if="sessionInfoLabel"
-        :label="sessionInfoLabel"
-        :image="image"
-    ></Chip>
-  </div>
+  <ContactChip
+      :id="props.session?.me?.id"
+      :name="props.session?.me?.pushName"
+      :image="props.image"
+  />
 </template>
 
 <style scoped lang="scss">
