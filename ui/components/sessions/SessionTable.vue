@@ -21,6 +21,7 @@ const session = ref({
 const sessionDialog = ref(false)
 const sessionDialogMode = ref(undefined)
 const sessionControlDialog = ref(false)
+const sessionChatsDialog = ref(false)
 
 const rows = ref(10)
 const dt = ref(null);
@@ -212,6 +213,21 @@ function openSessionControl(data) {
   session.value = data
 }
 
+function openSessionChats(data) {
+  session.value = data
+  sessionChatsDialog.value = true;
+}
+
+watch(sessionChatsDialog, (val) => {
+  if (!val) {
+    session.value = {
+      config: {
+        webhooks: [],
+      },
+    }
+  }
+})
+
 
 const globalFilterFields = computed(
     () => {
@@ -339,6 +355,17 @@ const globalFilterFields = computed(
           </div>
           <div>
             <Button
+                icon="pi pi-whatsapp"
+                v-tooltip.top="'Chat UI'"
+                severity=""
+                rounded
+                outlined
+                :disabled="data.status !== 'WORKING'"
+                @click="openSessionChats(data)"
+            />
+          </div>
+          <div>
+            <Button
                 icon="pi pi-code"
                 v-tooltip.top="'Send Request'"
                 severity="secondary"
@@ -433,6 +460,10 @@ const globalFilterFields = computed(
     </Column>
   </DataTable>
   <ConfirmPopup></ConfirmPopup>
+  <SessionChatDialog
+      v-model:visible="sessionChatsDialog"
+      v-model:session="session"
+  ></SessionChatDialog>
   <SessionControlDialog
       v-model:visible="sessionControlDialog"
       v-model:session="session"

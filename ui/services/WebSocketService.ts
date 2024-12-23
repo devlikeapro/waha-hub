@@ -2,7 +2,7 @@ import type {ServerInfo} from "./hub/IHubServerAPI";
 
 export enum ClientStatus {
     CONNECTING = "CONNECTING...",
-    CONNECTED = "LISTENING...",
+    CONNECTED = "CONNECTED",
     DISCONNECTED = "DISCONNECTED",
     ERROR = "ERROR",
 }
@@ -16,6 +16,7 @@ export class WebSocketClient {
     constructor(
         private server: ServerInfo,
         private events: string[],
+        private session: string = "*",
     ) {
         this.connection = null
         this.ev = new EventEmitter()
@@ -36,7 +37,7 @@ export class WebSocketClient {
         }
         // Add ?session=*&events=session.status
         const params = new URLSearchParams()
-        params.append("session", "*")
+        params.append("session", this.session)
         for (const event of this.events) {
             params.append("events", event)
         }

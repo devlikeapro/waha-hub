@@ -163,6 +163,42 @@ export class WahaAPI {
         });
     }
 
+    getChatsOverview(serverId: ServerId, sessionName: string, limit, offset): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/chats/overview`,
+            params: {limit: limit, offset: offset},
+        });
+    }
+
+    getChatsMessages(serverId: ServerId, sessionName: string, chatId: string, limit: number, offset: number, media: boolean): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/chats/${chatId}/messages`,
+            params: {
+                limit: limit,
+                offset: offset,
+                downloadMedia: media,
+                sortBy: "messageTimestamp",
+                sortOrder: "desc",
+            },
+        });
+    }
+
+    sendText(serverId: ServerId, sessionName: string, chatId: string, text: string): Promise<any> {
+        const body = {
+            session: sessionName,
+            chatId: chatId,
+            text: text,
+        }
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: '/api/sendText',
+            params: {},
+            body: body,
+        })
+    }
+
     getPairingCode(serverId: ServerId, sessionName: string, phone: string): Promise<string> {
         return this.api.call(serverId, {
             method: 'POST',

@@ -1,22 +1,10 @@
 <script setup>
-import {onMounted} from "vue";
-
-const store = useServerStore()
 const props = defineProps(['session'])
 const screenshot = ref(null)
 
 const refreshScreenshot = () => {
   screenshot.value.refresh()
 }
-const profilePicture = ref(null)
-
-onMounted(() => {
-  if (props.session?.me?.id) {
-    store.getProfilePicture(props.session.server.id, props.session.name, props.session.me.id).then((data) => {
-      profilePicture.value = data.profilePictureURL
-    })
-  }
-})
 
 </script>
 
@@ -30,7 +18,6 @@ onMounted(() => {
               <SessionChip
                   v-if="session.me"
                   :session="session"
-                  :image="profilePicture"
               >
               </SessionChip>
             </div>

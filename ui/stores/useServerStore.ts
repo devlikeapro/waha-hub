@@ -259,6 +259,32 @@ export const useServerStore = defineStore('serverStore', () => {
         return wahaAPI.getQR(serverId, sessionName)
     }
 
+    async function getChatsOverview(serverId: ServerId, sessionName: string,
+                                    limit: number,
+                                    offset: number,
+    ): Promise<string> {
+        return wahaAPI.getChatsOverview(serverId, sessionName, limit, offset)
+    }
+
+    async function getChatsMessages(
+        serverId: ServerId, sessionName: string,
+        chatId: string,
+        limit: number,
+        offset: number,
+        media: boolean,
+    ): Promise<string> {
+        return wahaAPI.getChatsMessages(serverId, sessionName, chatId, limit, offset, media)
+    }
+
+    async function sendText(
+        serverId: ServerId,
+        sessionName: string,
+        chatId: string,
+        text: string,
+    ): Promise<string> {
+        return wahaAPI.sendText(serverId, sessionName, chatId, text)
+    }
+
     async function getPairingCode(serverId: ServerId, sessionName: string, phone): Promise<string> {
         return wahaAPI.getPairingCode(serverId, sessionName, phone)
     }
@@ -322,6 +348,9 @@ export const useServerStore = defineStore('serverStore', () => {
         logoutSession,
         getScreenshot,
         getQR,
+        getChatsOverview,
+        getChatsMessages,
+        sendText,
         getPairingCode,
         getProfilePicture,
         getServerEnvironment,

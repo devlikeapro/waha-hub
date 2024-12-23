@@ -1,9 +1,21 @@
 <script setup>
 import ContactChip from "./ContactChip.vue";
+import {onMounted} from "vue";
 
 const props = defineProps({
   session: Object,
-  image: String,
+})
+
+const store = useServerStore()
+
+const profilePicture = ref(null)
+
+onMounted(() => {
+  if (props.session?.me?.id) {
+    store.getProfilePicture(props.session.server.id, props.session.name, props.session.me.id).then((data) => {
+      profilePicture.value = data.profilePictureURL
+    })
+  }
 })
 </script>
 
@@ -11,7 +23,7 @@ const props = defineProps({
   <ContactChip
       :id="props.session?.me?.id"
       :name="props.session?.me?.pushName"
-      :image="props.image"
+      :image="profilePicture"
   />
 </template>
 
