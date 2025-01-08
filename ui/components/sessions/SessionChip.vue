@@ -11,7 +11,7 @@ const store = useServerStore()
 const profilePicture = ref(null)
 
 onMounted(() => {
-  if (props.session?.me?.id) {
+  if (props.session?.me?.id && props.session?.status == "WORKING") {
     store.getProfilePicture(props.session.server.id, props.session.name, props.session.me.id).then((data) => {
       profilePicture.value = data.profilePictureURL
     })
