@@ -155,19 +155,6 @@ function openNew() {
     config: {
       metadata: {},
       webhooks: [
-        {
-          url: "https://httpbin.org/post",
-          events: ["session.status", "message"],
-          hmac: {
-            key: null,
-          },
-          retries: {
-            delaySeconds: 1,
-            attempts: 15,
-            policy: "exponential",
-          },
-          customHeaders: null,
-        },
       ],
       noweb: {
         markOnline: true,
