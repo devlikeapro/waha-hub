@@ -22,6 +22,26 @@ const values = computed(() => {
         event === "message.ack" ? null: payload.reaction?.text,
         payload.media?.url ? "🖼" : null,
       ]
+    case "group.v2.join":
+      return [
+        payload.group.id,
+        JSON.stringify(payload.group),
+      ]
+    case "group.v2.leave":
+      return [
+        payload.group.id
+      ]
+    case "group.v2.update":
+      return [
+        payload.group.id,
+        JSON.stringify(payload.group),
+      ]
+    case "group.v2.participants":
+      return [
+        payload.group.id,
+        payload.type,
+        JSON.stringify(payload.participants),
+      ]
     case "engine.event":
       return [
         payload.event,
