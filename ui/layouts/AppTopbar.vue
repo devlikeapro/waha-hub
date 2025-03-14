@@ -91,12 +91,13 @@ const {refreshing} = storeToRefs(store)
     </button>
 
     <div class="layout-topbar-menu" :class="topbarMenuClasses">
-      <button
+      <a
+          href="./event-monitor"
           v-tooltip.bottom="'Event Monitor'"
-          @click="eventMonitor" class="p-link layout-topbar-button">
+          class="p-link layout-topbar-button">
         <i class="pi pi-eye" style="color: #459e74" ></i>
         <span>Event Monitor</span>
-      </button>
+      </a>
       <div class="m-auto">
         <RefreshIcon :refreshing="refreshing"/>
       </div>
