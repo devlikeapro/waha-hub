@@ -205,7 +205,6 @@ async function copyRequest(event) {
                   v-model="session.config.noweb.markOnline"
                   onLabel="Presence: online"
                   offLabel="Presence: offline"
-                  :disabled="disabledServer"
                   v-tooltip="'Send presence when connect for the connected session. If presence online - you don not get notifications in your phone'"
               >
                 <template #icon>
@@ -220,7 +219,6 @@ async function copyRequest(event) {
                     v-model="session.config.noweb.store.enabled"
                     onLabel="Store: Enabled"
                     offLabel="Store: Disabled"
-                    :disabled="disabledServer"
                     v-tooltip="'Store contacts, chats, messages in the database, so you can get it in API'"
                 >
                   <template #icon>
@@ -234,7 +232,6 @@ async function copyRequest(event) {
                     v-model="session.config.noweb.store.fullSync"
                     onLabel="Store: Full Sync On"
                     offLabel="Store: Full Sync Off"
-                    :disabled="disabledServer"
                     v-tooltip="'Sync all contacts, chats, messages from the phone at the start.\nOtherwise the store can miss some information.'"
                 >
                   <template #icon>
