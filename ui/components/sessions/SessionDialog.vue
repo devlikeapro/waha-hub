@@ -191,9 +191,6 @@ async function copyRequest(event) {
       </div>
       <Accordion :activeIndex="0">
         <AccordionTab header="NOWEB">
-          <template #header>
-            &nbsp;<Tag value="New"></Tag>
-          </template>
           <!-- Store -->
           <div class="flex flex-column gap-2">
             <div>
