@@ -22,6 +22,7 @@ export class HubServerLocalAPI implements IHubServerAPI {
                 name: 'WAHA',
                 connection: {
                     url: window.location.origin,
+                    key: "admin",
                 }
             }]
         }
