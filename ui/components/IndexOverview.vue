@@ -83,7 +83,7 @@ onBeforeMount(() => {
       <div class="flex justify-content-between mb-3">
         <div>
             <span class="block text-900 font-medium mb-3">
-                Latest Version
+                Available Version
             </span>
           <div>
             <Skeleton v-if="!store.latestVersion" width="4rem"></Skeleton>
