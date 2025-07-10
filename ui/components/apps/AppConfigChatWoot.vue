@@ -84,7 +84,7 @@ async function loadLocales() {
           <InputNumber 
             id="accountId" 
             v-model="config.accountId" 
-            placeholder="1"
+            placeholder="Your Account ID"
             :class="{'p-invalid': submitted && !config.accountId}"
           />
           <small class="p-error" v-if="submitted && !config.accountId">Account ID is required.</small>
@@ -119,7 +119,7 @@ async function loadLocales() {
           <InputNumber 
             id="inboxId" 
             v-model="config.inboxId" 
-            placeholder="1"
+            placeholder="Your Inbox ID"
             :class="{'p-invalid': submitted && !config.inboxId}"
           />
           <small class="p-error" v-if="submitted && !config.inboxId">Inbox ID is required.</small>
