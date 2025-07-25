@@ -102,7 +102,8 @@ onBeforeMount(() => {
       </div>
       <template v-if="serversRequireUpdates.length > 0">
         <span class="text-orange-400 font-medium">{{ serversRequireUpdates.length }}</span>
-        <span class="text-500"> workers can be updated</span>
+        <span class="text-500" v-if="serversRequireUpdates.length === 1"> worker can be updated</span>
+        <span class="text-500" v-else> workers can be updated</span>
       </template>
       <template v-else>
           <span class="text-green-500 font-medium">
