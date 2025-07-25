@@ -83,13 +83,13 @@ onBeforeMount(() => {
       <div class="flex justify-content-between mb-3">
         <div>
             <span class="block text-900 font-medium mb-3">
-                Available Version
+                Updates
             </span>
           <div>
             <Skeleton v-if="!store.latestVersion" width="4rem"></Skeleton>
             <span v-else class="text-900 font-medium text-xl">
               <a href="https://waha.devlike.pro/docs/overview/changelog/" target="_blank">
-                {{ store.latestVersion }}
+                Changelog
                 <i class="pi pi-external-link"></i>
               </a>
               </span>
