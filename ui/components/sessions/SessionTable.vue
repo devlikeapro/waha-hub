@@ -7,8 +7,10 @@ import {useAsyncData} from "nuxt/app";
 import {SessionStatuses} from "../../services/waha/dtos";
 import SessionLogin from "./SessionLogin.vue";
 import AppsDialog from "../apps/AppsDialog.vue";
+import {useI18n} from "vue-i18n";
 
 const toast = useToast();
+const { t } = useI18n();
 
 const store = useServerStore()
 const {visibleSessions, refreshing, servers} = storeToRefs(store)
@@ -88,11 +90,11 @@ onBeforeMount(() => {
 });
 
 const columns = ref([
-  {field: "name", header: "Name"},
-  {field: "metadata", header: "Metadata"},
-  {field: "me", header: "Me"},
-  {field: "status", header: "Status"},
-  {field: "server", header: "Server"},
+  {field: "name", header: t('sessions.name')},
+  {field: "metadata", header: t('sessions.metadata')},
+  {field: "me", header: t('sessions.me')},
+  {field: "status", header: t('sessions.status')},
+  {field: "server", header: t('sessions.server')},
 ])
 
 function loadHiddenColumns() {
@@ -146,8 +148,8 @@ function openNew() {
   if (!server) {
     toast.add({
       severity: 'error',
-      summary: 'No connected server',
-      detail: 'Please connect to a server first',
+      summary: t('sessions.noConnectedServer'),
+      detail: t('sessions.pleaseConnectToServerFirst'),
       life: 3000
     });
     return
@@ -244,14 +246,14 @@ const globalFilterFields = computed(
       <h5 class="flex align-items-center gap-1">
         <i class="pi pi-whatsapp"></i>
         <span class="mr-1">
-      Sessions
+      {{ t('sessions.title') }}
       </span>
         <RefreshIcon :refreshing="refreshing"/>
       </h5>
     </div>
     <div>
       <button
-          v-tooltip.top="'Refresh'"
+          v-tooltip.top="t('sessions.refresh')"
           @click="refreshServers" class="p-link layout-topbar-button" :disabled="refreshing">
         <i class="pi pi-refresh"></i>
       </button>
@@ -280,7 +282,7 @@ const globalFilterFields = computed(
     <template #header>
       <div class="flex justify-content-between flex-column sm:flex-row gap-2 sm:gap-0">
         <div class="flex flex-column">
-          <Button label="Start New" icon="pi pi-play" severity="success" @click="openNew"/>
+          <Button :label="t('sessions.startNew')" icon="pi pi-play" severity="success" @click="openNew"/>
         </div>
         <div class="flex justify-content-between flex-column sm:flex-row gap-2 sm:gap-2">
           <HideDuplicates></HideDuplicates>
@@ -289,18 +291,18 @@ const globalFilterFields = computed(
               <InputIcon class="pi pi-search"/>
               <InputText
                   v-model="filters['global'].value"
-                  placeholder="Search by Name, Phone, Metadata"
+                  :placeholder="t('sessions.searchByNamePhoneMetadata')"
                   style="width: 100%"
               />
             </IconField>
           </div>
           <div style="text-align:left" class="flex flex-column">
             <MultiSelect
-                placeholder="Columns"
+                :placeholder="t('sessions.columns')"
                 :modelValue="selectedColumns"
                 :options="columns"
                 optionLabel="header"
-                selectedItemsLabel="Columns"
+                :selectedItemsLabel="t('sessions.columns')"
                 :maxSelectedLabels="0"
                 @update:modelValue="onToggle"
             />
@@ -308,14 +310,14 @@ const globalFilterFields = computed(
         </div>
       </div>
     </template>
-    <template #empty> No sessions found</template>
-    <template #loading> Loading sessions...</template>
+    <template #empty> {{ t('sessions.noSessionsFound') }}</template>
+    <template #loading> {{ t('sessions.loadingSessions') }}</template>
     <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
 
     <Column
         v-if="isNameEnabled"
         field="name"
-        header="Name"
+        :header="t('sessions.name')"
         :show-filter-menu="false"
         sortable
     >
@@ -323,14 +325,14 @@ const globalFilterFields = computed(
         <InputText
             v-model="filters['name'].value"
             type="text"
-            placeholder="Session"
+            :placeholder="t('sessions.session')"
         />
       </template>
     </Column>
 
     <Column
         v-if="isMetadataEnabled"
-        header="Metadata"
+        :header="t('sessions.metadata')"
     >
       <template #body="{ data }">
         <Metadata
@@ -341,7 +343,7 @@ const globalFilterFields = computed(
 
     <Column
         v-if="isMeEnabled"
-        header="Me"
+        :header="t('sessions.me')"
     >
       <template #body="{ data }">
         <div class="text-center">
@@ -352,14 +354,14 @@ const globalFilterFields = computed(
         <InputText
             v-model="filters['me.id'].value"
             type="text"
-            placeholder="Me (Phone Number)"
+            :placeholder="t('sessions.mePhoneNumber')"
         />
       </template>
     </Column>
 
     <Column
         v-if="isStatusEnabled"
-        field="status" header="Status" :showFilterMenu="false" style="width: 9rem">
+        field="status" :header="t('sessions.status')" :showFilterMenu="false" style="width: 9rem">
       <template #body="{ data }">
         <div class="flex gap-2">
           <div>
@@ -371,7 +373,7 @@ const globalFilterFields = computed(
           <div>
             <Button
                 icon="pi pi-whatsapp"
-                v-tooltip.top="'Chat UI'"
+                v-tooltip.top="t('sessions.chatUI')"
                 severity=""
                 rounded
                 outlined
@@ -382,7 +384,7 @@ const globalFilterFields = computed(
           <div>
             <Button
                 icon="pi pi-code"
-                v-tooltip.top="'Send Request'"
+                v-tooltip.top="t('sessions.sendRequest')"
                 severity="secondary"
                 rounded
                 outlined
@@ -392,7 +394,6 @@ const globalFilterFields = computed(
           <div class="my-auto">
             <SessionStatusTag
                 :status="data.status"
-                :value="data.status.toUpperCase()"
             ></SessionStatusTag>
           </div>
         </div>
@@ -402,13 +403,12 @@ const globalFilterFields = computed(
         <Dropdown
             v-model="filterModel.value" :options="SessionStatuses"
             @change="filterCallback()"
-            placeholder="Any" class="p-column-filter"
+            :placeholder="t('sessions.any')" class="p-column-filter"
             :showClear="true"
         >
           <template #option="{ option }">
             <SessionStatusTag
                 :status="option"
-                :value="option"
             ></SessionStatusTag>
           </template>
         </Dropdown>
@@ -419,12 +419,12 @@ const globalFilterFields = computed(
         v-if="isServerEnabled"
         field="server.name"
         filterField='server.id'
-        header="Server"
+        :header="t('sessions.server')"
         :showFilterMenu="false"
     >
       <template #filter="{ filterModel, filterCallback }">
         <ServerDropdown
-            placeholder="Any"
+            :placeholder="t('sessions.any')"
             @change="filterCallback()"
             v-model="filterModel.value"
             :showClear="true"
@@ -435,7 +435,7 @@ const globalFilterFields = computed(
         {{ data.server.name }}
         <i
             v-if="data.assignedWorker && data.server.name !== data.assignedWorker"
-            v-tooltip='`Assigned Worker ID does not match\n\n👉 Assigned Worker ID: ${ data.assignedWorker }`'
+            v-tooltip='`${t("sessions.assignedWorkerIdDoesNotMatch")}\n\n👉 ${t("sessions.assignedWorkerId")}: ${ data.assignedWorker }`'
             class="pi pi-info-circle text-orange-400"
         ></i>
       </template>

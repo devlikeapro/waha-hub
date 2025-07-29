@@ -1,0 +1,131 @@
+{
+  "STOPPED": "متوقف",
+  "STARTING": "در حال شروع",
+  "WORKING": "در حال کار",
+  "SCAN_QR_CODE": "اسکن کد QR",
+  "FAILED": "ناموفق",
+  "uptime": {
+    "day": "روز",
+    "days": "روز"
+  },
+  "chat": {
+    "emptyMessage": "پیام خالی",
+    "pleaseEnterMessage": "لطفاً پیامی وارد کنید",
+    "header": "سربرگ",
+    "last20Chats": "۲۰ گفتگوی آخر",
+    "aboutChatUI": "ℹ️ درباره رابط کاربری گفتگو",
+    "promo": {
+      "exampleChatsUI": "این یک نمونه رابط کاربری گفتگو است.",
+      "implementFeatures": "شما می‌توانید گفتگوی زنده، چندین نماینده و ویژگی‌های بیشتر را با استفاده از",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "برای دریافت نمای کلی گفتگوها و پیام‌ها",
+      "sendAPI": "Send API",
+      "sendMessages": "برای ارسال پیام به گفتگوها",
+      "messageACK": "تأیید پیام",
+      "getMessageStatus": "برای دریافت وضعیت پیام",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "برای دریافت پیام‌ها در زمان واقعی در سمت کاربر",
+      "sourceCodeOnGithub": "کد منبع در Github",
+      "availableFor": "(Vue3 + PrimeVue) در دسترس برای",
+      "wahaPro": "WAHA PRO",
+      "supporters": "حامیان!"
+    }
+  },
+  "menu": {
+    "dashboard": "داشبورد",
+    "home": "خانه",
+    "workers": "کارگران",
+    "sessions": "جلسات",
+    "eventMonitor": "نظارت بر رویدادها"
+  },
+  "topbar": {
+    "logo": "داشبورد | WAHA",
+    "language": "زبان",
+    "refresh": "بازخوانی"
+  },
+  "common": {
+    "value": "مقدار",
+    "add": "افزودن",
+    "delete": "حذف",
+    "cancel": "لغو",
+    "save": "ذخیره",
+    "no": "خیر"
+  },
+  "screenshot": {
+    "screenshot": "تصویر صفحه",
+    "screenshotQR": "تصویر صفحه / QR"
+  },
+  "dashboard": {
+    "sessions": "جلسات",
+    "working": "در حال کار",
+    "requiresAttention": "نیاز به توجه دارد",
+    "stopped": "متوقف شده",
+    "notConnected": "متصل نیست",
+    "connected": "متصل",
+    "updates": "به‌روزرسانی‌ها",
+    "changelog": "تغییرات",
+    "workerCanBeUpdated": "کارگر می‌تواند به‌روزرسانی شود",
+    "workersCanBeUpdated": "کارگران می‌توانند به‌روزرسانی شوند",
+    "allWorkersUpToDate": "همه کارگران به‌روز هستند!"
+  },
+  "sessions": {
+    "title": "جلسات",
+    "refresh": "بازخوانی",
+    "startNew": "شروع جدید",
+    "searchByNamePhoneMetadata": "جستجو بر اساس نام، تلفن، متادیتا",
+    "noSessionsFound": "هیچ جلسه‌ای یافت نشد",
+    "loadingSessions": "در حال بارگذاری جلسات...",
+    "name": "نام",
+    "session": "جلسه",
+    "metadata": "متادیتا",
+    "me": "حساب",
+    "mePhoneNumber": "حساب (شماره تلفن)",
+    "status": "وضعیت",
+    "chatUI": "رابط کاربری گفتگو",
+    "sendRequest": "ارسال درخواست",
+    "any": "هر کدام",
+    "server": "سرور",
+    "configuration": "پیکربندی",
+    "apps": "برنامه‌ها",
+    "start": "شروع",
+    "restart": "راه‌اندازی مجدد",
+    "login": "ورود",
+    "qr": "کد QR",
+    "scanQRCode": "اسکن {qr} برای مجوز این جلسه.",
+    "scanQRTab": "اسکن QR",
+    "enterCodeTab": "ورود کد",
+    "enterPhoneNumber": "وارد کردن <b>شماره تلفن شما</b>:",
+    "request": "درخواست",
+    "apiEndpoint": "نقطه پایانی API",
+    "body": "بدنه",
+    "response": "پاسخ",
+    "send": "ارسال"
+  },
+  "monitor": {
+    "title": "نظارت بر رویدادها",
+    "description": "رویدادهای WAHA را از جلسات خود در زمان واقعی نظارت کنید!",
+    "purpose": "می‌توانید از نظارت بر رویدادها برای توسعه و اشکال‌زدایی استفاده کنید.",
+    "realTimeOnly": "فقط رویدادهای ورودی جدید را در زمان واقعی نمایش می‌دهد؛ هیچ داده تاریخی در دسترس نیست.",
+    "listen": "گوش دادن",
+    "pause": "مکث",
+    "selectServer": "انتخاب سرور",
+    "download": "دانلود",
+    "cleanEvents": "پاک کردن رویدادها ({count})",
+    "searchInData": "جستجو در داده‌ها",
+    "listeningForEvents": "در حال گوش دادن به رویدادهای جدید...",
+    "eventColumn": "رویداد",
+    "any": "هر کدام",
+    "eventsSelected": "{'{0}'} رویداد",
+    "sessionColumn": "جلسه",
+    "timeColumn": "زمان",
+    "detailColumn": "جزئیات",
+    "copiedToClipboard": "در کلیپ‌بورد کپی شد"
+  },
+  "serverStore": {
+    "sessionNotFound": "جلسه یافت نشد - '{sessionName}' در '{serverName}'",
+    "connectionFailed": "اتصال به سرور ناموفق بود",
+    "serverNotConnected": "{serverName} ({serverUrl}) متصل نیست.\nلطفاً مطمئن شوید که آنلاین است و کلید API صحیح در پیکربندی تنظیم شده است.",
+    "failedToRefreshServer": "بازخوانی سرور ناموفق بود - {serverId}"
+  }
+}

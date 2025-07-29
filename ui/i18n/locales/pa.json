@@ -1,0 +1,131 @@
+{
+  "STOPPED": "ਰੁਕਿਆ ਹੋਇਆ",
+  "STARTING": "ਸ਼ੁਰੂ ਹੋ ਰਿਹਾ ਹੈ",
+  "WORKING": "ਕੰਮ ਕਰ ਰਿਹਾ ਹੈ",
+  "SCAN_QR_CODE": "QR ਕੋਡ ਸਕੈਨ ਕਰੋ",
+  "FAILED": "ਅਸਫਲ",
+  "uptime": {
+    "day": "ਦਿਨ",
+    "days": "ਦਿਨ"
+  },
+  "chat": {
+    "emptyMessage": "ਖਾਲੀ ਸੁਨੇਹਾ",
+    "pleaseEnterMessage": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਸੁਨੇਹਾ ਦਰਜ ਕਰੋ",
+    "header": "ਸਿਰਲੇਖ",
+    "last20Chats": "ਆਖਰੀ 20 ਚੈਟਾਂ",
+    "aboutChatUI": "ℹ️ ਚੈਟ UI ਬਾਰੇ",
+    "promo": {
+      "exampleChatsUI": "ਇਹ ਇੱਕ ਉਦਾਹਰਣ ਚੈਟ UI ਹੈ।",
+      "implementFeatures": "ਤੁਸੀਂ ਲਾਈਵ ਚੈਟ, ਮਲਟੀਪਲ ਏਜੰਟ, ਅਤੇ ਹੋਰ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਨੂੰ ਇਸ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਲਾਗੂ ਕਰ ਸਕਦੇ ਹੋ",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "ਚੈਟਾਂ ਅਤੇ ਸੁਨੇਹਿਆਂ ਦਾ ਸੰਖੇਪ ਜਾਇਜ਼ਾ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ",
+      "sendAPI": "Send API",
+      "sendMessages": "ਚੈਟਾਂ ਵਿੱਚ ਸੁਨੇਹੇ ਭੇਜਣ ਲਈ",
+      "messageACK": "ਸੁਨੇਹਾ ਪੁਸ਼ਟੀਕਰਨ",
+      "getMessageStatus": "ਸੁਨੇਹੇ ਦੀ ਸਥਿਤੀ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "ਕਲਾਈਂਟ ਸਾਈਡ 'ਤੇ ਰੀਅਲ-ਟਾਈਮ ਸੁਨੇਹੇ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ",
+      "sourceCodeOnGithub": "Github 'ਤੇ ਸੋਰਸ ਕੋਡ",
+      "availableFor": "(Vue3 + PrimeVue) ਉਪਲਬਧ ਹੈ",
+      "wahaPro": "WAHA PRO",
+      "supporters": "ਸਮਰਥਕਾਂ ਲਈ!"
+    }
+  },
+  "menu": {
+    "dashboard": "ਡੈਸ਼ਬੋਰਡ",
+    "home": "ਹੋਮ",
+    "workers": "ਵਰਕਰ",
+    "sessions": "ਸੈਸ਼ਨ",
+    "eventMonitor": "ਈਵੈਂਟ ਮਾਨੀਟਰ"
+  },
+  "topbar": {
+    "logo": "ਡੈਸ਼ਬੋਰਡ | WAHA",
+    "language": "ਭਾਸ਼ਾ",
+    "refresh": "ਰਿਫਰੈਸ਼"
+  },
+  "common": {
+    "value": "ਮੁੱਲ",
+    "add": "ਜੋੜੋ",
+    "delete": "ਮਿਟਾਓ",
+    "cancel": "ਰੱਦ ਕਰੋ",
+    "save": "ਸੰਭਾਲੋ",
+    "no": "ਨਹੀਂ"
+  },
+  "screenshot": {
+    "screenshot": "ਸਕ੍ਰੀਨਸ਼ਾਟ",
+    "screenshotQR": "ਸਕ੍ਰੀਨਸ਼ਾਟ / QR"
+  },
+  "dashboard": {
+    "sessions": "ਸੈਸ਼ਨ",
+    "working": "ਕੰਮ ਕਰ ਰਿਹਾ ਹੈ",
+    "requiresAttention": "ਧਿਆਨ ਦੀ ਲੋੜ ਹੈ",
+    "stopped": "ਰੁਕਿਆ ਹੋਇਆ",
+    "notConnected": "ਕਨੈਕਟ ਨਹੀਂ ਹੈ",
+    "connected": "ਕਨੈਕਟ ਹੈ",
+    "updates": "ਅਪਡੇਟ",
+    "changelog": "ਬਦਲਾਅ ਲੌਗ",
+    "workerCanBeUpdated": "ਵਰਕਰ ਅਪਡੇਟ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ",
+    "workersCanBeUpdated": "ਵਰਕਰ ਅਪਡੇਟ ਕੀਤੇ ਜਾ ਸਕਦੇ ਹਨ",
+    "allWorkersUpToDate": "ਸਾਰੇ ਵਰਕਰ ਅਪ ਟੂ ਡੇਟ ਹਨ!"
+  },
+  "sessions": {
+    "title": "ਸੈਸ਼ਨ",
+    "refresh": "ਰਿਫਰੈਸ਼",
+    "startNew": "ਨਵਾਂ ਸ਼ੁਰੂ ਕਰੋ",
+    "searchByNamePhoneMetadata": "ਨਾਮ, ਫੋਨ, ਮੇਟਾਡੇਟਾ ਦੁਆਰਾ ਖੋਜੋ",
+    "noSessionsFound": "ਕੋਈ ਸੈਸ਼ਨ ਨਹੀਂ ਮਿਲਿਆ",
+    "loadingSessions": "ਸੈਸ਼ਨ ਲੋਡ ਹੋ ਰਹੇ ਹਨ...",
+    "name": "ਨਾਮ",
+    "session": "ਸੈਸ਼ਨ",
+    "metadata": "ਮੇਟਾਡੇਟਾ",
+    "me": "ਖਾਤਾ",
+    "mePhoneNumber": "ਖਾਤਾ (ਫੋਨ ਨੰਬਰ)",
+    "status": "ਸਥਿਤੀ",
+    "chatUI": "ਚੈਟ UI",
+    "sendRequest": "ਬੇਨਤੀ ਭੇਜੋ",
+    "any": "ਕੋਈ ਵੀ",
+    "server": "ਸਰਵਰ",
+    "configuration": "ਕੌਂਫਿਗਰੇਸ਼ਨ",
+    "apps": "ਐਪਸ",
+    "start": "ਸ਼ੁਰੂ ਕਰੋ",
+    "restart": "ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ",
+    "login": "ਲੌਗਇਨ",
+    "qr": "QR ਕੋਡ",
+    "scanQRCode": "ਇਸ ਸੈਸ਼ਨ ਨੂੰ ਅਧਿਕਾਰਤ ਕਰਨ ਲਈ {qr} ਸਕੈਨ ਕਰੋ।",
+    "scanQRTab": "QR ਸਕੈਨ ਕਰੋ",
+    "enterCodeTab": "ਕੋਡ ਦਰਜ ਕਰੋ",
+    "enterPhoneNumber": "<b>ਆਪਣਾ ਫੋਨ ਨੰਬਰ</b> ਦਰਜ ਕਰੋ:",
+    "request": "ਬੇਨਤੀ",
+    "apiEndpoint": "API ਐਂਡਪੋਇੰਟ",
+    "body": "ਬਾਡੀ",
+    "response": "ਜਵਾਬ",
+    "send": "ਭੇਜੋ"
+  },
+  "monitor": {
+    "title": "ਈਵੈਂਟ ਮਾਨੀਟਰ",
+    "description": "ਆਪਣੇ ਸੈਸ਼ਨਾਂ ਤੋਂ WAHA ਈਵੈਂਟਾਂ ਨੂੰ ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ ਮਾਨੀਟਰ ਕਰੋ!",
+    "purpose": "ਤੁਸੀਂ ਡਿਵੈਲਪਮੈਂਟ ਅਤੇ ਡੀਬੱਗਿੰਗ ਉਦੇਸ਼ਾਂ ਲਈ ਈਵੈਂਟ ਮਾਨੀਟਰ ਦੀ ਵਰਤੋਂ ਕਰ ਸਕਦੇ ਹੋ।",
+    "realTimeOnly": "ਸਿਰਫ਼ ਨਵੇਂ ਆਉਣ ਵਾਲੇ ਈਵੈਂਟਾਂ ਨੂੰ ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ ਦਿਖਾਉਂਦਾ ਹੈ; ਕੋਈ ਇਤਿਹਾਸਕ ਡੇਟਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।",
+    "listen": "ਸੁਣੋ",
+    "pause": "ਰੋਕੋ",
+    "selectServer": "ਸਰਵਰ ਚੁਣੋ",
+    "download": "ਡਾਊਨਲੋਡ",
+    "cleanEvents": "ਈਵੈਂਟ ਸਾਫ਼ ਕਰੋ ({count})",
+    "searchInData": "ਡੇਟਾ ਵਿੱਚ ਖੋਜੋ",
+    "listeningForEvents": "ਨਵੇਂ ਈਵੈਂਟਾਂ ਲਈ ਸੁਣ ਰਿਹਾ ਹੈ...",
+    "eventColumn": "ਈਵੈਂਟ",
+    "any": "ਕੋਈ ਵੀ",
+    "eventsSelected": "{'{0}'} ਈਵੈਂਟ",
+    "sessionColumn": "ਸੈਸ਼ਨ",
+    "timeColumn": "ਸਮਾਂ",
+    "detailColumn": "ਵੇਰਵਾ",
+    "copiedToClipboard": "ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ"
+  },
+  "serverStore": {
+    "sessionNotFound": "ਸੈਸ਼ਨ ਨਹੀਂ ਮਿਲਿਆ - '{serverName}' 'ਤੇ '{sessionName}'",
+    "connectionFailed": "ਸਰਵਰ ਕਨੈਕਸ਼ਨ ਅਸਫਲ",
+    "serverNotConnected": "{serverName} ({serverUrl}) ਕਨੈਕਟ ਨਹੀਂ ਹੈ।\nਕਿਰਪਾ ਕਰਕੇ ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਇਹ ਔਨਲਾਈਨ ਹੈ ਅਤੇ ਕੌਂਫਿਗਰੇਸ਼ਨ ਵਿੱਚ ਸਹੀ API ਕੁੰਜੀ ਸੈੱਟ ਕੀਤੀ ਗਈ ਹੈ।",
+    "failedToRefreshServer": "ਸਰਵਰ ਨੂੰ ਰਿਫਰੈਸ਼ ਕਰਨ ਵਿੱਚ ਅਸਫਲ - {serverId}"
+  }
+}

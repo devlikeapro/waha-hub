@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
-import { useToast } from 'primevue/usetoast';
-import { useConfirm } from 'primevue/useconfirm';
 import { useServerStore } from '../../stores/useServerStore';
 import { App } from '../../services/waha/dtos';
 import AppEdit from './AppEdit.vue';
 import useShowToastOnResult from '../../composables/useShowToastOnResult';
 import { generateRandomId } from '../../utils/ids';
 import ChatWootLabel from '../common/ChatWootLabel.vue';
+import { useI18n } from 'vue-i18n';
 
 const toast = useToast();
 const confirm = useConfirm();
 const store = useServerStore();
 const req = useShowToastOnResult();
+const { t } = useI18n();
 
 const props = defineProps({
   server: Object,
@@ -49,7 +49,7 @@ async function loadApps() {
     apps.value = await req(
       store.getApps(props.server.id, props.session.name),
       undefined,
-      "Failed to load apps"
+      t('apps.failedToLoad')
     );
   } catch (error) {
     console.error("Error loading apps:", error);
@@ -63,7 +63,7 @@ function openNewApp() {
     toast.add({
       severity: 'info',
       summary: 'Info',
-      detail: 'Create session first to add Apps',
+      detail: t('apps.createSessionFirst'),
       life: 3000
     });
     return;
@@ -89,12 +89,12 @@ function confirmDeleteApp(app: App, event: Event) {
   const appTypeLabel = getAppTypeLabel(app.app);
   confirm.require({
     target: event.currentTarget,
-    message: `Delete ${appTypeLabel} (${app.id})?`,
+    message: t('apps.deleteConfirm', { appType: appTypeLabel, id: app.id }),
     icon: 'pi pi-exclamation-triangle',
     rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
     acceptClass: 'p-button-danger p-button-sm',
-    rejectLabel: 'No',
-    acceptLabel: 'Yes, Delete',
+    rejectLabel: t('apps.no'),
+    acceptLabel: t('apps.yesDelete'),
     accept: async () => {
       await deleteApp(app);
     },
@@ -109,12 +109,12 @@ async function deleteApp(app: App) {
     await req(
       store.deleteApp(props.server.id, app.id),
       undefined,
-      "Failed to delete app"
+      t('apps.failedToDelete')
     );
     const appTypeLabel = getAppTypeLabel(app.app);
     toast.add({
       severity: 'success',
-      summary: 'App Deleted',
+      summary: t('apps.deleted'),
       detail: `${appTypeLabel} (${app.id})`,
       life: 3000
     });
@@ -135,11 +135,11 @@ async function saveApp(app: App) {
       await req(
         store.createApp(props.server.id, app),
         undefined,
-        "Failed to create app"
+        t('apps.failedToCreate')
       );
       toast.add({
         severity: 'success',
-        summary: 'App Created',
+        summary: t('apps.created'),
         detail: `${appTypeLabel} (${app.id})`,
         life: 3000
       });
@@ -147,11 +147,11 @@ async function saveApp(app: App) {
       await req(
         store.updateApp(props.server.id, app),
         undefined,
-        "Failed to update app"
+        t('apps.failedToUpdate')
       );
       toast.add({
         severity: 'success',
-        summary: 'App Updated',
+        summary: t('apps.updated'),
         detail: `${appTypeLabel} (${app.id})`,
         life: 3000
       });
@@ -182,16 +182,16 @@ function getAppTypeLabel(appType: string) {
     <div class="flex justify-content-between align-items-center w-full mb-2">
       <div>
         <h5 class="mb-0">
-          🧩 Apps
+          {{ t('apps.title') }}
           <i
-              v-tooltip='"Built-in integrations"'
+              v-tooltip="t('apps.builtInIntegrations')"
               class="pi pi-info-circle"
           ></i>
         </h5>
       </div>
       <div>
         <Button 
-          label="Add App" 
+          :label="t('apps.addApp')" 
           icon="pi pi-plus" 
           @click="openNewApp" 
           severity="success"
@@ -210,17 +210,17 @@ function getAppTypeLabel(appType: string) {
     >
       <template #empty>
         <div class="text-center p-4">
-          No apps found. Click "Add App" to create one.
+          {{ t('apps.noAppsFound') }}
         </div>
       </template>
 
-      <Column field="app" header="App Type">
+      <Column field="app" :header="t('apps.appType')">
         <template #body="{ data }">
           <ChatWootLabel v-if="data.app === 'chatwoot'" />
           <template v-else>{{ getAppTypeLabel(data.app) }}</template>
         </template>
       </Column>
-      <Column field="id" header="ID"></Column>
+      <Column field="id" :header="t('apps.id')"></Column>
       <Column style="width: 10rem; text-align: right;">
         <template #body="{ data }">
           <div class="flex gap-2 justify-content-end">
@@ -230,7 +230,7 @@ function getAppTypeLabel(appType: string) {
               outlined 
               rounded 
               severity="success"
-              v-tooltip.top="'Edit App'"
+              v-tooltip.top="t('apps.editApp')"
             />
             <Button 
               icon="pi pi-trash" 
@@ -238,7 +238,7 @@ function getAppTypeLabel(appType: string) {
               outlined 
               rounded 
               severity="danger"
-              v-tooltip.top="'Delete App'"
+              v-tooltip.top="t('apps.deleteApp')"
             />
           </div>
         </template>

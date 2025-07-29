@@ -1,6 +1,8 @@
 <script setup>
 import {ref, onMounted, computed} from "vue";
+import {useI18n} from 'vue-i18n'
 
+const { t } = useI18n();
 const store = useServerStore()
 const props = defineProps(['session'])
 const response = ref(null)
@@ -76,11 +78,11 @@ onMounted(() => {
   <div>
     <div class="h-full flex flex-column">
       <div class="flex justify-content-center align-items-center">
-        <h5 class="m-0">Request</h5>
+        <h5 class="m-0">{{ t('sessions.request') }}</h5>
         <Button
             rounded
             text=""
-            v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
+            v-tooltip.focus.bottom="{ value: t('sessions.copiedToClipboard') }"
             :tabindex="0"
             icon="pi pi-copy"
             @click="copyRequest($event)">
@@ -94,16 +96,16 @@ onMounted(() => {
                 :options="methods"
             />
             <InputText type="text" class="w-full" v-model="requestEndpoint"
-                       placeholder="API Endpoint"
+                       :placeholder="t('sessions.apiEndpoint')"
             />
           </div>
           <div class="text-center">
-            <div class="mb-2">Body</div>
-            <Textarea v-model="requestBody" rows=8 class="w-full" placeholder="Request"/>
+            <div class="mb-2">{{ t('sessions.body') }}</div>
+            <Textarea v-model="requestBody" rows=8 class="w-full" :placeholder="t('sessions.request')"/>
           </div>
         </div>
         <div class="text-center mt-2">
-          <Button @click="sendRequest" :loading="fetching" label="Send" icon="pi pi-send" icon-pos="right">
+          <Button @click="sendRequest" :loading="fetching" :label="t('sessions.send')" icon="pi pi-send" icon-pos="right">
           </Button>
         </div>
       </div>
@@ -114,11 +116,11 @@ onMounted(() => {
   <div>
     <div class="flex flex-column h-full">
       <div class="flex justify-content-center align-items-center">
-        <h5 class="m-0">Response</h5>
+        <h5 class="m-0">{{ t('sessions.response') }}</h5>
         <Button
             rounded
             text=""
-            v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
+            v-tooltip.focus.bottom="{ value: t('sessions.copiedToClipboard') }"
             :tabindex="0"
             icon="pi pi-copy"
             @click="copyResponse($event)">

@@ -1,0 +1,131 @@
+{
+  "STOPPED": "מופסק",
+  "STARTING": "מתחיל",
+  "WORKING": "עובד",
+  "SCAN_QR_CODE": "סרוק קוד QR",
+  "FAILED": "נכשל",
+  "uptime": {
+    "day": "יום",
+    "days": "ימים"
+  },
+  "chat": {
+    "emptyMessage": "הודעה ריקה",
+    "pleaseEnterMessage": "אנא הכנס הודעה",
+    "header": "כותרת",
+    "last20Chats": "20 הצ'אטים האחרונים",
+    "aboutChatUI": "ℹ️ אודות ממשק הצ'אט",
+    "promo": {
+      "exampleChatsUI": "זוהי דוגמה לממשק צ'אטים.",
+      "implementFeatures": "אתה יכול ליישם צ'אט חי, סוכנים מרובים, ועוד תכונות באמצעות",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "לקבלת סקירה של צ'אטים והודעות",
+      "sendAPI": "Send API",
+      "sendMessages": "לשליחת הודעות לצ'אטים",
+      "messageACK": "אישור הודעה",
+      "getMessageStatus": "לקבלת סטטוס ההודעה",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "לקבלת הודעות בזמן אמת בצד הלקוח",
+      "sourceCodeOnGithub": "קוד מקור ב-Github",
+      "availableFor": "(Vue3 + PrimeVue) זמין עבור",
+      "wahaPro": "WAHA PRO",
+      "supporters": "תומכים!"
+    }
+  },
+  "menu": {
+    "dashboard": "לוח בקרה",
+    "home": "בית",
+    "workers": "עובדים",
+    "sessions": "הפעלות",
+    "eventMonitor": "מוניטור אירועים"
+  },
+  "topbar": {
+    "logo": "לוח בקרה | WAHA",
+    "language": "שפה",
+    "refresh": "רענן"
+  },
+  "common": {
+    "value": "ערך",
+    "add": "הוסף",
+    "delete": "מחק",
+    "cancel": "בטל",
+    "save": "שמור",
+    "no": "לא"
+  },
+  "screenshot": {
+    "screenshot": "צילום מסך",
+    "screenshotQR": "צילום מסך / QR"
+  },
+  "dashboard": {
+    "sessions": "הפעלות",
+    "working": "עובד",
+    "requiresAttention": "דורש תשומת לב",
+    "stopped": "מופסק",
+    "notConnected": "לא מחובר",
+    "connected": "מחובר",
+    "updates": "עדכונים",
+    "changelog": "יומן שינויים",
+    "workerCanBeUpdated": "עובד ניתן לעדכון",
+    "workersCanBeUpdated": "עובדים ניתנים לעדכון",
+    "allWorkersUpToDate": "כל העובדים מעודכנים!"
+  },
+  "sessions": {
+    "title": "הפעלות",
+    "refresh": "רענן",
+    "startNew": "התחל חדש",
+    "searchByNamePhoneMetadata": "חפש לפי שם, טלפון, מטא-נתונים",
+    "noSessionsFound": "לא נמצאו הפעלות",
+    "loadingSessions": "טוען הפעלות...",
+    "name": "שם",
+    "session": "הפעלה",
+    "metadata": "מטא-נתונים",
+    "me": "חשבון",
+    "mePhoneNumber": "חשבון (מספר טלפון)",
+    "status": "סטטוס",
+    "chatUI": "ממשק צ'אט",
+    "sendRequest": "שלח בקשה",
+    "any": "כל",
+    "server": "שרת",
+    "configuration": "תצורה",
+    "apps": "יישומים",
+    "start": "התחל",
+    "restart": "הפעל מחדש",
+    "login": "התחבר",
+    "qr": "קוד QR",
+    "scanQRCode": "סרוק {qr} כדי לאשר הפעלה זו.",
+    "scanQRTab": "סרוק QR",
+    "enterCodeTab": "הכנס קוד",
+    "enterPhoneNumber": "הכנס <b>את מספר הטלפון שלך</b>:",
+    "request": "בקשה",
+    "apiEndpoint": "נקודת קצה API",
+    "body": "גוף",
+    "response": "תגובה",
+    "send": "שלח"
+  },
+  "monitor": {
+    "title": "מוניטור אירועים",
+    "description": "נטר אירועי WAHA מההפעלות שלך בזמן אמת!",
+    "purpose": "אתה יכול להשתמש במוניטור האירועים למטרות פיתוח וניפוי באגים.",
+    "realTimeOnly": "מציג רק אירועים נכנסים חדשים בזמן אמת; אין נתונים היסטוריים זמינים.",
+    "listen": "האזן",
+    "pause": "השהה",
+    "selectServer": "בחר שרת",
+    "download": "הורד",
+    "cleanEvents": "נקה אירועים ({count})",
+    "searchInData": "חפש בנתונים",
+    "listeningForEvents": "מאזין לאירועים חדשים...",
+    "eventColumn": "אירוע",
+    "any": "כל",
+    "eventsSelected": "{'{0}'} אירועים",
+    "sessionColumn": "הפעלה",
+    "timeColumn": "זמן",
+    "detailColumn": "פרט",
+    "copiedToClipboard": "הועתק ללוח"
+  },
+  "serverStore": {
+    "sessionNotFound": "הפעלה לא נמצאה - '{sessionName}' על '{serverName}'",
+    "connectionFailed": "חיבור לשרת נכשל",
+    "serverNotConnected": "{serverName} ({serverUrl}) אינו מחובר.\nאנא ודא שהוא מקוון והגדר את מפתח ה-API הנכון בתצורה.",
+    "failedToRefreshServer": "נכשל בריענון השרת - {serverId}"
+  }
+}

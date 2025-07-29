@@ -11,11 +11,13 @@ import WebSocketStatus from "./WebSocketStatus.vue";
 import {sleep} from "../../services/utils";
 import downloadjs from "downloadjs"
 import {showTime} from "../../utils/time";
+import {useI18n} from "vue-i18n";
 
 const toast = useToast();
 const store = useServerStore()
 const {servers} = storeToRefs(store)
 const selectedServer = ref(null)
+const { t } = useI18n();
 
 
 onMounted(async () => {
@@ -160,7 +162,7 @@ const clearEvents = () => {
 
 const clearEventsText = computed(() => {
   const count = events.value.length
-  return `Clean Events (${count})`
+  return t('monitor.cleanEvents', { count })
 })
 
 function download(event) {
@@ -174,23 +176,16 @@ function download(event) {
     <h5 class="flex align-items-center gap-1">
       <i class="pi pi-eye"></i>
       <span class="mr-1">
-      Event Monitor
+      {{ t('monitor.title') }}
       </span>
     </h5>
     <div>
       <p class="m-0">
-        Monitor
-        <a
-            target="_blank"
-            href="https://waha.devlike.pro/docs/how-to/webhooks/#events"
-        >
-          WAHA Events
-        </a>
-        from your sessions in real-time!
+        {{ t('monitor.description') }}
         <br/>
-        You can use Event Monitor for <b>development</b> and <b>debugging</b> purposes.
+        {{ t('monitor.purpose') }}
         <i
-            v-tooltip='"Displays only new incoming events in real-time; no historical data is available."'
+            v-tooltip="t('monitor.realTimeOnly')"
             class="pi pi-info-circle"
         ></i>
       </p>
@@ -217,14 +212,14 @@ function download(event) {
       <div class="flex justify-content-between align-items-center flex-column sm:flex-row gap-2 sm:gap-0">
         <div class="flex flex-column sm:flex-row gap-2">
           <div class="flex gap-2">
-            <Button v-if="!listening" label="Listen" icon="pi pi-play" severity="success"
+            <Button v-if="!listening" :label="t('monitor.listen')" icon="pi pi-play" severity="success"
                     @click="startListening"
             />
-            <Button v-else label="Pause" icon="pi pi-pause" severity="secondary"
+            <Button v-else :label="t('monitor.pause')" icon="pi pi-pause" severity="secondary"
                     @click="stopListening"
             />
             <ServerDropdown
-                placeholder="Select Server"
+                :placeholder="t('monitor.selectServer')"
                 v-model="selectedServer"
                 :showClear="false"
             ></ServerDropdown>
@@ -235,8 +230,8 @@ function download(event) {
         </div>
         <div class="flex justify-content-between flex-column sm:flex-row gap-2 sm:gap-2">
           <Button
-              v-tooltip="'Download all events as JSON'"
-              icon="pi pi-download" label="Download"
+              v-tooltip="t('monitor.downloadTooltip')"
+              icon="pi pi-download" :label="t('monitor.download')"
               @click="download($event)"
           />
           <Button
@@ -248,7 +243,7 @@ function download(event) {
             <InputIcon class="pi pi-search"/>
             <InputText
                 v-model="filters['global'].value"
-                placeholder="Search in data"
+                :placeholder="t('monitor.searchInData')"
                 style="width: 100%"
             />
           </IconField>
@@ -258,13 +253,13 @@ function download(event) {
     <template #empty>
       <div class="p-4 text-center text-se">
         <template v-if="clientStatus === ClientStatus.CONNECTED">
-          <span> Listening for new events... </span>
+          <span> {{ t('monitor.listeningForEvents') }} </span>
           <i class="pi pi-spin pi-spinner"></i>
         </template>
         <template v-else>
           <Button
               v-if="!listening"
-              label="Listen"
+              :label="t('monitor.listen')"
               icon="pi pi-play"
               severity="success"
               @click="startListening"
@@ -285,16 +280,16 @@ function download(event) {
 
     <Column
         field="event"
-        header="Event"
+        :header="t('monitor.eventColumn')"
         :show-filter-menu="false"
     >
       <template #filter="{ filterModel, filterCallback }">
         <MultiSelect
             id="events"
             v-model="filterModel.value"
-            placeholder="Any"
+            :placeholder="t('monitor.any')"
             :max-selected-labels="1"
-            selectedItemsLabel="{0} events"
+            :selectedItemsLabel="t('monitor.eventsSelected')"
             @change="filterCallback()"
             :options="WAHAEvents"
             :showClear="true"
@@ -307,25 +302,25 @@ function download(event) {
     </Column>
     <Column
         field="session"
-        header="Session"
+        :header="t('monitor.sessionColumn')"
         :show-filter-menu="false"
     >
       <template #filter="{ filterModel, filterCallback }">
         <InputText
             v-model="filters['session'].value"
-            placeholder="Session"
+            :placeholder="t('monitor.sessionColumn')"
             style="width: 100%"
         />
       </template>
     </Column>
-    <Column field="timestamp" header="Time" sortable>
+    <Column field="timestamp" :header="t('monitor.timeColumn')" sortable>
       <template #body="{data}">
         <span>  {{ showTime(data.timestamp) }}</span>
       </template>
     </Column>
 
     <Column
-        header="Detail"
+        :header="t('monitor.detailColumn')"
         :show-filter-menu="false"
     >
       <template #body="{data}">

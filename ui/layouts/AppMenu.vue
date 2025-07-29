@@ -1,15 +1,16 @@
 <script setup>
 import {ref} from 'vue';
 import AppMenuItem from './AppMenuItem.vue';
+const { t } = useI18n()
 
 const model = ref([
   {
-    label: 'Home',
+    label: t('menu.home'),
     items: [
-      {label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/'},
-      {label: 'Workers', icon: 'pi pi-fw pi-server', to: '/workers'},
-      {label: 'Sessions', icon: 'pi pi-fw pi-whatsapp', to: '/sessions'},
-      {label: 'Event Monitor', icon: 'pi pi-fw pi-eye', to: '/event-monitor'},
+      {label: t('menu.dashboard') , icon: 'pi pi-fw pi-home', to: '/'},
+      {label: t('menu.workers'), icon: 'pi pi-fw pi-server', to: '/workers'},
+      {label: t('menu.sessions'), icon: 'pi pi-fw pi-whatsapp', to: '/sessions'},
+      {label: t('menu.eventMonitor'), icon: 'pi pi-fw pi-eye', to: '/event-monitor'},
     ],
   },
 ]);

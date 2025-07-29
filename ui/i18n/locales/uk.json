@@ -1,0 +1,131 @@
+{
+  "STOPPED": "ЗУПИНЕНО",
+  "STARTING": "ЗАПУСКАЄТЬСЯ",
+  "WORKING": "ПРАЦЮЄ",
+  "SCAN_QR_CODE": "СКАНУВАТИ QR-КОД",
+  "FAILED": "ПОМИЛКА",
+  "uptime": {
+    "day": "день",
+    "days": "днів"
+  },
+  "chat": {
+    "emptyMessage": "Порожнє повідомлення",
+    "pleaseEnterMessage": "Будь ласка, введіть повідомлення",
+    "header": "Заголовок",
+    "last20Chats": "Останні 20 чатів",
+    "aboutChatUI": "ℹ️ Про інтерфейс чату",
+    "promo": {
+      "exampleChatsUI": "Це приклад інтерфейсу чатів.",
+      "implementFeatures": "Ви можете реалізувати Живий Чат, Кількох Агентів та інші функції за допомогою",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "для отримання огляду чатів та повідомлень",
+      "sendAPI": "Send API",
+      "sendMessages": "для надсилання повідомлень у чати",
+      "messageACK": "Підтвердження повідомлення",
+      "getMessageStatus": "для отримання статусу повідомлення",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "для отримання повідомлень у реальному часі на стороні клієнта",
+      "sourceCodeOnGithub": "Вихідний код на Github",
+      "availableFor": "(Vue3 + PrimeVue) доступно для",
+      "wahaPro": "WAHA PRO",
+      "supporters": "прихильників!"
+    }
+  },
+  "menu": {
+    "dashboard": "Панель керування",
+    "home": "Головна",
+    "workers": "Воркери",
+    "sessions": "Сесії",
+    "eventMonitor": "Монітор подій"
+  },
+  "topbar": {
+    "logo": "Панель керування | WAHA",
+    "language": "Мова",
+    "refresh": "Оновити"
+  },
+  "common": {
+    "value": "Значення",
+    "add": "Додати",
+    "delete": "Видалити",
+    "cancel": "Скасувати",
+    "save": "Зберегти",
+    "no": "Ні"
+  },
+  "screenshot": {
+    "screenshot": "Знімок екрану",
+    "screenshotQR": "Знімок екрану / QR"
+  },
+  "dashboard": {
+    "sessions": "Сесії",
+    "working": "працює",
+    "requiresAttention": "потребує уваги",
+    "stopped": "зупинено",
+    "notConnected": "не підключено",
+    "connected": "підключено",
+    "updates": "Оновлення",
+    "changelog": "Журнал змін",
+    "workerCanBeUpdated": "воркер може бути оновлений",
+    "workersCanBeUpdated": "воркерів можуть бути оновлені",
+    "allWorkersUpToDate": "Усі воркери актуальні!"
+  },
+  "sessions": {
+    "title": "Сесії",
+    "refresh": "Оновити",
+    "startNew": "Почати нову",
+    "searchByNamePhoneMetadata": "Пошук за ім'ям, телефоном, метаданими",
+    "noSessionsFound": "Сесії не знайдено",
+    "loadingSessions": "Завантаження сесій...",
+    "name": "Ім'я",
+    "session": "Сесія",
+    "metadata": "Метадані",
+    "me": "Обліковий запис",
+    "mePhoneNumber": "Обліковий запис (Номер телефону)",
+    "status": "Статус",
+    "chatUI": "Інтерфейс чату",
+    "sendRequest": "Надіслати запит",
+    "any": "Будь-який",
+    "server": "Сервер",
+    "configuration": "Конфігурація",
+    "apps": "Додатки",
+    "start": "Почати",
+    "restart": "Перезапустити",
+    "login": "Увійти",
+    "qr": "QR-код",
+    "scanQRCode": "Відскануйте {qr} для авторизації цієї сесії.",
+    "scanQRTab": "Сканувати QR",
+    "enterCodeTab": "Ввести код",
+    "enterPhoneNumber": "Введіть <b>Ваш номер телефону</b>:",
+    "request": "Запит",
+    "apiEndpoint": "Кінцева точка API",
+    "body": "Тіло",
+    "response": "Відповідь",
+    "send": "Надіслати"
+  },
+  "monitor": {
+    "title": "Монітор подій",
+    "description": "Моніторте події WAHA з ваших сесій у реальному часі!",
+    "purpose": "Ви можете використовувати Монітор подій для розробки та налагодження.",
+    "realTimeOnly": "Відображає лише нові вхідні події в реальному часі; історичні дані недоступні.",
+    "listen": "Слухати",
+    "pause": "Пауза",
+    "selectServer": "Вибрати сервер",
+    "download": "Завантажити",
+    "cleanEvents": "Очистити події ({count})",
+    "searchInData": "Пошук у даних",
+    "listeningForEvents": "Прослуховування нових подій...",
+    "eventColumn": "Подія",
+    "any": "Будь-яка",
+    "eventsSelected": "{'{0}'} подій",
+    "sessionColumn": "Сесія",
+    "timeColumn": "Час",
+    "detailColumn": "Деталі",
+    "copiedToClipboard": "Скопійовано в буфер обміну"
+  },
+  "serverStore": {
+    "sessionNotFound": "Сесія не знайдена - '{sessionName}' на '{serverName}'",
+    "connectionFailed": "Помилка підключення до сервера",
+    "serverNotConnected": "{serverName} ({serverUrl}) не підключений.\nБудь ласка, переконайтеся, що він онлайн та встановлено правильний API ключ у конфігурації.",
+    "failedToRefreshServer": "Не вдалося оновити сервер - {serverId}"
+  }
+}

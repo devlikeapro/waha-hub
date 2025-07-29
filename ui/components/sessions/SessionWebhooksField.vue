@@ -1,4 +1,7 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 const webhooks = defineModel("webhooks");
 const props = defineProps({
   disabled: Boolean,
@@ -31,11 +34,11 @@ function remove(index) {
 <template>
   <div class="flex flex-column gap-2">
     <div class="flex justify-content-between align-items-center w-full">
-      <h5>🔄 Webhooks</h5>
+      <h5>{{ t('sessions.webhooks.title') }}</h5>
       <div class="pr-2">
         <Button
-            v-tooltip.top="`Add Webhook`"
-            label="Webhook"
+            v-tooltip.top="t('sessions.webhooks.addWebhook')"
+            :label="t('sessions.webhooks.webhook')"
             text
             icon="pi pi-plus"
             severity="success"
@@ -46,7 +49,7 @@ function remove(index) {
 
     <template v-if="webhooks.length === 0">
       <div class="text-300 text-center">
-        No webhooks configured
+        {{ t('sessions.webhooks.noWebhooksConfigured') }}
       </div>
     </template>
     <template v-else>

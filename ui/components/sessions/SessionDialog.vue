@@ -2,11 +2,14 @@
 import {useServerStore} from "../stores/useServerStore";
 import {ref, computed, watch} from "vue";
 import lodash from "lodash";
+import {useI18n} from "vue-i18n";
 
 const toast = useToast();
 import useShowToastOnResult from "../composables/useShowToastOnResult";
 import {useToast} from "primevue/usetoast";
 import {convertKeyValueToList} from "../../utils/objects";
+
+const { t } = useI18n();
 
 const visible = defineModel("visible");
 const session = defineModel("session");
@@ -69,11 +72,11 @@ async function updateSession() {
     await req(
         store.updateSession(session.value.server, session.value.name, body.config),
         undefined,
-        "Failed to update session",
+        t('sessions.failedToUpdateSession'),
     )
     toast.add({
       severity: 'success',
-      summary: "Updated",
+      summary: t('sessions.updated'),
       detail: session.value.name,
       life: 3000
     });
@@ -94,9 +97,9 @@ async function createSession(start) {
     const result = await req(
         store.createSession(session.value.server, body),
         undefined,
-        "Failed to start session",
+        t('sessions.failedToStartSession'),
     )
-    const summary = start ? 'Started' : 'Created'
+    const summary = start ? t('sessions.started') : t('sessions.created')
     toast.add({
       severity: 'success',
       summary: summary,
@@ -145,7 +148,7 @@ async function copyRequest(event) {
       <div>
         <h5>
           <i class="pi pi-whatsapp"></i>
-          Create Session
+          {{ t('sessions.createSession') }}
         </h5>
       </div>
     </template>
@@ -156,53 +159,53 @@ async function copyRequest(event) {
     </template>
     <div class="mb-2">
       <InlineMessage severity="info" v-if="modeUpdate">
-        To change the <b>Server</b> or <b>Name</b> - please remove the session and run again.
+        {{ t('sessions.changeServerOrNameInfo') }}
       </InlineMessage>
     </div>
 
     <div class="field">
-      <label for="server">Server</label>
+      <label for="server">{{ t('sessions.server') }}</label>
       <ServerDropdown
-          placeholder="Select Server"
+          :placeholder="t('sessions.selectServer')"
           v-model="session.server"
           :showClear="false"
           :required="true"
           :invalid="submitted && !session.server"
           :disabled="disabledServer"
       ></ServerDropdown>
-      <small class="p-invalid" v-if="submitted && !session.server">Server is required.</small>
+      <small class="p-invalid" v-if="submitted && !session.server">{{ t('sessions.serverRequired') }}</small>
     </div>
 
     <div class="field">
-      <label for="name">Name (optional)</label>
+      <label for="name">{{ t('sessions.nameOptional') }}</label>
       <InputText
           id="name"
           v-model.trim="session.name"
           required="false"
           autofocus
-          placeholder="session_1111111111111"
+          :placeholder="t('sessions.sessionIdPlaceholder')"
           :disabled="!modeNew"
       />
     </div>
 
     <div class="mb-4" v-if="isNOWEB">
       <div class="mb-3">
-        <h5>🏭 Engine Settings </h5>
+        <h5>🏭 {{ t('sessions.engineSettings') }}</h5>
       </div>
       <Accordion :activeIndex="0">
         <AccordionTab header="NOWEB">
           <!-- Store -->
           <div class="flex flex-column gap-2">
             <div>
-              <a href="https://waha.devlike.pro/docs/engines/noweb" target="_blank">Read more about NOWEB settings</a>
+              <a href="https://waha.devlike.pro/docs/engines/noweb" target="_blank">{{ t('sessions.readMoreAboutNOWEB') }}</a>
             </div>
 
             <div>
               <ToggleButton
                   v-model="session.config.noweb.markOnline"
-                  onLabel="Presence: online"
-                  offLabel="Presence: offline"
-                  v-tooltip="'Send presence when connect for the connected session. If presence online - you don not get notifications in your phone'"
+                  :onLabel="t('sessions.presenceOnline')"
+                  :offLabel="t('sessions.presenceOffline')"
+                  v-tooltip="t('sessions.presenceTooltip')"
               >
                 <template #icon>
                   <font-awesome-icon icon="fa-solid fa-sync" class="mr-2"/>
@@ -214,9 +217,9 @@ async function copyRequest(event) {
               <div>
                 <ToggleButton
                     v-model="session.config.noweb.store.enabled"
-                    onLabel="Store: Enabled"
-                    offLabel="Store: Disabled"
-                    v-tooltip="'Store contacts, chats, messages in the database, so you can get it in API'"
+                    :onLabel="t('sessions.storeEnabled')"
+                    :offLabel="t('sessions.storeDisabled')"
+                    v-tooltip="t('sessions.storeTooltip')"
                 >
                   <template #icon>
                     <font-awesome-icon icon="fa-solid fa-folder" class="mr-2"/>
@@ -227,9 +230,9 @@ async function copyRequest(event) {
               <div>
                 <ToggleButton
                     v-model="session.config.noweb.store.fullSync"
-                    onLabel="Store: Full Sync On"
-                    offLabel="Store: Full Sync Off"
-                    v-tooltip="'Sync all contacts, chats, messages from the phone at the start.\nOtherwise the store can miss some information.'"
+                    :onLabel="t('sessions.storeFullSyncOn')"
+                    :offLabel="t('sessions.storeFullSyncOff')"
+                    v-tooltip="t('sessions.storeFullSyncTooltip')"
                 >
                   <template #icon>
                     <font-awesome-icon icon="fa-solid fa-sync" class="mr-2"/>
@@ -244,18 +247,18 @@ async function copyRequest(event) {
 
     <div>
       <div>
-        <h5>📝 Metadata
+        <h5>📝 {{ t('sessions.metadata') }}
           <i
-              v-tooltip='"Key value pairs you can attach to Session and will receive it in webhooks, API and search the values on Dashboard."'
+              v-tooltip="t('sessions.metadataTooltip')"
               class="pi pi-info-circle"></i>
         </h5>
       </div>
 
       <KeyValueTable
           v-model="metadataKeyValue"
-          entity-name="Metadata"
+          :entity-name="t('sessions.metadata')"
           key-column="key"
-          key-column-name="Key"
+          :key-column-name="t('sessions.key')"
           prefix="user.id."
       ></KeyValueTable>
     </div>
@@ -270,13 +273,13 @@ async function copyRequest(event) {
     <div>
       <div class="field flex justify-content-between align-items-center">
         <div>
-          <h5><label for="proxy">🌐 Proxy</label></h5>
+          <h5><label for="proxy">🌐 {{ t('sessions.proxy') }}</label></h5>
         </div>
         <ToggleButton
             v-model="proxyEnabled"
             id="proxy"
-            onLabel="Proxy On"
-            offLabel="Proxy Off"
+            :onLabel="t('sessions.proxyOn')"
+            :offLabel="t('sessions.proxyOff')"
         >
           <template #icon>
             <font-awesome-icon icon="fa-solid fa-server" class="mr-2"/>
@@ -286,26 +289,26 @@ async function copyRequest(event) {
 
       <div v-if="proxyEnabled" class="card mb-4">
         <div class="field">
-          <label for="proxy-server">Server</label>
+          <label for="proxy-server">{{ t('sessions.server') }}</label>
           <InputText
               id="proxy-server"
               v-model.trim="session.config.proxy.server"
               required="true"
               :invalid="submitted && !session.config.proxy.server"
-              placeholder="host:port"
+              :placeholder="t('sessions.hostPort')"
           />
-          <small class="p-invalid" v-if="submitted && !session.config.proxy.server">Server is required.</small>
+          <small class="p-invalid" v-if="submitted && !session.config.proxy.server">{{ t('sessions.serverRequired') }}</small>
         </div>
         <div class="flex gap-3">
           <div class="field w-full">
-            <label for="proxy-username">Username (optional)</label>
+            <label for="proxy-username">{{ t('sessions.usernameOptional') }}</label>
             <InputText
                 id="proxy-username"
                 v-model.trim="session.config.proxy.username"
             />
           </div>
           <div class="field w-full">
-            <label for="proxy-password">Password (optional)</label>
+            <label for="proxy-password">{{ t('sessions.passwordOptional') }}</label>
             <Password
                 id="proxy-password"
                 v-model.trim="session.config.proxy.password"
@@ -319,12 +322,12 @@ async function copyRequest(event) {
 
     <div class="field flex justify-content-between align-items-center">
       <div>
-        <h5><label for="debug">🛠️ Debug</label></h5>
+        <h5><label for="debug">🛠️ {{ t('sessions.debug') }}</label></h5>
       </div>
       <ToggleButton
           v-model="session.config.debug"
-          onLabel="Debug Enabled"
-          offLabel="Debug Disabled"
+          :onLabel="t('sessions.debugEnabled')"
+          :offLabel="t('sessions.debugDisabled')"
           onIcon="fa fa-bug"
       >
         <template #icon>
@@ -338,15 +341,21 @@ async function copyRequest(event) {
       <div class="w-full flex flex-column gap-2">
         <div>
           <InlineMessage severity="warn" v-if="modeUpdate && !isStopped">
-            The session is in '<b>{{ session.status }}'</b> status,
-            in order to save configuration the session will be restarted.
+            {{ t('sessions.sessionRestartWarning', { status: session.status }) }}
           </InlineMessage>
         </div>
         <div class="flex justify-content-end">
           <Button
-              label="Copy"
+              :label="t('common.cancel')"
+              icon="pi pi-times"
               text=""
-              v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
+              @click="hide"
+              severity="secondary"
+          />
+          <Button
+              :label="t('sessions.copy')"
+              text=""
+              v-tooltip.focus.bottom="{ value: t('sessions.copiedToClipboard') }"
               :tabindex="0"
               icon="pi pi-copy"
               severity="secondary"
@@ -354,7 +363,7 @@ async function copyRequest(event) {
           </Button>
           <Button
               v-if="!modeUpdate"
-              label="Create"
+              :label="t('sessions.create')"
               icon="pi pi-plus"
               text=""
               @click="createSession(false)"
@@ -362,7 +371,7 @@ async function copyRequest(event) {
           />
           <Button
               v-if="!modeUpdate"
-              label="Create & Start"
+              :label="t('sessions.createAndStart')"
               icon="pi pi-play"
               text
               @click="createSession(true)"
@@ -370,7 +379,7 @@ async function copyRequest(event) {
           />
           <Button
               v-if="modeUpdate"
-              label="Update"
+              :label="t('sessions.update')"
               icon="pi pi-save"
               text=""
               @click="updateSession"

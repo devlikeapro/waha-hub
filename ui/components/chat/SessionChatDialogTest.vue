@@ -77,8 +77,8 @@ function sendText() {
   if (!text.value) {
     toast.add({
       severity: "warn",
-      summary: "Empty message",
-      detail: "Please enter a message",
+      summary: $t('chat.emptyMessage'),
+      detail: $t('chat.pleaseEnterMessage'),
       life: 3000
     })
     return
@@ -108,7 +108,7 @@ function sendText() {
       ></SessionHeader>
     </template>
     <div>
-      Header
+      {{ $t('chat.header') }}
     </div>
     <Splitter style="height: 90%;">
       <SplitterPanel :size=30>

@@ -51,11 +51,40 @@
 </g>
 </svg>
         </div>
-        <div class="dots" style="">
+        <div class="dots" style="" id="spa-loading-text">
             Fetching updates
         </div>
     </div>
 </div>
+
+<script>
+    const messages = {
+        en: 'Fetching updates',
+        ar: 'جارٍ جلب التحديثات',
+        bn: 'আপডেট আনা হচ্ছে',
+        de: 'Updates werden abgerufen',
+        es: 'Obteniendo actualizaciones',
+        fa: 'در حال دریافت به‌روزرسانی‌ها',
+        fr: 'Récupération des mises à jour',
+        he: 'מביא עדכונים',
+        hi: 'अपडेट प्राप्त कर रहा है',
+        id: 'Mengambil pembaruan',
+        pa: 'ਅਪਡੇਟ ਪ੍ਰਾਪਤ ਕਰ ਰਿਹਾ ਹੈ',
+        pt: 'Buscando atualizações',
+        ru: 'Получение обновлений',
+        tr: 'Güncellemeler alınıyor',
+        uk: 'Отримання оновлень',
+        ur: 'اپڈیٹس حاصل کر رہا ہے',
+    };
+
+    try {
+        const lang = localStorage.getItem('language') || 'en';
+        const msg = messages[lang] || messages.en;
+        document.getElementById('spa-loading-text').textContent = msg;
+    } catch (e) {
+        console.warn('Language detection failed', e);
+    }
+</script>
 
 <style>
     #loading-body {

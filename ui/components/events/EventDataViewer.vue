@@ -1,5 +1,7 @@
 <script setup>
+import {useI18n} from "vue-i18n";
 const props = defineProps(['data']);
+const { t } = useI18n();
 const showData = computed(() => {
   const data = {...props.data}
   delete data._json
@@ -29,7 +31,7 @@ async function copy(event) {
       <Button
           rounded
           text=""
-          v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
+          v-tooltip.focus.bottom="{ value: t('monitor.copiedToClipboard') }"
           icon="pi pi-copy"
           severity="secondary"
           @click="copy($event)">

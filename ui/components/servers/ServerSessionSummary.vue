@@ -33,7 +33,7 @@ const sessionsByStatusSorted = computed(() => {
       v-for="[status, sessions] in sessionsByStatusSorted"
       :key="status + sessions.length"
       :status="status"
-      :value="`${status}: ${sessions.length}`"
+      :suffix="`: &nbsp;${sessions.length}`"
   >
   </SessionStatusTag>
 

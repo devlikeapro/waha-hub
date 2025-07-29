@@ -2,6 +2,9 @@
 import {ref, watch} from "vue";
 import {convertKeyValueToList} from "../../utils/objects";
 import {WAHAEvents} from "../../services/WAHAEvents";
+import {useI18n} from 'vue-i18n';
+
+const { t } = useI18n();
 
 const webhook = defineModel("webhook");
 const props = defineProps({
@@ -20,9 +23,9 @@ const retryPolicyTooltip = computed(() => {
   const linear = Array.from({length: attemptsInExample}, (_, i) => delay * (i + 1))
   const exponential = Array.from({length: attemptsInExample}, (_, i) => delay * 2 ** i)
   return [
-    `Constant: ${constant.join(", ")}`,
-    `Linear: ${linear.join(", ")}`,
-    `Exponential: ${exponential.join(", ")}`,
+    t('sessions.webhooks.constant', { values: constant.join(", ") }),
+    t('sessions.webhooks.linear', { values: linear.join(", ") }),
+    t('sessions.webhooks.exponential', { values: exponential.join(", ") }),
   ].join("\n")
 })
 const events = WAHAEvents
@@ -48,14 +51,14 @@ watch(customHeadersEnabled, (value, oldValue) => {
       <template #header>
         <div class="flex justify-content-between align-items-center w-full">
           <div>
-            Webhook {{ props.index + 1 }}
+            {{ t('sessions.webhooks.webhookNumber', { number: props.index + 1 }) }}
           </div>
           <div>
             <Button
                 label=""
                 text
                 rounded
-                v-tooltip.top="'Delete Webhook'"
+                v-tooltip.top="t('sessions.webhooks.deleteWebhook')"
                 style="height:2rem; width: 2rem"
                 icon="pi pi-trash"
                 severity="warning"
@@ -65,21 +68,21 @@ watch(customHeadersEnabled, (value, oldValue) => {
         </div>
       </template>
       <div class="field">
-        <label for="url">URL</label>
+        <label for="url">{{ t('sessions.webhooks.url') }}</label>
         <InputText id="url" v-model.trim="webhook.url" required="true"
                    :disabled="disabled"
         />
       </div>
 
       <div class="field mb-4">
-        <label for="events">Events</label>
+        <label for="events">{{ t('sessions.webhooks.events') }}</label>
         <MultiSelect
             id="events"
             v-model="webhook.events"
             :options="events"
-            placeholder="Select Events"
+            :placeholder="t('sessions.webhooks.selectEvents')"
             :max-selected-labels="1"
-            selectedItemsLabel="{0} events selected"
+            :selectedItemsLabel="t('sessions.webhooks.eventsSelected')"
             :disabled="disabled"
         />
         <ul>
@@ -88,10 +91,10 @@ watch(customHeadersEnabled, (value, oldValue) => {
       </div>
 
       <div>
-        <div class="font-bold mb-2">Retries</div>
+        <div class="font-bold mb-2">{{ t('sessions.webhooks.retries') }}</div>
         <div class="flex gap-3">
           <div class="field" style="width: 10em">
-            <label for="retries-attempts">Attempts</label>
+            <label for="retries-attempts">{{ t('sessions.webhooks.attempts') }}</label>
             <InputNumber
                 v-model="webhook.retries.attempts"
                 inputId="retries-delay-attempts"
@@ -111,7 +114,7 @@ watch(customHeadersEnabled, (value, oldValue) => {
           </div>
 
           <div class="field" style="width: 10em">
-            <label for="retries-delay-seconds">Delay, seconds</label>
+            <label for="retries-delay-seconds">{{ t('sessions.webhooks.delaySeconds') }}</label>
             <InputNumber
                 v-model="webhook.retries.delaySeconds"
                 inputId="retries-delay-seconds"
@@ -132,7 +135,7 @@ watch(customHeadersEnabled, (value, oldValue) => {
 
           <div class="field">
             <label for="retries-delay-policy">
-              Retry Policy
+              {{ t('sessions.webhooks.retryPolicy') }}
               <i
                   v-tooltip="retryPolicyTooltip"
                   class="pi pi-info-circle"
@@ -142,7 +145,7 @@ watch(customHeadersEnabled, (value, oldValue) => {
                 id="retries-delay-policy"
                 v-model="webhook.retries.policy"
                 :options="retryPolicies"
-                placeholder="Select Retry Policy"
+                :placeholder="t('sessions.webhooks.selectRetryPolicy')"
                 :max-selected-labels="1"
                 :disabled="disabled"
             >
@@ -162,7 +165,7 @@ watch(customHeadersEnabled, (value, oldValue) => {
       </div>
 
       <div class="field">
-        <label for="hmac">HMAC Key (optional)</label>
+        <label for="hmac">{{ t('sessions.webhooks.hmacKey') }}</label>
         <InputText id="hmac" v-model.trim="webhook.hmac.key"
                    :disabled="disabled"
         />
@@ -170,13 +173,13 @@ watch(customHeadersEnabled, (value, oldValue) => {
       <div class="field">
         <div class="field flex justify-content-between align-items-center">
           <div>
-            <label for="hmac">Custom Headers (optional)</label>
+            <label for="hmac">{{ t('sessions.webhooks.customHeaders') }}</label>
           </div>
           <ToggleButton
               v-model="customHeadersEnabled"
               id="customHeaders"
-              onLabel="Headers On"
-              offLabel="Headers Off"
+              :onLabel="t('sessions.webhooks.headersOn')"
+              :offLabel="t('sessions.webhooks.headersOff')"
           >
             <template #icon>
               <font-awesome-icon icon="fa-solid fa-fingerprint" class="mr-2"/>

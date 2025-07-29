@@ -1,5 +1,6 @@
 <script>
 import CodeHighlight from './CodeHighlight.vue';
+import { useI18n } from 'vue-i18n';
 
 export default {
     props: {
@@ -14,6 +15,10 @@ export default {
         },
         containerClass: null,
         previewStyle: null
+    },
+    setup() {
+        const { t } = useI18n();
+        return { t };
     },
     data() {
         return {
@@ -43,14 +48,14 @@ export default {
         <div class="block-header">
             <span class="block-title">
                 <span>{{ header }}</span>
-                <span v-if="recent" class="badge-new">New</span>
+                <span v-if="recent" class="badge-new">{{ t('ui.new') }}</span>
             </span>
             <div class="block-actions">
-                <a tabindex="0" :class="{ 'block-action-active': blockView === BlockView.PREVIEW }" @click="activateView($event, BlockView.PREVIEW)"><span>Preview</span></a>
+                <a tabindex="0" :class="{ 'block-action-active': blockView === BlockView.PREVIEW }" @click="activateView($event, BlockView.PREVIEW)"><span>{{ t('ui.preview') }}</span></a>
                 <a :tabindex="'0'" :class="{ 'block-action-active': blockView === BlockView.CODE }" @click="activateView($event, BlockView.CODE)">
-                    <span>Code</span>
+                    <span>{{ t('ui.code') }}</span>
                 </a>
-                <a v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }" :tabindex="0" class="block-action-copy" @click="copyCode($event)"><i class="pi pi-copy"></i></a>
+                <a v-tooltip.focus.bottom="{ value: t('ui.copiedToClipboard') }" :tabindex="0" class="block-action-copy" @click="copyCode($event)"><i class="pi pi-copy"></i></a>
             </div>
         </div>
         <div class="block-content">

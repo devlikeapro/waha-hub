@@ -1,6 +1,8 @@
 <script setup>
 import {useConfirm} from "primevue/useconfirm";
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n();
 const confirm = useConfirm()
 
 const props = defineProps([
@@ -41,12 +43,12 @@ async function startSession() {
   confirm.require({
     group: props.group,
     target: event.target,
-    message: `Start ${props.name}?`,
+    message: t('sessions.startConfirm', { name: props.name }),
     icon: 'pi pi-exclamation-triangle',
     rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
     acceptClass: 'p-button-success p-button-sm',
-    rejectLabel: 'No',
-    acceptLabel: 'Yes, Start',
+    rejectLabel: t('sessions.no'),
+    acceptLabel: t('sessions.yesStart'),
     accept: () => {
       emit("start")
     },
@@ -73,12 +75,12 @@ function confirmRestartSession(event) {
   confirm.require({
     group: props.group,
     target: event.target,
-    message: `Restart ${props.name}?`,
+    message: t('sessions.restartConfirm', { name: props.name }),
     icon: 'pi pi-exclamation-triangle',
     rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
     acceptClass: 'p-button-info p-button-sm',
-    rejectLabel: 'No',
-    acceptLabel: 'Yes, Restart',
+    rejectLabel: t('sessions.no'),
+    acceptLabel: t('sessions.yesRestart'),
     accept: () => {
       emit("restart")
     },
@@ -91,12 +93,12 @@ function confirmStopSession(event) {
   confirm.require({
     group: props.group,
     target: event.target,
-    message: `Stop ${props.name}?`,
+    message: t('sessions.stopConfirm', { name: props.name }),
     icon: 'pi pi-exclamation-triangle',
     rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
     acceptClass: 'p-button-warning p-button-sm',
-    rejectLabel: 'No',
-    acceptLabel: 'Yes, Stop',
+    rejectLabel: t('sessions.no'),
+    acceptLabel: t('sessions.yesStop'),
     accept: async () => {
       emit("stop")
 
@@ -110,12 +112,12 @@ function confirmLogoutSession(event) {
   confirm.require({
     group: props.group,
     target: event.target,
-    message: `Logout ${props.name}?`,
+    message: t('sessions.logoutConfirm', { name: props.name }),
     icon: 'pi pi-exclamation-triangle',
     rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
     acceptClass: 'p-button-warning p-button-sm',
-    rejectLabel: 'No',
-    acceptLabel: 'Yes, Logout',
+    rejectLabel: t('sessions.no'),
+    acceptLabel: t('sessions.yesLogout'),
     accept: async () => {
       emit("logout")
     },
@@ -128,12 +130,12 @@ function confirmRemoveSession(event) {
   confirm.require({
     group: props.group,
     target: event.target,
-    message: `Delete ${props.name}?`,
+    message: t('sessions.deleteConfirm', { name: props.name }),
     icon: 'pi pi-exclamation-triangle',
     rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
     acceptClass: 'p-button-danger p-button-sm',
-    rejectLabel: 'No',
-    acceptLabel: 'Yes, Delete',
+    rejectLabel: t('sessions.no'),
+    acceptLabel: t('sessions.yesDelete'),
     accept: async () => {
       emit("delete")
     },
@@ -149,7 +151,7 @@ function confirmRemoveSession(event) {
     <Button
         v-if="shouldShowConfiguration"
         icon="pi pi-cog"
-        v-tooltip.top="'Configuration'"
+        v-tooltip.top="t('sessions.configuration')"
         severity="help"
         rounded
         outlined
@@ -159,7 +161,7 @@ function confirmRemoveSession(event) {
     <Button
         v-if="shouldShowApps"
         icon="pi pi-th-large"
-        v-tooltip.top="'Apps'"
+        v-tooltip.top="t('sessions.apps')"
         severity="info"
         rounded
         outlined
@@ -168,7 +170,7 @@ function confirmRemoveSession(event) {
     />
     <Button
         icon="pi pi-play"
-        v-tooltip.top="'Start'"
+        v-tooltip.top="t('sessions.start')"
         severity="success"
         rounded
         outlined
@@ -178,7 +180,7 @@ function confirmRemoveSession(event) {
     />
     <Button
         icon="pi pi-replay"
-        v-tooltip.top="'Restart'"
+        v-tooltip.top="t('sessions.restart')"
         severity="info"
         rounded outlined
         @click="confirmRestartSession($event)"
@@ -187,7 +189,7 @@ function confirmRemoveSession(event) {
     />
     <Button
         icon="pi pi-stop"
-        v-tooltip.top="'Stop'"
+        v-tooltip.top="t('sessions.stop')"
         severity="secondary"
         rounded outlined
         @click="confirmStopSession($event)"
@@ -196,7 +198,7 @@ function confirmRemoveSession(event) {
     />
     <Button
         icon="pi pi-sign-out"
-        v-tooltip.top="'Logout'"
+        v-tooltip.top="t('sessions.logout')"
         severity="warning"
         rounded
         outlined
@@ -206,7 +208,7 @@ function confirmRemoveSession(event) {
     />
     <Button
         icon="pi pi-trash"
-        v-tooltip.top="'Delete'"
+        v-tooltip.top="t('sessions.delete')"
         severity="danger"
         rounded
         outlined

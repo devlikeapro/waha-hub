@@ -1,0 +1,131 @@
+{
+  "STOPPED": "PARADO",
+  "STARTING": "INICIANDO",
+  "WORKING": "FUNCIONANDO",
+  "SCAN_QR_CODE": "ESCANEAR CÓDIGO QR",
+  "FAILED": "FALHOU",
+  "uptime": {
+    "day": "dia",
+    "days": "dias"
+  },
+  "chat": {
+    "emptyMessage": "Mensagem vazia",
+    "pleaseEnterMessage": "Por favor, digite uma mensagem",
+    "header": "Cabeçalho",
+    "last20Chats": "Últimos 20 chats",
+    "aboutChatUI": "ℹ️ Sobre a interface de chat",
+    "promo": {
+      "exampleChatsUI": "É um exemplo de interface de chats.",
+      "implementFeatures": "Você pode implementar Chat ao Vivo, Múltiplos Agentes e mais recursos usando",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "para obter uma visão geral dos chats e mensagens",
+      "sendAPI": "Send API",
+      "sendMessages": "para enviar mensagens para os chats",
+      "messageACK": "Confirmação de mensagem",
+      "getMessageStatus": "para obter o status da mensagem",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "para obter mensagens em tempo real no lado do cliente",
+      "sourceCodeOnGithub": "Código fonte no Github",
+      "availableFor": "(Vue3 + PrimeVue) disponível para",
+      "wahaPro": "WAHA PRO",
+      "supporters": "apoiadores!"
+    }
+  },
+  "menu": {
+    "dashboard": "Painel de controle",
+    "home": "Início",
+    "workers": "Trabalhadores",
+    "sessions": "Sessões",
+    "eventMonitor": "Monitor de eventos"
+  },
+  "topbar": {
+    "logo": "Painel de controle | WAHA",
+    "language": "Idioma",
+    "refresh": "Atualizar"
+  },
+  "common": {
+    "value": "Valor",
+    "add": "Adicionar",
+    "delete": "Excluir",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "no": "Não"
+  },
+  "screenshot": {
+    "screenshot": "Captura de tela",
+    "screenshotQR": "Captura de tela / QR"
+  },
+  "dashboard": {
+    "sessions": "Sessões",
+    "working": "funcionando",
+    "requiresAttention": "requer atenção",
+    "stopped": "parado",
+    "notConnected": "não conectado",
+    "connected": "conectado",
+    "updates": "Atualizações",
+    "changelog": "Registro de alterações",
+    "workerCanBeUpdated": "trabalhador pode ser atualizado",
+    "workersCanBeUpdated": "trabalhadores podem ser atualizados",
+    "allWorkersUpToDate": "Todos os trabalhadores estão atualizados!"
+  },
+  "sessions": {
+    "title": "Sessões",
+    "refresh": "Atualizar",
+    "startNew": "Iniciar nova",
+    "searchByNamePhoneMetadata": "Buscar por nome, telefone, metadados",
+    "noSessionsFound": "Nenhuma sessão encontrada",
+    "loadingSessions": "Carregando sessões...",
+    "name": "Nome",
+    "session": "Sessão",
+    "metadata": "Metadados",
+    "me": "Conta",
+    "mePhoneNumber": "Conta (Número de telefone)",
+    "status": "Status",
+    "chatUI": "Interface de chat",
+    "sendRequest": "Enviar solicitação",
+    "any": "Qualquer",
+    "server": "Servidor",
+    "configuration": "Configuração",
+    "apps": "Aplicativos",
+    "start": "Iniciar",
+    "restart": "Reiniciar",
+    "login": "Entrar",
+    "qr": "Código QR",
+    "scanQRCode": "Escaneie {qr} para autorizar esta sessão.",
+    "scanQRTab": "Escanear QR",
+    "enterCodeTab": "Inserir código",
+    "enterPhoneNumber": "Digite <b>Seu número de telefone</b>:",
+    "request": "Solicitação",
+    "apiEndpoint": "Endpoint da API",
+    "body": "Corpo",
+    "response": "Resposta",
+    "send": "Enviar"
+  },
+  "monitor": {
+    "title": "Monitor de eventos",
+    "description": "Monitore eventos WAHA das suas sessões em tempo real!",
+    "purpose": "Você pode usar o Monitor de eventos para desenvolvimento e depuração.",
+    "realTimeOnly": "Exibe apenas novos eventos recebidos em tempo real; nenhum dado histórico está disponível.",
+    "listen": "Ouvir",
+    "pause": "Pausar",
+    "selectServer": "Selecionar servidor",
+    "download": "Baixar",
+    "cleanEvents": "Limpar eventos ({count})",
+    "searchInData": "Buscar nos dados",
+    "listeningForEvents": "Ouvindo novos eventos...",
+    "eventColumn": "Evento",
+    "any": "Qualquer",
+    "eventsSelected": "{'{0}'} eventos",
+    "sessionColumn": "Sessão",
+    "timeColumn": "Hora",
+    "detailColumn": "Detalhe",
+    "copiedToClipboard": "Copiado para a área de transferência"
+  },
+  "serverStore": {
+    "sessionNotFound": "Sessão não encontrada - '{sessionName}' em '{serverName}'",
+    "connectionFailed": "Falha na conexão com o servidor",
+    "serverNotConnected": "{serverName} ({serverUrl}) não está conectado.\nPor favor, certifique-se de que está online e configure corretamente a chave API na configuração.",
+    "failedToRefreshServer": "Falha ao atualizar o servidor - {serverId}"
+  }
+}

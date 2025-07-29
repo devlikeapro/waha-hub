@@ -7,8 +7,10 @@ import {useAsyncData} from "nuxt/app";
 import {dashboard} from "../../services/utils";
 import OverlayLinks from "../common/OverlayLinks.vue";
 import OverlayLink from "../common/OverlayLink.vue";
+import {useI18n} from 'vue-i18n';
 
 
+const { t } = useI18n();
 const confirm = useConfirm();
 const store = useServerStore()
 const req = useShowToastOnResult()
@@ -61,17 +63,17 @@ function confirmDeleteServer(event, server) {
   confirm.require({
     group: "popup",
     target: event.target,
-    message: `Disconnect '${server.name}' worker?`,
+    message: t('servers.disconnectWorkerConfirm', {worker: server.name}),
     icon: 'pi pi-exclamation-triangle',
     rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
     acceptClass: 'p-button-danger p-button-sm',
-    rejectLabel: 'No',
-    acceptLabel: 'Yes, Disconnect',
+    rejectLabel: t('common.no'),
+    acceptLabel: t('servers.yesDisconnect'),
     accept: () => {
       return req(
           store.deleteServer(server.id),
-          "Disconnected",
-          "Failed to disconnect worker",
+          t('servers.disconnected'),
+          t('servers.failedToDisconnectWorker'),
       )
     },
     reject: () => {
@@ -83,17 +85,17 @@ const confirmRestart = (server) => {
   confirm.require({
     group: "restart",
     message: server.name,
-    header: `Restart '${server.name}' server?`,
+    header: t('servers.restartServerConfirm', {server: server.name}),
     icon: 'pi pi-replay',
     rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
     acceptClass: 'p-button-warning p-button-sm',
-    rejectLabel: 'No',
-    acceptLabel: 'Yes, Restart',
+    rejectLabel: t('common.no'),
+    acceptLabel: t('servers.yesRestart'),
     accept: async () => {
       await req(
           store.stopServer(server, forceRestart.value),
-          `Restarting...`,
-          `Failed to restart worker`,
+          t('servers.restarting'),
+          t('servers.failedToRestartWorker'),
           server.name,
           server.name,
       )
@@ -115,7 +117,7 @@ function refreshServers() {
       <h5 class="flex align-items-center gap-1">
         <i class="pi pi-server"></i>
         <span class="mr-1">
-      Workers
+      {{ t('servers.workers') }}
       </span>
         <RefreshIcon :refreshing="refreshing"/>
       </h5>
@@ -123,7 +125,7 @@ function refreshServers() {
 
     <div>
       <button
-          v-tooltip.top="'Refresh'"
+          v-tooltip.top="t('servers.refresh')"
           @click="refreshServers" class="p-link layout-topbar-button" :disabled="refreshing">
         <i class="pi pi-refresh"></i>
       </button>
@@ -148,31 +150,31 @@ function refreshServers() {
 
     <template #header>
       <div class="flex justify-content-between flex-column sm:flex-row gap-2 sm:gap-0">
-        <Button label="Connect" icon="pi pi-link" severity="success" @click="openNew"/>
+        <Button :label="t('servers.connect')" icon="pi pi-link" severity="success" @click="openNew"/>
         <IconField iconPosition="left">
           <InputIcon class="pi pi-search"/>
-          <InputText v-model="filters['global'].value" placeholder="Keyword Search" style="width: 100%"/>
+          <InputText v-model="filters['global'].value" :placeholder="t('servers.keywordSearch')" style="width: 100%"/>
         </IconField>
       </div>
     </template>
-    <template #empty> No workers found</template>
-    <template #loading> Loading workers...</template>
+    <template #empty> {{ t('servers.noWorkersFound') }}</template>
+    <template #loading> {{ t('servers.loadingWorkers') }}</template>
 
 
-    <Column field="name" header="Name">
+    <Column field="name" :header="t('servers.name')">
       <template #body="{ data }">
         <div>
           {{ data.name }}
           <i
               v-if="data.status?.worker?.id && data.status?.worker?.id !== data.name"
-              v-tooltip='`Worker ID does not match. Rename the worker to match it.\n\n👉 Worker ID: ${ data.status?.worker?.id }`'
+              v-tooltip="t('servers.workerIdMismatch', {worker: data.status?.worker?.id})"
               class="pi pi-info-circle text-orange-400"
           ></i>
         </div>
       </template>
     </Column>
 
-    <Column header="API">
+    <Column :header="t('servers.api')">
       <template #body="{ data }">
         <div>
           <ServerConnectionIcon :connected="data.connected"></ServerConnectionIcon>
@@ -185,7 +187,7 @@ function refreshServers() {
       </template>
     </Column>
 
-    <Column header="Info">
+    <Column :header="t('servers.info')">
       <template #body="{ data }">
         <Skeleton v-if="data.connected === undefined" width="9rem"></Skeleton>
         <ServerConnectionIcon v-else-if="data.connected===false" :connected="data.connected"></ServerConnectionIcon>
@@ -198,7 +200,7 @@ function refreshServers() {
       </template>
     </Column>
 
-    <Column header="Sessions">
+    <Column :header="t('servers.sessionsSection')">
       <template #body="{ data }">
         <div class="flex gap-1">
           <Skeleton
@@ -217,26 +219,26 @@ function refreshServers() {
       <template #body="{data}">
         <div class="flex flex-row gap-2 justify-content-end">
           <Button
-              v-tooltip.top="'Links'"
+              v-tooltip.top="t('servers.links')"
               icon="pi pi-link" severity="info" rounded outlined @click="toggleLinksPanel($event, data)"
           />
           <Button
               :disabled="!data.connected"
-              v-tooltip.top="'Worker Info'"
+              v-tooltip.top="t('servers.workerInfo')"
               icon="pi pi-info" severity="help" rounded outlined @click="openServerControl(data)"
           />
           <Button
-              v-tooltip.top="'Edit Worker'"
+              v-tooltip.top="t('servers.editWorker')"
               icon="pi pi-pencil" severity="success" rounded outlined @click="editServer(data)"/>
           <Button
               icon="pi pi-replay"
-              v-tooltip.top="'Restart Worker'"
+              v-tooltip.top="t('servers.restartWorker')"
               severity="warning"
               rounded outlined
               @click="confirmRestart(data)"
           />
           <Button
-              v-tooltip.top="'Disconnect Worker'"
+              v-tooltip.top="t('servers.disconnectWorker')"
               icon="pi pi-times" severity="danger" rounded outlined @click="confirmDeleteServer($event, data)"/>
         </div>
       </template>
@@ -256,26 +258,17 @@ function refreshServers() {
     <template #message="slotProps">
       <div>
         <p>
-          You're going to restart <b>{{ slotProps.message.message }}</b> server.
+          {{ t('servers.youreGoingToRestart', {server: slotProps.message.message}) }}
         </p>
-        <p>
-          It'll call <code>POST api/server/stop</code>,
-          but if you're using Docker
-          <br>
-          and followed
-          <a href="https://waha.devlike.pro/docs/how-to/install/" target="_blank"><b>🔧 Install & Update</b></a> guide,
-          Docker will start a new container.
-        </p>
-
         <div>
           <p>
-            By default it will gracefully stop the server, but you can force restart.
+            {{ t('servers.gracefulStop') }}
           </p>
           <ToggleButton
               v-model="forceRestart"
               id="forceRestart"
-              onLabel="Force Restart On"
-              offLabel="Force Restart Off"
+              :onLabel="t('servers.forceRestartOn')"
+              :offLabel="t('servers.forceRestartOff')"
           >
             <template #icon>
               <i class="pi pi-replay mr-2"/>
@@ -286,21 +279,21 @@ function refreshServers() {
     </template>
   </ConfirmDialog>
 
-  <OverlayLinks ref="linksOverlayPanel" title="Server Links">
+  <OverlayLinks ref="linksOverlayPanel" :title="t('servers.links')">
     <OverlayLink 
       :href="`${linksOverlayPanel.currentItem?.connection.url}/dashboard`" 
       icon="pi-home" 
-      name="Dashboard"
+      :name="t('servers.dashboard')"
     />
     <OverlayLink
       :href="`${linksOverlayPanel.currentItem?.connection.url}/jobs`" 
       icon="pi-cog" 
-      name="Jobs"
+      :name="t('servers.jobs')"
     />
     <OverlayLink
         :href="linksOverlayPanel.currentItem?.connection.url"
         icon="pi-code"
-        name="Swagger"
+        :name="t('servers.swagger')"
     />
   </OverlayLinks>
 </template>

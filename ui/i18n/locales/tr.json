@@ -1,0 +1,131 @@
+{
+  "STOPPED": "DURDURULDU",
+  "STARTING": "BAŞLIYOR",
+  "WORKING": "ÇALIŞIYOR",
+  "SCAN_QR_CODE": "QR KODU TARA",
+  "FAILED": "BAŞARISIZ",
+  "uptime": {
+    "day": "gün",
+    "days": "gün"
+  },
+  "chat": {
+    "emptyMessage": "Boş mesaj",
+    "pleaseEnterMessage": "Lütfen bir mesaj girin",
+    "header": "Başlık",
+    "last20Chats": "Son 20 Sohbet",
+    "aboutChatUI": "ℹ️ Sohbet Arayüzü Hakkında",
+    "promo": {
+      "exampleChatsUI": "Bu bir örnek Sohbet Arayüzüdür.",
+      "implementFeatures": "Canlı Sohbet, Çoklu Ajanlar ve daha fazla özelliği şunları kullanarak uygulayabilirsiniz",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "sohbetlere ve mesajlara genel bakış için",
+      "sendAPI": "Send API",
+      "sendMessages": "sohbetlere mesaj göndermek için",
+      "messageACK": "Mesaj Onayı",
+      "getMessageStatus": "mesaj durumunu almak için",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "istemci tarafında gerçek zamanlı mesajlar almak için",
+      "sourceCodeOnGithub": "Github'da Kaynak Kodu",
+      "availableFor": "(Vue3 + PrimeVue) şunlar için mevcut",
+      "wahaPro": "WAHA PRO",
+      "supporters": "destekçileri!"
+    }
+  },
+  "menu": {
+    "dashboard": "Kontrol Paneli",
+    "home": "Ana Sayfa",
+    "workers": "İşçiler",
+    "sessions": "Oturumlar",
+    "eventMonitor": "Olay İzleyici"
+  },
+  "topbar": {
+    "logo": "Kontrol Paneli | WAHA",
+    "language": "Dil",
+    "refresh": "Yenile"
+  },
+  "common": {
+    "value": "Değer",
+    "add": "Ekle",
+    "delete": "Sil",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "no": "Hayır"
+  },
+  "screenshot": {
+    "screenshot": "Ekran Görüntüsü",
+    "screenshotQR": "Ekran Görüntüsü / QR"
+  },
+  "dashboard": {
+    "sessions": "Oturumlar",
+    "working": "çalışıyor",
+    "requiresAttention": "dikkat gerektiriyor",
+    "stopped": "durduruldu",
+    "notConnected": "bağlı değil",
+    "connected": "bağlı",
+    "updates": "Güncellemeler",
+    "changelog": "Değişiklik Günlüğü",
+    "workerCanBeUpdated": "işçi güncellenebilir",
+    "workersCanBeUpdated": "işçiler güncellenebilir",
+    "allWorkersUpToDate": "Tüm işçiler güncel!"
+  },
+  "sessions": {
+    "title": "Oturumlar",
+    "refresh": "Yenile",
+    "startNew": "Yeni Başlat",
+    "searchByNamePhoneMetadata": "İsim, Telefon, Meta Veri ile Ara",
+    "noSessionsFound": "Oturum bulunamadı",
+    "loadingSessions": "Oturumlar yükleniyor...",
+    "name": "İsim",
+    "session": "Oturum",
+    "metadata": "Meta Veri",
+    "me": "Hesap",
+    "mePhoneNumber": "Hesap (Telefon Numarası)",
+    "status": "Durum",
+    "chatUI": "Sohbet Arayüzü",
+    "sendRequest": "İstek Gönder",
+    "any": "Herhangi",
+    "server": "Sunucu",
+    "configuration": "Yapılandırma",
+    "apps": "Uygulamalar",
+    "start": "Başlat",
+    "restart": "Yeniden Başlat",
+    "login": "Giriş",
+    "qr": "QR Kodu",
+    "scanQRCode": "Bu oturumu yetkilendirmek için {qr} tarayın.",
+    "scanQRTab": "QR Tara",
+    "enterCodeTab": "Kod Gir",
+    "enterPhoneNumber": "<b>Telefon numaranızı</b> girin:",
+    "request": "İstek",
+    "apiEndpoint": "API Uç Noktası",
+    "body": "Gövde",
+    "response": "Yanıt",
+    "send": "Gönder"
+  },
+  "monitor": {
+    "title": "Olay İzleyici",
+    "description": "Oturumlarınızdan WAHA olaylarını gerçek zamanlı izleyin!",
+    "purpose": "Olay İzleyiciyi geliştirme ve hata ayıklama amaçları için kullanabilirsiniz.",
+    "realTimeOnly": "Yalnızca gerçek zamanlı yeni gelen olayları gösterir; geçmiş veri mevcut değildir.",
+    "listen": "Dinle",
+    "pause": "Duraklat",
+    "selectServer": "Sunucu Seç",
+    "download": "İndir",
+    "cleanEvents": "Olayları Temizle ({count})",
+    "searchInData": "Verilerde Ara",
+    "listeningForEvents": "Yeni olaylar dinleniyor...",
+    "eventColumn": "Olay",
+    "any": "Herhangi",
+    "eventsSelected": "{'{0}'} olay",
+    "sessionColumn": "Oturum",
+    "timeColumn": "Zaman",
+    "detailColumn": "Detay",
+    "copiedToClipboard": "Panoya kopyalandı"
+  },
+  "serverStore": {
+    "sessionNotFound": "Oturum bulunamadı - '{serverName}' üzerinde '{sessionName}'",
+    "connectionFailed": "Sunucu bağlantısı başarısız",
+    "serverNotConnected": "{serverName} ({serverUrl}) bağlı değil.\nLütfen çevrimiçi olduğundan ve yapılandırmada doğru API anahtarının ayarlandığından emin olun.",
+    "failedToRefreshServer": "Sunucu yenilenemedi - {serverId}"
+  }
+}

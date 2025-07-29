@@ -1,6 +1,8 @@
 <script setup>
 import {ref} from 'vue';
+import {useI18n} from 'vue-i18n';
 
+const { t } = useI18n();
 const data = defineModel()
 const props = defineProps([
   'keyColumn',
@@ -62,7 +64,7 @@ function deleteRow(index) {
       </Column>
       <Column
           style="width: 40%"
-          field="value" header="Value"
+          field="value" :header="t('common.value')"
       >
         <template #editor="{ data, field }">
           <InputText v-model="data[field]"/>
@@ -72,7 +74,7 @@ function deleteRow(index) {
         <template #header>
           <div class="flex flex-grow-1 justify-content-center">
             <Button
-                v-tooltip.top="`Add ${entityName}`"
+                v-tooltip.top="`${t('common.add')} ${entityName}`"
                 :label="entityName"
                 text
                 icon="pi pi-plus"
@@ -87,7 +89,7 @@ function deleteRow(index) {
                 label=""
                 rounded
                 text
-                v-tooltip.top="'Delete'"
+                v-tooltip.top="t('common.delete')"
                 style="height:2rem; width: 2rem"
                 icon="pi pi-trash"
                 severity="warning"
@@ -99,4 +101,3 @@ function deleteRow(index) {
     </DataTable>
   </div>
 </template>
-

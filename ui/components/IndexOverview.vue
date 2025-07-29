@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {onBeforeMount} from 'vue';
 import {computed} from "../.nuxt/imports";
+import {useI18n} from 'vue-i18n';
 
-
+const {t} = useI18n();
 const store = useServerStore()
 const notConnectedServers = computed(() => {
   return store.servers.filter(server => server.connected === false)
@@ -24,7 +25,7 @@ onBeforeMount(() => {
     <div class="card mb-0">
       <div class="flex justify-content-between mb-3">
         <div>
-          <span class="block text-900 font-medium mb-3">Sessions</span>
+          <span class="block text-900 font-medium mb-3">{{ t('dashboard.sessions') }}</span>
           <div class="text-900 font-medium text-xl">{{ store.visibleSessions.length }}</div>
         </div>
         <div class="flex">
@@ -38,16 +39,16 @@ onBeforeMount(() => {
         </div>
       </div>
       <span class="text-green-500 font-medium">{{ workingSessions.length }}</span>
-      <span class="text-500"> working</span>
+      <span class="text-500">&nbsp;{{ t('dashboard.working') }}</span>
       <template v-if="badSessions.length > 0">
         <span class="text-500">, </span>
         <span class="text-orange-400 font-medium">{{ badSessions.length }}</span>
-        <span class="text-500"> requires attention</span>
+        <span class="text-500">&nbsp;{{ t('dashboard.requiresAttention') }}</span>
       </template>
       <template v-if="stoppedSessions.length >0">
         <span class="text-500">, </span>
         <span class="text-gray-400 font-medium">{{ stoppedSessions.length }}</span>
-        <span class="text-500"> stopped</span>
+        <span class="text-500">&nbsp;{{ t('dashboard.stopped') }}</span>
       </template>
     </div>
   </div>
@@ -56,9 +57,9 @@ onBeforeMount(() => {
     <div class="card mb-0">
       <div class="flex justify-content-between mb-3">
         <div>
-          <span class="block text-900 font-medium mb-3">Workers</span>
+          <span class="block text-900 font-medium mb-3">{{ t('menu.workers') }}</span>
           <span class="text-900 font-medium text-xl">
-              <span> {{ store.servers.length }}</span>
+              <span>{{ store.servers.length }}</span>
             </span>
         </div>
         <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
@@ -69,11 +70,11 @@ onBeforeMount(() => {
       <div>
         <template v-if="notConnectedServers.length > 0">
           <span class="text-red-500 font-medium">{{ notConnectedServers.length }}</span>
-          <span class="text-900"> not connected</span>
+          <span class="text-900">&nbsp;{{ t('dashboard.notConnected') }}</span>
           <span> / </span>
         </template>
         <span class="text-green-500 font-medium">{{ connectedServers.length }}</span>
-        <span class="text-500"> connected</span>
+        <span class="text-500">&nbsp;{{ t('dashboard.connected') }}</span>
       </div>
     </div>
   </div>
@@ -83,16 +84,23 @@ onBeforeMount(() => {
       <div class="flex justify-content-between mb-3">
         <div>
             <span class="block text-900 font-medium mb-3">
-                Updates
+                {{ t('dashboard.updates') }}
             </span>
-          <div>
+          <div class="text-900 text-xl">
             <Skeleton v-if="!store.latestVersion" width="4rem"></Skeleton>
-            <span v-else class="text-900 font-medium text-xl">
-              <a href="https://waha.devlike.pro/docs/overview/changelog/" target="_blank">
-                Changelog
-                <i class="pi pi-external-link"></i>
-              </a>
+            <template v-else-if="serversRequireUpdates.length > 0">
+              <span class="text-orange-400 font-medium">{{ serversRequireUpdates.length }}</span>
+              <span class="text-500" v-if="serversRequireUpdates.length === 1">&nbsp;{{
+                  t('dashboard.workerCanBeUpdated')
+                }}</span>
+              <span class="text-500" v-else>&nbsp;{{ t('dashboard.workersCanBeUpdated') }}</span>
+            </template>
+            <template v-else>
+              <span class="text-green-500 font-medium">
+                <i class="pi text-green-500 pi-check-circle"></i>
+                {{ t('dashboard.allWorkersUpToDate') }}
               </span>
+            </template>
           </div>
         </div>
         <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
@@ -100,17 +108,15 @@ onBeforeMount(() => {
           <i class="pi pi-cloud-download text-cyan-500 text-xl"></i>
         </div>
       </div>
-      <template v-if="serversRequireUpdates.length > 0">
-        <span class="text-orange-400 font-medium">{{ serversRequireUpdates.length }}</span>
-        <span class="text-500" v-if="serversRequireUpdates.length === 1"> worker can be updated</span>
-        <span class="text-500" v-else> workers can be updated</span>
-      </template>
-      <template v-else>
-          <span class="text-green-500 font-medium">
-            <i class="pi text-green-500 pi-check-circle"></i>
-            All workers up to date!
-          </span>
-      </template>
+
+      <div class="text-500 font-medium mt-1">
+        <a href="https://waha.devlike.pro/docs/overview/changelog/" target="_blank">
+          {{ t('dashboard.changelog') }}
+          <i class="pi pi-external-link"></i>
+        </a>
+      </div>
+
+
     </div>
   </div>
 

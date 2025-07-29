@@ -1,6 +1,8 @@
 <script setup>
 import {computed} from "vue";
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n();
 const props = defineProps({
   session: Object,
   refresh: Boolean,
@@ -30,7 +32,6 @@ async function refreshServers() {
         </span>
     <SessionStatusTag
         :status="session.status"
-        :value="session.status?.toUpperCase()"
     ></SessionStatusTag>
     <div>
       <span>(</span>
@@ -39,7 +40,7 @@ async function refreshServers() {
       <span>)</span>
     </div>
     <button
-        v-tooltip.top="'Refresh'"
+        v-tooltip.top="t('sessions.refresh')"
         v-if="refresh"
         @click="refreshServers()" class="p-link layout-topbar-button" :disabled="refreshing">
       <i class="pi pi-refresh"></i>

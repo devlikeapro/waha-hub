@@ -1,6 +1,8 @@
 <script setup>
 import SessionLoginDialog from "./SessionLoginDialog.vue";
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n();
 const props = defineProps(['session']);
 const showDialog = ref(false);
 
@@ -9,7 +11,7 @@ const showDialog = ref(false);
 <template>
   <Button
       icon="pi pi-sign-in"
-      v-tooltip.top="'Login'"
+      v-tooltip.top="t('sessions.login')"
       severity=""
       rounded
       outlined

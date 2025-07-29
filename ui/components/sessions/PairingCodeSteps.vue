@@ -3,6 +3,7 @@ import EnterCodeGuide from "./EnterCodeGuide.vue";
 import {sleep} from "../../services/utils";
 // @ts-ignore
 import lodash from "lodash";
+import {useI18n} from 'vue-i18n'
 
 const props = defineProps(['session'])
 const phone = ref(null)
@@ -11,6 +12,7 @@ const code = ref('XXXX-XXXX')
 
 const req = useShowToastOnResult()
 const store = useServerStore()
+const {t} = useI18n()
 
 function keepOnlyDigits(phone){
   return phone.replace(/\D/g, '')
@@ -23,8 +25,8 @@ async function showCode() {
     await sleep(1000)
     const data = await req(
         store.getPairingCode(props.session.server.id, props.session.name, phone.value),
-        "Request sent",
-        "Failed to request code",
+        t('sessions.guide.code.requestSent'),
+        t('sessions.guide.code.failedToRequestCode'),
         props.session.name,
         props.session.name,
     )
@@ -54,13 +56,13 @@ watch(phone, lodash.debounce((newValue) => {
               :useGrouping="false"
               required="true"
               autofocus
-              placeholder="1213213213 (no +, no dashes -)"
+              :placeholder="t('sessions.guide.code.phonePlaceholder')"
           />
         </div>
         <div>
           <Button
               type="submit"
-              label="Show Code"
+              :label="t('sessions.guide.code.showCode')"
               icon="pi pi-send"
               :loading="loading"
           />

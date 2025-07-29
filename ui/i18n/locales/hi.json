@@ -1,0 +1,131 @@
+{
+  "STOPPED": "रुका हुआ",
+  "STARTING": "शुरू हो रहा है",
+  "WORKING": "काम कर रहा है",
+  "SCAN_QR_CODE": "QR कोड स्कैन करें",
+  "FAILED": "विफल",
+  "uptime": {
+    "day": "दिन",
+    "days": "दिन"
+  },
+  "chat": {
+    "emptyMessage": "खाली संदेश",
+    "pleaseEnterMessage": "कृपया एक संदेश दर्ज करें",
+    "header": "शीर्षक",
+    "last20Chats": "पिछले 20 चैट",
+    "aboutChatUI": "ℹ️ चैट UI के बारे में",
+    "promo": {
+      "exampleChatsUI": "यह एक उदाहरण चैट UI है।",
+      "implementFeatures": "आप लाइव चैट, मल्टीपल एजेंट्स और अधिक सुविधाओं को इसका उपयोग करके लागू कर सकते हैं",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "चैट और संदेशों का अवलोकन प्राप्त करने के लिए",
+      "sendAPI": "Send API",
+      "sendMessages": "चैट में संदेश भेजने के लिए",
+      "messageACK": "संदेश पुष्टिकरण",
+      "getMessageStatus": "संदेश की स्थिति प्राप्त करने के लिए",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "क्लाइंट साइड पर रीयल-टाइम संदेश प्राप्त करने के लिए",
+      "sourceCodeOnGithub": "Github पर सोर्स कोड",
+      "availableFor": "(Vue3 + PrimeVue) उपलब्ध है",
+      "wahaPro": "WAHA PRO",
+      "supporters": "समर्थकों के लिए!"
+    }
+  },
+  "menu": {
+    "dashboard": "डैशबोर्ड",
+    "home": "होम",
+    "workers": "वर्कर्स",
+    "sessions": "सेशन",
+    "eventMonitor": "इवेंट मॉनिटर"
+  },
+  "topbar": {
+    "logo": "डैशबोर्ड | WAHA",
+    "language": "भाषा",
+    "refresh": "रीफ्रेश"
+  },
+  "common": {
+    "value": "मूल्य",
+    "add": "जोड़ें",
+    "delete": "हटाएं",
+    "cancel": "रद्द करें",
+    "save": "सहेजें",
+    "no": "नहीं"
+  },
+  "screenshot": {
+    "screenshot": "स्क्रीनशॉट",
+    "screenshotQR": "स्क्रीनशॉट / QR"
+  },
+  "dashboard": {
+    "sessions": "सेशन",
+    "working": "काम कर रहा है",
+    "requiresAttention": "ध्यान देने की आवश्यकता है",
+    "stopped": "रुका हुआ",
+    "notConnected": "कनेक्ट नहीं है",
+    "connected": "कनेक्टेड",
+    "updates": "अपडेट",
+    "changelog": "परिवर्तन लॉग",
+    "workerCanBeUpdated": "वर्कर अपडेट किया जा सकता है",
+    "workersCanBeUpdated": "वर्कर्स अपडेट किए जा सकते हैं",
+    "allWorkersUpToDate": "सभी वर्कर्स अप टू डेट हैं!"
+  },
+  "sessions": {
+    "title": "सेशन",
+    "refresh": "रीफ्रेश",
+    "startNew": "नया शुरू करें",
+    "searchByNamePhoneMetadata": "नाम, फोन, मेटाडेटा से खोजें",
+    "noSessionsFound": "कोई सेशन नहीं मिला",
+    "loadingSessions": "सेशन लोड हो रहे हैं...",
+    "name": "नाम",
+    "session": "सेशन",
+    "metadata": "मेटाडेटा",
+    "me": "अकाउंट",
+    "mePhoneNumber": "अकाउंट (फोन नंबर)",
+    "status": "स्थिति",
+    "chatUI": "चैट UI",
+    "sendRequest": "अनुरोध भेजें",
+    "any": "कोई भी",
+    "server": "सर्वर",
+    "configuration": "कॉन्फिगरेशन",
+    "apps": "ऐप्स",
+    "start": "शुरू करें",
+    "restart": "पुनः आरंभ करें",
+    "login": "लॉगिन",
+    "qr": "QR कोड",
+    "scanQRCode": "इस सेशन को अधिकृत करने के लिए {qr} स्कैन करें।",
+    "scanQRTab": "QR स्कैन करें",
+    "enterCodeTab": "कोड दर्ज करें",
+    "enterPhoneNumber": "<b>अपना फोन नंबर</b> दर्ज करें:",
+    "request": "अनुरोध",
+    "apiEndpoint": "API एंडपॉइंट",
+    "body": "बॉडी",
+    "response": "प्रतिक्रिया",
+    "send": "भेजें"
+  },
+  "monitor": {
+    "title": "इवेंट मॉनिटर",
+    "description": "अपने सेशन से WAHA इवेंट्स को रीयल-टाइम में मॉनिटर करें!",
+    "purpose": "आप डेवलपमेंट और डीबगिंग उद्देश्यों के लिए इवेंट मॉनिटर का उपयोग कर सकते हैं।",
+    "realTimeOnly": "केवल नए आने वाले इवेंट्स को रीयल-टाइम में दिखाता है; कोई ऐतिहासिक डेटा उपलब्ध नहीं है।",
+    "listen": "सुनें",
+    "pause": "रोकें",
+    "selectServer": "सर्वर चुनें",
+    "download": "डाउनलोड",
+    "cleanEvents": "इवेंट्स साफ करें ({count})",
+    "searchInData": "डेटा में खोजें",
+    "listeningForEvents": "नए इवेंट्स के लिए सुन रहा है...",
+    "eventColumn": "इवेंट",
+    "any": "कोई भी",
+    "eventsSelected": "{'{0}'} इवेंट्स",
+    "sessionColumn": "सेशन",
+    "timeColumn": "समय",
+    "detailColumn": "विवरण",
+    "copiedToClipboard": "क्लिपबोर्ड पर कॉपी किया गया"
+  },
+  "serverStore": {
+    "sessionNotFound": "सेशन नहीं मिला - '{serverName}' पर '{sessionName}'",
+    "connectionFailed": "सर्वर कनेक्शन विफल",
+    "serverNotConnected": "{serverName} ({serverUrl}) कनेक्ट नहीं है।\nकृपया सुनिश्चित करें कि यह ऑनलाइन है और कॉन्फिगरेशन में सही API कुंजी सेट है।",
+    "failedToRefreshServer": "सर्वर को रीफ्रेश करने में विफल - {serverId}"
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "STOPPED": "ANGEHALTEN",
+  "STARTING": "STARTET",
+  "WORKING": "AKTIV",
+  "SCAN_QR_CODE": "QR-CODE SCANNEN",
+  "FAILED": "FEHLGESCHLAGEN",
+  "uptime": {
+    "day": "Tag",
+    "days": "Tage"
+  },
+  "chat": {
+    "emptyMessage": "Leere Nachricht",
+    "pleaseEnterMessage": "Bitte geben Sie eine Nachricht ein",
+    "header": "Kopfzeile",
+    "last20Chats": "Letzte 20 Chats",
+    "aboutChatUI": "ℹ️ Über die Chat-Oberfläche",
+    "promo": {
+      "exampleChatsUI": "Dies ist eine Beispiel-Chat-Oberfläche.",
+      "implementFeatures": "Sie können Live-Chat, mehrere Agenten und weitere Funktionen implementieren mit",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "um eine Übersicht über Chats und Nachrichten zu erhalten",
+      "sendAPI": "Send API",
+      "sendMessages": "um Nachrichten an Chats zu senden",
+      "messageACK": "Nachrichtenbestätigung",
+      "getMessageStatus": "um den Status der Nachricht zu erhalten",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "um Echtzeit-Nachrichten auf der Clientseite zu erhalten",
+      "sourceCodeOnGithub": "Quellcode auf Github",
+      "availableFor": "(Vue3 + PrimeVue) verfügbar für",
+      "wahaPro": "WAHA PRO",
+      "supporters": "Unterstützer!"
+    }
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "home": "Startseite",
+    "workers": "Worker",
+    "sessions": "Sitzungen",
+    "eventMonitor": "Ereignismonitor"
+  },
+  "topbar": {
+    "logo": "Dashboard | WAHA",
+    "language": "Sprache",
+    "refresh": "Aktualisieren"
+  },
+  "common": {
+    "value": "Wert",
+    "add": "Hinzufügen",
+    "delete": "Löschen",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "no": "Nein"
+  },
+  "screenshot": {
+    "screenshot": "Screenshot",
+    "screenshotQR": "Screenshot / QR"
+  },
+  "dashboard": {
+    "sessions": "Sitzungen",
+    "working": "aktiv",
+    "requiresAttention": "erfordert Aufmerksamkeit",
+    "stopped": "angehalten",
+    "notConnected": "nicht verbunden",
+    "connected": "verbunden",
+    "updates": "Updates",
+    "changelog": "Änderungsprotokoll",
+    "workerCanBeUpdated": "Worker kann aktualisiert werden",
+    "workersCanBeUpdated": "Worker können aktualisiert werden",
+    "allWorkersUpToDate": "Alle Worker sind auf dem neuesten Stand!"
+  },
+  "sessions": {
+    "title": "Sitzungen",
+    "refresh": "Aktualisieren",
+    "startNew": "Neue starten",
+    "searchByNamePhoneMetadata": "Nach Name, Telefon, Metadaten suchen",
+    "noSessionsFound": "Keine Sitzungen gefunden",
+    "loadingSessions": "Sitzungen werden geladen...",
+    "name": "Name",
+    "session": "Sitzung",
+    "metadata": "Metadaten",
+    "me": "Konto",
+    "mePhoneNumber": "Konto (Telefonnummer)",
+    "status": "Status",
+    "chatUI": "Chat-Oberfläche",
+    "sendRequest": "Anfrage senden",
+    "any": "Alle",
+    "server": "Server",
+    "configuration": "Konfiguration",
+    "apps": "Anwendungen",
+    "start": "Starten",
+    "restart": "Neustarten",
+    "login": "Anmelden",
+    "qr": "QR-Code",
+    "scanQRCode": "Scannen Sie {qr}, um diese Sitzung zu autorisieren.",
+    "scanQRTab": "QR scannen",
+    "enterCodeTab": "Code eingeben",
+    "enterPhoneNumber": "Geben Sie <b>Ihre Telefonnummer</b> ein:",
+    "request": "Anfrage",
+    "apiEndpoint": "API-Endpunkt",
+    "body": "Inhalt",
+    "response": "Antwort",
+    "send": "Senden"
+  },
+  "monitor": {
+    "title": "Ereignismonitor",
+    "description": "Überwachen Sie WAHA-Ereignisse aus Ihren Sitzungen in Echtzeit!",
+    "purpose": "Sie können den Ereignismonitor für Entwicklungs- und Debugging-Zwecke verwenden.",
+    "realTimeOnly": "Zeigt nur neue eingehende Ereignisse in Echtzeit an; keine historischen Daten verfügbar.",
+    "listen": "Zuhören",
+    "pause": "Pause",
+    "selectServer": "Server auswählen",
+    "download": "Herunterladen",
+    "cleanEvents": "Ereignisse löschen ({count})",
+    "searchInData": "In Daten suchen",
+    "listeningForEvents": "Auf neue Ereignisse wird gewartet...",
+    "eventColumn": "Ereignis",
+    "any": "Alle",
+    "eventsSelected": "{'{0}'} Ereignisse",
+    "sessionColumn": "Sitzung",
+    "timeColumn": "Zeit",
+    "detailColumn": "Detail",
+    "copiedToClipboard": "In die Zwischenablage kopiert"
+  },
+  "serverStore": {
+    "sessionNotFound": "Sitzung nicht gefunden - '{sessionName}' auf '{serverName}'",
+    "connectionFailed": "Serververbindung fehlgeschlagen",
+    "serverNotConnected": "{serverName} ({serverUrl}) ist nicht verbunden.\nBitte stellen Sie sicher, dass er online ist und der richtige API-Schlüssel in der Konfiguration eingestellt ist.",
+    "failedToRefreshServer": "Fehler beim Aktualisieren des Servers - {serverId}"
+  }
+}

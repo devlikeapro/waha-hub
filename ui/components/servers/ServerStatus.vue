@@ -1,6 +1,8 @@
 <script setup>
 import {dashboard} from "../../services/utils";
+import {useI18n} from 'vue-i18n';
 
+const { t } = useI18n();
 const props = defineProps(['server'])
 const store = useServerStore()
 const isNewVersionAvailable = computed(() => {
@@ -12,17 +14,17 @@ const isNewVersionAvailable = computed(() => {
   <div class="p-3 flex flex-column gap-2">
     <div class="flex gap-2">
       <div>
-        Status:
+        {{ t('servers.status') }}
       </div>
       <div class="flex flex-column gap-1">
         <div>
           <ServerConnectionIcon class="mr-1" :connected="server.connected"></ServerConnectionIcon>
           <span> <b>
             <template v-if="server.connected">
-            Connected
+            {{ t('servers.statusConnected') }}
             </template>
             <template v-else>
-            Disconnected
+            {{ t('servers.disconnected') }}
             </template>
           </b> </span>
         </div>
@@ -31,7 +33,7 @@ const isNewVersionAvailable = computed(() => {
 
     <div class="flex gap-1">
       <div>
-        API URL:
+        {{ t('servers.apiUrl') }}
       </div>
       <div>
         <a :href="server.connection?.url" target="_blank" class="ml-2">{{ server.connection?.url }}
@@ -42,7 +44,7 @@ const isNewVersionAvailable = computed(() => {
 
     <div class="flex gap-1">
       <div>
-        Dashboard URL:
+        {{ t('servers.dashboardUrl') }}
       </div>
       <div>
         <a :href="dashboard(server.connection?.url)" target="_blank" class="ml-2">{{ dashboard(server.connection?.url) }}
@@ -53,7 +55,7 @@ const isNewVersionAvailable = computed(() => {
 
     <div class="flex gap-2">
       <div>
-        Engine:
+        {{ t('servers.engine') }}
       </div>
       <div>
         <code>
@@ -64,7 +66,7 @@ const isNewVersionAvailable = computed(() => {
 
     <div class="flex gap-2">
       <div>
-        Version:
+        {{ t('servers.version') }}
       </div>
       <div>
         <code
@@ -77,7 +79,7 @@ const isNewVersionAvailable = computed(() => {
         <template v-if="!isNewVersionAvailable">
             <span class="text-green-500 font-medium ml-2">
               <i class="pi text-green-500 pi-check-circle"></i>
-              Up to date
+              {{ t('servers.upToDate') }}
             </span>
         </template>
       </div>
@@ -85,7 +87,7 @@ const isNewVersionAvailable = computed(() => {
 
     <div class="flex gap-2">
       <div>
-        Uptime:
+        {{ t('servers.uptime') }}
       </div>
       <div v-if="server.status">
         <ServerUptime
@@ -97,14 +99,14 @@ const isNewVersionAvailable = computed(() => {
     <InlineMessage
         v-if="isNewVersionAvailable"
         severity="info">
-      There's a new
+      {{ t('servers.newVersionAvailable') }}
       <span class="text-900 font-medium">
               <a href="https://waha.devlike.pro/docs/overview/changelog/" target="_blank">
                 {{ store.latestVersion }}
                 <i class="pi pi-external-link"></i>
               </a>
               </span>
-      version available!
+      {{ t('servers.versionAvailable') }}
     </InlineMessage>
   </div>
 

@@ -1,6 +1,8 @@
 <script setup>
 import {saveHideDuplicatedSessions} from "../../stores/useServerStore";
+import {useI18n} from 'vue-i18n'
 
+const { t } = useI18n();
 const store = useServerStore()
 const {hideDuplicatedSessions, servers} = storeToRefs(store)
 
@@ -18,9 +20,9 @@ store.$subscribe((mutation, state) => {
       class="ml-auto flex align-items-center gap-2 mr-2"
       v-else
   >
-    <label for="show-duplicates">Hide Duplicates</label>
+    <label for="show-duplicates">{{ t('sessions.hideDuplicates') }}</label>
     <i
-        v-tooltip='"Hide STOPPED sessions with the same \"name\" .\nUseful when you use multiple workers with the same database"'
+        v-tooltip="t('sessions.hideDuplicatesTooltip')"
         class="pi pi-info-circle"></i>
     <InputSwitch
         id="show-duplicates"

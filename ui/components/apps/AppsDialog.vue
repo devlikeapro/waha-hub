@@ -3,7 +3,9 @@ import AppList from './AppList.vue';
 import SessionHeader from '../sessions/SessionHeader.vue';
 import InlineMessage from 'primevue/inlinemessage';
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const visible = defineModel("visible");
 const session = defineModel("session");
 const server = defineModel("server");
@@ -37,13 +39,12 @@ function hide() {
       <div class="w-full flex flex-column gap-2">
         <div v-if="!isStopped">
           <InlineMessage severity="warn">
-            The session is in '<b>{{ session.status }}</b>' status,
-            in order to change apps or their configuration, the session will be restarted.
+            <span v-html="t('apps.sessionStatusWarning', { status: session.status })"></span>
           </InlineMessage>
         </div>
         <div class="flex justify-content-end">
           <Button
-            label="Close"
+            :label="t('apps.close')"
             icon="pi pi-times"
             text=""
             @click="hide"

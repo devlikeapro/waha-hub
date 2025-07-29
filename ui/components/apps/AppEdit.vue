@@ -7,6 +7,9 @@ import AppFAQChatWoot from './AppFAQChatWoot.vue';
 import useShowToastOnResult from '../../composables/useShowToastOnResult';
 import { generateRandomId } from '../../utils/ids';
 import ChatWootLabel from '../common/ChatWootLabel.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const props = defineProps({
   modelValue: {
@@ -110,29 +113,29 @@ function cancel() {
     v-model:visible="isVisible" 
     :modal="true" 
     class="p-fluid" 
-    :header="props.isNewApp ? 'Add App' : 'Edit App'"
+    :header="props.isNewApp ? t('apps.addAppTitle') : t('apps.editAppTitle')"
   >
     <div class="app-edit">
       <div class="field">
-        <label for="id"><b>App ID</b></label>
+        <label for="id"><b>{{ t('apps.appId') }}</b></label>
         <InputText 
           id="id" 
           v-model="app.id" 
           :disabled="!props.isNewApp"
           placeholder="Automatically generated"
         />
-        <small class="p-error" v-if="submitted && !app.id">ID is required.</small>
+        <small class="p-error" v-if="submitted && !app.id">{{ t('apps.appIdRequired') }}</small>
       </div>
 
       <div class="field">
-        <label for="app-type"><b>App Type</b></label>
+        <label for="app-type"><b>{{ t('apps.appType') }}</b></label>
         <Dropdown 
           id="app-type" 
           v-model="app.app" 
           :options="appTypes" 
           optionLabel="name" 
           optionValue="value"
-          placeholder="Select App Type"
+          :placeholder="t('apps.selectAppType')"
           :class="{'p-invalid': submitted && !app.app}"
           :disabled="!props.isNewApp"
         >
@@ -148,18 +151,18 @@ function cancel() {
             <ChatWootLabel v-if="slotProps.option.value === 'chatwoot'" />
           </template>
         </Dropdown>
-        <small class="p-error" v-if="submitted && !app.app">App Type is required.</small>
+        <small class="p-error" v-if="submitted && !app.app">{{ t('apps.appTypeRequired') }}</small>
       </div>
 
       <div class="field" v-if="app.app">
-        <label><b>App FAQ</b></label>
+        <label><b>{{ t('apps.appFAQ') }}</b></label>
         <AppFAQChatWoot
           v-if="app.app === 'chatwoot'"
           :app="app"
           :session="app.session || ''"
         />
 
-        <label><b>App Configuration</b></label>
+        <label><b>{{ t('apps.appConfiguration') }}</b></label>
         <div class="card app-config">
           <AppConfigChatWoot 
             v-if="app.app === 'chatwoot'" 
@@ -173,14 +176,14 @@ function cancel() {
 
     <template #footer>
       <Button 
-        label="Cancel" 
+        :label="t('apps.cancel')" 
         icon="pi pi-times" 
         @click="cancel" 
         text="" 
         severity="secondary"
       />
       <Button 
-        :label="isNewApp ? 'Add' : 'Save'" 
+        :label="isNewApp ? t('apps.add') : t('apps.save')" 
         :icon="isNewApp ? 'pi pi-plus' : 'pi pi-check'" 
         @click="save" 
         :loading="props.loading"

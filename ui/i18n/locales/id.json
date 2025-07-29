@@ -1,0 +1,131 @@
+{
+  "STOPPED": "BERHENTI",
+  "STARTING": "MEMULAI",
+  "WORKING": "BEKERJA",
+  "SCAN_QR_CODE": "PINDAI KODE QR",
+  "FAILED": "GAGAL",
+  "uptime": {
+    "day": "hari",
+    "days": "hari"
+  },
+  "chat": {
+    "emptyMessage": "Pesan kosong",
+    "pleaseEnterMessage": "Silakan masukkan pesan",
+    "header": "Header",
+    "last20Chats": "20 Chat Terakhir",
+    "aboutChatUI": "ℹ️ Tentang UI Chat",
+    "promo": {
+      "exampleChatsUI": "Ini adalah contoh UI Chat.",
+      "implementFeatures": "Anda dapat mengimplementasikan Chat Langsung, Beberapa Agen, dan fitur lainnya menggunakan",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "untuk mendapatkan ikhtisar chat dan pesan",
+      "sendAPI": "Send API",
+      "sendMessages": "untuk mengirim pesan ke chat",
+      "messageACK": "Konfirmasi Pesan",
+      "getMessageStatus": "untuk mendapatkan status pesan",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "untuk mendapatkan pesan real-time di sisi klien",
+      "sourceCodeOnGithub": "Kode Sumber di Github",
+      "availableFor": "(Vue3 + PrimeVue) tersedia untuk",
+      "wahaPro": "WAHA PRO",
+      "supporters": "pendukung!"
+    }
+  },
+  "menu": {
+    "dashboard": "Dasbor",
+    "home": "Beranda",
+    "workers": "Pekerja",
+    "sessions": "Sesi",
+    "eventMonitor": "Monitor Acara"
+  },
+  "topbar": {
+    "logo": "Dasbor | WAHA",
+    "language": "Bahasa",
+    "refresh": "Segarkan"
+  },
+  "common": {
+    "value": "Nilai",
+    "add": "Tambah",
+    "delete": "Hapus",
+    "cancel": "Batal",
+    "save": "Simpan",
+    "no": "Tidak"
+  },
+  "screenshot": {
+    "screenshot": "Tangkapan Layar",
+    "screenshotQR": "Tangkapan Layar / QR"
+  },
+  "dashboard": {
+    "sessions": "Sesi",
+    "working": "bekerja",
+    "requiresAttention": "memerlukan perhatian",
+    "stopped": "berhenti",
+    "notConnected": "tidak terhubung",
+    "connected": "terhubung",
+    "updates": "Pembaruan",
+    "changelog": "Catatan Perubahan",
+    "workerCanBeUpdated": "pekerja dapat diperbarui",
+    "workersCanBeUpdated": "pekerja dapat diperbarui",
+    "allWorkersUpToDate": "Semua pekerja sudah terbaru!"
+  },
+  "sessions": {
+    "title": "Sesi",
+    "refresh": "Segarkan",
+    "startNew": "Mulai Baru",
+    "searchByNamePhoneMetadata": "Cari berdasarkan Nama, Telepon, Metadata",
+    "noSessionsFound": "Tidak ada sesi ditemukan",
+    "loadingSessions": "Memuat sesi...",
+    "name": "Nama",
+    "session": "Sesi",
+    "metadata": "Metadata",
+    "me": "Akun",
+    "mePhoneNumber": "Akun (Nomor Telepon)",
+    "status": "Status",
+    "chatUI": "UI Chat",
+    "sendRequest": "Kirim Permintaan",
+    "any": "Apa saja",
+    "server": "Server",
+    "configuration": "Konfigurasi",
+    "apps": "Aplikasi",
+    "start": "Mulai",
+    "restart": "Mulai Ulang",
+    "login": "Masuk",
+    "qr": "Kode QR",
+    "scanQRCode": "Pindai {qr} untuk mengotorisasi sesi ini.",
+    "scanQRTab": "Pindai QR",
+    "enterCodeTab": "Masukkan Kode",
+    "enterPhoneNumber": "Masukkan <b>Nomor telepon Anda</b>:",
+    "request": "Permintaan",
+    "apiEndpoint": "Endpoint API",
+    "body": "Isi",
+    "response": "Respons",
+    "send": "Kirim"
+  },
+  "monitor": {
+    "title": "Monitor Acara",
+    "description": "Pantau acara WAHA dari sesi Anda secara real-time!",
+    "purpose": "Anda dapat menggunakan Monitor Acara untuk tujuan pengembangan dan debugging.",
+    "realTimeOnly": "Hanya menampilkan acara masuk baru secara real-time; tidak ada data historis yang tersedia.",
+    "listen": "Dengarkan",
+    "pause": "Jeda",
+    "selectServer": "Pilih Server",
+    "download": "Unduh",
+    "cleanEvents": "Bersihkan Acara ({count})",
+    "searchInData": "Cari dalam data",
+    "listeningForEvents": "Mendengarkan acara baru...",
+    "eventColumn": "Acara",
+    "any": "Apa saja",
+    "eventsSelected": "{'{0}'} acara",
+    "sessionColumn": "Sesi",
+    "timeColumn": "Waktu",
+    "detailColumn": "Detail",
+    "copiedToClipboard": "Disalin ke clipboard"
+  },
+  "serverStore": {
+    "sessionNotFound": "Sesi tidak ditemukan - '{sessionName}' pada '{serverName}'",
+    "connectionFailed": "Koneksi server gagal",
+    "serverNotConnected": "{serverName} ({serverUrl}) tidak terhubung.\nPastikan server online dan kunci API yang benar telah diatur dalam konfigurasi.",
+    "failedToRefreshServer": "Gagal menyegarkan server - {serverId}"
+  }
+}

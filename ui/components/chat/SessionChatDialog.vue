@@ -164,7 +164,7 @@ const showPromo = ref(false)
       <div class="m-auto pb-2">
         <div class="text-center">
           <a href="#" @click="showPromo = true">
-            <b>ℹ️ About Chat UI</b>
+            <b>{{ $t('chat.aboutChatUI') }}</b>
           </a>
         </div>
         <ChatPromo

@@ -1,4 +1,7 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 const props = defineProps(['session']);
 
 const op = ref(null);
@@ -22,7 +25,7 @@ const disabled = computed(() => {
 
 <template>
   <Button
-      v-tooltip.top="'Screenshot / QR'"
+      v-tooltip.top="t('screenshot.screenshotQR')"
       :disabled="disabled"
       type="button"
       icon="pi pi-camera"
@@ -34,7 +37,7 @@ const disabled = computed(() => {
   <OverlayPanel ref="op" appendTo="body" :showCloseIcon="true">
     <div class="" style="min-width:20rem;">
       <div class="flex justify-content-center align-items-center">
-        <h5 class="m-0">Screenshot</h5>
+        <h5 class="m-0">{{ t('screenshot.screenshot') }}</h5>
         <RefreshButton @click="refreshScreenshot"></RefreshButton>
       </div>
       <div class="m-auto w-full">

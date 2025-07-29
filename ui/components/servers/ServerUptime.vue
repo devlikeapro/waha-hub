@@ -1,11 +1,16 @@
 <script setup>
+import { useI18n } from "vue-i18n";
+import { computed } from "vue";
+import { formatUptime } from "../../utils/uptime";
+
+const { t } = useI18n();
 const props = defineProps(['status'])
 const uptime = computed(() => {
   const ms = props.status.uptime
   if (!ms) {
     return
   }
-  return formatUptime(ms)
+  return formatUptime(ms, t)
 })
 const startTime = computed(() => {
   const timestamp = props.status.startTimestamp
@@ -18,9 +23,9 @@ const startTime = computed(() => {
 </script>
 
 <template>
-  {{ uptime }} up
+  {{ uptime }} {{ t('servers.uptimeStatus') }}
   <i
-      v-tooltip='`Start time: ${startTime?.toLocaleString()}`'
+      v-tooltip='`${t("servers.startTime")}: ${startTime?.toLocaleString()}`'
       class="pi pi-info-circle"
   ></i>
 </template>

@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import {ref, computed} from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const props = defineProps({
   app: {
@@ -36,48 +39,48 @@ async function copyExampleUrl() {
 <template>
   <div class="chatwoot-faq">
     <Accordion :multiple="true" :activeIndex="[1]">
-      <AccordionTab header="About WAHA ChatWoot App">
+      <AccordionTab :header="t('apps.chatwoot.aboutApp')">
         <div class="mb-3">
           <a href="https://waha.devlike.pro/docs/apps/chatwoot" target="_blank">
-            Learn more about WAHA ChatWoot App
+            {{ t('apps.chatwoot.learnMore') }}
           </a>
         </div>
       </AccordionTab>
 
-      <AccordionTab header="ChatWoot Inbox - Webhook URL">
+      <AccordionTab :header="t('apps.chatwoot.webhookUrl')">
         <div class="mb-4">
           <p class="mb-1">
-            Use this <strong>Webhook URL</strong> for your <b>ChatWoot Inbox</b>:
+            {{ t('apps.chatwoot.useWebhookUrl') }}
           </p>
           <div class="p-inputgroup mb-1">
             <InputText
                 :value=templateUrl
                 disabled
-                placeholder="Webhook URL"
+                :placeholder="t('apps.chatwoot.webhookUrlPlaceholder')"
             />
             <Button
-                label="Copy"
+                :label="t('apps.chatwoot.copy')"
                 icon="pi pi-copy"
                 @click="copyWebhookUrl"
-                v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
+                v-tooltip.focus.bottom="{ value: t('apps.chatwoot.copiedToClipboard') }"
             />
           </div>
-          <small class="p-message-secondary">👉 Replace <b>WAHA_BASE_URL</b> with <b>Your WAHA URL</b></small>
+          <small class="p-message-secondary">{{ t('apps.chatwoot.replaceBaseUrl') }}</small>
         </div>
 
         <div class="mt-4">
-          <p>Example (if you're using <b>docker-compose</b> default setup):</p>
+          <p>{{ t('apps.chatwoot.exampleSetup') }}</p>
           <div class="p-inputgroup">
             <InputText
                 :value="exampleUrl"
                 disabled
-                placeholder="Example URL"
+                :placeholder="t('apps.chatwoot.exampleUrlPlaceholder')"
             />
             <Button
-                label="Copy"
+                :label="t('apps.chatwoot.copy')"
                 icon="pi pi-copy"
                 @click="copyExampleUrl"
-                v-tooltip.focus.bottom="{ value: 'Copied to clipboard' }"
+                v-tooltip.focus.bottom="{ value: t('apps.chatwoot.copiedToClipboard') }"
             />
           </div>
         </div>

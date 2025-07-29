@@ -24,7 +24,7 @@ const emit = defineEmits(['clickOnChat',
       <template #header>
         <div class="flex justify-content-center align-items-center gap-1">
           <div>
-            Last 20 Chats
+            {{ $t('chat.last20Chats') }}
           </div>
           <RefreshButton
               @click="emit('refreshChats')"

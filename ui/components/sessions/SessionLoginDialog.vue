@@ -6,6 +6,7 @@ import ScanQRCodeGuide from "./ScanQRCodeGuide.vue";
 
 const visible = defineModel("visible");
 const props = defineProps(['session'])
+const { t } = useI18n();
 
 </script>
 
@@ -25,12 +26,13 @@ const props = defineProps(['session'])
       <TabPanel>
         <template #header>
           <i class="pi pi-qrcode mr-2"></i>
-          Scan QR
+          {{ t('sessions.scanQRTab') }}
         </template>
-        <p>
-          Scan <b>QR Code</b>
-          to authorize this session.
-        </p>
+        <i18n-t keypath="sessions.scanQRCode" tag="p">
+          <template v-slot:qr>
+            <b>{{ t('sessions.qr') }}</b>
+          </template>
+        </i18n-t>
         <ScanQRCodeGuide/>
         <div>
           <QRImage :session="session"></QRImage>
@@ -39,11 +41,9 @@ const props = defineProps(['session'])
       <TabPanel>
         <template #header>
           <i class="pi pi-send mr-2"></i>
-          Enter Code
+          {{ t('sessions.enterCodeTab') }}
         </template>
-        <p class="m-0">
-          Enter <b>Your Phone number</b>:
-        </p>
+        <p v-html="t('sessions.enterPhoneNumber')" class="m-0"></p>
         <div>
           <PairingCodeSteps :session="session"></PairingCodeSteps>
         </div>

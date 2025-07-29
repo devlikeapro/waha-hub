@@ -4,12 +4,15 @@ import {useLayout} from './composables/layout';
 import {useRouter} from 'vue-router';
 import {useAsyncData} from "nuxt/app";
 import {useServerStore} from "../stores/useServerStore";
+import LanguageSelector from "../components/LanguageSelector.vue";
+
+const { t } = useI18n();
 
 const {layoutConfig, onMenuToggle} = useLayout();
 const outsideClickListener = ref(null);
 const topbarMenuActive = ref(false);
 const router = useRouter();
-const store = useServerStore()
+const store = useServerStore();
 
 onMounted(() => {
   bindOutsideClickListener();
@@ -71,6 +74,12 @@ function eventMonitor(){
   router.push('/event-monitor')
 }
 
+const languageSelector = ref(null);
+
+const toggleLanguageSelector = (event) => {
+  languageSelector.value.toggle(event);
+};
+
 const {refreshing} = storeToRefs(store)
 </script>
 
@@ -82,7 +91,7 @@ const {refreshing} = storeToRefs(store)
 
     <router-link to="/" class="layout-topbar-logo">
       <img class="mb-1" :src="logoUrl" alt="logo"/>
-      <span>Dashboard | WAHA</span>
+      <span>{{ t('topbar.logo') }}</span>
     </router-link>
 
 
@@ -91,21 +100,30 @@ const {refreshing} = storeToRefs(store)
     </button>
 
     <div class="layout-topbar-menu" :class="topbarMenuClasses">
+      <button
+          class="p-link layout-topbar-button"
+          v-tooltip.bottom="t('topbar.language')"
+          @click="toggleLanguageSelector($event)"
+      >
+        <i class="pi pi-globe" style="color: #38bdf8" ></i>
+        <span>{{ t('topbar.language') }}</span>
+      </button>
+      <LanguageSelector ref="languageSelector" />
       <router-link
           to="/event-monitor"
-          v-tooltip.bottom="'Event Monitor'"
+          v-tooltip.bottom="t('menu.eventMonitor')"
           class="p-link layout-topbar-button">
         <i class="pi pi-eye" style="color: #459e74" ></i>
-        <span>Event Monitor</span>
+        <span>{{ t('menu.eventMonitor') }}</span>
       </router-link>
       <div class="m-auto">
         <RefreshIcon :refreshing="refreshing"/>
       </div>
       <button
-          v-tooltip.bottom="'Refresh'"
+          v-tooltip.bottom="t('topbar.refresh')"
           @click="refreshServers" class="p-link layout-topbar-button" :disabled="refreshing">
         <i class="pi pi-refresh"></i>
-        <span>Refresh</span>
+        <span>{{ t('topbar.refresh') }}</span>
       </button>
       <!--      <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">-->
       <!--        <i class="pi pi-user"></i>-->

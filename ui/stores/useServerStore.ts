@@ -17,6 +17,7 @@ import {WahaAPIMockClient} from "../services/impl/waha/WahaAPIMockClient";
 import {IWahaAPIClient} from "../services/waha/IWahaAPIClient";
 import {useRuntimeConfig} from "nuxt/app";
 import {HubServerMockAPI} from "../services/impl/hub/HubServerMockAPI";
+import {useI18n} from "vue-i18n";
 
 function filterSessions(sessions) {
     // Group by session name and me.id to identify "theSame" sessions
@@ -61,6 +62,7 @@ export function saveHideDuplicatedSessions(value) {
 export const useServerStore = defineStore('serverStore', () => {
     const toast = useToast();
     const config = useRuntimeConfig()
+    const { t } = useI18n();
 
     let hubServerAPI: IHubServerAPI
     let wahaAPIClient: IWahaAPIClient
@@ -111,7 +113,7 @@ export const useServerStore = defineStore('serverStore', () => {
                     const sessionName = data.session
                     const session = sessions.get(server.id)?.find(session => session.name === sessionName)
                     if (!session) {
-                        console.log(`Session not found - '${sessionName}' on '${server.name}'`)
+                        console.log(t('serverStore.sessionNotFound', { sessionName, serverName: server.name }))
                         refresh()
                         return
                     }
@@ -150,11 +152,14 @@ export const useServerStore = defineStore('serverStore', () => {
             server.connected = false
             toast.add({
                 severity: 'error',
-                summary: `Server connection failed`,
-                detail: `${server.name} (${server.connection.url}) is not connected.\nPlease make sure it's online and set right API key in the configuration.`,
+                summary: t('serverStore.connectionFailed'),
+                detail: t('serverStore.serverNotConnected', { 
+                    serverName: server.name, 
+                    serverUrl: server.connection.url 
+                }),
                 life: 3000
             });
-            console.error(`Failed to refresh server - ${id}`, e)
+            console.error(t('serverStore.failedToRefreshServer', { serverId: id }), e)
         }
     }
 

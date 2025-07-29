@@ -1,0 +1,131 @@
+{
+  "STOPPED": "বন্ধ",
+  "STARTING": "শুরু হচ্ছে",
+  "WORKING": "কাজ করছে",
+  "SCAN_QR_CODE": "QR কোড স্ক্যান করুন",
+  "FAILED": "ব্যর্থ",
+  "uptime": {
+    "day": "দিন",
+    "days": "দিন"
+  },
+  "chat": {
+    "emptyMessage": "খালি বার্তা",
+    "pleaseEnterMessage": "অনুগ্রহ করে একটি বার্তা লিখুন",
+    "header": "শিরোনাম",
+    "last20Chats": "শেষ ২০টি চ্যাট",
+    "aboutChatUI": "ℹ️ চ্যাট ইউআই সম্পর্কে",
+    "promo": {
+      "exampleChatsUI": "এটি একটি উদাহরণ চ্যাট ইউআই।",
+      "implementFeatures": "আপনি লাইভ চ্যাট, একাধিক এজেন্ট এবং আরও বৈশিষ্ট্য বাস্তবায়ন করতে পারেন",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "চ্যাট এবং বার্তাগুলির ওভারভিউ পেতে",
+      "sendAPI": "Send API",
+      "sendMessages": "চ্যাটে বার্তা পাঠাতে",
+      "messageACK": "বার্তা নিশ্চিতকরণ",
+      "getMessageStatus": "বার্তার অবস্থা পেতে",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "ক্লায়েন্ট সাইডে রিয়েল-টাইম বার্তা পেতে",
+      "sourceCodeOnGithub": "Github-এ সোর্স কোড",
+      "availableFor": "(Vue3 + PrimeVue) উপলব্ধ",
+      "wahaPro": "WAHA PRO",
+      "supporters": "সমর্থকদের জন্য!"
+    }
+  },
+  "menu": {
+    "dashboard": "ড্যাশবোর্ড",
+    "home": "হোম",
+    "workers": "ওয়ার্কার",
+    "sessions": "সেশন",
+    "eventMonitor": "ইভেন্ট মনিটর"
+  },
+  "topbar": {
+    "logo": "ড্যাশবোর্ড | WAHA",
+    "language": "ভাষা",
+    "refresh": "রিফ্রেশ"
+  },
+  "common": {
+    "value": "মান",
+    "add": "যোগ করুন",
+    "delete": "মুছুন",
+    "cancel": "বাতিল",
+    "save": "সংরক্ষণ",
+    "no": "না"
+  },
+  "screenshot": {
+    "screenshot": "স্ক্রিনশট",
+    "screenshotQR": "স্ক্রিনশট / QR"
+  },
+  "dashboard": {
+    "sessions": "সেশন",
+    "working": "কাজ করছে",
+    "requiresAttention": "মনোযোগ প্রয়োজন",
+    "stopped": "বন্ধ",
+    "notConnected": "সংযুক্ত নয়",
+    "connected": "সংযুক্ত",
+    "updates": "আপডেট",
+    "changelog": "পরিবর্তন লগ",
+    "workerCanBeUpdated": "ওয়ার্কার আপডেট করা যাবে",
+    "workersCanBeUpdated": "ওয়ার্কারগুলি আপডেট করা যাবে",
+    "allWorkersUpToDate": "সব ওয়ার্কার আপ টু ডেট!"
+  },
+  "sessions": {
+    "title": "সেশন",
+    "refresh": "রিফ্রেশ",
+    "startNew": "নতুন শুরু করুন",
+    "searchByNamePhoneMetadata": "নাম, ফোন, মেটাডাটা দ্বারা অনুসন্ধান করুন",
+    "noSessionsFound": "কোন সেশন পাওয়া যায়নি",
+    "loadingSessions": "সেশন লোড হচ্ছে...",
+    "name": "নাম",
+    "session": "সেশন",
+    "metadata": "মেটাডাটা",
+    "me": "অ্যাকাউন্ট",
+    "mePhoneNumber": "অ্যাকাউন্ট (ফোন নম্বর)",
+    "status": "স্ট্যাটাস",
+    "chatUI": "চ্যাট ইউআই",
+    "sendRequest": "অনুরোধ পাঠান",
+    "any": "যেকোনো",
+    "server": "সার্ভার",
+    "configuration": "কনফিগারেশন",
+    "apps": "অ্যাপস",
+    "start": "শুরু করুন",
+    "restart": "পুনরায় শুরু করুন",
+    "login": "লগইন",
+    "qr": "QR কোড",
+    "scanQRCode": "এই সেশন অনুমোদন করতে {qr} স্ক্যান করুন।",
+    "scanQRTab": "QR স্ক্যান করুন",
+    "enterCodeTab": "কোড লিখুন",
+    "enterPhoneNumber": "<b>আপনার ফোন নম্বর</b> লিখুন:",
+    "request": "অনুরোধ",
+    "apiEndpoint": "API এন্ডপয়েন্ট",
+    "body": "বডি",
+    "response": "প্রতিক্রিয়া",
+    "send": "পাঠান"
+  },
+  "monitor": {
+    "title": "ইভেন্ট মনিটর",
+    "description": "আপনার সেশন থেকে WAHA ইভেন্টগুলি রিয়েল-টাইমে মনিটর করুন!",
+    "purpose": "আপনি ডেভেলপমেন্ট এবং ডিবাগিং উদ্দেশ্যে ইভেন্ট মনিটর ব্যবহার করতে পারেন।",
+    "realTimeOnly": "শুধুমাত্র নতুন আসা ইভেন্টগুলি রিয়েল-টাইমে দেখায়; কোন ঐতিহাসিক ডেটা উপলব্ধ নেই।",
+    "listen": "শুনুন",
+    "pause": "বিরতি",
+    "selectServer": "সার্ভার নির্বাচন করুন",
+    "download": "ডাউনলোড",
+    "cleanEvents": "ইভেন্ট পরিষ্কার করুন ({count})",
+    "searchInData": "ডেটাতে অনুসন্ধান করুন",
+    "listeningForEvents": "নতুন ইভেন্টের জন্য শোনা হচ্ছে...",
+    "eventColumn": "ইভেন্ট",
+    "any": "যেকোনো",
+    "eventsSelected": "{'{0}'} ইভেন্ট",
+    "sessionColumn": "সেশন",
+    "timeColumn": "সময়",
+    "detailColumn": "বিস্তারিত",
+    "copiedToClipboard": "ক্লিপবোর্ডে কপি করা হয়েছে"
+  },
+  "serverStore": {
+    "sessionNotFound": "সেশন পাওয়া যায়নি - '{serverName}'-এ '{sessionName}'",
+    "connectionFailed": "সার্ভার সংযোগ ব্যর্থ",
+    "serverNotConnected": "{serverName} ({serverUrl}) সংযুক্ত নয়।\nঅনুগ্রহ করে নিশ্চিত করুন যে এটি অনলাইন এবং কনফিগারেশনে সঠিক API কী সেট করা আছে।",
+    "failedToRefreshServer": "সার্ভার রিফ্রেশ করতে ব্যর্থ - {serverId}"
+  }
+}

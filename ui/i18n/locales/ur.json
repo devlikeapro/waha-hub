@@ -1,0 +1,131 @@
+{
+  "STOPPED": "رک گیا",
+  "STARTING": "شروع ہو رہا ہے",
+  "WORKING": "کام کر رہا ہے",
+  "SCAN_QR_CODE": "QR کوڈ اسکین کریں",
+  "FAILED": "ناکام",
+  "uptime": {
+    "day": "دن",
+    "days": "دن"
+  },
+  "chat": {
+    "emptyMessage": "خالی پیغام",
+    "pleaseEnterMessage": "براہ کرم پیغام درج کریں",
+    "header": "سرخی",
+    "last20Chats": "آخری 20 چیٹس",
+    "aboutChatUI": "ℹ️ چیٹ انٹرفیس کے بارے میں",
+    "promo": {
+      "exampleChatsUI": "یہ چیٹس انٹرفیس کی ایک مثال ہے۔",
+      "implementFeatures": "آپ لائیو چیٹ، متعدد ایجنٹس، اور مزید خصوصیات استعمال کر سکتے ہیں",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "چیٹس اور پیغامات کا جائزہ حاصل کرنے کے لیے",
+      "sendAPI": "Send API",
+      "sendMessages": "چیٹس میں پیغامات بھیجنے کے لیے",
+      "messageACK": "پیغام کی تصدیق",
+      "getMessageStatus": "پیغام کی حیثیت حاصل کرنے کے لیے",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "کلائنٹ سائیڈ پر ریئل ٹائم پیغامات حاصل کرنے کے لیے",
+      "sourceCodeOnGithub": "Github پر سورس کوڈ",
+      "availableFor": "(Vue3 + PrimeVue) دستیاب ہے",
+      "wahaPro": "WAHA PRO",
+      "supporters": "حامیوں کے لیے!"
+    }
+  },
+  "menu": {
+    "dashboard": "ڈیش بورڈ",
+    "home": "ہوم",
+    "workers": "ورکرز",
+    "sessions": "سیشنز",
+    "eventMonitor": "ایونٹ مانیٹر"
+  },
+  "topbar": {
+    "logo": "ڈیش بورڈ | WAHA",
+    "language": "زبان",
+    "refresh": "ریفریش"
+  },
+  "common": {
+    "value": "قیمت",
+    "add": "شامل کریں",
+    "delete": "حذف کریں",
+    "cancel": "منسوخ کریں",
+    "save": "محفوظ کریں",
+    "no": "نہیں"
+  },
+  "screenshot": {
+    "screenshot": "اسکرین شاٹ",
+    "screenshotQR": "اسکرین شاٹ / QR"
+  },
+  "dashboard": {
+    "sessions": "سیشنز",
+    "working": "کام کر رہا ہے",
+    "requiresAttention": "توجہ کی ضرورت ہے",
+    "stopped": "رک گیا",
+    "notConnected": "منسلک نہیں",
+    "connected": "منسلک",
+    "updates": "اپڈیٹس",
+    "changelog": "تبدیلیوں کی فہرست",
+    "workerCanBeUpdated": "ورکر اپڈیٹ کیا جا سکتا ہے",
+    "workersCanBeUpdated": "ورکرز اپڈیٹ کیے جا سکتے ہیں",
+    "allWorkersUpToDate": "تمام ورکرز اپ ٹو ڈیٹ ہیں!"
+  },
+  "sessions": {
+    "title": "سیشنز",
+    "refresh": "ریفریش",
+    "startNew": "نیا شروع کریں",
+    "searchByNamePhoneMetadata": "نام، فون، میٹا ڈیٹا سے تلاش کریں",
+    "noSessionsFound": "کوئی سیشن نہیں ملا",
+    "loadingSessions": "سیشنز لوڈ ہو رہے ہیں...",
+    "name": "نام",
+    "session": "سیشن",
+    "metadata": "میٹا ڈیٹا",
+    "me": "اکاؤنٹ",
+    "mePhoneNumber": "اکاؤنٹ (فون نمبر)",
+    "status": "حیثیت",
+    "chatUI": "چیٹ انٹرفیس",
+    "sendRequest": "درخواست بھیجیں",
+    "any": "کوئی بھی",
+    "server": "سرور",
+    "configuration": "ترتیب",
+    "apps": "ایپس",
+    "start": "شروع کریں",
+    "restart": "دوبارہ شروع کریں",
+    "login": "لاگ ان",
+    "qr": "QR کوڈ",
+    "scanQRCode": "اس سیشن کو اجازت دینے کے لیے {qr} اسکین کریں۔",
+    "scanQRTab": "QR اسکین کریں",
+    "enterCodeTab": "کوڈ درج کریں",
+    "enterPhoneNumber": "<b>اپنا فون نمبر</b> درج کریں:",
+    "request": "درخواست",
+    "apiEndpoint": "API اینڈپوائنٹ",
+    "body": "باڈی",
+    "response": "جواب",
+    "send": "بھیجیں"
+  },
+  "monitor": {
+    "title": "ایونٹ مانیٹر",
+    "description": "اپنے سیشنز سے WAHA ایونٹس کو ریئل ٹائم میں مانیٹر کریں!",
+    "purpose": "آپ ڈیولپمنٹ اور ڈیبگنگ کے مقاصد کے لیے ایونٹ مانیٹر استعمال کر سکتے ہیں۔",
+    "realTimeOnly": "صرف نئے آنے والے ایونٹس کو ریئل ٹائم میں دکھاتا ہے؛ کوئی تاریخی ڈیٹا دستیاب نہیں ہے۔",
+    "listen": "سنیں",
+    "pause": "روکیں",
+    "selectServer": "سرور منتخب کریں",
+    "download": "ڈاؤنلوڈ",
+    "cleanEvents": "ایونٹس صاف کریں ({count})",
+    "searchInData": "ڈیٹا میں تلاش کریں",
+    "listeningForEvents": "نئے ایونٹس کے لیے سن رہا ہے...",
+    "eventColumn": "ایونٹ",
+    "any": "کوئی بھی",
+    "eventsSelected": "{'{0}'} ایونٹس",
+    "sessionColumn": "سیشن",
+    "timeColumn": "وقت",
+    "detailColumn": "تفصیل",
+    "copiedToClipboard": "کلپ بورڈ پر کاپی ہو گیا"
+  },
+  "serverStore": {
+    "sessionNotFound": "سیشن نہیں ملا - '{serverName}' پر '{sessionName}'",
+    "connectionFailed": "سرور کنکشن ناکام",
+    "serverNotConnected": "{serverName} ({serverUrl}) منسلک نہیں ہے۔\nبراہ کرم یقینی بنائیں کہ یہ آن لائن ہے اور ترتیب میں درست API کلید سیٹ ہے۔",
+    "failedToRefreshServer": "سرور کو ریفریش کرنے میں ناکام - {serverId}"
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "STOPPED": "ARRÊTÉ",
+  "STARTING": "DÉMARRAGE",
+  "WORKING": "EN MARCHE",
+  "SCAN_QR_CODE": "SCANNER LE CODE QR",
+  "FAILED": "ÉCHEC",
+  "uptime": {
+    "day": "jour",
+    "days": "jours"
+  },
+  "chat": {
+    "emptyMessage": "Message vide",
+    "pleaseEnterMessage": "Veuillez saisir un message",
+    "header": "En-tête",
+    "last20Chats": "20 dernières discussions",
+    "aboutChatUI": "ℹ️ À propos de l'interface de chat",
+    "promo": {
+      "exampleChatsUI": "C'est un exemple d'interface de chat.",
+      "implementFeatures": "Vous pouvez implémenter le Chat en Direct, Plusieurs Agents, et plus de fonctionnalités en utilisant",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "pour obtenir un aperçu des chats et des messages",
+      "sendAPI": "Send API",
+      "sendMessages": "pour envoyer des messages aux chats",
+      "messageACK": "Accusé de réception",
+      "getMessageStatus": "pour obtenir le statut du message",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "pour obtenir des messages en temps réel côté client",
+      "sourceCodeOnGithub": "Code source sur Github",
+      "availableFor": "(Vue3 + PrimeVue) disponible pour",
+      "wahaPro": "WAHA PRO",
+      "supporters": "supporters!"
+    }
+  },
+  "menu": {
+    "dashboard": "Tableau de bord",
+    "home": "Accueil",
+    "workers": "Travailleurs",
+    "sessions": "Sessions",
+    "eventMonitor": "Moniteur d'événements"
+  },
+  "topbar": {
+    "logo": "Tableau de bord | WAHA",
+    "language": "Langue",
+    "refresh": "Actualiser"
+  },
+  "common": {
+    "value": "Valeur",
+    "add": "Ajouter",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "no": "Non"
+  },
+  "screenshot": {
+    "screenshot": "Capture d'écran",
+    "screenshotQR": "Capture d'écran / QR"
+  },
+  "dashboard": {
+    "sessions": "Sessions",
+    "working": "en marche",
+    "requiresAttention": "nécessite attention",
+    "stopped": "arrêté",
+    "notConnected": "non connecté",
+    "connected": "connecté",
+    "updates": "Mises à jour",
+    "changelog": "Journal des modifications",
+    "workerCanBeUpdated": "travailleur peut être mis à jour",
+    "workersCanBeUpdated": "travailleurs peuvent être mis à jour",
+    "allWorkersUpToDate": "Tous les travailleurs sont à jour!"
+  },
+  "sessions": {
+    "title": "Sessions",
+    "refresh": "Actualiser",
+    "startNew": "Démarrer nouvelle",
+    "searchByNamePhoneMetadata": "Rechercher par nom, téléphone, métadonnées",
+    "noSessionsFound": "Aucune session trouvée",
+    "loadingSessions": "Chargement des sessions...",
+    "name": "Nom",
+    "session": "Session",
+    "metadata": "Métadonnées",
+    "me": "Compte",
+    "mePhoneNumber": "Compte (Numéro de téléphone)",
+    "status": "Statut",
+    "chatUI": "Interface de chat",
+    "sendRequest": "Envoyer requête",
+    "any": "Tous",
+    "server": "Serveur",
+    "configuration": "Configuration",
+    "apps": "Applications",
+    "start": "Démarrer",
+    "restart": "Redémarrer",
+    "login": "Connexion",
+    "qr": "Code QR",
+    "scanQRCode": "Scannez {qr} pour autoriser cette session.",
+    "scanQRTab": "Scanner QR",
+    "enterCodeTab": "Entrer code",
+    "enterPhoneNumber": "Entrez <b>Votre numéro de téléphone</b>:",
+    "request": "Requête",
+    "apiEndpoint": "Point d'API",
+    "body": "Corps",
+    "response": "Réponse",
+    "send": "Envoyer"
+  },
+  "monitor": {
+    "title": "Moniteur d'événements",
+    "description": "Surveillez les événements WAHA de vos sessions en temps réel!",
+    "purpose": "Vous pouvez utiliser le Moniteur d'événements pour le développement et le débogage.",
+    "realTimeOnly": "Affiche uniquement les nouveaux événements entrants en temps réel; aucune donnée historique n'est disponible.",
+    "listen": "Écouter",
+    "pause": "Pause",
+    "selectServer": "Sélectionner serveur",
+    "download": "Télécharger",
+    "cleanEvents": "Nettoyer événements ({count})",
+    "searchInData": "Rechercher dans les données",
+    "listeningForEvents": "Écoute de nouveaux événements...",
+    "eventColumn": "Événement",
+    "any": "Tous",
+    "eventsSelected": "{'{0}'} événements",
+    "sessionColumn": "Session",
+    "timeColumn": "Heure",
+    "detailColumn": "Détail",
+    "copiedToClipboard": "Copié dans le presse-papiers"
+  },
+  "serverStore": {
+    "sessionNotFound": "Session non trouvée - '{sessionName}' sur '{serverName}'",
+    "connectionFailed": "Échec de connexion au serveur",
+    "serverNotConnected": "{serverName} ({serverUrl}) n'est pas connecté.\nVeuillez vous assurer qu'il est en ligne et que la clé API est correctement configurée.",
+    "failedToRefreshServer": "Échec de l'actualisation du serveur - {serverId}"
+  }
+}

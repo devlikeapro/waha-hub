@@ -1,12 +1,15 @@
 <script setup>
-import { computed} from 'vue';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const props = defineProps({
   status: {
     type: String,
     required: true
   },
-  value: {
+  suffix: {
     type: String,
     required: true,
   },
@@ -24,11 +27,19 @@ const severity = computed(() => {
   return map[status] || "warning";
 })
 
+const visibleStatusName = computed(() => {
+  const status = props.status.toUpperCase();
+  if (props.suffix){
+    return t(status) + props.suffix
+  }
+  return t(status)
+})
+
 </script>
 
 <template>
   <Tag
-      :value="value"
+      :value="visibleStatusName"
       :severity="severity"
       class="session-status-tag"
   ></Tag>

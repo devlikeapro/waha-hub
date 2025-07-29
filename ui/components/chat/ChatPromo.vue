@@ -5,41 +5,41 @@ const emit = defineEmits(['close'])
 
 <template>
   <Message @close="emit('close')">
-    It's an example <b>Chats UI</b>.<br>
-    You can implement <b>Live Chat</b>, <b>Multiple Agents</b>, and more features using
+    {{ $t('chat.promo.exampleChatsUI') }}<br>
+    {{ $t('chat.promo.implementFeatures') }}
     <a href="https://waha.devlike.pro/" target="_blank">
       <b>
-        WAHA API
+        {{ $t('chat.promo.wahaAPI') }}
       </b>
     </a>
     :<br>
     <ul>
       <li>
-        <a href="https://waha.devlike.pro/docs/how-to/chats/" target="_blank"><b>Chats API</b></a>
-        to get chats overview and messages
+        <a href="https://waha.devlike.pro/docs/how-to/chats/" target="_blank"><b>{{ $t('chat.promo.chatsAPI') }}</b></a>
+        {{ $t('chat.promo.getChatsOverview') }}
       </li>
       <li>
-        <a href="https://waha.devlike.pro/docs/how-to/send-messages/" target="_blank"><b>Send API</b></a>
-        to send messages to chats
+        <a href="https://waha.devlike.pro/docs/how-to/send-messages/" target="_blank"><b>{{ $t('chat.promo.sendAPI') }}</b></a>
+        {{ $t('chat.promo.sendMessages') }}
       </li>
       <li>
-        <a href="https://waha.devlike.pro/docs/how-to/webhooks/#messageack" target="_blank"><b>Message ACK</b></a>
-        to get message status
+        <a href="https://waha.devlike.pro/docs/how-to/webhooks/#messageack" target="_blank"><b>{{ $t('chat.promo.messageACK') }}</b></a>
+        {{ $t('chat.promo.getMessageStatus') }}
       </li>
       <li>
-        <a href="https://waha.devlike.pro/docs/how-to/webhooks/#websockets" target="_blank"><b>Websockets</b></a>
-        to get real-time messages on client side
+        <a href="https://waha.devlike.pro/docs/how-to/webhooks/#websockets" target="_blank"><b>{{ $t('chat.promo.websockets') }}</b></a>
+        {{ $t('chat.promo.getRealTimeMessages') }}
       </li>
     </ul>
 
     👉
     <a href="https://github.com/devlikeapro/waha-hub/tree/main/ui/components/chat" target="_blank">
-      <b>Source Code on Github</b>
+      <b>{{ $t('chat.promo.sourceCodeOnGithub') }}</b>
     </a>
-    (Vue3 + PrimeVue) available for
+    {{ $t('chat.promo.availableFor') }}
     <a href="https://waha.devlike.pro/pricing/#tier-pro" target="_blank">
-      WAHA PRO
-    </a> supporters!
+      {{ $t('chat.promo.wahaPro') }}
+    </a> {{ $t('chat.promo.supporters') }}
 
   </Message>
 </template>

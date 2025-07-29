@@ -1,0 +1,131 @@
+{
+  "STOPPED": "متوقف",
+  "STARTING": "قيد البدء",
+  "WORKING": "يعمل",
+  "SCAN_QR_CODE": "مسح رمز الاستجابة السريعة",
+  "FAILED": "فشل",
+  "uptime": {
+    "day": "يوم",
+    "days": "أيام"
+  },
+  "chat": {
+    "emptyMessage": "رسالة فارغة",
+    "pleaseEnterMessage": "الرجاء إدخال رسالة",
+    "header": "الترويسة",
+    "last20Chats": "آخر 20 محادثة",
+    "aboutChatUI": "ℹ️ حول واجهة المحادثة",
+    "promo": {
+      "exampleChatsUI": "هذا مثال لواجهة المحادثات.",
+      "implementFeatures": "يمكنك تنفيذ الدردشة المباشرة، وكلاء متعددين، والمزيد من الميزات باستخدام",
+      "wahaAPI": "WAHA API",
+      "chatsAPI": "Chats API",
+      "getChatsOverview": "للحصول على نظرة عامة على المحادثات والرسائل",
+      "sendAPI": "Send API",
+      "sendMessages": "لإرسال رسائل إلى المحادثات",
+      "messageACK": "تأكيد الرسالة",
+      "getMessageStatus": "للحصول على حالة الرسالة",
+      "websockets": "Websockets",
+      "getRealTimeMessages": "للحصول على رسائل في الوقت الحقيقي على جانب العميل",
+      "sourceCodeOnGithub": "الكود المصدري على Github",
+      "availableFor": "(Vue3 + PrimeVue) متاح لـ",
+      "wahaPro": "WAHA PRO",
+      "supporters": "الداعمين!"
+    }
+  },
+  "menu": {
+    "dashboard": "لوحة التحكم",
+    "home": "الرئيسية",
+    "workers": "العمال",
+    "sessions": "الجلسات",
+    "eventMonitor": "مراقب الأحداث"
+  },
+  "topbar": {
+    "logo": "لوحة التحكم | WAHA",
+    "language": "اللغة",
+    "refresh": "تحديث"
+  },
+  "common": {
+    "value": "القيمة",
+    "add": "إضافة",
+    "delete": "حذف",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "no": "لا"
+  },
+  "screenshot": {
+    "screenshot": "لقطة شاشة",
+    "screenshotQR": "لقطة شاشة / رمز الاستجابة السريعة"
+  },
+  "dashboard": {
+    "sessions": "الجلسات",
+    "working": "يعمل",
+    "requiresAttention": "يتطلب الانتباه",
+    "stopped": "متوقف",
+    "notConnected": "غير متصل",
+    "connected": "متصل",
+    "updates": "التحديثات",
+    "changelog": "سجل التغييرات",
+    "workerCanBeUpdated": "يمكن تحديث العامل",
+    "workersCanBeUpdated": "يمكن تحديث العمال",
+    "allWorkersUpToDate": "جميع العمال محدثون!"
+  },
+  "sessions": {
+    "title": "الجلسات",
+    "refresh": "تحديث",
+    "startNew": "بدء جديد",
+    "searchByNamePhoneMetadata": "البحث بالاسم، الهاتف، البيانات الوصفية",
+    "noSessionsFound": "لم يتم العثور على جلسات",
+    "loadingSessions": "جاري تحميل الجلسات...",
+    "name": "الاسم",
+    "session": "الجلسة",
+    "metadata": "البيانات الوصفية",
+    "me": "الحساب",
+    "mePhoneNumber": "الحساب (رقم الهاتف)",
+    "status": "الحالة",
+    "chatUI": "واجهة المحادثة",
+    "sendRequest": "إرسال طلب",
+    "any": "أي",
+    "server": "الخادم",
+    "configuration": "الإعدادات",
+    "apps": "التطبيقات",
+    "start": "بدء",
+    "restart": "إعادة تشغيل",
+    "login": "تسجيل الدخول",
+    "qr": "رمز الاستجابة السريعة",
+    "scanQRCode": "امسح {qr} للتفويض لهذه الجلسة.",
+    "scanQRTab": "مسح رمز الاستجابة السريعة",
+    "enterCodeTab": "إدخال الرمز",
+    "enterPhoneNumber": "أدخل <b>رقم هاتفك</b>:",
+    "request": "طلب",
+    "apiEndpoint": "نقطة نهاية API",
+    "body": "المحتوى",
+    "response": "الاستجابة",
+    "send": "إرسال"
+  },
+  "monitor": {
+    "title": "مراقب الأحداث",
+    "description": "راقب أحداث WAHA من جلساتك في الوقت الحقيقي!",
+    "purpose": "يمكنك استخدام مراقب الأحداث لأغراض التطوير وتصحيح الأخطاء.",
+    "realTimeOnly": "يعرض فقط الأحداث الجديدة الواردة في الوقت الحقيقي؛ لا تتوفر بيانات تاريخية.",
+    "listen": "استماع",
+    "pause": "إيقاف مؤقت",
+    "selectServer": "اختر الخادم",
+    "download": "تنزيل",
+    "cleanEvents": "مسح الأحداث ({count})",
+    "searchInData": "البحث في البيانات",
+    "listeningForEvents": "الاستماع للأحداث الجديدة...",
+    "eventColumn": "الحدث",
+    "any": "أي",
+    "eventsSelected": "{'{0}'} أحداث",
+    "sessionColumn": "الجلسة",
+    "timeColumn": "الوقت",
+    "detailColumn": "التفاصيل",
+    "copiedToClipboard": "تم النسخ إلى الحافظة"
+  },
+  "serverStore": {
+    "sessionNotFound": "لم يتم العثور على الجلسة - '{sessionName}' على '{serverName}'",
+    "connectionFailed": "فشل الاتصال بالخادم",
+    "serverNotConnected": "{serverName} ({serverUrl}) غير متصل.\nالرجاء التأكد من أنه متصل بالإنترنت وتم تعيين مفتاح API الصحيح في الإعدادات.",
+    "failedToRefreshServer": "فشل تحديث الخادم - {serverId}"
+  }
+}
