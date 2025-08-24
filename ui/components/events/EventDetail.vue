@@ -22,6 +22,11 @@ const values = computed(() => {
         event === "message.ack" ? null : payload.reaction?.text,
         payload.media?.url ? "🖼" : null,
       ]
+    case "poll.vote":
+      return [
+        payload.vote.id,
+        payload.vote.selectedOptions,
+      ]
     case "message.revoked":
       return [
         payload.revokedMessageId,
