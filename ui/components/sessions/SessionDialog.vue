@@ -124,11 +124,7 @@ const isStopped = computed(() => {
 
 async function copyRequest(event) {
   await navigator.clipboard.writeText(JSON.stringify(
-      {
-        method: "POST",
-        uri: "/api/sessions",
-        body: createSessionRequest.value,
-      },
+      createSessionRequest.value,
       null,
       2
   ));
