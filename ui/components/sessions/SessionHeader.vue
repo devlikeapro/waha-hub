@@ -22,6 +22,13 @@ async function refreshServers() {
   await store.refresh()
 }
 
+async function copySessionName(event) {
+  await navigator.clipboard.writeText(props.session?.name || '');
+  if (event && event.preventDefault) {
+    event.preventDefault();
+  }
+}
+
 </script>
 
 <template>
@@ -30,6 +37,14 @@ async function refreshServers() {
         <span>
           {{ session?.name }}
         </span>
+        <Button
+            text=""
+            v-tooltip.focus.bottom="{ value: t('sessions.copiedToClipboard') }"
+            :tabindex="0"
+            icon="pi pi-copy"
+            severity="secondary"
+            @click="copySessionName($event)">
+        </Button>
     <SessionStatusTag
         :status="session.status"
     ></SessionStatusTag>
