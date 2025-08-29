@@ -168,6 +168,9 @@ function openNew() {
           fullSync: false
         },
       },
+      webjs: {
+        tagsEventsOn: false,
+      },
       ignore: null,
       proxy: {},
     },

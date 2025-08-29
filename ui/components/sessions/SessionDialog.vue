@@ -75,6 +75,9 @@ const createSessionRequest = computed(() => {
   if (!isNOWEB.value) {
     delete config.noweb
   }
+  if (!isWEBJS.value) {
+    delete config.webjs
+  }
   return {
     name: session.value.name,
     config: config,
@@ -255,6 +258,30 @@ async function copyRequest(event) {
                   </template>
                 </ToggleButton>
               </div>
+            </div>
+          </div>
+        </AccordionTab>
+      </Accordion>
+    </div>
+
+    <div class="mb-4" v-if="isWEBJS">
+      <div class="mb-3">
+        <h5>🏭 {{ t('sessions.engineSettings') }}</h5>
+      </div>
+      <Accordion :activeIndex="0">
+        <AccordionTab header="WEBJS">
+          <div class="flex flex-column gap-2">
+            <div>
+              <ToggleButton
+                  v-model="session.config.webjs.tagsEventsOn"
+                  :onLabel="t('sessions.webjs.tagsEventsOnOn')"
+                  :offLabel="t('sessions.webjs.tagsEventsOnOff')"
+                  v-tooltip="t('sessions.webjs.tagsEventsOnTooltip')"
+              >
+                <template #icon>
+                  <font-awesome-icon icon="fa-solid fa-tag" class="mr-2"/>
+                </template>
+              </ToggleButton>
             </div>
           </div>
         </AccordionTab>

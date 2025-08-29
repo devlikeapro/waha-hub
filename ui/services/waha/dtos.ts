@@ -27,6 +27,10 @@ export interface NowebConfig {
     store?: NowebStoreConfig
 }
 
+export interface WebjsConfig {
+    tagsEventsOn: boolean,
+}
+
 export interface IgnoreConfig {
     status?: boolean,
     groups?: boolean,
@@ -38,6 +42,7 @@ export interface SessionConfig {
     webhooks: Webhook[];
     proxy: any;
     noweb?: NowebConfig;
+    webjs?: WebjsConfig;
     ignore?: IgnoreConfig;
 }
 

@@ -66,6 +66,11 @@ export class WahaAPI {
                 store: {enabled: false, fullSync: false}
             }
         }
+        if (!session.config.webjs) {
+            session.config.webjs = {
+                tagsEventsOn: false,
+            }
+        }
         for (const webhook of session.config.webhooks) {
             if (!webhook.retries) {
                 webhook.retries = {attempts: 15, delaySeconds: 2, policy: "constant"}
