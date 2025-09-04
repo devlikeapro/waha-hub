@@ -1,5 +1,6 @@
 <script setup>
 import lodash from "lodash";
+import WorkerNoApiKeyWarning from './WorkerNoApiKeyWarning.vue'
 
 const props = defineProps(['server'])
 const store = useServerStore()
@@ -51,6 +52,17 @@ const {
 watch(() => props.server, refresh, {immediate: true})
 watch(showAll, refresh)
 
+const apiKeyFromEnv = computed(() => {
+  const vars = data.value || []
+  // find exact names: WHATSAPP_API_KEY or WAHA_API_KEY
+  // prefer WHATSAPP_API_KEY if both exist
+  const map = {}
+  for (const v of vars) {
+    map[v.name] = v.value
+  }
+  return map['WHATSAPP_API_KEY'] ?? map['WAHA_API_KEY']
+})
+
 async function copyVariables(event) {
   const value = formatVariables(data.value)
   await navigator.clipboard.writeText(value);
@@ -61,6 +73,9 @@ async function copyVariables(event) {
 </script>
 
 <template>
+  <div class="mb-3">
+    <WorkerNoApiKeyWarning :apikey="apiKeyFromEnv" :connected="true" />
+  </div>
   <DataTable
       :value="data"
       :loading="pending"

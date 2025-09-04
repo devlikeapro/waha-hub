@@ -1,6 +1,7 @@
 <script setup>
 import {ref} from "vue";
 import {useI18n} from 'vue-i18n';
+import WorkerNoApiKeyWarning from './WorkerNoApiKeyWarning.vue'
 
 const { t } = useI18n();
 const visible = defineModel("visible");
@@ -112,6 +113,7 @@ const isCurrentConnectionSecure = computed(() => {
     <div class="field">
       <label for="connection-key">{{ t('servers.apiKeyOptional') }}</label>
       <Password id="connection-key" v-model.trim="server.connection.key" :feedback="false" toggleMask/>
+      <WorkerNoApiKeyWarning class="mt-2" :apikey="server.connection?.key" :connected="true" />
     </div>
 
     <template #footer>

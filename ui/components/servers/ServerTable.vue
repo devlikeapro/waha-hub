@@ -7,10 +7,11 @@ import {useAsyncData} from "nuxt/app";
 import {dashboard} from "../../services/utils";
 import OverlayLinks from "../common/OverlayLinks.vue";
 import OverlayLink from "../common/OverlayLink.vue";
+import WorkerNoApiKeyWarning from "./WorkerNoApiKeyWarning.vue";
 import {useI18n} from 'vue-i18n';
 
 
-const { t } = useI18n();
+const {t} = useI18n();
 const confirm = useConfirm();
 const store = useServerStore()
 const req = useShowToastOnResult()
@@ -174,15 +175,18 @@ function refreshServers() {
       </template>
     </Column>
 
-    <Column :header="t('servers.api')">
+    <Column :header="t('servers.api')" class="text-left">
       <template #body="{ data }">
-        <div>
-          <ServerConnectionIcon :connected="data.connected"></ServerConnectionIcon>
-          <a
-              class="ml-1"
-              :href="data.connection.url" target="_blank">
-            {{ data.connection.url }}
-          </a>
+        <div class="text-left">
+          <div>
+            <ServerConnectionIcon :connected="data.connected"></ServerConnectionIcon>
+            <a
+                class="ml-1"
+                :href="data.connection.url" target="_blank">
+              {{ data.connection.url }}
+            </a>
+          </div>
+          <WorkerNoApiKeyWarning :apikey="data.connection?.key" :connected="data.connected === true"/>
         </div>
       </template>
     </Column>
@@ -280,15 +284,15 @@ function refreshServers() {
   </ConfirmDialog>
 
   <OverlayLinks ref="linksOverlayPanel" :title="t('servers.links')">
-    <OverlayLink 
-      :href="`${linksOverlayPanel.currentItem?.connection.url}/dashboard`" 
-      icon="pi-home" 
-      :name="t('servers.dashboard')"
+    <OverlayLink
+        :href="`${linksOverlayPanel.currentItem?.connection.url}/dashboard`"
+        icon="pi-home"
+        :name="t('servers.dashboard')"
     />
     <OverlayLink
-      :href="`${linksOverlayPanel.currentItem?.connection.url}/jobs`" 
-      icon="pi-cog" 
-      :name="t('servers.jobs')"
+        :href="`${linksOverlayPanel.currentItem?.connection.url}/jobs`"
+        icon="pi-cog"
+        :name="t('servers.jobs')"
     />
     <OverlayLink
         :href="linksOverlayPanel.currentItem?.connection.url"
