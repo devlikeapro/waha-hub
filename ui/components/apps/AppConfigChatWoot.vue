@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref, onMounted, reactive, watch} from 'vue';
 import {useServerStore} from '../../stores/useServerStore';
-import {ChatWootAppConfig, Locale} from '../../services/waha/dtos';
+import {ChatWootAppConfig, Locale, LinkPreview} from '../../services/waha/dtos';
 import useShowToastOnResult from '../../composables/useShowToastOnResult';
 import {useI18n} from 'vue-i18n';
 import InlineMessage from 'primevue/inlinemessage';
@@ -36,6 +36,7 @@ const defaults: ChatWootAppConfig = {
   inboxId: null,
   inboxIdentifier: '',
   locale: 'en-US',
+  linkPreview: LinkPreview.OFF,
   commands: {
     server: true,
   }
@@ -56,6 +57,12 @@ watch(
 
 const locales = ref<Locale[]>([]);
 const loading = ref(false);
+
+const linkPreviewOptions = [
+  { label: t('apps.chatwoot.linkPreview.off'), value: LinkPreview.OFF },
+  { label: t('apps.chatwoot.linkPreview.lq'), value: LinkPreview.LQ },
+  { label: t('apps.chatwoot.linkPreview.hq'), value: LinkPreview.HQ },
+];
 
 onMounted(async () => {
   await loadLocales();
@@ -190,6 +197,23 @@ async function loadLocales() {
           scrollHeight="400px"
       />
       <small class="p-error" v-if="submitted && !config.locale">{{ t('apps.chatwoot.languageRequired') }}</small>
+    </div>
+
+    <div class="field">
+      <label for="linkPreview">
+        {{ t('apps.chatwoot.linkPreview.label') }}
+        <i
+          class="pi pi-info-circle"
+          v-tooltip="t('apps.chatwoot.linkPreview.tooltip')"
+        />
+      </label>
+      <Dropdown
+        id="linkPreview"
+        v-model="config.linkPreview"
+        :options="linkPreviewOptions"
+        optionLabel="label"
+        optionValue="value"
+      />
     </div>
 
     <div class="field">

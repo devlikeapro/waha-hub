@@ -86,6 +86,12 @@ export interface App {
     enabled?: boolean;
 }
 
+export enum LinkPreview {
+    OFF = 'OFF',
+    LQ = 'LG',
+    HQ = 'HG',
+}
+
 export interface ChatWootAppConfig {
     url: string;
     accountId: number;
@@ -93,6 +99,8 @@ export interface ChatWootAppConfig {
     inboxId: number;
     inboxIdentifier: string;
     locale: string;
+    // Link preview quality for URLs in messages (optional)
+    linkPreview?: LinkPreview;
     commands?: ChatWootCommandsConfig;
 }
 
