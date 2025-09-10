@@ -6,6 +6,7 @@ import useShowToastOnResult from '../../composables/useShowToastOnResult';
 import {useI18n} from 'vue-i18n';
 import InlineMessage from 'primevue/inlinemessage';
 import lodash from 'lodash';
+import AppConfigChatWootTemplates from "./AppConfigChatWootTemplates.vue";
 
 const {t} = useI18n();
 
@@ -37,6 +38,7 @@ const defaults: ChatWootAppConfig = {
   inboxIdentifier: '',
   locale: 'en-US',
   linkPreview: LinkPreview.OFF,
+  templates: {},
   commands: {
     server: true,
   }
@@ -178,6 +180,42 @@ async function loadLocales() {
     </div>
 
     <div class="field">
+      <label for="linkPreview">
+        {{ t('apps.chatwoot.linkPreview.label') }}
+        <i
+            class="pi pi-info-circle"
+            v-tooltip="t('apps.chatwoot.linkPreview.tooltip')"
+        />
+      </label>
+      <Dropdown
+          id="linkPreview"
+          v-model="config.linkPreview"
+          :options="linkPreviewOptions"
+          optionLabel="label"
+          optionValue="value"
+      />
+    </div>
+
+    <div class="field">
+      <label>
+        {{ t('apps.chatwoot.commands.title') }}
+        <i
+            class="pi pi-info-circle"
+            v-tooltip="t('apps.chatwoot.commands.tooltip')"
+        />
+      </label>
+      <div>
+        <ToggleButton
+            v-model="config.commands.server"
+            onIcon="pi pi-check"
+            offIcon="pi pi-times"
+            :onLabel="t('apps.chatwoot.commands.server.on')"
+            :offLabel="t('apps.chatwoot.commands.server.off')"
+        />
+      </div>
+    </div>
+
+    <div class="field">
       <label for="locale">
         {{ t('apps.chatwoot.language') }}
         <i
@@ -200,38 +238,15 @@ async function loadLocales() {
     </div>
 
     <div class="field">
-      <label for="linkPreview">
-        {{ t('apps.chatwoot.linkPreview.label') }}
-        <i
-          class="pi pi-info-circle"
-          v-tooltip="t('apps.chatwoot.linkPreview.tooltip')"
-        />
-      </label>
-      <Dropdown
-        id="linkPreview"
-        v-model="config.linkPreview"
-        :options="linkPreviewOptions"
-        optionLabel="label"
-        optionValue="value"
-      />
-    </div>
-
-    <div class="field">
       <label>
-        {{ t('apps.chatwoot.commands.title') }}
+        {{ t('apps.chatwoot.templates.title') }}
         <i
             class="pi pi-info-circle"
-            v-tooltip="t('apps.chatwoot.commands.tooltip')"
+            v-tooltip="t('apps.chatwoot.templates.tooltip')"
         />
       </label>
       <div>
-        <ToggleButton
-            v-model="config.commands.server"
-            onIcon="pi pi-check"
-            offIcon="pi pi-times"
-            :onLabel="t('apps.chatwoot.commands.server.on')"
-            :offLabel="t('apps.chatwoot.commands.server.off')"
-        />
+        <AppConfigChatWootTemplates v-model="config.templates" />
       </div>
     </div>
   </div>

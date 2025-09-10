@@ -102,6 +102,8 @@ export interface ChatWootAppConfig {
     // Link preview quality for URLs in messages (optional)
     linkPreview?: LinkPreview;
     commands?: ChatWootCommandsConfig;
+    // Optional set of message templates
+    templates?: Record<string, string>;
 }
 
 export interface Locale {
