@@ -88,7 +88,7 @@
   "apps.chatwoot.linkPreview.lq": "🟡 Low Quality Image",
   "apps.chatwoot.linkPreview.hq": "🟢 High Quality Image",
   "apps.chatwoot.conversations.title": "Conversations",
-  "apps.chatwoot.conversations.sort.label": "Select Conversation Behaviour",
+  "apps.chatwoot.conversations.sort.label": "Select Conversation Behavior",
   "apps.chatwoot.conversations.sort.tooltip": "Defines how WAHA selects which existing ChatWoot conversation to use for a contact when a new WhatsApp message arrives (by recent activity or creation time).",
   "apps.chatwoot.conversations.sort.activityNewest": "Activity: Newest",
   "apps.chatwoot.conversations.sort.activityOldest": "Activity: Oldest",
