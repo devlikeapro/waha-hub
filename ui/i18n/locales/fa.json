@@ -298,7 +298,7 @@
   "sessions.metadataTooltip": "جفت‌های کلید-مقدار که می‌توانید به جلسه متصل کنید و آن‌ها را در وب‌هوک‌ها، API دریافت کنید و مقادیر را در داشبورد جستجو کنید.",
   "sessions.key": "کلید",
   "sessions.config.ignore.title": "\uD83D\uDCAC چت‌ها",
-  "sessions.config.ignore.filterOn": "فیلتر کردن چت‌ها",
+  "sessions.config.ignore.filterOn": "چت‌ها",
   "sessions.config.ignore.filterOff": "همهٔ چت‌ها",
   "sessions.config.ignore.on": "روشن",
   "sessions.config.ignore.off": "خاموش",

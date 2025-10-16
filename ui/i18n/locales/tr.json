@@ -298,7 +298,7 @@
   "sessions.metadataTooltip": "Oturuma ekleyebileceğiniz ve web kancalarında, API'de alacağınız ve Gösterge Panelinde değerleri arayabileceğiniz anahtar değer çiftleri.",
   "sessions.key": "Anahtar",
   "sessions.config.ignore.title": "\uD83D\uDCAC Sohbetler",
-  "sessions.config.ignore.filterOn": "Sohbetleri filtrele",
+  "sessions.config.ignore.filterOn": "Sohbetler",
   "sessions.config.ignore.filterOff": "Tüm sohbetler",
   "sessions.config.ignore.on": "Açık",
   "sessions.config.ignore.off": "Kapalı",

@@ -298,7 +298,7 @@
   "sessions.metadataTooltip": "কী ভ্যালু পেয়ার যা আপনি সেশনে সংযুক্ত করতে পারেন এবং ওয়েবহুক, API এবং ড্যাশবোর্ডে অনুসন্ধান করতে পারেন।",
   "sessions.key": "কী",
   "sessions.config.ignore.title": "\uD83D\uDCAC চ্যাট",
-  "sessions.config.ignore.filterOn": "চ্যাট ফিল্টার করুন",
+  "sessions.config.ignore.filterOn": "চ্যাট",
   "sessions.config.ignore.filterOff": "সব চ্যাট",
   "sessions.config.ignore.on": "চালু",
   "sessions.config.ignore.off": "বন্ধ",

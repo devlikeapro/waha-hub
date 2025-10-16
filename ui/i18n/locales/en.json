@@ -302,7 +302,7 @@
   "sessions.metadataTooltip": "Key value pairs you can attach to Session and will receive it in webhooks, API and search the values on Dashboard.",
   "sessions.key": "Key",
   "sessions.config.ignore.title": "\uD83D\uDCAC Chats",
-  "sessions.config.ignore.filterOn": "Filter Chats",
+  "sessions.config.ignore.filterOn": "Chats",
   "sessions.config.ignore.filterOff": "All Chats",
   "sessions.config.ignore.on": "On",
   "sessions.config.ignore.off": "Off",

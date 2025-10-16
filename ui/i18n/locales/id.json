@@ -298,7 +298,7 @@
   "sessions.metadataTooltip": "Pasangan nilai kunci yang dapat Anda lampirkan ke Sesi dan akan menerimanya di webhook, API, dan mencari nilai di Dasbor.",
   "sessions.key": "Kunci",
   "sessions.config.ignore.title": "\uD83D\uDCAC Obrolan",
-  "sessions.config.ignore.filterOn": "Saring obrolan",
+  "sessions.config.ignore.filterOn": "Obrolan",
   "sessions.config.ignore.filterOff": "Semua obrolan",
   "sessions.config.ignore.on": "Aktif",
   "sessions.config.ignore.off": "Nonaktif",

@@ -298,7 +298,7 @@
   "sessions.metadataTooltip": "Pares clave-valor que puedes adjuntar a la sesión y recibirlos en webhooks, API y buscar los valores en el panel.",
   "sessions.key": "Clave",
   "sessions.config.ignore.title": "\uD83D\uDCAC Chats",
-  "sessions.config.ignore.filterOn": "Filtrar chats",
+  "sessions.config.ignore.filterOn": "Chats",
   "sessions.config.ignore.filterOff": "Todos los chats",
   "sessions.config.ignore.on": "Activado",
   "sessions.config.ignore.off": "Desactivado",

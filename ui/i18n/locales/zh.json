@@ -298,7 +298,7 @@
   "sessions.metadataTooltip": "可附加到会话的键值对，你将会在 webhooks、API 中接收并在仪表盘上搜索这些值。",
   "sessions.key": "键",
   "sessions.config.ignore.title": "\uD83D\uDCAC 聊天",
-  "sessions.config.ignore.filterOn": "筛选聊天",
+  "sessions.config.ignore.filterOn": "聊天",
   "sessions.config.ignore.filterOff": "所有聊天",
   "sessions.config.ignore.on": "开启",
   "sessions.config.ignore.off": "关闭",

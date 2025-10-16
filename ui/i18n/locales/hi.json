@@ -298,7 +298,7 @@
   "sessions.metadataTooltip": "की वैल्यू पेयर्स जिन्हें आप सेशन से अटैच कर सकते हैं और वेबहुक्स, API में प्राप्त कर सकते हैं और डैशबोर्ड पर वैल्यूज खोज सकते हैं।",
   "sessions.key": "की",
   "sessions.config.ignore.title": "\uD83D\uDCAC चैट्स",
-  "sessions.config.ignore.filterOn": "चैट्स फ़िल्टर करें",
+  "sessions.config.ignore.filterOn": "चैट्स",
   "sessions.config.ignore.filterOff": "सभी चैट्स",
   "sessions.config.ignore.on": "चालू",
   "sessions.config.ignore.off": "बंद",

@@ -298,7 +298,7 @@
   "sessions.metadataTooltip": "Пары ключ-значение, которые вы можете прикрепить к сессии и получить их в вебхуках, API и искать значения на панели управления.",
   "sessions.key": "Ключ",
   "sessions.config.ignore.title": "\uD83D\uDCAC Чаты",
-  "sessions.config.ignore.filterOn": "Фильтровать чаты",
+  "sessions.config.ignore.filterOn": "Чаты",
   "sessions.config.ignore.filterOff": "Все чаты",
   "sessions.config.ignore.on": "Вкл",
   "sessions.config.ignore.off": "Выкл",

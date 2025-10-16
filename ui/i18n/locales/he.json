@@ -298,7 +298,7 @@
   "sessions.metadataTooltip": "זוגות מפתח-ערך שאתה יכול לצרף להפעלה ולקבל אותם ב-webhooks, API ולחפש את הערכים בלוח הבקרה.",
   "sessions.key": "מפתח",
   "sessions.config.ignore.title": "\uD83D\uDCAC צ'אטים",
-  "sessions.config.ignore.filterOn": "סינון צ'אטים",
+  "sessions.config.ignore.filterOn": "צ'אטים",
   "sessions.config.ignore.filterOff": "כל הצ'אטים",
   "sessions.config.ignore.on": "מופעל",
   "sessions.config.ignore.off": "כבוי",

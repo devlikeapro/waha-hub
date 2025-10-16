@@ -298,7 +298,7 @@
   "sessions.metadataTooltip": "ਕੀ ਵੈਲਯੂ ਜੋੜੇ ਜੋ ਤੁਸੀਂ ਸੈਸ਼ਨ ਨਾਲ ਜੋੜ ਸਕਦੇ ਹੋ ਅਤੇ ਇਸਨੂੰ ਵੈਬਹੁੱਕਸ, API ਵਿੱਚ ਪ੍ਰਾਪਤ ਕਰੋਗੇ ਅਤੇ ਡੈਸ਼ਬੋਰਡ 'ਤੇ ਮੁੱਲਾਂ ਦੀ ਖੋਜ ਕਰ ਸਕਦੇ ਹੋ।",
   "sessions.key": "ਕੁੰਜੀ",
   "sessions.config.ignore.title": "\uD83D\uDCAC ਚੈਟਾਂ",
-  "sessions.config.ignore.filterOn": "ਚੈਟਾਂ ਫਿਲਟਰ ਕਰੋ",
+  "sessions.config.ignore.filterOn": "ਚੈਟਾਂ",
   "sessions.config.ignore.filterOff": "ਸਾਰੀਆਂ ਚੈਟਾਂ",
   "sessions.config.ignore.on": "ਚਾਲੂ",
   "sessions.config.ignore.off": "ਬੰਦ",

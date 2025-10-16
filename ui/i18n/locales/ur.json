@@ -295,7 +295,7 @@
   "sessions.metadataTooltip": "کلیدی قیمت کے جوڑے جو آپ سیشن سے منسلک کر سکتے ہیں اور اسے ویب ہکس، اے پی آئی میں حاصل کریں گے اور ڈیش بورڈ پر قیمتوں کو تلاش کریں گے۔",
   "sessions.key": "کلید",
   "sessions.config.ignore.title": "\uD83D\uDCAC چیٹس",
-  "sessions.config.ignore.filterOn": "چیٹس کو فلٹر کریں",
+  "sessions.config.ignore.filterOn": "چیٹس",
   "sessions.config.ignore.filterOff": "تمام چیٹس",
   "sessions.config.ignore.on": "آن",
   "sessions.config.ignore.off": "آف",

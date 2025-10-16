@@ -298,7 +298,7 @@
   "sessions.metadataTooltip": "أزواج المفتاح والقيمة التي يمكنك إرفاقها بالجلسة وستتلقاها في webhooks وAPI والبحث عن القيم في لوحة التحكم.",
   "sessions.key": "المفتاح",
   "sessions.config.ignore.title": "\uD83D\uDCAC الدردشات",
-  "sessions.config.ignore.filterOn": "تصفية الدردشات",
+  "sessions.config.ignore.filterOn": "الدردشات",
   "sessions.config.ignore.filterOff": "جميع الدردشات",
   "sessions.config.ignore.on": "تشغيل",
   "sessions.config.ignore.off": "إيقاف",

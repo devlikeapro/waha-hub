@@ -298,7 +298,7 @@
   "sessions.metadataTooltip": "Пари ключ-значення, які ви можете прикріпити до сесії та отримувати їх у вебхуках, API та шукати значення на панелі керування.",
   "sessions.key": "Ключ",
   "sessions.config.ignore.title": "\uD83D\uDCAC Чати",
-  "sessions.config.ignore.filterOn": "Фільтрувати чати",
+  "sessions.config.ignore.filterOn": "Чати",
   "sessions.config.ignore.filterOff": "Усі чати",
   "sessions.config.ignore.on": "Увімкнено",
   "sessions.config.ignore.off": "Вимкнено",
