@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed, ref, watch} from 'vue';
 import {useI18n} from 'vue-i18n';
-import YAML, { Scalar, YAMLMap, Pair } from 'yaml';
+import YAML, { Scalar } from 'yaml';
 
 type Templates = Record<string, string>;
 
@@ -15,6 +15,23 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue']);
+
+const AGENT_NAME_TEMPLATE_VALUES: Templates = {
+  'chatwoot.to.whatsapp.message.text': '*{{{chatwoot.sender.name}}}*:\n{{{ content }}}',
+  'chatwoot.to.whatsapp.message.media.caption': [
+    '{{#singleAttachment}}',
+    '{{#content}}',
+    '*{{{chatwoot.sender.name}}}*:',
+    '{{{ content }}}',
+    '{{/content}}',
+    '{{/singleAttachment}}',
+  ].join('\n'),
+};
+
+const agentTemplateKeys = Object.keys(AGENT_NAME_TEMPLATE_VALUES);
+
+const agentNameImage = new URL('./chatwoot-templates-agent-name.jpg', import.meta.url).href;
+const noAgentNameImage = new URL('./chatwoot-templates-no-agent-name.jpg', import.meta.url).href;
 
 // Local edit state
 const editing = ref(false);
@@ -38,6 +55,50 @@ function formatToYaml(data: Record<string, string>): string {
   return parts.join('\n\n');
 }
 
+
+const agentTemplatesPresent = computed(() => {
+  const current = props.modelValue || {};
+  return agentTemplateKeys.every((key) => Object.prototype.hasOwnProperty.call(current, key));
+});
+
+const agentTemplatesToggle = computed({
+  get: () => agentTemplatesPresent.value,
+  set: (enabled: boolean) => {
+    if (editing.value) {
+      return;
+    }
+
+    if (enabled === agentTemplatesPresent.value) {
+      return;
+    }
+
+    const next: Templates = {...(props.modelValue || {})};
+
+    if (enabled) {
+      for (const [key, template] of Object.entries(AGENT_NAME_TEMPLATE_VALUES)) {
+        next[key] = template;
+      }
+    } else {
+      for (const key of agentTemplateKeys) {
+        if (Object.prototype.hasOwnProperty.call(next, key)) {
+          delete next[key];
+        }
+      }
+    }
+
+    value.value = formatToYaml(next);
+    error.value = null;
+    emit('update:modelValue', next);
+  },
+});
+
+const previewImage = computed(() =>
+  agentTemplatesPresent.value ? agentNameImage : noAgentNameImage
+);
+
+const previewAlt = computed(() =>
+  agentTemplatesPresent.value ? 'Templates with agent name' : 'Templates without agent name'
+);
 
 // Keep local value in sync when model changes and not editing
 watch(
@@ -102,6 +163,20 @@ async function copyYaml() {
 
 <template>
   <div class="templates-editor">
+    <div class="agent-toggle">
+      <ToggleButton
+          inputId="templates-add-agent-name"
+          v-model="agentTemplatesToggle"
+          :disabled="editing"
+          :onLabel="t('apps.chatwoot.templates.toggle.addAgentName')"
+          :offLabel="t('apps.chatwoot.templates.toggle.noAgentName')"
+          :aria-label="t('apps.chatwoot.templates.addAgentName')"
+      />
+      <div class="image-wrapper">
+        <img :src="previewImage" :alt="previewAlt" />
+      </div>
+    </div>
+
     <Textarea
         v-model="value"
         spellcheck="false"
@@ -149,6 +224,35 @@ async function copyYaml() {
 
 <style scoped lang="scss">
 .templates-editor {
+  .agent-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    .image-wrapper {
+      margin-left: auto;
+    }
+  }
+
+  .image-wrapper {
+    text-align: center;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      display: block;
+      width: 300px;
+      max-height: 160px;
+      object-fit: contain;
+      border-radius: 0.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+  }
+
   .toolbar {
     display: flex;
     justify-content: flex-end;

@@ -345,14 +345,17 @@ async function loadLocales() {
       <small class="p-error" v-if="submitted && !config.locale">{{ t('apps.chatwoot.languageRequired') }}</small>
     </div>
 
+    <hr/>
     <div class="field">
-      <label>
-        {{ t('apps.chatwoot.templates.title') }}
-        <i
-            class="pi pi-info-circle"
-            v-tooltip="t('apps.chatwoot.templates.tooltip')"
-        />
-      </label>
+      <div class="text-center">
+        <h4>
+          {{ t('apps.chatwoot.templates.title') }}
+          <i
+              class="pi pi-info-circle"
+              v-tooltip="t('apps.chatwoot.templates.tooltip')"
+          />
+        </h4>
+      </div>
       <div>
         <AppConfigChatWootTemplates v-model="config.templates"/>
       </div>
