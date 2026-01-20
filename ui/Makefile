@@ -9,3 +9,6 @@ copy-waha-src:
 	cp -Rv .output/public/* ../../whatsapp-http-api/src/dashboard/
 
 dev: build copy-waha copy-waha-src
+
+update-swagger:
+	wget http://admin:666@localhost:3000/-json -O - | jq '.' > ./openapi.json
