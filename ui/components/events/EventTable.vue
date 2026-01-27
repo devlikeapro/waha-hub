@@ -197,6 +197,9 @@ function download(event) {
       :dataKey="'id'"
       v-model:expandedRows="expandedRows"
       :rowHover="true"
+      paginator
+      :rows="20"
+      :rowsPerPageOptions="[20, 50, 100, 200, 500]"
       v-model:filters="filters"
       filterDisplay="row"
       :globalFilterFields="globalFilterFields"
