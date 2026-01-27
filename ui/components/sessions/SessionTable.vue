@@ -171,6 +171,14 @@ function openNew() {
       webjs: {
         tagsEventsOn: false,
       },
+      gows: {
+        storage: {
+          messages: true,
+          groups: true,
+          chats: true,
+          labels: true,
+        },
+      },
       ignore: null,
       proxy: {},
     },

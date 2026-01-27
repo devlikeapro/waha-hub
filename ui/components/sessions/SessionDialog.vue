@@ -55,6 +55,14 @@ watch(session, async (newSession, _) => {
   includeGroups.value = !newSession?.config?.ignore?.groups
   includeChannels.value = !newSession?.config?.ignore?.channels
   includeBroadcast.value = !newSession?.config?.ignore?.broadcast
+  if (newSession?.config && isGOWS.value) {
+    if (!newSession.config.gows) {
+      newSession.config.gows = {storage: {}}
+    }
+    if (!newSession.config.gows.storage) {
+      newSession.config.gows.storage = {}
+    }
+  }
 })
 watch(clientEnabled, (enabled) => {
   if (!session.value?.config) {
@@ -102,6 +110,9 @@ const createSessionRequest = computed(() => {
   }
   if (!isWEBJS.value) {
     delete config.webjs
+  }
+  if (!isGOWS.value) {
+    delete config.gows
   }
   return {
     name: session.value.name,
@@ -353,6 +364,60 @@ async function copyRequest(event) {
                   </template>
                 </ToggleButton>
               </div>
+            </div>
+          </div>
+        </AccordionTab>
+      </Accordion>
+    </div>
+
+    <div class="mb-4" v-if="isGOWS">
+      <div class="mb-3">
+        <h5>🏭 {{ t('sessions.engineSettings') }}</h5>
+      </div>
+      <Accordion :activeIndex="0">
+        <AccordionTab header="GOWS">
+          <div class="flex flex-column gap-2">
+            <div class="flex gap-2 flex-wrap">
+              <ToggleButton
+                  v-model="session.config.gows.storage.messages"
+                  :onLabel="t('sessions.gows.storage.messagesOn')"
+                  :offLabel="t('sessions.gows.storage.messagesOff')"
+                  v-tooltip="t('sessions.gows.storage.messagesTooltip')"
+              >
+                <template #icon>
+                  <font-awesome-icon icon="fa-solid fa-message" class="mr-2"/>
+                </template>
+              </ToggleButton>
+              <ToggleButton
+                  v-model="session.config.gows.storage.chats"
+                  :onLabel="t('sessions.gows.storage.chatsOn')"
+                  :offLabel="t('sessions.gows.storage.chatsOff')"
+                  v-tooltip="t('sessions.gows.storage.chatsTooltip')"
+              >
+                <template #icon>
+                  <font-awesome-icon icon="fa-solid fa-comments" class="mr-2"/>
+                </template>
+              </ToggleButton>
+              <ToggleButton
+                  v-model="session.config.gows.storage.groups"
+                  :onLabel="t('sessions.gows.storage.groupsOn')"
+                  :offLabel="t('sessions.gows.storage.groupsOff')"
+                  v-tooltip="t('sessions.gows.storage.groupsTooltip')"
+              >
+                <template #icon>
+                  <font-awesome-icon icon="fa-solid fa-users" class="mr-2"/>
+                </template>
+              </ToggleButton>
+              <ToggleButton
+                  v-model="session.config.gows.storage.labels"
+                  :onLabel="t('sessions.gows.storage.labelsOn')"
+                  :offLabel="t('sessions.gows.storage.labelsOff')"
+                  v-tooltip="t('sessions.gows.storage.labelsTooltip')"
+              >
+                <template #icon>
+                  <font-awesome-icon icon="fa-solid fa-tags" class="mr-2"/>
+                </template>
+              </ToggleButton>
             </div>
           </div>
         </AccordionTab>

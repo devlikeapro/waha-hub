@@ -71,6 +71,16 @@ export class WahaAPI {
                 tagsEventsOn: false,
             }
         }
+        if (!session.config.gows) {
+            session.config.gows = {
+                storage: {
+                    messages: true,
+                    groups: true,
+                    chats: true,
+                    labels: true,
+                },
+            }
+        }
         for (const webhook of session.config.webhooks) {
             if (!webhook.retries) {
                 webhook.retries = {attempts: 15, delaySeconds: 2, policy: "constant"}

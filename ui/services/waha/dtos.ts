@@ -31,6 +31,17 @@ export interface WebjsConfig {
     tagsEventsOn: boolean,
 }
 
+export interface GowsStorageConfig {
+    messages?: boolean | null,
+    groups?: boolean | null,
+    chats?: boolean | null,
+    labels?: boolean | null,
+}
+
+export interface GowsConfig {
+    storage?: GowsStorageConfig,
+}
+
 export interface ClientSessionConfig {
     deviceName?: string;
     browserName?: string;
@@ -49,6 +60,7 @@ export interface SessionConfig {
     proxy: any;
     noweb?: NowebConfig;
     webjs?: WebjsConfig;
+    gows?: GowsConfig;
     client?: ClientSessionConfig | null;
     ignore?: IgnoreConfig;
 }
