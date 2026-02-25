@@ -35,17 +35,17 @@ const iClass = computed(() => {
 const iStyle = computed(() => {
   switch (props.ack) {
     case Ack.ERROR:
-      return 'color: red'
+      return 'color: #fb923c'
     case Ack.PENDING:
-      return 'color: blue'
+      return 'color: #4a97dd'
     case Ack.SERVER:
       return ''
     case Ack.DEVICE:
       return ''
     case Ack.READ:
-      return 'color: blue'
+      return 'color: #4a97dd'
     case Ack.PLAYED:
-      return 'color: blue'
+      return 'color: #4a97dd'
   }
 })
 
