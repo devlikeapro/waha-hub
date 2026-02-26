@@ -22,6 +22,7 @@ watch(visible, () => {
 
 const toast = useToast();
 const store = useServerStore()
+const mergeOverview = ref(true)
 const {
   data: chats,
   pending,
@@ -30,7 +31,13 @@ const {
 } = useAsyncData(
     `session-${session.value.name}-chats`,
     async () => {
-      return await store.getChatsOverview(session.value.server.id, session.value.name, 20)
+      return await store.getChatsOverview(
+          session.value.server.id,
+          session.value.name,
+          20,
+          undefined,
+          mergeOverview.value,
+      )
     })
 
 const selectedChat = ref(null)
@@ -100,7 +107,8 @@ function fetchMessages() {
       selectedChat.value.id,
       limit.value,
       offset.value,
-      false
+      false,
+      mergeOverview.value,
   ).then((data) => {
     // revert
     messages.value = data.reverse()
@@ -110,10 +118,16 @@ function fetchMessages() {
   )
 }
 
+function onMergeToggle(value) {
+  mergeOverview.value = value
+  refreshChats()
+}
+
 watch(session, () => {
   if (!session.value?.me?.id) {
     return;
   }
+  mergeOverview.value = true
   stopClient()
   startClient()
   refreshChats()
@@ -179,9 +193,11 @@ const showPromo = ref(false)
       <SplitterPanel :size=30 class="flex items-center justify-center">
         <ChatList
             :chats="chats"
-            :loading="pending"
+            :pending="pending"
+            :merge="mergeOverview"
             @click-on-chat="clickOnChat"
             @refresh-chats="refreshChats"
+            @update:merge="onMergeToggle"
         ></ChatList>
       </SplitterPanel>
       <SplitterPanel :size=70 class="flex flex-column gap-2 justify-content-between p-2">

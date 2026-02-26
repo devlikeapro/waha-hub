@@ -2,10 +2,15 @@
 const props = defineProps({
       chats: Array,
       pending: Boolean,
+      merge: {
+        type: Boolean,
+        default: true,
+      }
     }
 )
 const emit = defineEmits(['clickOnChat',
-  'refreshChats'
+  'refreshChats',
+  'update:merge'
 ])
 
 </script>
@@ -23,14 +28,27 @@ const emit = defineEmits(['clickOnChat',
   >
     <Column>
       <template #header>
-        <div class="flex justify-content-center align-items-center gap-1">
-          <div>
-            {{ $t('chat.last20Chats') }}
+        <div class="w-full flex align-items-center gap-3 flex-wrap justify-content-between">
+          <div class="flex align-items-center gap-2">
+            <div>
+              {{ $t('chat.last20Chats') }}
+            </div>
+            <RefreshButton
+                @click="emit('refreshChats')"
+                :refreshing="pending"
+            ></RefreshButton>
           </div>
-          <RefreshButton
-              @click="emit('refreshChats')"
-              :refreshing="pending"
-          ></RefreshButton>
+          <div
+              class="flex align-items-center gap-2 ml-auto"
+              v-tooltip.bottom="$t('chat.mergeToggleTooltip')"
+          >
+            <i class="pi pi-object-ungroup text-sm"></i>
+            <span class="font-medium text-sm">{{ $t('chat.mergeToggleLabel') }}</span>
+            <InputSwitch
+                :modelValue="props.merge"
+                @update:modelValue="value => emit('update:merge', value)"
+            />
+          </div>
         </div>
       </template>
       <template #body="{ data }">

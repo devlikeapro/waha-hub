@@ -10,6 +10,8 @@
   "chat.pleaseEnterMessage": "Please enter a message",
   "chat.header": "Header",
   "chat.last20Chats": "Last 20 Chats",
+  "chat.mergeToggleLabel": "Merge",
+  "chat.mergeToggleTooltip": "Merge lid and c.us chats referencing the same contact.",
   "chat.aboutChatUI": "ℹ️ About Chat UI",
   "chat.message.media": "Media Message, open WhatsApp App to see message.",
   "chat.message.not-supported": "Message not supported, open WhatsApp App to see the message.",

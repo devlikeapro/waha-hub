@@ -266,9 +266,10 @@ export const useServerStore = defineStore('serverStore', () => {
 
     async function getChatsOverview(serverId: ServerId, sessionName: string,
                                     limit: number,
-                                    offset: number,
+                                    offset?: number,
+                                    merge?: boolean,
     ): Promise<string> {
-        return wahaAPI.getChatsOverview(serverId, sessionName, limit, offset)
+        return wahaAPI.getChatsOverview(serverId, sessionName, limit, offset, merge)
     }
 
     async function getChatsMessages(
@@ -277,8 +278,9 @@ export const useServerStore = defineStore('serverStore', () => {
         limit: number,
         offset: number,
         media: boolean,
+        merge?: boolean,
     ): Promise<string> {
-        return wahaAPI.getChatsMessages(serverId, sessionName, chatId, limit, offset, media)
+        return wahaAPI.getChatsMessages(serverId, sessionName, chatId, limit, offset, media, merge)
     }
 
     async function sendText(

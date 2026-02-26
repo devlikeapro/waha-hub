@@ -46,7 +46,8 @@ function fetchMessages() {
       selectedChat.value.id,
       limit.value,
       offset.value,
-      false
+      false,
+      true,
   ).then((data) => {
     // revert
     messages.value = data.reverse()

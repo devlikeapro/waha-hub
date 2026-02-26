@@ -178,25 +178,36 @@ export class WahaAPI {
         });
     }
 
-    getChatsOverview(serverId: ServerId, sessionName: string, limit, offset): Promise<any> {
+    getChatsOverview(serverId: ServerId, sessionName: string, limit, offset?: number, merge?: boolean): Promise<any> {
+        const params: Record<string, any> = {limit: limit}
+        if (offset !== undefined) {
+            params.offset = offset
+        }
+        if (merge !== undefined) {
+            params.merge = merge
+        }
         return this.api.call(serverId, {
             method: 'GET',
             uri: `/api/${sessionName}/chats/overview`,
-            params: {limit: limit, offset: offset},
+            params: params,
         });
     }
 
-    getChatsMessages(serverId: ServerId, sessionName: string, chatId: string, limit: number, offset: number, media: boolean): Promise<any> {
+    getChatsMessages(serverId: ServerId, sessionName: string, chatId: string, limit: number, offset: number, media: boolean, merge?: boolean): Promise<any> {
+        const params: Record<string, any> = {
+            limit: limit,
+            offset: offset,
+            downloadMedia: media,
+            sortBy: "messageTimestamp",
+            sortOrder: "desc",
+        }
+        if (merge !== undefined) {
+            params.merge = merge
+        }
         return this.api.call(serverId, {
             method: 'GET',
             uri: `/api/${sessionName}/chats/${chatId}/messages`,
-            params: {
-                limit: limit,
-                offset: offset,
-                downloadMedia: media,
-                sortBy: "messageTimestamp",
-                sortOrder: "desc",
-            },
+            params,
         });
     }
 
