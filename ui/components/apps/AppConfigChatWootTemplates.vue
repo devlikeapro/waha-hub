@@ -17,12 +17,15 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue']);
 
 const AGENT_NAME_TEMPLATE_VALUES: Templates = {
-  'chatwoot.to.whatsapp.message.text': '*{{{chatwoot.sender.name}}}*:\n{{{ content }}}',
+  'chatwoot.to.whatsapp.message.text': [
+    '{{#chatwoot.sender.name}}*{{{chatwoot.sender.name}}}*:',
+    '{{/chatwoot.sender.name}}{{{ content }}}',
+  ].join('\n'),
   'chatwoot.to.whatsapp.message.media.caption': [
     '{{#singleAttachment}}',
     '{{#content}}',
-    '*{{{chatwoot.sender.name}}}*:',
-    '{{{ content }}}',
+    '{{#chatwoot.sender.name}}*{{{chatwoot.sender.name}}}*:',
+    '{{/chatwoot.sender.name}}{{{ content }}}',
     '{{/content}}',
     '{{/singleAttachment}}',
   ].join('\n'),
