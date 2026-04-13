@@ -172,6 +172,8 @@ export interface ChatWootConversationsConfig {
 export interface CallsAppChannelConfig {
     reject: boolean;
     message?: string;
+    waitBeforeDecline?: number;
+    waitBeforeResponse?: number;
 }
 
 export interface CallsAppConfig {

@@ -25,10 +25,14 @@ const getDefaults = (): CallsAppConfig => ({
   dm: {
     reject: true,
     message: defaultMessage.value,
+    waitBeforeDecline: 0,
+    waitBeforeResponse: 0,
   },
   group: {
     reject: true,
     message: defaultMessage.value,
+    waitBeforeDecline: 0,
+    waitBeforeResponse: 0,
   },
 });
 
@@ -69,6 +73,37 @@ watch(
       />
     </div>
 
+    <div class="field wait-fields">
+      <div class="wait-field">
+        <label class="block mb-2" for="dm-wait-before-decline">
+          {{ t('apps.calls.waitBeforeDecline.label') }}
+        </label>
+        <InputNumber
+          id="dm-wait-before-decline"
+          v-model="config.dm.waitBeforeDecline"
+          :min="0"
+          :showButtons="true"
+        />
+        <small class="p-message-secondary">
+          {{ t('apps.calls.waitBeforeDecline.help') }}
+        </small>
+      </div>
+      <div class="wait-field">
+        <label class="block mb-2" for="dm-wait-before-response">
+          {{ t('apps.calls.waitBeforeResponse.label') }}
+        </label>
+        <InputNumber
+          id="dm-wait-before-response"
+          v-model="config.dm.waitBeforeResponse"
+          :min="0"
+          :showButtons="true"
+        />
+        <small class="p-message-secondary">
+          {{ t('apps.calls.waitBeforeResponse.help') }}
+        </small>
+      </div>
+    </div>
+
     <div class="field">
       <label class="block mb-2" for="dm-message">
         {{ t('apps.calls.message.label') }}
@@ -98,6 +133,37 @@ watch(
       />
     </div>
 
+    <div class="field wait-fields">
+      <div class="wait-field">
+        <label class="block mb-2" for="group-wait-before-decline">
+          {{ t('apps.calls.waitBeforeDecline.label') }}
+        </label>
+        <InputNumber
+          id="group-wait-before-decline"
+          v-model="config.group.waitBeforeDecline"
+          :min="0"
+          :showButtons="true"
+        />
+        <small class="p-message-secondary">
+          {{ t('apps.calls.waitBeforeDecline.help') }}
+        </small>
+      </div>
+      <div class="wait-field">
+        <label class="block mb-2" for="group-wait-before-response">
+          {{ t('apps.calls.waitBeforeResponse.label') }}
+        </label>
+        <InputNumber
+          id="group-wait-before-response"
+          v-model="config.group.waitBeforeResponse"
+          :min="0"
+          :showButtons="true"
+        />
+        <small class="p-message-secondary">
+          {{ t('apps.calls.waitBeforeResponse.help') }}
+        </small>
+      </div>
+    </div>
+
     <div class="field">
       <label class="block mb-2" for="group-message">
         {{ t('apps.calls.message.label') }}
@@ -125,6 +191,17 @@ watch(
 
   label {
     font-weight: bold;
+  }
+
+  .wait-fields {
+    display: flex;
+    gap: 1rem;
+
+    .wait-field {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 </style>
