@@ -18,7 +18,7 @@
   "chat.noMoreMessages": "Daha fazla mesaj yok",
   "chat.showMoreChats": "Daha Fazla Sohbet Göster",
   "chat.aboutChatUI": "ℹ️ Sohbet Arayüzü Hakkında",
-  "chat.message.media": "Medya mesajı, mesajı görmek için WhatsApp uygulamasını açın.",
+  "chat.message.media": "Tam medyayı görmek için telefonda açın.",
   "chat.message.not-supported": "Mesaj desteklenmiyor, onu görmek için WhatsApp uygulamasını açın.",
   "chat.promo.exampleChatsUI": "Bu bir örnek Sohbet Arayüzüdür.",
   "chat.promo.implementFeatures": "Canlı Sohbet, Çoklu Ajanlar ve daha fazla özelliği şunları kullanarak uygulayabilirsiniz",
@@ -512,5 +512,14 @@
   "apps.enabled.label.list": "Durum",
   "apps.enabled.label.edit": "Uygulama Durumu",
   "apps.enabled.on": "Etkin",
-  "apps.enabled.off": "Devre Dışı"
+  "apps.enabled.off": "Devre Dışı",
+  "chat.message.download": "İndir",
+  "chat.message.save": "Kaydet",
+  "chat.send.attach.audio": "Ses",
+  "chat.send.attach.file": "Dosya",
+  "chat.send.attach.image": "Görsel",
+  "chat.send.attach.video": "Video",
+  "chat.send.placeholder.caption": "Altyazı (isteğe bağlı)...",
+  "chat.send.placeholder.noAudioCaption": "Ses için altyazı yok",
+  "chat.send.progress": "{current}/{total}"
 }

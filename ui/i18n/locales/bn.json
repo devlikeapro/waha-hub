@@ -18,7 +18,7 @@
   "chat.noMoreMessages": "আর কোনো বার্তা নেই",
   "chat.showMoreChats": "আরও চ্যাট দেখান",
   "chat.aboutChatUI": "ℹ️ চ্যাট UI সম্পর্কে",
-  "chat.message.media": "মিডিয়া বার্তা, বার্তাটি দেখতে হোয়াটসঅ্যাপ অ্যাপ খুলুন।",
+  "chat.message.media": "পূর্ণ মিডিয়া দেখতে ফোনে খুলুন।",
   "chat.message.not-supported": "বার্তাটি সমর্থিত নয়, এটি দেখতে হোয়াটসঅ্যাপ অ্যাপ খুলুন।",
   "chat.promo.exampleChatsUI": "এটি একটি উদাহরণ চ্যাট UI।",
   "chat.promo.implementFeatures": "আপনি লাইভ চ্যাট, একাধিক এজেন্ট এবং আরও বৈশিষ্ট্য বাস্তবায়ন করতে পারেন",
@@ -512,5 +512,14 @@
   "apps.enabled.label.list": "স্ট্যাটাস",
   "apps.enabled.label.edit": "অ্যাপ স্ট্যাটাস",
   "apps.enabled.on": "সক্রিয়",
-  "apps.enabled.off": "নিষ্ক্রিয়"
+  "apps.enabled.off": "নিষ্ক্রিয়",
+  "chat.message.download": "ডাউনলোড",
+  "chat.message.save": "সেভ করুন",
+  "chat.send.attach.audio": "অডিও",
+  "chat.send.attach.file": "ফাইল",
+  "chat.send.attach.image": "ছবি",
+  "chat.send.attach.video": "ভিডিও",
+  "chat.send.placeholder.caption": "ক্যাপশন (ঐচ্ছিক)...",
+  "chat.send.placeholder.noAudioCaption": "অডিওর জন্য ক্যাপশন নেই",
+  "chat.send.progress": "{current}/{total}"
 }

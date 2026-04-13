@@ -18,7 +18,7 @@
   "chat.noMoreMessages": "ਹੋਰ ਕੋਈ ਸੁਨੇਹਾ ਨਹੀਂ",
   "chat.showMoreChats": "ਹੋਰ ਚੈਟਾਂ ਦਿਖਾਓ",
   "chat.aboutChatUI": "ℹ️ ਚੈਟ UI ਬਾਰੇ",
-  "chat.message.media": "ਮੀਡੀਆ ਸੁਨੇਹਾ, ਸੁਨੇਹਾ ਵੇਖਣ ਲਈ WhatsApp ਐਪ ਖੋਲ੍ਹੋ।",
+  "chat.message.media": "ਪੂਰਾ ਮੀਡੀਆ ਵੇਖਣ ਲਈ ਫ਼ੋਨ ’ਤੇ ਖੋਲ੍ਹੋ।",
   "chat.message.not-supported": "ਸੁਨੇਹਾ ਸਮਰਥਿਤ ਨਹੀਂ ਹੈ, ਇਸਨੂੰ ਵੇਖਣ ਲਈ WhatsApp ਐਪ ਖੋਲ੍ਹੋ।",
   "chat.promo.exampleChatsUI": "ਇਹ ਇੱਕ ਉਦਾਹਰਨ ਚੈਟਸ UI ਹੈ।",
   "chat.promo.implementFeatures": "ਤੁਸੀਂ ਲਾਈਵ ਚੈਟ, ਮਲਟੀਪਲ ਏਜੰਟਸ, ਅਤੇ ਹੋਰ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਨੂੰ ਲਾਗੂ ਕਰ ਸਕਦੇ ਹੋ",
@@ -512,5 +512,14 @@
   "apps.enabled.label.list": "ਸਥਿਤੀ",
   "apps.enabled.label.edit": "ਐਪ ਸਥਿਤੀ",
   "apps.enabled.on": "ਯੋਗ",
-  "apps.enabled.off": "ਅਯੋਗ"
+  "apps.enabled.off": "ਅਯੋਗ",
+  "chat.message.download": "ਡਾਊਨਲੋਡ",
+  "chat.message.save": "ਸੇਵ ਕਰੋ",
+  "chat.send.attach.audio": "ਆਡੀਓ",
+  "chat.send.attach.file": "ਫ਼ਾਈਲ",
+  "chat.send.attach.image": "ਤਸਵੀਰ",
+  "chat.send.attach.video": "ਵੀਡੀਓ",
+  "chat.send.placeholder.caption": "ਕੈਪਸ਼ਨ (ਵਿਕਲਪਿਕ)...",
+  "chat.send.placeholder.noAudioCaption": "ਆਡੀਓ ਲਈ ਕੋਈ ਕੈਪਸ਼ਨ ਨਹੀਂ",
+  "chat.send.progress": "{current}/{total}"
 }

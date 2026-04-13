@@ -3,6 +3,12 @@ import {ApiKeyDTO, ApiKeyRequest, App, Locale, Session, SessionConfig, SessionSt
 import {IWahaAPIClient} from "./IWahaAPIClient";
 import {HTTPRequest} from "./HTTPRequest";
 
+export interface MediaFile {
+    data: string;
+    mimetype: string;
+    filename?: string;
+}
+
 /**
  * Go over metadata fields convert it to big key=value;key=value string
  * @param metadata
@@ -211,6 +217,14 @@ export class WahaAPI {
         });
     }
 
+    getChatMessage(serverId: ServerId, sessionName: string, messageId: string, chatId: string = 'all'): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/chats/${chatId}/messages/${messageId}`,
+            params: { downloadMedia: true },
+        });
+    }
+
     readChatMessages(serverId: ServerId, sessionName: string, chatId: string, body?: { messages?: number, days?: number }): Promise<any> {
         return this.api.call(serverId, {
             method: 'POST',
@@ -231,6 +245,42 @@ export class WahaAPI {
             uri: '/api/sendText',
             params: {},
             body: body,
+        })
+    }
+
+    sendImage(serverId: ServerId, sessionName: string, chatId: string, file: MediaFile, caption?: string): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: '/api/sendImage',
+            params: {},
+            body: { session: sessionName, chatId: chatId, file: file, caption: caption },
+        })
+    }
+
+    sendVideo(serverId: ServerId, sessionName: string, chatId: string, file: MediaFile, caption?: string): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: '/api/sendVideo',
+            params: {},
+            body: { session: sessionName, chatId: chatId, file: file, caption: caption, convert: true },
+        })
+    }
+
+    sendVoice(serverId: ServerId, sessionName: string, chatId: string, file: MediaFile): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: '/api/sendVoice',
+            params: {},
+            body: { session: sessionName, chatId: chatId, file: file, convert: true },
+        })
+    }
+
+    sendFile(serverId: ServerId, sessionName: string, chatId: string, file: MediaFile, caption?: string): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: '/api/sendFile',
+            params: {},
+            body: { session: sessionName, chatId: chatId, file: file, caption: caption },
         })
     }
 

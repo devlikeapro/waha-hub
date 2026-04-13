@@ -18,7 +18,7 @@
   "chat.noMoreMessages": "پیام دیگری وجود ندارد",
   "chat.showMoreChats": "نمایش چت‌های بیشتر",
   "chat.aboutChatUI": "ℹ️ درباره رابط کاربری گفتگو",
-  "chat.message.media": "پیام رسانه‌ای، برای دیدن پیام برنامه واتساپ را باز کنید.",
+  "chat.message.media": "برای مشاهده رسانه کامل در گوشی باز کنید.",
   "chat.message.not-supported": "پیام پشتیبانی نمی‌شود، برای دیدن آن برنامه واتساپ را باز کنید.",
   "chat.promo.exampleChatsUI": "این یک نمونه رابط کاربری گفتگو است.",
   "chat.promo.implementFeatures": "شما می‌توانید گفتگوی زنده، چندین نماینده و ویژگی‌های بیشتری را با استفاده از",
@@ -512,5 +512,14 @@
   "apps.enabled.label.list": "وضعیت",
   "apps.enabled.label.edit": "وضعیت برنامه",
   "apps.enabled.on": "فعال",
-  "apps.enabled.off": "غیرفعال"
+  "apps.enabled.off": "غیرفعال",
+  "chat.message.download": "دانلود",
+  "chat.message.save": "ذخیره",
+  "chat.send.attach.audio": "صدا",
+  "chat.send.attach.file": "فایل",
+  "chat.send.attach.image": "تصویر",
+  "chat.send.attach.video": "ویدیو",
+  "chat.send.placeholder.caption": "توضیح (اختیاری)...",
+  "chat.send.placeholder.noAudioCaption": "بدون توضیح برای صدا",
+  "chat.send.progress": "{current}/{total}"
 }

@@ -18,7 +18,7 @@
   "chat.noMoreMessages": "אין עוד הודעות",
   "chat.showMoreChats": "הצג עוד שיחות",
   "chat.aboutChatUI": "ℹ️ אודות ממשק הצ'אט",
-  "chat.message.media": "הודעת מדיה, פתח את אפליקציית WhatsApp כדי לראות את ההודעה.",
+  "chat.message.media": "פתח בטלפון לצפייה במדיה המלאה.",
   "chat.message.not-supported": "ההודעה אינה נתמכת, פתח את אפליקציית WhatsApp כדי לראות אותה.",
   "chat.promo.exampleChatsUI": "זהו ממשק צ'אט לדוגמה.",
   "chat.promo.implementFeatures": "אתה יכול ליישם צ'אט חי, סוכנים מרובים, ועוד תכונות באמצעות",
@@ -512,5 +512,14 @@
   "apps.enabled.label.list": "סטטוס",
   "apps.enabled.label.edit": "סטטוס האפליקציה",
   "apps.enabled.on": "מופעל",
-  "apps.enabled.off": "מושבת"
+  "apps.enabled.off": "מושבת",
+  "chat.message.download": "הורדה",
+  "chat.message.save": "שמור",
+  "chat.send.attach.audio": "שמע",
+  "chat.send.attach.file": "קובץ",
+  "chat.send.attach.image": "תמונה",
+  "chat.send.attach.video": "וידאו",
+  "chat.send.placeholder.caption": "כיתוב (אופציונלי)...",
+  "chat.send.placeholder.noAudioCaption": "אין כיתוב לשמע",
+  "chat.send.progress": "{current}/{total}"
 }

@@ -18,7 +18,7 @@
   "chat.noMoreMessages": "لا توجد رسائل أخرى",
   "chat.showMoreChats": "عرض المزيد من المحادثات",
   "chat.aboutChatUI": "ℹ️ حول واجهة المحادثة",
-  "chat.message.media": "رسالة وسائط، افتح تطبيق واتساب لعرض الرسالة.",
+  "chat.message.media": "افتح على الهاتف لعرض الوسائط كاملة.",
   "chat.message.not-supported": "الرسالة غير مدعومة، افتح تطبيق واتساب لعرضها.",
   "chat.promo.exampleChatsUI": "هذا مثال لواجهة المحادثات.",
   "chat.promo.implementFeatures": "يمكنك تنفيذ الدردشة المباشرة، وكلاء متعددين، والمزيد من الميزات باستخدام",
@@ -512,5 +512,14 @@
   "apps.enabled.label.list": "الحالة",
   "apps.enabled.label.edit": "حالة التطبيق",
   "apps.enabled.on": "مفعل",
-  "apps.enabled.off": "معطل"
+  "apps.enabled.off": "معطل",
+  "chat.message.download": "تنزيل",
+  "chat.message.save": "حفظ",
+  "chat.send.attach.audio": "صوت",
+  "chat.send.attach.file": "ملف",
+  "chat.send.attach.image": "صورة",
+  "chat.send.attach.video": "فيديو",
+  "chat.send.placeholder.caption": "تعليق (اختياري)...",
+  "chat.send.placeholder.noAudioCaption": "لا يوجد تعليق للصوت",
+  "chat.send.progress": "{current}/{total}"
 }

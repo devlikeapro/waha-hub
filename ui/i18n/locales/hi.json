@@ -18,7 +18,7 @@
   "chat.noMoreMessages": "कोई और संदेश नहीं",
   "chat.showMoreChats": "अधिक चैट दिखाएं",
   "chat.aboutChatUI": "ℹ️ चैट यूआई के बारे में",
-  "chat.message.media": "मीडिया संदेश, संदेश देखने के लिए WhatsApp ऐप खोलें।",
+  "chat.message.media": "पूरा मीडिया देखने के लिए फ़ोन पर खोलें।",
   "chat.message.not-supported": "संदेश समर्थित नहीं है, इसे देखने के लिए WhatsApp ऐप खोलें।",
   "chat.promo.exampleChatsUI": "यह एक उदाहरण चैट यूआई है।",
   "chat.promo.implementFeatures": "आप लाइव चैट, मल्टीपल एजेंट्स और अधिक सुविधाओं को इम्प्लीमेंट कर सकते हैं",
@@ -512,5 +512,14 @@
   "apps.enabled.label.list": "स्थिति",
   "apps.enabled.label.edit": "ऐप स्थिति",
   "apps.enabled.on": "सक्षम",
-  "apps.enabled.off": "अक्षम"
+  "apps.enabled.off": "अक्षम",
+  "chat.message.download": "डाउनलोड",
+  "chat.message.save": "सहेजें",
+  "chat.send.attach.audio": "ऑडियो",
+  "chat.send.attach.file": "फ़ाइल",
+  "chat.send.attach.image": "छवि",
+  "chat.send.attach.video": "वीडियो",
+  "chat.send.placeholder.caption": "कैप्शन (वैकल्पिक)...",
+  "chat.send.placeholder.noAudioCaption": "ऑडियो के लिए कोई कैप्शन नहीं",
+  "chat.send.progress": "{current}/{total}"
 }

@@ -18,7 +18,7 @@
   "chat.noMoreMessages": "Більше повідомлень немає",
   "chat.showMoreChats": "Показати більше чатів",
   "chat.aboutChatUI": "ℹ️ Про інтерфейс чату",
-  "chat.message.media": "Медійне повідомлення, відкрийте застосунок WhatsApp, щоб переглянути повідомлення.",
+  "chat.message.media": "Відкрийте на телефоні, щоб переглянути повне медіа.",
   "chat.message.not-supported": "Повідомлення не підтримується, відкрийте застосунок WhatsApp, щоб його переглянути.",
   "chat.promo.exampleChatsUI": "Це приклад інтерфейсу чатів.",
   "chat.promo.implementFeatures": "Ви можете реалізувати Живий чат, Кілька агентів та інші функції за допомогою",
@@ -512,5 +512,14 @@
   "apps.enabled.label.list": "Статус",
   "apps.enabled.label.edit": "Статус додатку",
   "apps.enabled.on": "Увімкнено",
-  "apps.enabled.off": "Вимкнено"
+  "apps.enabled.off": "Вимкнено",
+  "chat.message.download": "Завантажити",
+  "chat.message.save": "Зберегти",
+  "chat.send.attach.audio": "Аудіо",
+  "chat.send.attach.file": "Файл",
+  "chat.send.attach.image": "Зображення",
+  "chat.send.attach.video": "Відео",
+  "chat.send.placeholder.caption": "Підпис (необов'язково)...",
+  "chat.send.placeholder.noAudioCaption": "Для аудіо підпис недоступний",
+  "chat.send.progress": "{current}/{total}"
 }

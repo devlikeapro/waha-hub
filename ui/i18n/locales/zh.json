@@ -18,7 +18,7 @@
   "chat.noMoreMessages": "没有更多消息",
   "chat.showMoreChats": "显示更多聊天",
   "chat.aboutChatUI": "ℹ️ 关于聊天界面",
-  "chat.message.media": "媒体消息，请打开 WhatsApp 应用查看该消息。",
+  "chat.message.media": "在手机上打开以查看完整媒体。",
   "chat.message.not-supported": "消息不受支持，请打开 WhatsApp 应用查看。",
   "chat.promo.exampleChatsUI": "这是一个聊天界面的示例。",
   "chat.promo.implementFeatures": "你可以使用",
@@ -512,5 +512,14 @@
   "apps.enabled.label.list": "状态",
   "apps.enabled.label.edit": "应用状态",
   "apps.enabled.on": "启用",
-  "apps.enabled.off": "禁用"
+  "apps.enabled.off": "禁用",
+  "chat.message.download": "下载",
+  "chat.message.save": "保存",
+  "chat.send.attach.audio": "音频",
+  "chat.send.attach.file": "文件",
+  "chat.send.attach.image": "图片",
+  "chat.send.attach.video": "视频",
+  "chat.send.placeholder.caption": "标题（可选）...",
+  "chat.send.placeholder.noAudioCaption": "音频不支持标题",
+  "chat.send.progress": "{current}/{total}"
 }

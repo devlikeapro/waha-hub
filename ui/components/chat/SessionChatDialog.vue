@@ -98,7 +98,7 @@ function startClient() {
 }
 
 async function handleEvent(event) {
-  await sleep(100)
+  await sleep(1000)
   const chatId = selectedChat.value?.id
   if (!chatId) {
     return
@@ -211,6 +211,22 @@ function clickOnChat(chat) {
   selectedChat.value = chat
 }
 
+async function sendMedia(type, file, base64, caption) {
+  if (!selectedChat.value) return
+  const mediaFile = { data: base64, mimetype: file.type, filename: file.name }
+  if (type === 'image') {
+    await store.sendImage(session.value.server.id, session.value.name, selectedChat.value.id, mediaFile, caption)
+  } else if (type === 'video') {
+    await store.sendVideo(session.value.server.id, session.value.name, selectedChat.value.id, mediaFile, caption)
+  } else if (type === 'audio') {
+    await store.sendVoice(session.value.server.id, session.value.name, selectedChat.value.id, mediaFile)
+  } else {
+    await store.sendFile(session.value.server.id, session.value.name, selectedChat.value.id, mediaFile, caption)
+  }
+  await sleep(1000)
+  fetchMessages()
+}
+
 async function sendText(text) {
   if (!selectedChat.value) {
     return
@@ -231,7 +247,8 @@ async function sendText(text) {
     })
   }
   await store.sendText(session.value.server.id, session.value.name, selectedChat.value.id, text)
-  await sleep(100)
+  await sleep(1000)
+  fetchMessages()
 }
 
 const showPromo = ref(false)
@@ -307,11 +324,14 @@ const showPromo = ref(false)
                 :loadEarlier="loadEarlyMessages"
                 :loadingEarlier="loadingEarly"
                 :hasEarlierMessages="hasEarlierMessages"
+                :serverId="session.server.id"
+                :sessionName="session.name"
             ></ChatMessages>
 
             <ChatInputFooter
                 :disabled="!selectedChat || fetchingMessages"
                 :sendText="sendText"
+                :sendMedia="sendMedia"
             />
           </template>
         </div>

@@ -6,6 +6,8 @@ const props = defineProps({
   loadEarlier: Function,
   loadingEarlier: Boolean,
   hasEarlierMessages: Boolean,
+  serverId: String,
+  sessionName: String,
 })
 const scroll = ref(null)
 const isLoadingEarlier = ref(false)
@@ -53,7 +55,12 @@ async function handleLoadEarlier() {
       </div>
       <template v-for="message in messages">
         <div>
-          <ChatMessage :key="message.key" :message="message"/>
+          <ChatMessage
+              :key="message.id"
+              :message="message"
+              :serverId="serverId"
+              :sessionName="sessionName"
+          />
         </div>
       </template>
     </div>

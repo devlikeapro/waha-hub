@@ -18,7 +18,7 @@
   "chat.noMoreMessages": "مزید کوئی پیغام نہیں",
   "chat.showMoreChats": "مزید چیٹس دکھائیں",
   "chat.aboutChatUI": "ℹ️ چیٹ یو آئی کے بارے میں",
-  "chat.message.media": "میڈیا پیغام، پیغام دیکھنے کے لیے واٹس ایپ ایپ کھولیں۔",
+  "chat.message.media": "مکمل میڈیا دیکھنے کے لیے فون پر کھولیں۔",
   "chat.message.not-supported": "پیغام معاونت یافتہ نہیں، اسے دیکھنے کے لیے واٹس ایپ ایپ کھولیں۔",
   "chat.promo.exampleChatsUI": "یہ ایک مثالی چیٹس یو آئی ہے۔",
   "chat.promo.implementFeatures": "آپ لائیو چیٹ، متعدد ایجنٹس، اور مزید خصوصیات استعمال کر سکتے ہیں",
@@ -512,5 +512,14 @@
   "apps.enabled.label.list": "حالت",
   "apps.enabled.label.edit": "ایپ کی حالت",
   "apps.enabled.on": "فعال",
-  "apps.enabled.off": "غیر فعال"
+  "apps.enabled.off": "غیر فعال",
+  "chat.message.download": "ڈاؤن لوڈ",
+  "chat.message.save": "محفوظ کریں",
+  "chat.send.attach.audio": "آڈیو",
+  "chat.send.attach.file": "فائل",
+  "chat.send.attach.image": "تصویر",
+  "chat.send.attach.video": "ویڈیو",
+  "chat.send.placeholder.caption": "کیپشن (اختیاری)...",
+  "chat.send.placeholder.noAudioCaption": "آڈیو کے لیے کوئی کیپشن نہیں",
+  "chat.send.progress": "{current}/{total}"
 }

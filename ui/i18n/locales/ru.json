@@ -18,7 +18,7 @@
   "chat.noMoreMessages": "Больше сообщений нет",
   "chat.showMoreChats": "Показать больше чатов",
   "chat.aboutChatUI": "ℹ️ О Chat UI",
-  "chat.message.media": "Мультимедийное сообщение, откройте приложение WhatsApp, чтобы его увидеть.",
+  "chat.message.media": "Откройте на телефоне, чтобы увидеть полное медиа.",
   "chat.message.not-supported": "Сообщение не поддерживается, откройте приложение WhatsApp, чтобы посмотреть его.",
   "chat.promo.exampleChatsUI": "Это пример интерфейса чатов.",
   "chat.promo.implementFeatures": "Вы можете реализовать Живой Чат, Несколько Агентов и другие функции, используя",
@@ -512,5 +512,14 @@
   "apps.enabled.label.list": "Статус",
   "apps.enabled.label.edit": "Статус приложения",
   "apps.enabled.on": "Включено",
-  "apps.enabled.off": "Отключено"
+  "apps.enabled.off": "Отключено",
+  "chat.message.download": "Скачать",
+  "chat.message.save": "Сохранить",
+  "chat.send.attach.audio": "Аудио",
+  "chat.send.attach.file": "Файл",
+  "chat.send.attach.image": "Изображение",
+  "chat.send.attach.video": "Видео",
+  "chat.send.placeholder.caption": "Подпись (необязательно)...",
+  "chat.send.placeholder.noAudioCaption": "Для аудио подпись недоступна",
+  "chat.send.progress": "{current}/{total}"
 }

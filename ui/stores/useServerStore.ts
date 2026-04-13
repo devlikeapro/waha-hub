@@ -6,7 +6,7 @@ import type {ApiKeyRequest, Session, SessionConfig, SessionStartRequest} from ".
 import {computed} from "../.nuxt/imports";
 // @ts-ignore
 import lodash from "lodash";
-import {WahaAPI} from "../services/waha/WahaAPI";
+import {MediaFile, WahaAPI} from "../services/waha/WahaAPI";
 import {WahaGlobalVersionAPI} from "../services/WahaGlobalVersionAPI";
 import {HubServerLocalAPI} from "../services/impl/hub/HubServerLocalAPI";
 import {WahaAPIDirectClient} from "../services/impl/waha/WahaAPIDirectClient";
@@ -283,6 +283,15 @@ export const useServerStore = defineStore('serverStore', () => {
         return wahaAPI.getChatsMessages(serverId, sessionName, chatId, limit, offset, media, merge)
     }
 
+    async function getChatMessage(
+        serverId: ServerId,
+        sessionName: string,
+        messageId: string,
+        chatId: string = 'all',
+    ): Promise<any> {
+        return wahaAPI.getChatMessage(serverId, sessionName, messageId, chatId)
+    }
+
     async function readChatMessages(
         serverId: ServerId,
         sessionName: string,
@@ -290,6 +299,22 @@ export const useServerStore = defineStore('serverStore', () => {
         options?: { messages?: number, days?: number },
     ): Promise<string> {
         return wahaAPI.readChatMessages(serverId, sessionName, chatId, options)
+    }
+
+    async function sendImage(serverId: ServerId, sessionName: string, chatId: string, file: MediaFile, caption?: string): Promise<any> {
+        return wahaAPI.sendImage(serverId, sessionName, chatId, file, caption)
+    }
+
+    async function sendVideo(serverId: ServerId, sessionName: string, chatId: string, file: MediaFile, caption?: string): Promise<any> {
+        return wahaAPI.sendVideo(serverId, sessionName, chatId, file, caption)
+    }
+
+    async function sendVoice(serverId: ServerId, sessionName: string, chatId: string, file: MediaFile): Promise<any> {
+        return wahaAPI.sendVoice(serverId, sessionName, chatId, file)
+    }
+
+    async function sendFile(serverId: ServerId, sessionName: string, chatId: string, file: MediaFile, caption?: string): Promise<any> {
+        return wahaAPI.sendFile(serverId, sessionName, chatId, file, caption)
     }
 
     async function sendText(
@@ -404,7 +429,12 @@ export const useServerStore = defineStore('serverStore', () => {
         getQR,
         getChatsOverview,
         getChatsMessages,
+        getChatMessage,
         readChatMessages,
+        sendImage,
+        sendVideo,
+        sendVoice,
+        sendFile,
         sendText,
         getPairingCode,
         getProfilePicture,

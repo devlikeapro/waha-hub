@@ -10,7 +10,10 @@ const {t} = useI18n();
 
 const props = defineProps({
   message: Object,
+  serverId: String,
+  sessionName: String,
 })
+
 const Ack = {
   ERROR: -1,
   PENDING: 0,
@@ -28,6 +31,114 @@ const showDetails = ref(false)
 function view() {
   showDetails.value = !showDetails.value
 }
+
+//
+// Media preview
+//
+const store = useServerStore()
+
+const mediaBlobUrl = ref(null)
+const mediaThumbnailUrl = ref(null)
+const mediaLoading = ref(false)
+const mediaFailed = ref(false)
+const mediaMimetype = ref(null)
+const mediaFilename = ref(null)
+
+const mediaType = computed(() => {
+  const mime = mediaMimetype.value || ''
+  if (mime.startsWith('image/')) return 'image'
+  if (mime.startsWith('video/')) return 'video'
+  if (mime.startsWith('audio/')) return 'audio'
+  return 'other'
+})
+
+const isFile = computed(() => !!(mediaFilename.value || props.message?.media?.filename))
+
+function initThumbnail() {
+  if (!props.message?.hasMedia) return
+  // Show _data thumbnail instantly without any API call.
+  // _data.body is always a JPEG thumbnail for image/video types (WEBJS only).
+  const dataBody = props.message._data?.body
+  const dataMime = props.message._data?.mimetype
+  const dataType = props.message._data?.type
+  if (dataBody && (dataType === 'image' || dataType === 'video')) {
+    mediaMimetype.value = dataMime || (dataType === 'image' ? 'image/jpeg' : 'video/mp4')
+    mediaThumbnailUrl.value = `data:image/jpeg;base64,${dataBody}`
+  }
+}
+
+async function downloadMedia() {
+  if (!props.message?.hasMedia || !props.serverId || !props.sessionName) return
+  if (mediaBlobUrl.value || mediaLoading.value) return
+
+  const chatId = props.message.id.split('_')[1] ?? 'all'
+
+  mediaLoading.value = true
+  mediaFailed.value = false
+  try {
+    const fullMessage = await store.getChatMessage(
+        props.serverId,
+        props.sessionName,
+        props.message.id,
+        chatId,
+    )
+    // Merge full message data back so the JSON viewer shows media fields
+    Object.assign(props.message, fullMessage)
+
+    const url = fullMessage?.media?.url
+    const mime = fullMessage?.media?.mimetype
+    const filename = fullMessage?.media?.filename
+    if (!url) {
+      mediaFailed.value = true
+      return
+    }
+    mediaMimetype.value = mime || ''
+    if (filename) mediaFilename.value = filename
+
+    const connection = store.getServer(props.serverId)?.connection
+    const headers = {}
+    if (connection?.key) {
+      headers['X-Api-Key'] = connection.key
+    }
+    const response = await fetch(url, {headers: headers})
+    if (!response.ok) {
+      mediaFailed.value = true
+      return
+    }
+    const blob = await response.blob()
+    mediaBlobUrl.value = URL.createObjectURL(blob)
+  } catch (e) {
+    mediaFailed.value = true
+  } finally {
+    mediaLoading.value = false
+  }
+}
+
+function saveMedia() {
+  const url = mediaBlobUrl.value
+  if (!url) return
+  let name = mediaFilename.value
+  if (!name) {
+    const ext = (mediaMimetype.value || '').split('/')[1]?.split(';')[0] || 'bin'
+    name = `${props.message.id}.${ext}`
+  }
+  const a = document.createElement('a')
+  a.href = url
+  a.download = name
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+}
+
+onMounted(() => {
+  initThumbnail()
+})
+
+onUnmounted(() => {
+  if (mediaBlobUrl.value?.startsWith('blob:')) {
+    URL.revokeObjectURL(mediaBlobUrl.value)
+  }
+})
 </script>
 
 
@@ -43,25 +154,103 @@ function view() {
         <!-- Body + ACK -->
         <div class="flex">
           <div class="flex-1">
-            <!-- Text Message -->
-            <template v-if="message.body || message.hasMedia">
-              <!-- Replace /n to <br> -->
-              <p v-html="message.body?.replace(/\n/g, '<br>')"></p>
-            </template>
             <!-- Not Supported Message -->
-            <template v-else>
+            <template v-if="!message.body && !message.hasMedia">
               <InlineMessage severity="warn" class="mt-2">
                 <p v-html="t('chat.message.not-supported')"></p>
               </InlineMessage>
             </template>
             <!-- Media Message -->
             <template v-if="message.hasMedia">
-              <InlineMessage severity="info">
-                <template #icon>
-                  <i class="pi pi-image mr-2"></i>
-                </template>
-                <p v-html="t('chat.message.media')"></p>
-              </InlineMessage>
+              <!-- 1. Open on phone sign -->
+              <div class="flex justify-content-center mt-1 mb-1">
+                <InlineMessage severity="info">
+                  <template #icon>
+                    <i class="pi pi-mobile mr-2"></i>
+                  </template>
+                  <p v-html="t('chat.message.media')"></p>
+                </InlineMessage>
+              </div>
+              <!-- 2. Media preview -->
+              <!-- Loading skeleton (only when no thumbnail available yet) -->
+              <div v-if="mediaLoading && !mediaThumbnailUrl" class="my-2 flex justify-content-center">
+                <Skeleton width="120px" height="80px" border-radius="6px"/>
+              </div>
+              <!-- Thumbnail or full blob -->
+              <div v-else-if="mediaBlobUrl || mediaThumbnailUrl" class="my-2 flex flex-column align-items-center gap-1">
+                <!-- Image: overlay download button on top of preview -->
+                <div v-if="mediaType === 'image' && !isFile" class="media-overlay-wrapper">
+                  <img
+                      :src="mediaBlobUrl || mediaThumbnailUrl"
+                      class="media-preview-image"
+                      alt="media"
+                  />
+                  <div v-if="!mediaBlobUrl" class="media-overlay" @click="downloadMedia">
+                    <Button
+                        icon="pi pi-download"
+                        rounded
+                        :loading="mediaLoading"
+                        :aria-label="t('chat.message.download')"
+                    />
+                  </div>
+                </div>
+                <!-- Video: overlay download button on poster -->
+                <div v-else-if="mediaType === 'video' && !isFile" class="media-overlay-wrapper">
+                  <video
+                      :src="mediaBlobUrl || undefined"
+                      :poster="mediaThumbnailUrl || undefined"
+                      :controls="!!mediaBlobUrl"
+                      class="media-preview-video"
+                  />
+                  <div v-if="!mediaBlobUrl" class="media-overlay" @click="downloadMedia">
+                    <Button
+                        icon="pi pi-download"
+                        rounded
+                        :loading="mediaLoading"
+                        :aria-label="t('chat.message.download')"
+                    />
+                  </div>
+                </div>
+                <!-- Audio: no thumbnail, just controls -->
+                <audio
+                    v-else-if="mediaType === 'audio' && !isFile"
+                    :src="mediaBlobUrl"
+                    controls
+                    class="media-preview-audio"
+                />
+                <!-- File / unknown type -->
+                <div v-else class="flex align-items-center gap-2 p-2">
+                  <i class="pi pi-file" style="font-size: 2rem"></i>
+                  <span v-if="mediaFilename" class="p-text-secondary" style="word-break: break-all">{{ mediaFilename }}</span>
+                </div>
+              </div>
+              <!-- No thumbnail yet: show download button placeholder -->
+              <div v-else class="my-2 flex justify-content-center">
+                <Button
+                    icon="pi pi-download"
+                    size="small"
+                    outlined
+                    :loading="mediaLoading"
+                    :label="t('chat.message.download')"
+                    @click="downloadMedia"
+                />
+              </div>
+              <!-- 3. Caption -->
+              <p v-if="message.body" v-html="message.body.replace(/\n/g, '<br>')"></p>
+              <!-- 4. Save button -->
+              <div v-if="mediaBlobUrl" class="flex justify-content-center mt-1">
+                <Button
+                    icon="pi pi-save"
+                    size="small"
+                    text
+                    :label="t('chat.message.save')"
+                    @click="saveMedia"
+                />
+              </div>
+            </template>
+            <!-- Plain text (no media) -->
+            <template v-else-if="message.body">
+              <p v-html="message.body.replace(/\n/g, '<br>')"></p>
             </template>
           </div>
           <!-- ack at the bottom of div-->
@@ -110,4 +299,45 @@ function view() {
   max-width: 100%;
 }
 
+.media-overlay-wrapper {
+  position: relative;
+  width: 240px;
+  line-height: 0;
+}
+
+.media-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.media-preview-image {
+  width: 240px;
+  height: auto;
+  display: block;
+  margin: 0;
+  border-radius: 6px;
+}
+
+.media-preview-video {
+  width: 240px;
+  height: auto;
+  display: block;
+  margin: 0;
+  border-radius: 6px;
+}
+
+.media-preview-audio {
+  max-width: 100%;
+  display: block;
+}
 </style>

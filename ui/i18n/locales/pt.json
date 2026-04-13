@@ -18,7 +18,7 @@
   "chat.noMoreMessages": "Sem mais mensagens",
   "chat.showMoreChats": "Mostrar mais conversas",
   "chat.aboutChatUI": "ℹ️ Sobre a Interface de Chat",
-  "chat.message.media": "Mensagem de mídia, abra o app do WhatsApp para ver a mensagem.",
+  "chat.message.media": "Abrir no telefone para ver a mídia completa.",
   "chat.message.not-supported": "Mensagem não suportada, abra o app do WhatsApp para vê-la.",
   "chat.promo.exampleChatsUI": "É um exemplo de Interface de Conversas.",
   "chat.promo.implementFeatures": "Você pode implementar Chat ao Vivo, Múltiplos Agentes e mais recursos usando",
@@ -512,5 +512,14 @@
   "apps.enabled.label.list": "Status",
   "apps.enabled.label.edit": "Status do Aplicativo",
   "apps.enabled.on": "Ativado",
-  "apps.enabled.off": "Desativado"
+  "apps.enabled.off": "Desativado",
+  "chat.message.download": "Baixar",
+  "chat.message.save": "Salvar",
+  "chat.send.attach.audio": "Áudio",
+  "chat.send.attach.file": "Arquivo",
+  "chat.send.attach.image": "Imagem",
+  "chat.send.attach.video": "Vídeo",
+  "chat.send.placeholder.caption": "Legenda (opcional)...",
+  "chat.send.placeholder.noAudioCaption": "Sem legenda para áudio",
+  "chat.send.progress": "{current}/{total}"
 }
