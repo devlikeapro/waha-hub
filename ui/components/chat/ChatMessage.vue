@@ -65,8 +65,9 @@ function initThumbnail() {
     mediaThumbnailUrl.value = `data:image/jpeg;base64,${dataBody}`
     return
   }
-  // GOWS: _data.Message contains the raw proto message structure.
-  const rawMsg = props.message._data?.Message
+  // GOWS: _data.Message (capital M), JPEGThumbnail (all caps)
+  // NOWEB: _data.message (lowercase m), jpegThumbnail (camelCase)
+  const rawMsg = props.message._data?.Message || props.message._data?.message
   if (!rawMsg) return
   const imgMsg = rawMsg.imageMessage
   const vidMsg = rawMsg.videoMessage
@@ -74,20 +75,17 @@ function initThumbnail() {
   const audMsg = rawMsg.audioMessage
   if (imgMsg) {
     mediaMimetype.value = imgMsg.mimetype || 'image/jpeg'
-    if (imgMsg.JPEGThumbnail) {
-      mediaThumbnailUrl.value = `data:image/jpeg;base64,${imgMsg.JPEGThumbnail}`
-    }
+    const thumb = imgMsg.JPEGThumbnail || imgMsg.jpegThumbnail
+    if (thumb) mediaThumbnailUrl.value = `data:image/jpeg;base64,${thumb}`
   } else if (vidMsg) {
     mediaMimetype.value = vidMsg.mimetype || 'video/mp4'
-    if (vidMsg.JPEGThumbnail) {
-      mediaThumbnailUrl.value = `data:image/jpeg;base64,${vidMsg.JPEGThumbnail}`
-    }
+    const thumb = vidMsg.JPEGThumbnail || vidMsg.jpegThumbnail
+    if (thumb) mediaThumbnailUrl.value = `data:image/jpeg;base64,${thumb}`
   } else if (docMsg) {
     mediaMimetype.value = docMsg.mimetype || 'application/octet-stream'
     if (docMsg.fileName) mediaFilename.value = docMsg.fileName
-    if (docMsg.JPEGThumbnail) {
-      mediaThumbnailUrl.value = `data:image/jpeg;base64,${docMsg.JPEGThumbnail}`
-    }
+    const thumb = docMsg.JPEGThumbnail || docMsg.jpegThumbnail
+    if (thumb) mediaThumbnailUrl.value = `data:image/jpeg;base64,${thumb}`
   } else if (audMsg) {
     mediaMimetype.value = audMsg.mimetype || 'audio/ogg'
   }
