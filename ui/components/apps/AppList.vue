@@ -26,6 +26,7 @@ const props = defineProps({
 
 const apps = ref<App[]>([]);
 const loading = ref(false);
+const saving = ref(false);
 const appDialog = ref(false);
 const selectedApp = ref<App | null>(null);
 const isNewApp = ref(false);
@@ -132,6 +133,7 @@ function generateAppId() {
 
 async function saveApp(app: App) {
   try {
+    saving.value = true;
     const appTypeLabel = getAppTypeLabel(app.app);
     if (isNewApp.value) {
       await req(
@@ -165,6 +167,8 @@ async function saveApp(app: App) {
   } catch (error) {
     console.error("Error saving app:", error);
     return false;
+  } finally {
+    saving.value = false;
   }
 }
 
@@ -263,8 +267,8 @@ function getAppTypeLabel(appType: string) {
       :server="server"
       v-model:visible="appDialog"
       :isNewApp="isNewApp"
-      :loading="loading"
-      @save="saveApp" 
+      :loading="saving"
+      @save="saveApp"
       @cancel="appDialog = false"
     />
   </div>
