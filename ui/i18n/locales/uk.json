@@ -243,6 +243,7 @@
   "dashboard.connected": "підключено",
   "dashboard.updates": "Оновлення",
   "dashboard.changelog": "Журнал змін",
+  "dashboard.howToUpdate": "Як оновити",
   "dashboard.workerCanBeUpdated": "воркер можна оновити",
   "dashboard.workersCanBeUpdated": "воркери можна оновити",
   "dashboard.allWorkersUpToDate": "Всі воркери оновлені!",

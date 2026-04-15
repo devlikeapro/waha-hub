@@ -243,6 +243,7 @@
   "dashboard.connected": "מחובר",
   "dashboard.updates": "עדכונים",
   "dashboard.changelog": "יומן שינויים",
+  "dashboard.howToUpdate": "כיצד לעדכן",
   "dashboard.workerCanBeUpdated": "עובד ניתן לעדכון",
   "dashboard.workersCanBeUpdated": "עובדים ניתנים לעדכון",
   "dashboard.allWorkersUpToDate": "כל העובדים מעודכנים!",

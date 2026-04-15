@@ -243,6 +243,7 @@
   "dashboard.connected": "connecté",
   "dashboard.updates": "Mises à jour",
   "dashboard.changelog": "Journal des modifications",
+  "dashboard.howToUpdate": "Comment mettre à jour",
   "dashboard.workerCanBeUpdated": "le travailleur peut être mis à jour",
   "dashboard.workersCanBeUpdated": "les travailleurs peuvent être mis à jour",
   "dashboard.allWorkersUpToDate": "Tous les travailleurs sont à jour !",

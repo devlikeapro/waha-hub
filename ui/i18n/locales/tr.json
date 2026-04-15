@@ -243,6 +243,7 @@
   "dashboard.connected": "bağlı",
   "dashboard.updates": "Güncellemeler",
   "dashboard.changelog": "Değişiklik Günlüğü",
+  "dashboard.howToUpdate": "Nasıl güncellenir",
   "dashboard.workerCanBeUpdated": "çalışan güncellenebilir",
   "dashboard.workersCanBeUpdated": "çalışanlar güncellenebilir",
   "dashboard.allWorkersUpToDate": "Tüm çalışanlar güncel!",

@@ -243,6 +243,7 @@
   "dashboard.connected": "متصل",
   "dashboard.updates": "التحديثات",
   "dashboard.changelog": "سجل التغييرات",
+  "dashboard.howToUpdate": "كيفية التحديث",
   "dashboard.workerCanBeUpdated": "يمكن تحديث العامل",
   "dashboard.workersCanBeUpdated": "يمكن تحديث العمال",
   "dashboard.allWorkersUpToDate": "جميع العمال محدثون!",

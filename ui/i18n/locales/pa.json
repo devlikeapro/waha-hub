@@ -243,6 +243,7 @@
   "dashboard.connected": "ਕਨੈਕਟ ਹੈ",
   "dashboard.updates": "ਅਪਡੇਟਸ",
   "dashboard.changelog": "ਚੇਂਜਲੌਗ",
+  "dashboard.howToUpdate": "ਅੱਪਡੇਟ ਕਿਵੇਂ ਕਰੀਏ",
   "dashboard.workerCanBeUpdated": "ਵਰਕਰ ਅਪਡੇਟ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ",
   "dashboard.workersCanBeUpdated": "ਵਰਕਰਜ਼ ਅਪਡੇਟ ਕੀਤੇ ਜਾ ਸਕਦੇ ਹਨ",
   "dashboard.allWorkersUpToDate": "ਸਾਰੇ ਵਰਕਰਜ਼ ਅਪ ਟੂ ਡੇਟ ਹਨ!",

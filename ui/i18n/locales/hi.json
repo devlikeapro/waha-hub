@@ -243,6 +243,7 @@
   "dashboard.connected": "कनेक्टेड",
   "dashboard.updates": "अपडेट्स",
   "dashboard.changelog": "चेंजलॉग",
+  "dashboard.howToUpdate": "अपडेट कैसे करें",
   "dashboard.workerCanBeUpdated": "वर्कर अपडेट किया जा सकता है",
   "dashboard.workersCanBeUpdated": "वर्कर्स अपडेट किए जा सकते हैं",
   "dashboard.allWorkersUpToDate": "सभी वर्कर्स अप टू डेट हैं!",

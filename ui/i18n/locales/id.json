@@ -243,6 +243,7 @@
   "dashboard.connected": "terhubung",
   "dashboard.updates": "Pembaruan",
   "dashboard.changelog": "Catatan Perubahan",
+  "dashboard.howToUpdate": "Cara Memperbarui",
   "dashboard.workerCanBeUpdated": "pekerja dapat diperbarui",
   "dashboard.workersCanBeUpdated": "pekerja dapat diperbarui",
   "dashboard.allWorkersUpToDate": "Semua pekerja terbaru!",

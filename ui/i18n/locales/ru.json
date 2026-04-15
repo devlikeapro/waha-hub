@@ -243,6 +243,7 @@
   "dashboard.connected": "подключено",
   "dashboard.updates": "Обновления",
   "dashboard.changelog": "Список изменений",
+  "dashboard.howToUpdate": "Как обновить",
   "dashboard.workerCanBeUpdated": "работник может быть обновлен",
   "dashboard.workersCanBeUpdated": "работники могут быть обновлены",
   "dashboard.allWorkersUpToDate": "Все работники обновлены!",

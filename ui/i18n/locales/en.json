@@ -256,6 +256,7 @@
   "dashboard.connected": "connected",
   "dashboard.updates": "Updates",
   "dashboard.changelog": "Changelog",
+  "dashboard.howToUpdate": "How to Update",
   "dashboard.workerCanBeUpdated": "worker can be updated",
   "dashboard.workersCanBeUpdated": "workers can be updated",
   "dashboard.allWorkersUpToDate": "All workers up to date!",

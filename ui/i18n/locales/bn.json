@@ -243,6 +243,7 @@
   "dashboard.connected": "সংযুক্ত",
   "dashboard.updates": "আপডেট",
   "dashboard.changelog": "পরিবর্তন লগ",
+  "dashboard.howToUpdate": "কিভাবে আপডেট করবেন",
   "dashboard.workerCanBeUpdated": "ওয়ার্কার আপডেট করা যাবে",
   "dashboard.workersCanBeUpdated": "ওয়ার্কার আপডেট করা যাবে",
   "dashboard.allWorkersUpToDate": "সব ওয়ার্কার আপ টু ডেট!",

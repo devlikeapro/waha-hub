@@ -243,6 +243,7 @@
   "dashboard.connected": "已连接",
   "dashboard.updates": "更新",
   "dashboard.changelog": "更新日志",
+  "dashboard.howToUpdate": "如何更新",
   "dashboard.workerCanBeUpdated": "工作器可更新",
   "dashboard.workersCanBeUpdated": "个工作器可更新",
   "dashboard.allWorkersUpToDate": "所有工作器均为最新！",

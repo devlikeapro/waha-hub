@@ -243,6 +243,7 @@
   "dashboard.connected": "متصل",
   "dashboard.updates": "به‌روزرسانی‌ها",
   "dashboard.changelog": "تغییرات",
+  "dashboard.howToUpdate": "نحوه به‌روزرسانی",
   "dashboard.workerCanBeUpdated": "کارگر می‌تواند به‌روزرسانی شود",
   "dashboard.workersCanBeUpdated": "کارگران می‌توانند به‌روزرسانی شوند",
   "dashboard.allWorkersUpToDate": "همه کارگران به‌روز هستند!",
