@@ -110,14 +110,12 @@ onBeforeMount(() => {
       </div>
 
       <div class="text-500 font-medium mt-1 flex gap-3">
-        <a href="https://waha.devlike.pro/docs/overview/changelog/" target="_blank">
-          {{ t('dashboard.changelog') }}&nbsp;
-          <i class="pi pi-external-link"></i>
-        </a>
-        <a href="https://waha.devlike.pro/blog/waha-update/" target="_blank">
-          {{ t('dashboard.howToUpdate') }}&nbsp;
-          <i class="pi pi-external-link"></i>
-        </a>
+        <LinkMultiple href="https://waha.devlike.pro/docs/overview/changelog/">
+          {{ t('dashboard.changelog') }}
+        </LinkMultiple>
+        <LinkMultiple href="https://waha.devlike.pro/blog/waha-update/">
+          {{ t('dashboard.howToUpdate') }}
+        </LinkMultiple>
       </div>
 
 
