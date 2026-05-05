@@ -5,19 +5,21 @@ import type { SessionActions } from '../../services/waha/dtos';
 
 const { t } = useI18n();
 
-const DEFAULT_ACTIONS: Required<SessionActions> = {
-  read: true,
-  send: true,
-  control: true,
-  setting: true,
-  app: true,
-  delete: false,
-};
-
 const props = defineProps({
   modelValue: {
     type: Object as () => SessionActions | null,
     default: null,
+  },
+  defaults: {
+    type: Object as () => Required<SessionActions>,
+    default: (): Required<SessionActions> => ({
+      read: true,
+      send: true,
+      control: true,
+      setting: true,
+      app: true,
+      delete: false,
+    }),
   },
 });
 
@@ -26,7 +28,7 @@ const emit = defineEmits<{
 }>();
 
 const actionsModel = computed<Required<SessionActions>>({
-  get: () => ({ ...DEFAULT_ACTIONS, ...props.modelValue }),
+  get: () => ({ ...props.defaults, ...props.modelValue }),
   set: (val) => emit('update:modelValue', val),
 });
 
