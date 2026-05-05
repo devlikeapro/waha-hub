@@ -236,6 +236,7 @@ async function sendMedia(type, file, base64, caption) {
       detail: e?.message || String(e),
       life: 5000,
     })
+    throw e
   }
 }
 
@@ -269,6 +270,7 @@ async function sendText(text) {
       detail: e?.message || String(e),
       life: 5000,
     })
+    throw e
   }
 }
 
