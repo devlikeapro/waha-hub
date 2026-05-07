@@ -66,7 +66,7 @@ function setAction(key: keyof SessionActions, val: boolean) {
       </div>
     </div>
     <div class="permissions-col">
-      <div v-for="action in ['setting', 'control', 'app', 'delete']" :key="action" class="permission-row">
+      <div v-for="action in ['control', 'setting', 'app', 'delete']" :key="action" class="permission-row">
         <Checkbox
           :inputId="`perm-${action}`"
           :modelValue="actionsModel[action as keyof SessionActions]"
