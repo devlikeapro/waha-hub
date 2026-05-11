@@ -28,6 +28,27 @@ const {formatChatTimestamp} = useI18nDate()
 const date = computed(() => formatChatTimestamp(props.message?.timestamp))
 const showDetails = ref(false)
 
+const CENTER_MESSAGE_TYPES = ['e2e_notification', 'notification_template']
+const isCenterMessage = computed(() => {
+  const type = props.message?._data?.type || props.message?.type
+  return CENTER_MESSAGE_TYPES.includes(type)
+})
+
+const centerMessageKey = computed(() => {
+  const type = props.message?._data?.type || props.message?.type
+  const subtype = props.message?._data?.subtype || props.message?.subtype
+  if (type === 'notification_template' && subtype === 'disappearing_mode_update') {
+    return 'chat.message.disappearing-mode-update'
+  }
+  return 'chat.message.e2e-notification'
+})
+
+const messageAlignClass = computed(() => {
+  if (isCenterMessage.value) return 'flex justify-content-center'
+  if (props.message?.fromMe) return 'flex justify-content-end'
+  return ''
+})
+
 function view() {
   showDetails.value = !showDetails.value
 }
@@ -167,7 +188,7 @@ onUnmounted(() => {
 
 
 <template>
-  <div :class="{'flex justify-content-end': message.fromMe}">
+  <div :class="messageAlignClass">
     <Chip :class="showDetails? 'chip-100' :'chip-70'" class="py-1 px-3">
       <div>
         <!-- From -->
@@ -178,8 +199,12 @@ onUnmounted(() => {
         <!-- Body + ACK -->
         <div class="flex">
           <div class="flex-1">
+            <!-- Center system message body -->
+            <template v-if="isCenterMessage">
+              <span class="p-text-secondary" style="font-size: 0.85rem">{{ t(centerMessageKey) }}</span>
+            </template>
             <!-- Not Supported Message -->
-            <template v-if="!message.body && !message.hasMedia">
+            <template v-else-if="!message.body && !message.hasMedia">
               <InlineMessage severity="warn" class="mt-2">
                 <p v-html="t('chat.message.not-supported')"></p>
               </InlineMessage>
@@ -324,6 +349,7 @@ onUnmounted(() => {
   </div>
 
 </template>
+
 
 <style scoped lang="scss">
 .chip-70 {

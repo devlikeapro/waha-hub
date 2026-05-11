@@ -30,6 +30,8 @@
   "chat.send.placeholder.noAudioCaption": "No caption for audio",
   "chat.send.progress": "{current}/{total}",
   "chat.message.not-supported": "Message not supported, open WhatsApp App to see the message.",
+  "chat.message.e2e-notification": "E2E encryption settings changed. https://faq.whatsapp.com/1460487824884467",
+  "chat.message.disappearing-mode-update": "Disappearing messages setting updated. https://faq.whatsapp.com/673193694148537",
   "chat.promo.exampleChatsUI": "It's an example Chats UI.",
   "chat.promo.implementFeatures": "You can implement Live Chat, Multiple Agents, and more features using",
   "chat.promo.wahaAPI": "WAHA API",
