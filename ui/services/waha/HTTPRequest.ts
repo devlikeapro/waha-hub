@@ -3,4 +3,5 @@ export interface HTTPRequest {
     uri: string;
     params: any;
     body?: any;
+    headers?: Record<string, string>;
 }

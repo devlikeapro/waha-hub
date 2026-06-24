@@ -25,6 +25,7 @@ export class WahaAPIDirectClient implements IWahaAPIClient {
         const headers = {
             'Content-Type': 'application/json',
             "Accept": "application/json",
+            ...(request.headers || {}),
         }
         if (connection.key) {
             headers['X-Api-Key'] = connection.key
@@ -36,6 +37,17 @@ export class WahaAPIDirectClient implements IWahaAPIClient {
             headers: headers,
             data: request.body,
             params: request.params,
-        }).then(response => response.data)
+        })
+            .then(response => response.data)
+            .catch((error) => {
+                const message =
+                    error?.response?.data?.message ||
+                    error?.response?.data?.error ||
+                    error?.message ||
+                    'Request failed'
+                const wrapped = new Error(message)
+                wrapped.response = error?.response
+                throw wrapped
+            })
     }
 }

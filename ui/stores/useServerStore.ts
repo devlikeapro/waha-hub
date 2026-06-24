@@ -407,6 +407,53 @@ export const useServerStore = defineStore('serverStore', () => {
         return lodash.groupBy(visibleSessions.value, session => session.server.id)
     })
 
+    async function startCall(
+        serverId: ServerId,
+        sessionName: string,
+        jid: string,
+        video = false,
+    ): Promise<{ call_id: string }> {
+        return wahaAPI.startCall(serverId, sessionName, jid, video)
+    }
+
+    async function acceptCall(
+        serverId: ServerId,
+        sessionName: string,
+        callId: string,
+    ): Promise<void> {
+        return wahaAPI.acceptCall(serverId, sessionName, callId)
+    }
+
+    async function rejectCall(
+        serverId: ServerId,
+        sessionName: string,
+        from: string,
+        callId: string,
+    ): Promise<void> {
+        return wahaAPI.rejectCall(serverId, sessionName, from, callId)
+    }
+
+    async function endCall(
+        serverId: ServerId,
+        sessionName: string,
+        callId: string,
+    ): Promise<void> {
+        return wahaAPI.endCall(serverId, sessionName, callId)
+    }
+
+    async function exchangeCallWebRTC(
+        serverId: ServerId,
+        sessionName: string,
+        callId: string,
+        sdpOffer: string,
+    ): Promise<{ sdp_answer: string }> {
+        return wahaAPI.exchangeCallWebRTC(serverId, sessionName, callId, sdpOffer)
+    }
+
+    async function getCallState(serverId: ServerId, sessionName: string) {
+        return wahaAPI.getCallState(serverId, sessionName)
+    }
+
     return {
         servers,
         sessions,
@@ -451,6 +498,12 @@ export const useServerStore = defineStore('serverStore', () => {
         createApiKey,
         updateApiKey,
         deleteApiKey,
+        startCall,
+        acceptCall,
+        rejectCall,
+        endCall,
+        exchangeCallWebRTC,
+        getCallState,
         // Version
         latestVersion,
         hideDuplicatedSessions,

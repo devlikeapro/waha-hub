@@ -2,6 +2,7 @@ import {ServerId} from "../hub/IHubServerAPI";
 import {ApiKeyDTO, ApiKeyRequest, App, Locale, Session, SessionConfig, SessionStartRequest} from "./dtos";
 import {IWahaAPIClient} from "./IWahaAPIClient";
 import {HTTPRequest} from "./HTTPRequest";
+import {getClientId} from "../calls/clientId";
 
 export interface MediaFile {
     data: string;
@@ -434,6 +435,79 @@ export class WahaAPI {
             method: 'DELETE',
             uri: `/api/keys/${id}`,
             params: {},
+        });
+    }
+
+    //
+    // VoIP Calls (GOWS + gows-plus)
+    //
+
+    startCall(
+        serverId: ServerId,
+        sessionName: string,
+        jid: string,
+        video = false,
+    ): Promise<{ call_id: string }> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: `/api/${sessionName}/calls`,
+            params: {},
+            body: { jid, video },
+        });
+    }
+
+    acceptCall(serverId: ServerId, sessionName: string, callId: string): Promise<void> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: `/api/${sessionName}/calls/${callId}/accept`,
+            params: {},
+            body: {},
+            headers: { 'X-Client-Id': getClientId() },
+        });
+    }
+
+    rejectCall(
+        serverId: ServerId,
+        sessionName: string,
+        from: string,
+        callId: string,
+    ): Promise<void> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: `/api/${sessionName}/calls/${callId}/reject`,
+            params: {},
+            body: { from, id: callId },
+            headers: { 'X-Client-Id': getClientId() },
+        });
+    }
+
+    endCall(serverId: ServerId, sessionName: string, callId: string): Promise<void> {
+        return this.api.call(serverId, {
+            method: 'DELETE',
+            uri: `/api/${sessionName}/calls/${callId}`,
+            params: {},
+        });
+    }
+
+    exchangeCallWebRTC(
+        serverId: ServerId,
+        sessionName: string,
+        callId: string,
+        sdpOffer: string,
+    ): Promise<{ sdp_answer: string }> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: `/api/${sessionName}/calls/${callId}/webrtc`,
+            params: {},
+            body: { sdp_offer: sdpOffer },
+        });
+    }
+
+    getCallState(serverId: ServerId, sessionName: string): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/calls/state`,
+            params: { _: Date.now().toString() },
         });
     }
 }

@@ -1933,6 +1933,7 @@ __metadata:
 "@rollup/rollup-linux-x64-gnu@npm:4.14.1":
   version: 4.14.1
   resolution: "@rollup/rollup-linux-x64-gnu@npm:4.14.1"
+  checksum: 10c0/9e4ff084040feb1fb37bc929979c67737bf524734614f794eccfd9ffdc0f33281a0a9122381a2a91f3e679eae96d16294f3628797ca89a57949c04127cf60365
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
@@ -10009,6 +10010,7 @@ __metadata:
     "@fortawesome/vue-fontawesome": "npm:^3.0.6"
     "@nuxtjs/i18n": "npm:9.1.1"
     "@pinia/nuxt": "npm:^0.5.1"
+    "@rollup/rollup-linux-x64-gnu": "npm:4.14.1"
     "@types/lodash": "npm:^4.17.0"
     axios: "npm:^1.9.0"
     chart.js: "npm:3.3.2"

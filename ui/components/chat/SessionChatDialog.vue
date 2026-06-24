@@ -5,8 +5,9 @@ import ChatMessages from "./ChatMessages.vue";
 import ChatHeader from "./ChatHeader.vue";
 import ChatList from "./ChatList.vue";
 import ChatInputFooter from "./ChatInputFooter.vue";
+import ChatCallManager from "./ChatCallManager.vue";
 import {ClientStatus, WebSocketClient} from "../../services/WebSocketService";
-import {ref} from "vue";
+import {ref, computed} from "vue";
 import WebSocketStatus from "../events/WebSocketStatus.vue";
 import {useI18n} from "vue-i18n";
 
@@ -79,10 +80,28 @@ const offset = ref(0)
 
 let client = null
 const clientStatus = ref(ClientStatus.DISCONNECTED)
+const callManager = ref(null)
+
+const isGows = computed(() => {
+  if (!session.value?.server?.id) {
+    return false
+  }
+  const server = store.getServer(session.value.server.id)
+  return server?.version?.engine === 'GOWS'
+})
 
 function startClient() {
   const server = store.getServer(session.value.server.id)
-  const listenEvents = ['message.any']
+  const listenEvents = [
+    'message.any',
+    'call.received',
+    'call.ringing',
+    'call.connecting',
+    'call.accepted',
+    'call.active',
+    'call.ended',
+    'call.rejected',
+  ]
   client = new WebSocketClient(server, listenEvents, session.value.name)
   client.connect()
   clientStatus.value = ClientStatus.CONNECTING
@@ -101,6 +120,12 @@ function startClient() {
 }
 
 async function handleEvent(event) {
+  if (event?.event?.startsWith('call.')) {
+    callManager.value?.handleEvent(event)
+    if (!['call.received', 'call.ringing', 'call.connecting', 'call.active'].includes(event.event)) {
+      return
+    }
+  }
   await sleep(1000)
   const chatId = selectedChat.value?.id
   if (!chatId) {
@@ -119,6 +144,7 @@ function stopClient() {
   client?.stop()
   client = null
   clientStatus.value = ClientStatus.DISCONNECTED
+  callManager.value?.resetCallState()
 }
 
 
@@ -275,6 +301,14 @@ async function sendText(text) {
 }
 
 const showPromo = ref(false)
+
+function startVoiceCall() {
+  callManager.value?.startOutgoing(false)
+}
+
+function startVideoCall() {
+  callManager.value?.startOutgoing(true)
+}
 </script>
 
 <template>
@@ -330,6 +364,13 @@ const showPromo = ref(false)
         ></ChatList>
       </SplitterPanel>
       <SplitterPanel :size=70 class="flex flex-column gap-2 justify-content-between p-2">
+        <ChatCallManager
+            ref="callManager"
+            :server-id="session.server.id"
+            :session-name="session.name"
+            :is-gows="isGows"
+            :selected-chat="selectedChat"
+        />
         <div class="flex flex-column justify-content-between" style="height: 100%">
           <template v-if="selectedChat">
             <ChatHeader
@@ -338,6 +379,9 @@ const showPromo = ref(false)
                 :mePicture="profilePicture"
                 :fetch="fetchMessages"
                 :fetching="fetchingMessages"
+                :is-gows="isGows"
+                @start-voice-call="startVoiceCall"
+                @start-video-call="startVideoCall"
             >
             </ChatHeader>
             <hr>
