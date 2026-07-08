@@ -293,6 +293,40 @@ export class WahaAPI {
         });
     }
 
+    getPasskeyChallenge(serverId: ServerId, sessionName: string): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/auth/passkey`,
+            params: {},
+        });
+    }
+
+    submitPasskey(serverId: ServerId, sessionName: string, assertion: any): Promise<void> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: `/api/${sessionName}/auth/passkey`,
+            params: {},
+            body: assertion,
+        });
+    }
+
+    getPasskeyConfirmation(serverId: ServerId, sessionName: string): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/auth/passkey/confirmation`,
+            params: {},
+        });
+    }
+
+    confirmPasskey(serverId: ServerId, sessionName: string): Promise<void> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: `/api/${sessionName}/auth/passkey/confirm`,
+            params: {},
+            body: {},
+        });
+    }
+
     getProfilePicture(serverId: ServerId, sessionName: string, contactId: string): Promise<string> {
         return this.api.call(serverId, {
             method: 'GET',

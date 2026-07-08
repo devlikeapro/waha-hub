@@ -4,6 +4,7 @@ import AppTopbar from './AppTopbar.vue';
 import AppFooter from './AppFooter.vue';
 import AppSidebar from './AppSidebar.vue';
 import AppConfig from './AppConfig.vue';
+import PasskeyExtensionBanner from '@/components/PasskeyExtensionBanner.vue';
 import { useLayout } from './composables/layout';
 
 const { layoutConfig, layoutState, isSidebarActive } = useLayout();
@@ -63,6 +64,7 @@ const isOutsideClicked = (event) => {
             <app-sidebar></app-sidebar>
         </div>
         <div class="layout-main-container">
+            <passkey-extension-banner></passkey-extension-banner>
             <div class="layout-main">
                 <router-view></router-view>
             </div>

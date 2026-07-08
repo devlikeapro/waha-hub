@@ -65,7 +65,7 @@ export interface SessionConfig {
     ignore?: IgnoreConfig;
 }
 
-export type SessionStatus = "STOPPED" | "STARTING" | "SCAN_QR_CODE" | "WORKING" | "FAILED";
+export type SessionStatus = "STOPPED" | "STARTING" | "SCAN_QR_CODE" | "PASSKEY_REQUIRED" | "WORKING" | "FAILED";
 export type SessionMe = {
     id: string;
     pushName: string
@@ -76,6 +76,7 @@ export const SessionStatuses = [
     "FAILED",
     "STARTING",
     "SCAN_QR_CODE",
+    "PASSKEY_REQUIRED",
     "STOPPED",
 ];
 

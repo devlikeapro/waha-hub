@@ -264,6 +264,22 @@ export const useServerStore = defineStore('serverStore', () => {
         return wahaAPI.getQR(serverId, sessionName)
     }
 
+    async function getPasskeyChallenge(serverId: ServerId, sessionName: string): Promise<any> {
+        return wahaAPI.getPasskeyChallenge(serverId, sessionName)
+    }
+
+    async function submitPasskey(serverId: ServerId, sessionName: string, assertion: any): Promise<void> {
+        return wahaAPI.submitPasskey(serverId, sessionName, assertion)
+    }
+
+    async function getPasskeyConfirmation(serverId: ServerId, sessionName: string): Promise<any> {
+        return wahaAPI.getPasskeyConfirmation(serverId, sessionName)
+    }
+
+    async function confirmPasskey(serverId: ServerId, sessionName: string): Promise<void> {
+        return wahaAPI.confirmPasskey(serverId, sessionName)
+    }
+
     async function getChatsOverview(serverId: ServerId, sessionName: string,
                                     limit: number,
                                     offset?: number,
@@ -427,6 +443,10 @@ export const useServerStore = defineStore('serverStore', () => {
         logoutSession,
         getScreenshot,
         getQR,
+        getPasskeyChallenge,
+        submitPasskey,
+        getPasskeyConfirmation,
+        confirmPasskey,
         getChatsOverview,
         getChatsMessages,
         getChatMessage,
