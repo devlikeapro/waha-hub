@@ -177,6 +177,8 @@ const script = computed(() => {
 });
 
 async function copyScript() {
+  // No challenge yet → nothing to copy; don't flip to "Copied!" and mislead.
+  if (!script.value) return;
   try {
     await navigator.clipboard.writeText(script.value);
     copied.value = true;
@@ -316,7 +318,9 @@ async function submitPasted() {
           <Message severity="info" :closable="false">
             {{ t("sessions.passkey.extensionNotDetected") }}
           </Message>
-          <PasskeyExtensionButtons :server-id="session.server.id"/>
+          <div class="flex justify-content-center">
+            <PasskeyExtensionButtons :server-id="session.server.id"/>
+          </div>
           <div class="mt-3">
             <a href="#" class="text-sm" @click.prevent="showManual = !showManual">
               {{ showManual ? t("sessions.passkey.manualHide") : t("sessions.passkey.manualShow") }}
@@ -329,17 +333,18 @@ async function submitPasted() {
 
         <template v-if="!preview && (showManual || (extensionAvailable === false && !isChrome && !isFirefox))">
           <ol style="line-height: 1.8; padding-left: 1.2rem">
-            <li>{{ t("sessions.passkey.manualStep1") }}</li>
-            <li>{{ t("sessions.passkey.manualStep2") }}</li>
-            <li>{{ t("sessions.passkey.manualStep3") }}</li>
-            <li>{{ t("sessions.passkey.manualStep4") }}</li>
-            <li>{{ t("sessions.passkey.manualStep5") }}</li>
+            <li v-html="t('sessions.passkey.manualStep1')"></li>
+            <li v-html="t('sessions.passkey.manualStep2')"></li>
+            <li v-html="t('sessions.passkey.manualStep3')"></li>
+            <li v-html="t('sessions.passkey.manualStep4')"></li>
+            <li v-html="t('sessions.passkey.manualStep5')"></li>
           </ol>
 
           <Button
             :label="copied ? t('sessions.passkey.copied') : t('sessions.passkey.copyScript')"
             :icon="copied ? 'pi pi-check' : 'pi pi-copy'"
             severity="secondary"
+            :disabled="!script"
             @click="copyScript"
             class="mb-3"
           />
@@ -354,7 +359,7 @@ async function submitPasted() {
 
           <Button
             :label="t('sessions.passkey.send')"
-            icon="pi pi-check"
+            icon="pi pi-send"
             :loading="submitting"
             :disabled="!pasted"
             @click="submitPasted"

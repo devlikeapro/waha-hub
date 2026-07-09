@@ -47,11 +47,7 @@ watch(
           :session="session"
       ></SessionHeader>
     </template>
-    <!-- The Passkey step renders its own pinned banner, so skip this one there. -->
-    <PasskeyExtensionBanner
-        v-if="activeIndex !== PASSKEY_TAB_INDEX"
-        :server-id="session.server.id"
-    ></PasskeyExtensionBanner>
+    <PasskeyExtensionBanner :server-id="session.server.id"></PasskeyExtensionBanner>
     <TabView v-model:activeIndex="activeIndex">
       <TabPanel>
         <template #header>
@@ -108,13 +104,7 @@ watch(
             </template>
           </i18n-t>
         </Message>
-        <!-- Pinned (non-closable) and kept outside BlockUI so the install links
-             stay clickable even while the steps below are still blocked. -->
-        <PasskeyExtensionBanner
-            :server-id="session.server.id"
-            :closable="false"
-        ></PasskeyExtensionBanner>
-        <BlockUI :blocked="session.status !== 'PASSKEY_REQUIRED'" class="p-3">
+        <BlockUI :blocked="session.status !== 'PASSKEY_REQUIRED'" class="py-3">
           <PasskeySteps
               :session="session"
               :preview="session.status !== 'PASSKEY_REQUIRED'"
