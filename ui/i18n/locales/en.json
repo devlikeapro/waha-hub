@@ -561,6 +561,7 @@
   "sessions.passkey.manualStep5": "Paste the result into the field below and click <b><i class='pi pi-send'></i> Send</b>.",
   "sessions.passkey.copyScript": "Copy script",
   "sessions.passkey.copied": "Copied!",
+  "sessions.passkey.noChallenge": "No passkey challenge yet — it loads once the session asks for a passkey. Please wait for it to load, then try again.",
   "sessions.passkey.resultLabel": "Result (paste here):",
   "sessions.passkey.send": "Send",
   "sessions.passkey.scriptButtonSign": "🔑 Sign with the passkey",

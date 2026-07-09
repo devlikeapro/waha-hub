@@ -20,6 +20,7 @@ const { t } = useI18n();
 // dashboard loaded (see PasskeyExtensionBanner.vue), so extensionAvailable is normally
 // already resolved by the time this step shows up.
 const store = useServerStore();
+const toast = useToast();
 // preview = the session hasn't asked for a passkey yet, so the steps below the
 // dialog show blocked as a preview. In that mode we skip fetching a challenge
 // (the server would reject it) and just render the whole flow at once.
@@ -177,8 +178,16 @@ const script = computed(() => {
 });
 
 async function copyScript() {
-  // No challenge yet → nothing to copy; don't flip to "Copied!" and mislead.
-  if (!script.value) return;
+  // No challenge yet → nothing to copy; explain why instead of silently failing.
+  if (!script.value) {
+    toast.add({
+      severity: "warn",
+      summary: t("sessions.passkey.tab"),
+      detail: t("sessions.passkey.noChallenge"),
+      life: 6000,
+    });
+    return;
+  }
   try {
     await navigator.clipboard.writeText(script.value);
     copied.value = true;
@@ -344,7 +353,6 @@ async function submitPasted() {
             :label="copied ? t('sessions.passkey.copied') : t('sessions.passkey.copyScript')"
             :icon="copied ? 'pi pi-check' : 'pi pi-copy'"
             severity="secondary"
-            :disabled="!script"
             @click="copyScript"
             class="mb-3"
           />
