@@ -20,7 +20,13 @@ const { t } = useI18n();
 // dashboard loaded (see PasskeyExtensionBanner.vue), so extensionAvailable is normally
 // already resolved by the time this step shows up.
 const store = useServerStore();
-const props = defineProps({ session: Object });
+// preview = the session hasn't asked for a passkey yet, so the steps below the
+// dialog show blocked as a preview. In that mode we skip fetching a challenge
+// (the server would reject it) and just render the whole flow at once.
+const props = defineProps({
+  session: Object,
+  preview: { type: Boolean, default: false },
+});
 
 const {
   isChrome,
@@ -49,17 +55,29 @@ const {
   data: challenge,
   pending,
   error,
+  refresh: refreshChallenge,
 } = useAsyncData(
   `session-passkey-${props.session.server.id}-${props.session.name}`,
   async () => {
     await sleep(300);
     return await store.getPasskeyChallenge(props.session.server.id, props.session.name);
-  }
+  },
+  { immediate: false }
 );
 
 onMounted(() => {
   checkExtension();
+  if (!props.preview) refreshChallenge();
 });
+
+// Once the session actually needs a passkey, drop out of preview and fetch the
+// real challenge.
+watch(
+  () => props.preview,
+  (preview) => {
+    if (!preview && !challenge.value) refreshChallenge();
+  }
+);
 
 function signWithExtension(challengeValue) {
   if (window.chrome?.runtime?.sendMessage) {
@@ -232,22 +250,22 @@ async function submitPasted() {
 </script>
 
 <template>
-  <div style="min-width: 22rem; max-width: 42rem">
-    <Message severity="warn" :closable="false">
+  <div style="min-width: 22rem; max-width: 42rem; margin: 0 auto">
+    <Message v-if="!preview" severity="warn" :closable="false">
       {{ t("sessions.passkey.requires") }}
     </Message>
 
     <ProgressBar
-      v-if="pending"
+      v-if="pending && !preview"
       mode="indeterminate"
       style="height: 3px"
     ></ProgressBar>
     <pre
-      v-else-if="error"
+      v-else-if="error && !preview"
       style="color: red; white-space: pre-wrap"
     >{{ error.cause?.response?.data?.message || error }}</pre>
 
-    <template v-else-if="challenge">
+    <template v-else-if="challenge || preview">
       <Message v-if="submitError" severity="error" :closable="false">{{
         submitError
       }}</Message>
@@ -275,7 +293,14 @@ async function submitPasted() {
       </Message>
 
       <template v-if="!submitted">
-        <template v-if="extensionAvailable === true">
+        <!-- Preview: show the one-click extension button so the whole flow is
+             visible at once. It's inert here (the dialog blocks it). -->
+        <Button
+          v-if="preview"
+          :label="t('sessions.passkey.signWithPasskey')"
+          icon="pi pi-key"
+        />
+        <template v-else-if="extensionAvailable === true">
           <p>{{ t("sessions.passkey.extensionDetected") }}</p>
           <Button
             :label="t('sessions.passkey.signWithPasskey')"
@@ -311,7 +336,7 @@ async function submitPasted() {
           {{ t("sessions.passkey.noInstallNeeded") }}
         </p>
 
-        <template v-if="showManual || (extensionAvailable === false && !isChrome && !isFirefox)">
+        <template v-if="!preview && (showManual || (extensionAvailable === false && !isChrome && !isFirefox))">
           <ol style="line-height: 1.8; padding-left: 1.2rem">
             <li>{{ t("sessions.passkey.manualStep1") }}</li>
             <li>{{ t("sessions.passkey.manualStep2") }}</li>

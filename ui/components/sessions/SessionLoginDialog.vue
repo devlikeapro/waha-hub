@@ -114,8 +114,11 @@ watch(
             :server-id="session.server.id"
             :closable="false"
         ></PasskeyExtensionBanner>
-        <BlockUI :blocked="session.status !== 'PASSKEY_REQUIRED'">
-          <PasskeySteps :session="session"></PasskeySteps>
+        <BlockUI :blocked="session.status !== 'PASSKEY_REQUIRED'" class="p-3">
+          <PasskeySteps
+              :session="session"
+              :preview="session.status !== 'PASSKEY_REQUIRED'"
+          ></PasskeySteps>
         </BlockUI>
       </TabPanel>
     </TabView>
