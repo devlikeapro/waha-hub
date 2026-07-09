@@ -15,6 +15,20 @@ const CODE_TAB_INDEX = 1;
 const PASSKEY_TAB_INDEX = 2;
 const activeIndex = ref(0);
 
+// Detect the extension at the dialog level so the "not detected + install"
+// prompt can sit outside BlockUI on the Passkey tab — visible before the
+// session asks for a passkey, so operators can install early.
+const {
+  isChrome,
+  isFirefox,
+  available: extensionAvailable,
+  check: checkExtension,
+} = usePasskeyExtension(props.session.server.id);
+
+onMounted(() => {
+  checkExtension();
+});
+
 watch(
   () => props.session.status,
   async (status) => {
@@ -104,6 +118,16 @@ watch(
             </template>
           </i18n-t>
         </Message>
+        <!-- Install prompt kept outside BlockUI so operators can install the
+             extension early, before the session is ready for a passkey. -->
+        <template v-if="extensionAvailable === false && (isChrome || isFirefox)">
+          <Message severity="info" :closable="false">
+            {{ t('sessions.passkey.extensionNotDetected') }}
+          </Message>
+          <div class="flex justify-content-center mb-3">
+            <PasskeyExtensionButtons :server-id="session.server.id"/>
+          </div>
+        </template>
         <BlockUI :blocked="session.status !== 'PASSKEY_REQUIRED'" class="py-3">
           <PasskeySteps
               :session="session"

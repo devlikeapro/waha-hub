@@ -324,12 +324,8 @@ async function submitPasted() {
           </div>
         </template>
         <template v-else-if="extensionAvailable === false && (isChrome || isFirefox)">
-          <Message severity="info" :closable="false">
-            {{ t("sessions.passkey.extensionNotDetected") }}
-          </Message>
-          <div class="flex justify-content-center">
-            <PasskeyExtensionButtons :server-id="session.server.id"/>
-          </div>
+          <!-- Install prompt lives above BlockUI (SessionLoginDialog) so it shows
+               before the session is ready; here we only offer the manual fallback. -->
           <div class="mt-3">
             <a href="#" class="text-sm" @click.prevent="showManual = !showManual">
               {{ showManual ? t("sessions.passkey.manualHide") : t("sessions.passkey.manualShow") }}
