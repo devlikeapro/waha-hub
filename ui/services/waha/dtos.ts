@@ -65,7 +65,20 @@ export interface SessionConfig {
     ignore?: IgnoreConfig;
 }
 
-export type SessionStatus = "STOPPED" | "STARTING" | "SCAN_QR_CODE" | "PASSKEY_REQUIRED" | "WORKING" | "FAILED";
+export type SessionStatus =
+    | "STOPPED"
+    | "STARTING"
+    | "SCAN_QR_CODE"
+    | "PASSKEY_REQUIRED"
+    | "PASSKEY_CONFIRMATION_REQUIRED"
+    | "WORKING"
+    | "FAILED";
+
+// The session is in the middle of the passkey (WebAuthn) pairing flow
+export const PasskeySessionStatuses: SessionStatus[] = [
+    "PASSKEY_REQUIRED",
+    "PASSKEY_CONFIRMATION_REQUIRED",
+];
 export type SessionMe = {
     id: string;
     pushName: string
@@ -77,6 +90,7 @@ export const SessionStatuses = [
     "STARTING",
     "SCAN_QR_CODE",
     "PASSKEY_REQUIRED",
+    "PASSKEY_CONFIRMATION_REQUIRED",
     "STOPPED",
 ];
 

@@ -1,7 +1,5 @@
 export const WAHAEvents = [
     "session.status",
-    "passkey.required",
-    "passkey.confirmation.required",
     "message",
     "message.any",
     "message.reaction",
@@ -33,8 +31,6 @@ export const WAHAEvents = [
 ]
 export const WAHAEventColor = {
     "session.status": "#64c4ff",
-    "passkey.required": "#34d399",
-    "passkey.confirmation.required": "#f0b429",
     "message": "#ffd429",
     "message.any": "#dfaef0",
     "message.reaction": "#99b6c1",

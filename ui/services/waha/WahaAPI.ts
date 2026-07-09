@@ -296,7 +296,7 @@ export class WahaAPI {
     getPasskeyChallenge(serverId: ServerId, sessionName: string): Promise<any> {
         return this.api.call(serverId, {
             method: 'GET',
-            uri: `/api/${sessionName}/auth/passkey`,
+            uri: `/api/${sessionName}/auth/passkey/challenge`,
             params: {},
         });
     }

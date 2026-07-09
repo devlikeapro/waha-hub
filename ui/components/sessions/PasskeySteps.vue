@@ -21,13 +21,24 @@ const { t } = useI18n();
 // already resolved by the time this step shows up.
 const store = useServerStore();
 const toast = useToast();
-// preview = the session hasn't asked for a passkey yet, so the steps below the
+// preview = the session isn't in the passkey flow yet, so the steps below the
 // dialog show blocked as a preview. In that mode we skip fetching a challenge
 // (the server would reject it) and just render the whole flow at once.
 const props = defineProps({
   session: Object,
   preview: { type: Boolean, default: false },
 });
+
+// The session drives the flow through its status: PASSKEY_REQUIRED means a
+// challenge is waiting to be signed, PASSKEY_CONFIRMATION_REQUIRED means the
+// operator has to verify a code. Both carry their payload on the
+// session.status event and are readable from the API while they last.
+const needsChallenge = computed(
+  () => props.session.status === "PASSKEY_REQUIRED",
+);
+const needsConfirmation = computed(
+  () => props.session.status === "PASSKEY_CONFIRMATION_REQUIRED",
+);
 
 const {
   isChrome,
@@ -66,17 +77,33 @@ const {
 
 onMounted(() => {
   checkExtension();
-  if (!props.preview) refreshChallenge();
+  if (needsChallenge.value) refreshChallenge();
+  if (needsConfirmation.value) fetchConfirmationCode();
 });
 
-// Once the session actually needs a passkey, drop out of preview and fetch the
-// real challenge.
-watch(
-  () => props.preview,
-  (preview) => {
-    if (!preview && !challenge.value) refreshChallenge();
+// Once the session actually asks for a passkey, fetch the real challenge.
+watch(needsChallenge, (needed) => {
+  if (needed && !challenge.value) refreshChallenge();
+});
+
+// The confirmation step is rare - most pairings are confirmed by WhatsApp right
+// after the assertion, and the session goes straight to WORKING.
+watch(needsConfirmation, (needed) => {
+  if (needed) fetchConfirmationCode();
+});
+
+async function fetchConfirmationCode() {
+  try {
+    const confirmation = await store.getPasskeyConfirmation(
+      props.session.server.id,
+      props.session.name,
+    );
+    confirmationCode.value = confirmation?.code ?? null;
+  } catch (e) {
+    // The session moved on and the code is gone - nothing left to confirm.
+    confirmationCode.value = null;
   }
-);
+}
 
 function signWithExtension(challengeValue) {
   if (window.chrome?.runtime?.sendMessage) {
@@ -202,34 +229,13 @@ async function submitAssertion(assertion) {
   try {
     await store.submitPasskey(props.session.server.id, props.session.name, assertion);
     submitted.value = true;
-    pollPasskeyConfirmation();
+    // Whatever comes next - WORKING or PASSKEY_CONFIRMATION_REQUIRED - arrives
+    // as a session status change, which the watchers above pick up.
   } catch (e) {
     submitError.value =
       e?.cause?.response?.data?.message || e?.message || String(e);
   } finally {
     submitting.value = false;
-  }
-}
-
-// The manual confirmation-code case is rare — most pairings auto-confirm
-// server-side right after the assertion is submitted, without any extra step.
-// Poll briefly for a pending code instead of adding a new webhook/websocket
-// dependency just for this corner case.
-async function pollPasskeyConfirmation(attempts = 8, intervalMs = 1000) {
-  for (let i = 0; i < attempts; i++) {
-    await sleep(intervalMs);
-    try {
-      const confirmation = await store.getPasskeyConfirmation(
-        props.session.server.id,
-        props.session.name,
-      );
-      if (confirmation?.code) {
-        confirmationCode.value = confirmation.code;
-        return;
-      }
-    } catch (e) {
-      return; // best-effort — give up quietly
-    }
   }
 }
 
@@ -274,7 +280,7 @@ async function submitPasted() {
       style="color: red; white-space: pre-wrap"
     >{{ error.cause?.response?.data?.message || error }}</pre>
 
-    <template v-else-if="challenge || preview">
+    <template v-else-if="challenge || preview || needsConfirmation">
       <Message v-if="submitError" severity="error" :closable="false">{{
         submitError
       }}</Message>
@@ -301,7 +307,9 @@ async function submitPasted() {
         {{ t("sessions.passkey.confirmed") }}
       </Message>
 
-      <template v-if="!submitted">
+      <!-- Signing is over once we're waiting on the confirmation code, even if
+           this dialog was opened fresh at that step and never submitted. -->
+      <template v-if="!submitted && !needsConfirmation">
         <!-- Preview: show the one-click extension button so the whole flow is
              visible at once. It's inert here (the dialog blocks it). -->
         <Button

@@ -5,6 +5,7 @@ import PairingCodeSteps from "./PairingCodeSteps.vue";
 import ScanQRCodeGuide from "./ScanQRCodeGuide.vue";
 import PasskeySteps from "./PasskeySteps.vue";
 import PasskeyExtensionBanner from "@/components/PasskeyExtensionBanner.vue";
+import { PasskeySessionStatuses } from "@/services/waha/dtos";
 
 const visible = defineModel("visible");
 const props = defineProps(['session'])
@@ -14,6 +15,12 @@ const QR_TAB_INDEX = 0;
 const CODE_TAB_INDEX = 1;
 const PASSKEY_TAB_INDEX = 2;
 const activeIndex = ref(0);
+
+// PASSKEY_REQUIRED (sign the challenge) and PASSKEY_CONFIRMATION_REQUIRED
+// (verify the code) are both steps of the same passkey flow.
+const passkeyActive = computed(() =>
+  PasskeySessionStatuses.includes(props.session.status),
+);
 
 // Detect the extension at the dialog level so the "not detected + install"
 // prompt can sit outside BlockUI on the Passkey tab — visible before the
@@ -37,7 +44,7 @@ watch(
       visible.value = false;
       return;
     }
-    if (status === "PASSKEY_REQUIRED") {
+    if (PasskeySessionStatuses.includes(status)) {
       // Jump straight to the Passkey tab, whether the dialog was already
       // open (e.g. on the QR tab) or is about to be opened by SessionLogin.
       await nextTick(); // let the dialog/tabs render before switching to it
@@ -96,7 +103,7 @@ watch(
         <!-- Always rendered so the steps are visible up front, but inert until
              the session actually asks for a passkey. -->
         <Message
-          v-if="session.status !== 'PASSKEY_REQUIRED'"
+          v-if="!passkeyActive"
           severity="warn"
           :closable="false"
         >
@@ -128,10 +135,10 @@ watch(
             <PasskeyExtensionButtons :server-id="session.server.id"/>
           </div>
         </template>
-        <BlockUI :blocked="session.status !== 'PASSKEY_REQUIRED'" class="py-3">
+        <BlockUI :blocked="!passkeyActive" class="py-3">
           <PasskeySteps
               :session="session"
-              :preview="session.status !== 'PASSKEY_REQUIRED'"
+              :preview="!passkeyActive"
           ></PasskeySteps>
         </BlockUI>
       </TabPanel>

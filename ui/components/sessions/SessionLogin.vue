@@ -1,10 +1,13 @@
 <script setup>
 import SessionLoginDialog from "./SessionLoginDialog.vue";
 import {useI18n} from "vue-i18n";
+import { PasskeySessionStatuses } from "@/services/waha/dtos";
 
 const { t } = useI18n();
 const props = defineProps(['session']);
 const showDialog = ref(false);
+
+const loginStatuses = ["SCAN_QR_CODE", ...PasskeySessionStatuses];
 
 // Surface the login dialog automatically as soon as passkey confirmation is
 // needed — regardless of what the operator was doing (e.g. watching the QR
@@ -13,7 +16,7 @@ const showDialog = ref(false);
 watch(
   () => props.session.status,
   (status) => {
-    if (status === "PASSKEY_REQUIRED") {
+    if (PasskeySessionStatuses.includes(status)) {
       showDialog.value = true;
     }
   },
@@ -29,7 +32,7 @@ watch(
       rounded
       outlined
       @click="showDialog = true"
-      :disabled="!['SCAN_QR_CODE', 'PASSKEY_REQUIRED'].includes(session.status)"
+      :disabled="!loginStatuses.includes(session.status)"
   />
   <SessionLoginDialog
       v-model:visible="showDialog"
