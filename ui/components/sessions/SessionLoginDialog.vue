@@ -4,6 +4,7 @@ import QRImage from "./QRImage.vue";
 import PairingCodeSteps from "./PairingCodeSteps.vue";
 import ScanQRCodeGuide from "./ScanQRCodeGuide.vue";
 import PasskeySteps from "./PasskeySteps.vue";
+import PasskeyExtensionBanner from "@/components/PasskeyExtensionBanner.vue";
 
 const visible = defineModel("visible");
 const props = defineProps(['session'])
@@ -44,6 +45,7 @@ watch(
           :session="session"
       ></SessionHeader>
     </template>
+    <PasskeyExtensionBanner :server-id="session.server.id"></PasskeyExtensionBanner>
     <TabView v-model:activeIndex="activeIndex">
       <TabPanel>
         <template #header>
