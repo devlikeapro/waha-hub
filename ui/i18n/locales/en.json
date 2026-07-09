@@ -550,7 +550,6 @@
   "sessions.passkey.manualShow": "Prefer the manual method (no extension)?",
   "sessions.passkey.manualHide": "Hide",
   "sessions.passkey.extensionNotDetected": "Extension not detected. Install it to connect with one click, or use the manual method below.",
-  "sessions.passkey.installExtension": "Install extension",
   "sessions.passkey.installChrome": "Install for Chrome",
   "sessions.passkey.installFirefox": "Install for Firefox",
   "sessions.passkey.noInstallNeeded": "No need to install anything — just do the step below in your browser.",
