@@ -228,34 +228,43 @@ function refreshServers() {
 
     <Column>
       <template #body="{data}">
-        <div class="flex flex-row gap-2 justify-content-end">
-          <Button
-              v-tooltip.top="t('servers.links')"
-              icon="pi pi-link" severity="info" rounded outlined @click="toggleLinksPanel($event, data)"
-          />
-          <Button
-              :disabled="!data.connected"
-              v-tooltip.top="t('servers.apikey.button.tooltip')"
-              icon="pi pi-key" severity="warning" rounded outlined @click="openApiKeyDialog(data)"
-          />
-          <Button
-              :disabled="!data.connected"
-              v-tooltip.top="t('servers.workerInfo')"
-              icon="pi pi-info" severity="help" rounded outlined @click="openServerControl(data)"
-          />
-          <Button
-              icon="pi pi-replay"
-              v-tooltip.top="t('servers.restartWorker')"
-              severity="warning"
-              rounded outlined
-              @click="confirmRestart(data)"
-          />
-          <Button
-              v-tooltip.top="t('servers.editWorker')"
-              icon="pi pi-pencil" severity="success" rounded outlined @click="editServer(data)"/>
-          <Button
-              v-tooltip.top="t('servers.disconnectWorker')"
-              icon="pi pi-times" severity="danger" rounded outlined @click="confirmDeleteServer($event, data)"/>
+        <div class="flex flex-row gap-2 align-items-center justify-content-end">
+          <!-- Left group: things you do *with* the worker -->
+          <div class="flex flex-row gap-2">
+            <Button
+                :disabled="!data.connected"
+                v-tooltip.top="t('servers.links')"
+                icon="pi pi-link" severity="info" rounded outlined @click="toggleLinksPanel($event, data)"
+            />
+            <Button
+                :disabled="!data.connected"
+                v-tooltip.top="t('servers.apikey.button.tooltip')"
+                icon="pi pi-key" severity="warning" rounded outlined @click="openApiKeyDialog(data)"
+            />
+            <Button
+                :disabled="!data.connected"
+                v-tooltip.top="t('servers.workerInfo')"
+                icon="pi pi-info" severity="help" rounded outlined @click="openServerControl(data)"
+            />
+            <Button
+                :disabled="!data.connected"
+                icon="pi pi-replay"
+                v-tooltip.top="t('servers.restartWorker')"
+                severity="warning"
+                rounded outlined
+                @click="confirmRestart(data)"
+            />
+          </div>
+          <Divider layout="vertical" class="mx-1"/>
+          <!-- Right group: things you do *to* the worker entry -->
+          <div class="flex flex-row gap-2">
+            <Button
+                v-tooltip.top="t('servers.editWorker')"
+                icon="pi pi-pencil" severity="success" rounded outlined @click="editServer(data)"/>
+            <Button
+                v-tooltip.top="t('servers.disconnectWorker')"
+                icon="pi pi-times" severity="danger" rounded outlined @click="confirmDeleteServer($event, data)"/>
+          </div>
         </div>
       </template>
     </Column>
