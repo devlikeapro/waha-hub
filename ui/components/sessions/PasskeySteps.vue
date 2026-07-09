@@ -34,8 +34,6 @@ const {
   available: extensionAvailable,
   check: checkExtension,
   EXTENSION_ID,
-  CHROME_STORE_URL,
-  FIREFOX_STORE_URL,
 } = usePasskeyExtension(props.session.server.id);
 
 const pasted = ref("");
@@ -318,14 +316,7 @@ async function submitPasted() {
           <Message severity="info" :closable="false">
             {{ t("sessions.passkey.extensionNotDetected") }}
           </Message>
-          <Button
-            :label="t('sessions.passkey.installExtension')"
-            icon="pi pi-external-link"
-            as="a"
-            :href="isFirefox ? FIREFOX_STORE_URL : CHROME_STORE_URL"
-            target="_blank"
-            rel="noopener"
-          />
+          <PasskeyExtensionButtons :server-id="session.server.id"/>
           <div class="mt-3">
             <a href="#" class="text-sm" @click.prevent="showManual = !showManual">
               {{ showManual ? t("sessions.passkey.manualHide") : t("sessions.passkey.manualShow") }}

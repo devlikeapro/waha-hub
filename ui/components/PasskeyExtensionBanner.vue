@@ -13,11 +13,7 @@ const props = defineProps({
 const { t } = useI18n();
 const DISMISS_KEY = "passkey-extension-banner-dismissed";
 
-const runtimeConfig = useRuntimeConfig();
-const baseUrl = runtimeConfig.app?.baseURL || "/";
-
-const { isFirefox, available, check, CHROME_STORE_URL, FIREFOX_STORE_URL } =
-  usePasskeyExtension(props.serverId);
+const { available, check } = usePasskeyExtension(props.serverId);
 const dismissed = ref(localStorage.getItem(DISMISS_KEY) === "1");
 
 onMounted(() => {
@@ -35,45 +31,13 @@ function dismiss() {
 const show = computed(
   () => available.value === false && (!props.closable || !dismissed.value),
 );
-
-// Offer both stores, but lead with the one matching the current browser.
-const stores = computed(() => {
-  const chrome = {
-    key: "chrome",
-    url: CHROME_STORE_URL.value,
-    label: t("sessions.passkey.installChrome"),
-    icon: `${baseUrl}icons/browsers/chrome.svg`,
-    color: "#4285F4",
-  };
-  const firefox = {
-    key: "firefox",
-    url: FIREFOX_STORE_URL.value,
-    label: t("sessions.passkey.installFirefox"),
-    icon: `${baseUrl}icons/browsers/firefox.svg`,
-    color: "#FF7139",
-  };
-  return isFirefox ? [firefox, chrome] : [chrome, firefox];
-});
 </script>
 
 <template>
   <Message v-if="show" severity="info" @close="dismiss" :closable="closable">
     <div class="passkey-banner flex flex-column">
       <span v-html="t('sessions.passkey.bannerRecommend')"></span>
-      <div class="passkey-banner-actions">
-        <a
-          v-for="store in stores"
-          :key="store.key"
-          :href="store.url"
-          target="_blank"
-          rel="noopener"
-          class="passkey-store-btn"
-          :style="{ backgroundColor: store.color }"
-        >
-          <img :src="store.icon" :alt="store.label" class="passkey-store-btn-icon"/>
-          <span>{{ store.label }}</span>
-        </a>
-      </div>
+      <PasskeyExtensionButtons :server-id="serverId"/>
     </div>
   </Message>
 </template>
@@ -84,33 +48,5 @@ const stores = computed(() => {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
-}
-
-.passkey-banner-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.passkey-store-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.6rem 1.25rem;
-  border-radius: 8px;
-  color: #fff;
-  font-weight: 600;
-  font-size: 1rem;
-  text-decoration: none;
-  transition: filter 0.15s ease;
-
-  &:hover {
-    filter: brightness(1.08);
-  }
-}
-
-.passkey-store-btn-icon {
-  width: 1.5rem;
-  height: 1.5rem;
 }
 </style>
