@@ -57,8 +57,8 @@ const stores = computed(() => {
 </script>
 
 <template>
-  <Message v-if="show" severity="info" @close="dismiss" :closable="closable" class="m-3">
-    <div class="passkey-banner">
+  <Message v-if="show" severity="info" @close="dismiss" :closable="closable">
+    <div class="passkey-banner flex flex-column">
       <span>{{ t("sessions.passkey.bannerRecommend") }}</span>
       <div class="passkey-banner-actions">
         <a
