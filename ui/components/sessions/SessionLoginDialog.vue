@@ -127,14 +127,16 @@ watch(
         </Message>
         <!-- Install prompt kept outside BlockUI so operators can install the
              extension early, before the session is ready for a passkey. -->
-        <template v-if="extensionAvailable === false && (isChrome || isFirefox)">
-          <Message severity="info" :closable="false">
-            {{ t('sessions.passkey.extensionNotDetected') }}
-          </Message>
-          <div class="flex justify-content-center mb-3">
+        <Message
+          v-if="extensionAvailable === false && (isChrome || isFirefox)"
+          severity="info"
+          :closable="false"
+        >
+          <div class="passkey-banner flex flex-column">
+            <span>{{ t('sessions.passkey.extensionNotDetected') }}</span>
             <PasskeyExtensionButtons :server-id="session.server.id"/>
           </div>
-        </template>
+        </Message>
         <BlockUI :blocked="!passkeyActive" class="py-3">
           <PasskeySteps
               :session="session"
@@ -153,5 +155,12 @@ watch(
   text-decoration: underline;
   white-space: nowrap;
   cursor: pointer;
+}
+
+.passkey-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
 }
 </style>
