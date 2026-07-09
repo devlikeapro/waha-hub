@@ -147,75 +147,86 @@ function confirmRemoveSession(event) {
 </script>
 
 <template>
-  <div class="flex flex-row gap-2 justify-content-end">
-    <Button
-        v-if="shouldShowConfiguration"
-        icon="pi pi-cog"
-        v-tooltip.top="t('sessions.configuration')"
-        severity="help"
-        rounded
-        outlined
-        @click="$emit('view')"
-        :disabled="allDisabled"
-    />
-    <Button
-        v-if="shouldShowApps"
-        icon="pi pi-th-large"
-        v-tooltip.top="t('sessions.apps')"
-        severity="info"
-        rounded
-        outlined
-        @click="$emit('apps')"
-        :disabled="allDisabled"
-    />
-    <Button
-        icon="pi pi-play"
-        v-tooltip.top="t('sessions.start')"
-        severity="success"
-        rounded
-        outlined
-        @click="startSession"
-        :loading="isStarting"
-        :disabled="allDisabled"
-    />
-    <Button
-        icon="pi pi-replay"
-        v-tooltip.top="t('sessions.restart')"
-        severity="info"
-        rounded outlined
-        @click="confirmRestartSession($event)"
-        :loading="isRestarting"
-        :disabled="allDisabled"
-    />
-    <Button
-        icon="pi pi-stop"
-        v-tooltip.top="t('sessions.stop')"
-        severity="secondary"
-        rounded outlined
-        @click="confirmStopSession($event)"
-        :loading="isStopping"
-        :disabled="allDisabled"
-    />
-    <Button
-        icon="pi pi-sign-out"
-        v-tooltip.top="t('sessions.logout')"
-        severity="warning"
-        rounded
-        outlined
-        @click="confirmLogoutSession($event)"
-        :loading="isLoggingOut"
-        :disabled="allDisabled"
-    />
-    <Button
-        icon="pi pi-trash"
-        v-tooltip.top="t('sessions.delete')"
-        severity="danger"
-        rounded
-        outlined
-        @click="confirmRemoveSession($event)"
-        :loading="isRemoving"
-        :disabled="allDisabled"
-    />
+  <div class="flex flex-row gap-2 align-items-center justify-content-end">
+    <!-- Left group: inspect the session -->
+    <div class="flex flex-row gap-2">
+      <Button
+          v-if="shouldShowConfiguration"
+          icon="pi pi-cog"
+          v-tooltip.top="t('sessions.configuration')"
+          severity="help"
+          rounded
+          outlined
+          @click="$emit('view')"
+          :disabled="allDisabled"
+      />
+      <Button
+          v-if="shouldShowApps"
+          icon="pi pi-th-large"
+          v-tooltip.top="t('sessions.apps')"
+          severity="info"
+          rounded
+          outlined
+          @click="$emit('apps')"
+          :disabled="allDisabled"
+      />
+    </div>
+    <Divider layout="vertical" class="mx-1"/>
+    <!-- Middle group: drive the session lifecycle -->
+    <div class="flex flex-row gap-2">
+      <Button
+          icon="pi pi-play"
+          v-tooltip.top="t('sessions.start')"
+          severity="success"
+          rounded
+          outlined
+          @click="startSession"
+          :loading="isStarting"
+          :disabled="allDisabled"
+      />
+      <Button
+          icon="pi pi-replay"
+          v-tooltip.top="t('sessions.restart')"
+          severity="info"
+          rounded outlined
+          @click="confirmRestartSession($event)"
+          :loading="isRestarting"
+          :disabled="allDisabled"
+      />
+      <Button
+          icon="pi pi-stop"
+          v-tooltip.top="t('sessions.stop')"
+          severity="secondary"
+          rounded outlined
+          @click="confirmStopSession($event)"
+          :loading="isStopping"
+          :disabled="allDisabled"
+      />
+      <Button
+          icon="pi pi-sign-out"
+          v-tooltip.top="t('sessions.logout')"
+          severity="warning"
+          rounded
+          outlined
+          @click="confirmLogoutSession($event)"
+          :loading="isLoggingOut"
+          :disabled="allDisabled"
+      />
+    </div>
+    <Divider layout="vertical" class="mx-1"/>
+    <!-- Right group: destroy the session entry -->
+    <div class="flex flex-row gap-2">
+      <Button
+          icon="pi pi-trash"
+          v-tooltip.top="t('sessions.delete')"
+          severity="danger"
+          rounded
+          outlined
+          @click="confirmRemoveSession($event)"
+          :loading="isRemoving"
+          :disabled="allDisabled"
+      />
+    </div>
   </div>
   <ConfirmPopup
       v-if="group==='popup'"
