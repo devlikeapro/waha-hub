@@ -10,6 +10,8 @@ const visible = defineModel("visible");
 const props = defineProps(['session'])
 const { t } = useI18n();
 
+const QR_TAB_INDEX = 0;
+const CODE_TAB_INDEX = 1;
 const PASSKEY_TAB_INDEX = 2;
 const activeIndex = ref(0);
 
@@ -24,7 +26,7 @@ watch(
     if (status === "PASSKEY_REQUIRED") {
       // Jump straight to the Passkey tab, whether the dialog was already
       // open (e.g. on the QR tab) or is about to be opened by SessionLogin.
-      await nextTick(); // let the v-if'd tab render before switching to it
+      await nextTick(); // let the dialog/tabs render before switching to it
       activeIndex.value = PASSKEY_TAB_INDEX;
     }
   },
@@ -72,12 +74,39 @@ watch(
           <PairingCodeSteps :session="session"></PairingCodeSteps>
         </div>
       </TabPanel>
-      <TabPanel v-if="session.status === 'PASSKEY_REQUIRED'">
+      <TabPanel>
         <template #header>
           <i class="pi pi-key mr-2"></i>
           {{ t('sessions.passkey.tab') }}
         </template>
-        <PasskeySteps :session="session"></PasskeySteps>
+        <!-- Always rendered so the steps are visible up front, but inert until
+             the session actually asks for a passkey. -->
+        <Message
+          v-if="session.status !== 'PASSKEY_REQUIRED'"
+          severity="warn"
+          :closable="false"
+        >
+          <i18n-t keypath="sessions.passkey.scanFirst" tag="span">
+            <template #scanQR>
+              <a href="#" class="passkey-tab-link" @click.prevent="activeIndex = QR_TAB_INDEX">
+                <i class="pi pi-qrcode mr-1"></i>{{ t('sessions.scanQRTab') }}
+              </a>
+            </template>
+            <template #enterCode>
+              <a href="#" class="passkey-tab-link" @click.prevent="activeIndex = CODE_TAB_INDEX">
+                <i class="pi pi-send mr-1"></i>{{ t('sessions.enterCodeTab') }}
+              </a>
+            </template>
+            <template #passkey>
+              <a href="#" class="passkey-tab-link" @click.prevent="activeIndex = PASSKEY_TAB_INDEX">
+                <i class="pi pi-key mr-1"></i>{{ t('sessions.passkey.tab') }}
+              </a>
+            </template>
+          </i18n-t>
+        </Message>
+        <BlockUI :blocked="session.status !== 'PASSKEY_REQUIRED'">
+          <PasskeySteps :session="session"></PasskeySteps>
+        </BlockUI>
       </TabPanel>
     </TabView>
   </Dialog>
@@ -85,5 +114,10 @@ watch(
 </template>
 
 <style scoped lang="scss">
-
+.passkey-tab-link {
+  font-weight: 700;
+  text-decoration: underline;
+  white-space: nowrap;
+  cursor: pointer;
+}
 </style>

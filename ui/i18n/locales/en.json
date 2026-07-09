@@ -540,6 +540,7 @@
   "sessions.guide.code.showCode": "Show Code",
   "sessions.passkey.tab": "Passkey",
   "sessions.passkey.requires": "This account requires a passkey to finish pairing.",
+  "sessions.passkey.scanFirst": "Please {scanQR} or {enterCode} first to use {passkey}.",
   "sessions.passkey.submitted": "Submitted! Waiting for the session to connect…",
   "sessions.passkey.confirmHint": "Check that the code below matches the one shown on your phone, then confirm.",
   "sessions.passkey.confirmCode": "Confirm code",
