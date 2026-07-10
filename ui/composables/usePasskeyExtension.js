@@ -11,9 +11,9 @@
 // When no serverId is available (app-wide banner) or the env var is unset, the defaults
 // below are used. Reading the env needs the server "manage" permission; on 403 we fall back
 // to the defaults quietly.
-const DEFAULT_EXTENSION_ID = "kihcbnjelmhgljhjdahofddiiijlgdjn"; // Chrome — published (unlisted) on the CWS
+const DEFAULT_EXTENSION_ID = "ghpdcgnjffaaekflfpcgkgpbafmjldcp"; // Chrome — published (unlisted) on the CWS
 // Locale-neutral AMO URL; addons.mozilla.org redirects to the visitor's language.
-const DEFAULT_FIREFOX_URL = "https://addons.mozilla.org/firefox/addon/waha-conectar-sessão/";
+const DEFAULT_FIREFOX_URL = "https://addons.mozilla.org/firefox/addon/whatsapp-browser-extension/";
 const ENV_EXTENSION_ID = "WAHA_DASHBOARD_PASSKEY_EXTENSION_ID";
 const ENV_FIREFOX_URL = "WAHA_DASHBOARD_PASSKEY_EXTENSION_FIREFOX_URL";
 const PING_TIMEOUT_MS = 300;
