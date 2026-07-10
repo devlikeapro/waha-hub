@@ -104,7 +104,6 @@ const text = computed(() => {
 <template>
   <div class="truncate">
     <code>{{ text }}</code>
-    🖼️
     <a
         v-if="mediaUrlWithKey"
         :href="mediaUrlWithKey"
