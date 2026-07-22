@@ -331,6 +331,7 @@
   "sessions.status": "حالت",
   "sessions.chatUI": "چیٹ یو آئی",
   "sessions.sendRequest": "درخواست بھیجیں",
+  "sessions.info": "سیشن کی معلومات",
   "sessions.any": "کوئی بھی",
   "sessions.server": "سرور",
   "sessions.assignedWorkerIdDoesNotMatch": "تفویض کردہ ورکر آئی ڈی مطابقت نہیں رکھتی",

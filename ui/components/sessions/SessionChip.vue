@@ -26,7 +26,11 @@ onMounted(() => {
       :id2="props.session?.me?.lid"
       :name="props.session?.me?.pushName"
       :image="profilePicture"
-  />
+  >
+    <template #end>
+      <slot name="end"></slot>
+    </template>
+  </ContactChip>
 </template>
 
 <style scoped lang="scss">

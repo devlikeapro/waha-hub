@@ -358,8 +358,16 @@ const globalFilterFields = computed(
         :header="t('sessions.me')"
     >
       <template #body="{ data }">
-        <div class="flex justify-content-center">
-          <SessionChip :session="data"></SessionChip>
+        <div class="flex justify-content-center align-items-center gap-1">
+          <SessionChip :session="data">
+            <template #end>
+              <SessionInfoButton :session="data"></SessionInfoButton>
+            </template>
+          </SessionChip>
+          <SessionInfoButton
+              v-if="!data.me?.id"
+              :session="data"
+          ></SessionInfoButton>
         </div>
       </template>
       <template #filter="{ filterModel, filterCallback }">

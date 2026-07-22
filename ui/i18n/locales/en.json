@@ -379,6 +379,7 @@
   "sessions.status": "Status",
   "sessions.chatUI": "Chat UI",
   "sessions.sendRequest": "Send Request",
+  "sessions.info": "Session Info",
   "sessions.any": "Any",
   "sessions.server": "Server",
   "sessions.assignedWorkerIdDoesNotMatch": "Assigned Worker ID does not match",

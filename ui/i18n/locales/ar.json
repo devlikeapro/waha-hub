@@ -331,6 +331,7 @@
   "sessions.status": "الحالة",
   "sessions.chatUI": "واجهة المحادثة",
   "sessions.sendRequest": "إرسال طلب",
+  "sessions.info": "معلومات الجلسة",
   "sessions.any": "أي",
   "sessions.server": "الخادم",
   "sessions.assignedWorkerIdDoesNotMatch": "معرف العامل المعين لا يتطابق",

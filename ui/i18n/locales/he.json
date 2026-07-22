@@ -331,6 +331,7 @@
   "sessions.status": "סטטוס",
   "sessions.chatUI": "ממשק צ'אט",
   "sessions.sendRequest": "שלח בקשה",
+  "sessions.info": "פרטי ההפעלה",
   "sessions.any": "כל",
   "sessions.server": "שרת",
   "sessions.assignedWorkerIdDoesNotMatch": "מזהה העובד המוקצה אינו תואם",

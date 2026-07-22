@@ -331,6 +331,7 @@
   "sessions.status": "स्थिति",
   "sessions.chatUI": "चैट यूआई",
   "sessions.sendRequest": "अनुरोध भेजें",
+  "sessions.info": "सेशन जानकारी",
   "sessions.any": "कोई भी",
   "sessions.server": "सर्वर",
   "sessions.assignedWorkerIdDoesNotMatch": "असाइन किया गया वर्कर आईडी मेल नहीं खाता",

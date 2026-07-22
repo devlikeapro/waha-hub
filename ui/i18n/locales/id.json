@@ -331,6 +331,7 @@
   "sessions.status": "Status",
   "sessions.chatUI": "UI Obrolan",
   "sessions.sendRequest": "Kirim Permintaan",
+  "sessions.info": "Info Sesi",
   "sessions.any": "Apa saja",
   "sessions.server": "Server",
   "sessions.assignedWorkerIdDoesNotMatch": "ID Pekerja yang Ditugaskan tidak cocok",

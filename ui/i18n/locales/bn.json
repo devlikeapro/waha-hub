@@ -331,6 +331,7 @@
   "sessions.status": "স্ট্যাটাস",
   "sessions.chatUI": "চ্যাট UI",
   "sessions.sendRequest": "অনুরোধ পাঠান",
+  "sessions.info": "সেশনের তথ্য",
   "sessions.any": "যেকোনো",
   "sessions.server": "সার্ভার",
   "sessions.assignedWorkerIdDoesNotMatch": "অ্যাসাইন করা ওয়ার্কার আইডি মিলছে না",

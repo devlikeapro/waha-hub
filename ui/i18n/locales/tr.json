@@ -331,6 +331,7 @@
   "sessions.status": "Durum",
   "sessions.chatUI": "Sohbet Arayüzü",
   "sessions.sendRequest": "İstek Gönder",
+  "sessions.info": "Oturum Bilgisi",
   "sessions.any": "Herhangi",
   "sessions.server": "Sunucu",
   "sessions.assignedWorkerIdDoesNotMatch": "Atanan Çalışan ID'si eşleşmiyor",

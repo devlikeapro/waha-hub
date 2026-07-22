@@ -331,6 +331,7 @@
   "sessions.status": "Статус",
   "sessions.chatUI": "Інтерфейс чату",
   "sessions.sendRequest": "Надіслати запит",
+  "sessions.info": "Інформація про сесію",
   "sessions.any": "Будь-який",
   "sessions.server": "Сервер",
   "sessions.assignedWorkerIdDoesNotMatch": "Призначений ID воркера не збігається",

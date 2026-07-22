@@ -331,6 +331,7 @@
   "sessions.status": "وضعیت",
   "sessions.chatUI": "رابط کاربری گفتگو",
   "sessions.sendRequest": "ارسال درخواست",
+  "sessions.info": "اطلاعات جلسه",
   "sessions.any": "هر کدام",
   "sessions.server": "سرور",
   "sessions.assignedWorkerIdDoesNotMatch": "شناسه کارگر اختصاص داده شده مطابقت ندارد",

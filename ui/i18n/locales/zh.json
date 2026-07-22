@@ -331,6 +331,7 @@
   "sessions.status": "状态",
   "sessions.chatUI": "聊天界面",
   "sessions.sendRequest": "发送请求",
+  "sessions.info": "会话信息",
   "sessions.any": "任意",
   "sessions.server": "服务器",
   "sessions.assignedWorkerIdDoesNotMatch": "分配的工作器 ID 不匹配",

@@ -47,6 +47,8 @@ const ids = computed(() => {
             </template>
           </div>
         </div>
+
+        <slot name="end"></slot>
       </div>
     </Chip>
   </div>

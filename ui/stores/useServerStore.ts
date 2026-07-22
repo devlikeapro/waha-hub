@@ -256,6 +256,10 @@ export const useServerStore = defineStore('serverStore', () => {
         refresh()
     }
 
+    async function getSession(serverId: ServerId, sessionName: string): Promise<any> {
+        return wahaAPI.getSession(serverId, sessionName)
+    }
+
     async function getScreenshot(serverId: ServerId, sessionName: string): Promise<string> {
         return wahaAPI.getScreenshot(serverId, sessionName)
     }
@@ -441,6 +445,7 @@ export const useServerStore = defineStore('serverStore', () => {
         stopSession,
         restartSession,
         logoutSession,
+        getSession,
         getScreenshot,
         getQR,
         getPasskeyChallenge,

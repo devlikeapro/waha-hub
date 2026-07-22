@@ -331,6 +331,7 @@
   "sessions.status": "Estado",
   "sessions.chatUI": "Interfaz de chat",
   "sessions.sendRequest": "Enviar solicitud",
+  "sessions.info": "Información de la sesión",
   "sessions.any": "Cualquiera",
   "sessions.server": "Servidor",
   "sessions.assignedWorkerIdDoesNotMatch": "El ID del trabajador asignado no coincide",

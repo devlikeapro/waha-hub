@@ -331,6 +331,7 @@
   "sessions.status": "Статус",
   "sessions.chatUI": "Интерфейс чата",
   "sessions.sendRequest": "Отправить запрос",
+  "sessions.info": "Информация о сессии",
   "sessions.any": "Любой",
   "sessions.server": "Сервер",
   "sessions.assignedWorkerIdDoesNotMatch": "Назначенный ID работника не совпадает",

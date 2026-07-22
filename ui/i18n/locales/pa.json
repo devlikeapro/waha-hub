@@ -331,6 +331,7 @@
   "sessions.status": "ਸਥਿਤੀ",
   "sessions.chatUI": "ਚੈਟ UI",
   "sessions.sendRequest": "ਬੇਨਤੀ ਭੇਜੋ",
+  "sessions.info": "ਸੈਸ਼ਨ ਜਾਣਕਾਰੀ",
   "sessions.any": "ਕੋਈ ਵੀ",
   "sessions.server": "ਸਰਵਰ",
   "sessions.assignedWorkerIdDoesNotMatch": "ਨਿਯੁਕਤ ਵਰਕਰ ID ਮੇਲ ਨਹੀਂ ਖਾਂਦੀ",

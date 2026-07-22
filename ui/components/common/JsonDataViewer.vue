@@ -1,8 +1,21 @@
 <script setup>
 import {useI18n} from "vue-i18n";
 
-const props = defineProps(['data']);
+const props = defineProps({
+  data: {},
+  deep: {
+    type: Number,
+    default: 2,
+  },
+  // vue-json-pretty paths to collapse by default, e.g. "root.config"
+  collapsedPaths: {
+    type: Array,
+    default: () => [],
+  },
+});
 const {t} = useI18n();
+
+const pathCollapsible = (node) => props.collapsedPaths.includes(node.path)
 
 async function copy(event) {
   await navigator.clipboard.writeText(JSON.stringify(
@@ -30,7 +43,8 @@ async function copy(event) {
     <div style="max-width: 100%">
       <vue-json-pretty
           :data="data"
-          :deep="2"
+          :deep="deep"
+          :pathCollapsible="pathCollapsible"
           :showLine="false"
           :showIcon="true"
           theme="dark"

@@ -110,6 +110,14 @@ export class WahaAPI {
         return session
     }
 
+    getSession(serverId: ServerId, sessionName: string): Promise<Session> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/sessions/${sessionName}`,
+            params: {},
+        });
+    }
+
     createSession(serverId: ServerId, body: SessionStartRequest): Promise<void> {
         return this.api.call(serverId, {
             method: 'POST',
