@@ -531,6 +531,8 @@
   "monitor.selectServer": "سرور منتخب کریں",
   "monitor.downloadTooltip": "تمام ایونٹس کو JSON کے طور پر ڈاؤن لوڈ کریں",
   "monitor.download": "ڈاؤن لوڈ کریں",
+  "monitor.copyTooltip": "تمام ایونٹس کو JSON کے طور پر کاپی کریں",
+  "monitor.copy": "کاپی کریں",
   "monitor.cleanEvents": "ایونٹس صاف کریں ({count})",
   "monitor.searchInData": "ڈیٹا میں تلاش کریں",
   "monitor.listeningForEvents": "نئے ایونٹس کے لیے سن رہا ہے...",

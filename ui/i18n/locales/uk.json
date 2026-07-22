@@ -531,6 +531,8 @@
   "monitor.selectServer": "Вибрати сервер",
   "monitor.downloadTooltip": "Завантажити всі події як JSON",
   "monitor.download": "Завантажити",
+  "monitor.copyTooltip": "Скопіювати всі події як JSON",
+  "monitor.copy": "Копіювати",
   "monitor.cleanEvents": "Очистити події ({count})",
   "monitor.searchInData": "Пошук у даних",
   "monitor.listeningForEvents": "Очікування нових подій...",

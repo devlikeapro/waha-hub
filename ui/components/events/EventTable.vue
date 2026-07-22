@@ -173,6 +173,15 @@ function download(event) {
   downloadjs(JSON.stringify(events.value, null, 2), "events.json", "text/plain");
 }
 
+async function copyEvents() {
+  await navigator.clipboard.writeText(JSON.stringify(events.value, null, 2));
+  toast.add({
+    severity: 'success',
+    summary: t('monitor.copiedToClipboard'),
+    life: 2000,
+  });
+}
+
 </script>
 
 <template>
@@ -240,6 +249,12 @@ function download(event) {
               v-tooltip="t('monitor.downloadTooltip')"
               icon="pi pi-download" :label="t('monitor.download')"
               @click="download($event)"
+          />
+          <Button
+              v-tooltip="t('monitor.copyTooltip')"
+              icon="pi pi-copy" :label="t('monitor.copy')"
+              severity="secondary"
+              @click="copyEvents"
           />
           <Button
               :label="clearEventsText"

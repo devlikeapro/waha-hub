@@ -531,6 +531,8 @@
   "monitor.selectServer": "انتخاب سرور",
   "monitor.downloadTooltip": "دانلود همه رویدادها به صورت JSON",
   "monitor.download": "دانلود",
+  "monitor.copyTooltip": "کپی همه رویدادها به صورت JSON",
+  "monitor.copy": "کپی",
   "monitor.cleanEvents": "پاک کردن رویدادها ({count})",
   "monitor.searchInData": "جستجو در داده‌ها",
   "monitor.listeningForEvents": "در حال گوش دادن به رویدادهای جدید...",

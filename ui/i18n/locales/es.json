@@ -531,6 +531,8 @@
   "monitor.selectServer": "Seleccionar servidor",
   "monitor.downloadTooltip": "Descargar todos los eventos como JSON",
   "monitor.download": "Descargar",
+  "monitor.copyTooltip": "Copiar todos los eventos como JSON",
+  "monitor.copy": "Copiar",
   "monitor.cleanEvents": "Limpiar eventos ({count})",
   "monitor.searchInData": "Buscar en datos",
   "monitor.listeningForEvents": "Escuchando nuevos eventos...",

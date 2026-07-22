@@ -531,6 +531,8 @@
   "monitor.selectServer": "Sunucu Seçin",
   "monitor.downloadTooltip": "Tüm olayları JSON olarak indir",
   "monitor.download": "İndir",
+  "monitor.copyTooltip": "Tüm olayları JSON olarak kopyala",
+  "monitor.copy": "Kopyala",
   "monitor.cleanEvents": "Olayları Temizle ({count})",
   "monitor.searchInData": "Verilerde ara",
   "monitor.listeningForEvents": "Yeni olaylar dinleniyor...",

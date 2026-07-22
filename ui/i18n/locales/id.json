@@ -531,6 +531,8 @@
   "monitor.selectServer": "Pilih Server",
   "monitor.downloadTooltip": "Unduh semua acara sebagai JSON",
   "monitor.download": "Unduh",
+  "monitor.copyTooltip": "Salin semua acara sebagai JSON",
+  "monitor.copy": "Salin",
   "monitor.cleanEvents": "Bersihkan Acara ({count})",
   "monitor.searchInData": "Cari dalam data",
   "monitor.listeningForEvents": "Mendengarkan acara baru...",

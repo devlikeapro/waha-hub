@@ -531,6 +531,8 @@
   "monitor.selectServer": "ਸਰਵਰ ਚੁਣੋ",
   "monitor.downloadTooltip": "ਸਾਰੇ ਈਵੈਂਟਸ ਨੂੰ JSON ਵਜੋਂ ਡਾਊਨਲੋਡ ਕਰੋ",
   "monitor.download": "ਡਾਊਨਲੋਡ",
+  "monitor.copyTooltip": "ਸਾਰੇ ਈਵੈਂਟਸ ਨੂੰ JSON ਵਜੋਂ ਕਾਪੀ ਕਰੋ",
+  "monitor.copy": "ਕਾਪੀ ਕਰੋ",
   "monitor.cleanEvents": "ਈਵੈਂਟਸ ਸਾਫ਼ ਕਰੋ ({count})",
   "monitor.searchInData": "ਡਾਟਾ ਵਿੱਚ ਖੋਜ",
   "monitor.listeningForEvents": "ਨਵੇਂ ਈਵੈਂਟਸ ਲਈ ਸੁਣ ਰਿਹਾ ਹੈ...",

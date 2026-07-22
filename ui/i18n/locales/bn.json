@@ -531,6 +531,8 @@
   "monitor.selectServer": "সার্ভার নির্বাচন করুন",
   "monitor.downloadTooltip": "সমস্ত ইভেন্ট JSON হিসাবে ডাউনলোড করুন",
   "monitor.download": "ডাউনলোড করুন",
+  "monitor.copyTooltip": "সমস্ত ইভেন্ট JSON হিসাবে কপি করুন",
+  "monitor.copy": "কপি করুন",
   "monitor.cleanEvents": "ইভেন্ট পরিষ্কার করুন ({count})",
   "monitor.searchInData": "ডেটাতে অনুসন্ধান করুন",
   "monitor.listeningForEvents": "নতুন ইভেন্টের জন্য শোনা হচ্ছে...",

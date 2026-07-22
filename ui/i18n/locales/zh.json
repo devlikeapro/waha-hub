@@ -531,6 +531,8 @@
   "monitor.selectServer": "选择服务器",
   "monitor.downloadTooltip": "将所有事件下载为 JSON",
   "monitor.download": "下载",
+  "monitor.copyTooltip": "将所有事件复制为 JSON",
+  "monitor.copy": "复制",
   "monitor.cleanEvents": "清空事件（{count}）",
   "monitor.searchInData": "在数据中搜索",
   "monitor.listeningForEvents": "正在监听新事件...",

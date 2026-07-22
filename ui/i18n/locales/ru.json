@@ -531,6 +531,8 @@
   "monitor.selectServer": "Выбрать сервер",
   "monitor.downloadTooltip": "Скачать все события как JSON",
   "monitor.download": "Скачать",
+  "monitor.copyTooltip": "Скопировать все события как JSON",
+  "monitor.copy": "Копировать",
   "monitor.cleanEvents": "Очистить события ({count})",
   "monitor.searchInData": "Поиск в данных",
   "monitor.listeningForEvents": "Прослушивание новых событий...",

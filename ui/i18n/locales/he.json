@@ -531,6 +531,8 @@
   "monitor.selectServer": "בחר שרת",
   "monitor.downloadTooltip": "הורד את כל האירועים כ-JSON",
   "monitor.download": "הורד",
+  "monitor.copyTooltip": "העתק את כל האירועים כ-JSON",
+  "monitor.copy": "העתק",
   "monitor.cleanEvents": "נקה אירועים ({count})",
   "monitor.searchInData": "חפש בנתונים",
   "monitor.listeningForEvents": "מאזין לאירועים חדשים...",

@@ -531,6 +531,8 @@
   "monitor.selectServer": "اختر الخادم",
   "monitor.downloadTooltip": "تنزيل جميع الأحداث بتنسيق JSON",
   "monitor.download": "تنزيل",
+  "monitor.copyTooltip": "نسخ جميع الأحداث بتنسيق JSON",
+  "monitor.copy": "نسخ",
   "monitor.cleanEvents": "مسح الأحداث ({count})",
   "monitor.searchInData": "البحث في البيانات",
   "monitor.listeningForEvents": "الاستماع للأحداث الجديدة...",
