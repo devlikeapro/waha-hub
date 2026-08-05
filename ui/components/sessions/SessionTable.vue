@@ -177,6 +177,8 @@ function openNew() {
           groups: true,
           chats: true,
           labels: true,
+          contacts: true,
+          messageSecrets: true,
         },
       },
       ignore: null,

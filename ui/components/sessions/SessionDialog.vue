@@ -389,23 +389,13 @@ async function copyRequest(event) {
                 </template>
               </ToggleButton>
               <ToggleButton
-                  v-model="session.config.gows.storage.chats"
-                  :onLabel="t('sessions.gows.storage.chatsOn')"
-                  :offLabel="t('sessions.gows.storage.chatsOff')"
-                  v-tooltip="t('sessions.gows.storage.chatsTooltip')"
+                  v-model="session.config.gows.storage.messageSecrets"
+                  :onLabel="t('sessions.gows.storage.messageSecretsOn')"
+                  :offLabel="t('sessions.gows.storage.messageSecretsOff')"
+                  v-tooltip="t('sessions.gows.storage.messageSecretsTooltip')"
               >
                 <template #icon>
-                  <font-awesome-icon icon="fa-solid fa-comments" class="mr-2"/>
-                </template>
-              </ToggleButton>
-              <ToggleButton
-                  v-model="session.config.gows.storage.groups"
-                  :onLabel="t('sessions.gows.storage.groupsOn')"
-                  :offLabel="t('sessions.gows.storage.groupsOff')"
-                  v-tooltip="t('sessions.gows.storage.groupsTooltip')"
-              >
-                <template #icon>
-                  <font-awesome-icon icon="fa-solid fa-users" class="mr-2"/>
+                  <font-awesome-icon icon="fa-solid fa-user-secret" class="mr-2"/>
                 </template>
               </ToggleButton>
               <ToggleButton
@@ -416,6 +406,38 @@ async function copyRequest(event) {
               >
                 <template #icon>
                   <font-awesome-icon icon="fa-solid fa-tags" class="mr-2"/>
+                </template>
+              </ToggleButton>
+            </div>
+            <div class="flex gap-2 flex-wrap">
+              <ToggleButton
+                  v-model="session.config.gows.storage.chats"
+                  :onLabel="t('sessions.gows.storage.chatsOn')"
+                  :offLabel="t('sessions.gows.storage.chatsOff')"
+                  v-tooltip="t('sessions.gows.storage.chatsTooltip')"
+              >
+                <template #icon>
+                  <font-awesome-icon icon="fa-solid fa-comments" class="mr-2"/>
+                </template>
+              </ToggleButton>
+              <ToggleButton
+                  v-model="session.config.gows.storage.contacts"
+                  :onLabel="t('sessions.gows.storage.contactsOn')"
+                  :offLabel="t('sessions.gows.storage.contactsOff')"
+                  v-tooltip="t('sessions.gows.storage.contactsTooltip')"
+              >
+                <template #icon>
+                  <font-awesome-icon icon="fa-solid fa-address-book" class="mr-2"/>
+                </template>
+              </ToggleButton>
+              <ToggleButton
+                  v-model="session.config.gows.storage.groups"
+                  :onLabel="t('sessions.gows.storage.groupsOn')"
+                  :offLabel="t('sessions.gows.storage.groupsOff')"
+                  v-tooltip="t('sessions.gows.storage.groupsTooltip')"
+              >
+                <template #icon>
+                  <font-awesome-icon icon="fa-solid fa-users" class="mr-2"/>
                 </template>
               </ToggleButton>
             </div>

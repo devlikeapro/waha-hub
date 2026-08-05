@@ -36,6 +36,8 @@ export interface GowsStorageConfig {
     groups?: boolean | null,
     chats?: boolean | null,
     labels?: boolean | null,
+    contacts?: boolean | null,
+    messageSecrets?: boolean | null,
 }
 
 export interface GowsConfig {

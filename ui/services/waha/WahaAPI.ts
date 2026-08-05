@@ -84,8 +84,15 @@ export class WahaAPI {
                     groups: true,
                     chats: true,
                     labels: true,
+                    contacts: true,
+                    messageSecrets: true,
                 },
             }
+        }
+        if (session.config.gows.storage) {
+            // Sessions saved before the flags existed should show them as enabled
+            session.config.gows.storage.contacts = session.config.gows.storage.contacts ?? true
+            session.config.gows.storage.messageSecrets = session.config.gows.storage.messageSecrets ?? true
         }
         for (const webhook of session.config.webhooks) {
             if (!webhook.retries) {
