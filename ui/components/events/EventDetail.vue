@@ -73,6 +73,12 @@ const values = computed(() => {
         payload.type,
         JSON.stringify(payload.participants),
       ]
+    case "group.v2.participants.join-request":
+      return [
+        payload.group.id,
+        payload.action,
+        payload.requesterId,
+      ]
     case "event.response":
     case "event.response.failed":
       return [
