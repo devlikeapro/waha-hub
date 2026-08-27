@@ -5,14 +5,17 @@ import { App } from '../../services/waha/dtos';
 import AppConfigChatWoot from './AppConfigChatWoot.vue';
 import AppConfigCalls from './AppConfigCalls.vue';
 import AppConfigMcp from './AppConfigMcp.vue';
+import AppConfigBrazilianPhoneNumbers from './AppConfigBrazilianPhoneNumbers.vue';
 import AppFAQChatWoot from './AppFAQChatWoot.vue';
 import AppFAQCalls from './AppFAQCalls.vue';
 import AppFAQMcp from './AppFAQMcp.vue';
+import AppFAQBrazilianPhoneNumbers from './AppFAQBrazilianPhoneNumbers.vue';
 import useShowToastOnResult from '../../composables/useShowToastOnResult';
 import { generateRandomId } from '../../utils/ids';
 import ChatWootLabel from '../common/ChatWootLabel.vue';
 import CallsLabel from '../common/CallsLabel.vue';
 import McpLabel from '../common/McpLabel.vue';
+import BrazilianPhoneNumbersLabel from '../common/BrazilianPhoneNumbersLabel.vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
@@ -88,6 +91,11 @@ const appTypes = computed(() => [
     name: `🤖 ${t('apps.mcp.name')}`,
     value: 'mcp',
     label: 'mcp'
+  },
+  {
+    name: `🇧🇷 ${t('apps.brazilianPhoneNumbers.name')}`,
+    value: 'brazilian-phone-numbers',
+    label: 'brazilian-phone-numbers'
   }
 ]);
 
@@ -191,6 +199,7 @@ function cancel() {
               <ChatWootLabel v-if="slotProps.value === 'chatwoot'" />
               <CallsLabel v-else-if="slotProps.value === 'calls'" />
               <McpLabel v-else-if="slotProps.value === 'mcp'" />
+              <BrazilianPhoneNumbersLabel v-else-if="slotProps.value === 'brazilian-phone-numbers'" />
               <span v-else>{{ slotProps.value }}</span>
             </div>
             <span v-else>
@@ -201,6 +210,7 @@ function cancel() {
             <ChatWootLabel v-if="slotProps.option.value === 'chatwoot'" />
             <CallsLabel v-else-if="slotProps.option.value === 'calls'" />
             <McpLabel v-else-if="slotProps.option.value === 'mcp'" />
+            <BrazilianPhoneNumbersLabel v-else-if="slotProps.option.value === 'brazilian-phone-numbers'" />
             <span v-else>{{ slotProps.option.name }}</span>
           </template>
         </Dropdown>
@@ -236,6 +246,10 @@ function cancel() {
           <label><b>{{ t('apps.appFAQ') }}</b></label>
           <AppFAQMcp :app="app" :server="server" />
         </div>
+        <div v-else-if="app.app === 'brazilian-phone-numbers'">
+          <label><b>{{ t('apps.appFAQ') }}</b></label>
+          <AppFAQBrazilianPhoneNumbers />
+        </div>
 
         <label><b>{{ t('apps.appConfiguration') }}</b></label>
         <div class="card app-config">
@@ -252,6 +266,11 @@ function cancel() {
           />
           <AppConfigMcp
             v-else-if="app.app === 'mcp'"
+            v-model="app.config"
+            :submitted="submitted"
+          />
+          <AppConfigBrazilianPhoneNumbers
+            v-else-if="app.app === 'brazilian-phone-numbers'"
             v-model="app.config"
             :submitted="submitted"
           />

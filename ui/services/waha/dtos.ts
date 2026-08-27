@@ -214,3 +214,16 @@ export interface McpAppConfig {
     key_id?: string;
     key?: string;
 }
+
+export interface BrazilianPhoneNumbersCacheConfig {
+    // Duration strings, e.g. '24h', '31d'
+    memoryTtl?: string;
+    persistent?: boolean;
+    persistentTtl?: string;
+}
+
+export interface BrazilianPhoneNumbersAppConfig {
+    strict?: boolean;
+    lookup?: boolean;
+    cache?: BrazilianPhoneNumbersCacheConfig;
+}
