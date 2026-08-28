@@ -16,22 +16,43 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 
-const AGENT_NAME_TEMPLATE_VALUES: Templates = {
-  'chatwoot.to.whatsapp.message.text': [
+type AgentNameOption = 'none' | 'name' | 'available_name';
+
+// Lines rendering the "*Agent Name*:\n" prefix; the message content is appended to the last line
+const AGENT_NAME_PREFIX_LINES: Record<Exclude<AgentNameOption, 'none'>, string[]> = {
+  name: [
     '{{#chatwoot.sender.name}}*{{{chatwoot.sender.name}}}*:',
-    '{{/chatwoot.sender.name}}{{{ content }}}',
-  ].join('\n'),
-  'chatwoot.to.whatsapp.message.media.caption': [
-    '{{#singleAttachment}}',
-    '{{#content}}',
-    '{{#chatwoot.sender.name}}*{{{chatwoot.sender.name}}}*:',
-    '{{/chatwoot.sender.name}}{{{ content }}}',
-    '{{/content}}',
-    '{{/singleAttachment}}',
-  ].join('\n'),
+    '{{/chatwoot.sender.name}}',
+  ],
+  // Display name, falling back to the full name when available_name is empty or missing
+  available_name: [
+    '{{#chatwoot.sender.available_name}}*{{{chatwoot.sender.available_name}}}*:',
+    '{{/chatwoot.sender.available_name}}{{^chatwoot.sender.available_name}}{{#chatwoot.sender.name}}*{{{chatwoot.sender.name}}}*:',
+    '{{/chatwoot.sender.name}}{{/chatwoot.sender.available_name}}',
+  ],
 };
 
-const agentTemplateKeys = Object.keys(AGENT_NAME_TEMPLATE_VALUES);
+function buildAgentTemplates(prefixLines: string[]): Templates {
+  const lines = [...prefixLines];
+  lines[lines.length - 1] += '{{{ content }}}';
+  return {
+    'chatwoot.to.whatsapp.message.text': lines.join('\n'),
+    'chatwoot.to.whatsapp.message.media.caption': [
+      '{{#singleAttachment}}',
+      '{{#content}}',
+      ...lines,
+      '{{/content}}',
+      '{{/singleAttachment}}',
+    ].join('\n'),
+  };
+}
+
+const AGENT_NAME_PRESETS: Record<Exclude<AgentNameOption, 'none'>, Templates> = {
+  name: buildAgentTemplates(AGENT_NAME_PREFIX_LINES.name),
+  available_name: buildAgentTemplates(AGENT_NAME_PREFIX_LINES.available_name),
+};
+
+const agentTemplateKeys = Object.keys(AGENT_NAME_PRESETS.name);
 
 const agentNameImage = new URL('./chatwoot-templates-agent-name.jpg', import.meta.url).href;
 const noAgentNameImage = new URL('./chatwoot-templates-no-agent-name.jpg', import.meta.url).href;
@@ -64,28 +85,46 @@ const agentTemplatesPresent = computed(() => {
   return agentTemplateKeys.every((key) => Object.prototype.hasOwnProperty.call(current, key));
 });
 
-const agentTemplatesToggle = computed({
-  get: () => agentTemplatesPresent.value,
-  set: (enabled: boolean) => {
-    if (editing.value) {
+const agentNameOptions = computed(() => [
+  {label: t('apps.chatwoot.templates.agentName.none'), value: 'none' as AgentNameOption},
+  {label: t('apps.chatwoot.templates.agentName.name'), value: 'name' as AgentNameOption},
+  {label: t('apps.chatwoot.templates.agentName.availableName'), value: 'available_name' as AgentNameOption},
+]);
+
+const agentNameOption = computed<AgentNameOption | null>({
+  get: () => {
+    const current = props.modelValue || {};
+    if (agentTemplateKeys.every((key) => !Object.prototype.hasOwnProperty.call(current, key))) {
+      return 'none';
+    }
+    for (const [option, templates] of Object.entries(AGENT_NAME_PRESETS)) {
+      if (agentTemplateKeys.every((key) => current[key] === templates[key])) {
+        return option as AgentNameOption;
+      }
+    }
+    // Templates were customized by hand - no preset matches
+    return null;
+  },
+  set: (option: AgentNameOption | null) => {
+    if (editing.value || option === null) {
       return;
     }
 
-    if (enabled === agentTemplatesPresent.value) {
+    if (option === agentNameOption.value) {
       return;
     }
 
     const next: Templates = {...(props.modelValue || {})};
 
-    if (enabled) {
-      for (const [key, template] of Object.entries(AGENT_NAME_TEMPLATE_VALUES)) {
-        next[key] = template;
-      }
-    } else {
+    if (option === 'none') {
       for (const key of agentTemplateKeys) {
         if (Object.prototype.hasOwnProperty.call(next, key)) {
           delete next[key];
         }
+      }
+    } else {
+      for (const [key, template] of Object.entries(AGENT_NAME_PRESETS[option])) {
+        next[key] = template;
       }
     }
 
@@ -167,14 +206,24 @@ async function copyYaml() {
 <template>
   <div class="templates-editor">
     <div class="agent-toggle">
-      <ToggleButton
-          inputId="templates-add-agent-name"
-          v-model="agentTemplatesToggle"
-          :disabled="editing"
-          :onLabel="t('apps.chatwoot.templates.toggle.addAgentName')"
-          :offLabel="t('apps.chatwoot.templates.toggle.noAgentName')"
-          :aria-label="t('apps.chatwoot.templates.addAgentName')"
-      />
+      <div class="field">
+        <label for="templates-agent-name" class="block mb-2">
+          {{ t('apps.chatwoot.templates.agentName.label') }}
+          <i
+              class="pi pi-info-circle"
+              v-tooltip="t('apps.chatwoot.templates.agentName.tooltip')"
+          />
+        </label>
+        <Dropdown
+            inputId="templates-agent-name"
+            v-model="agentNameOption"
+            :options="agentNameOptions"
+            optionLabel="label"
+            optionValue="value"
+            :disabled="editing"
+            :placeholder="t('apps.chatwoot.templates.agentName.custom')"
+        />
+      </div>
       <div class="image-wrapper">
         <img :src="previewImage" :alt="previewAlt" />
       </div>
