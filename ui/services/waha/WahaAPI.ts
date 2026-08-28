@@ -427,6 +427,17 @@ export class WahaAPI {
     }
 
     /**
+     * Purge an app's stored data
+     */
+    purgeApp(serverId: ServerId, appId: string): Promise<App> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: `/api/apps/${appId}/purge`,
+            params: {},
+        });
+    }
+
+    /**
      * Get all apps for a session
      */
     getApps(serverId: ServerId, sessionName: string): Promise<App[]> {

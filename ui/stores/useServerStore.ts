@@ -379,6 +379,10 @@ export const useServerStore = defineStore('serverStore', () => {
         return wahaAPI.deleteApp(serverId, appId)
     }
 
+    async function purgeApp(serverId: ServerId, appId: string) {
+        return wahaAPI.purgeApp(serverId, appId)
+    }
+
     async function getAppChatWootLocales(serverId: ServerId) {
         return wahaAPI.getAppChatWootLocales(serverId)
     }
@@ -470,6 +474,7 @@ export const useServerStore = defineStore('serverStore', () => {
         createApp,
         updateApp,
         deleteApp,
+        purgeApp,
         getAppChatWootLocales,
         // API Keys
         getApiKeys,

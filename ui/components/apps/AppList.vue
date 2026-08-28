@@ -109,6 +109,44 @@ function confirmDeleteApp(app: App, event: Event) {
   });
 }
 
+function confirmPurgeApp(app: App, event: Event) {
+  const appTypeLabel = getAppTypeLabel(app.app);
+  confirm.require({
+    target: event.currentTarget,
+    message: t('apps.purgeConfirm', { appType: appTypeLabel, id: app.id }),
+    icon: 'pi pi-exclamation-triangle',
+    rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
+    acceptClass: 'p-button-warning p-button-sm',
+    rejectLabel: t('apps.no'),
+    acceptLabel: t('apps.yesPurge'),
+    accept: async () => {
+      await purgeApp(app);
+    },
+    reject: () => {
+      // Do nothing on reject
+    }
+  });
+}
+
+async function purgeApp(app: App) {
+  try {
+    await req(
+      store.purgeApp(props.server.id, app.id),
+      undefined,
+      t('apps.failedToPurge')
+    );
+    const appTypeLabel = getAppTypeLabel(app.app);
+    toast.add({
+      severity: 'success',
+      summary: t('apps.purged'),
+      detail: `${appTypeLabel} (${app.id})`,
+      life: 3000
+    });
+  } catch (error) {
+    console.error("Error purging app:", error);
+  }
+}
+
 async function deleteApp(app: App) {
   try {
     await req(
@@ -262,18 +300,26 @@ function getAppTypeLabel(appType: string) {
           <AppStatusTag :enabled="data.enabled !== false" />
         </template>
       </Column>
-      <Column style="width: 10rem; text-align: right;">
+      <Column style="width: 13rem; text-align: right;">
         <template #body="{ data }">
           <div class="flex gap-2 justify-content-end">
-            <Button 
-              icon="pi pi-pencil" 
-              @click="editApp(data)" 
-              outlined 
-              rounded 
+            <Button
+              icon="pi pi-pencil"
+              @click="editApp(data)"
+              outlined
+              rounded
               severity="success"
               v-tooltip.top="t('apps.editApp')"
             />
-            <Button 
+            <Button
+              icon="pi pi-eraser"
+              @click="confirmPurgeApp(data, $event)"
+              outlined
+              rounded
+              severity="warning"
+              v-tooltip.top="t('apps.purgeApp')"
+            />
+            <Button
               icon="pi pi-trash" 
               @click="confirmDeleteApp(data, $event)" 
               outlined 
