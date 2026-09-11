@@ -7,6 +7,7 @@ import {
   LinkPreview,
   ConversationSort,
   ConversationStatus,
+  ChatWootOutgoingMode,
   ChatWootConversationsConfig
 } from '../../services/waha/dtos';
 import useShowToastOnResult from '../../composables/useShowToastOnResult';
@@ -54,6 +55,7 @@ const defaults: ChatWootAppConfig = {
     sort: 'created_newest' as ConversationSort,
     status: null,
     markAsRead: true,
+    outgoing: 'private-note' as ChatWootOutgoingMode,
   }
 };
 
@@ -85,6 +87,11 @@ const conversationSortOptions = [
   {label: t('apps.chatwoot.conversations.sort.activityNewest'), value: 'activity_newest' as ConversationSort},
   {label: t('apps.chatwoot.conversations.sort.activityOldest'), value: 'activity_oldest' as ConversationSort},
   {label: t('apps.chatwoot.conversations.sort.createdOldest'), value: 'created_oldest' as ConversationSort},
+];
+
+const conversationOutgoingOptions = [
+  {label: t('apps.chatwoot.conversations.outgoing.privateNote'), value: 'private-note' as ChatWootOutgoingMode},
+  {label: t('apps.chatwoot.conversations.outgoing.message'), value: 'message' as ChatWootOutgoingMode},
 ];
 
 const conversationStatusOptions = [
@@ -307,6 +314,23 @@ async function loadLocales() {
           offIcon="pi pi-times"
           :onLabel="t('apps.chatwoot.conversations.markAsRead.on')"
           :offLabel="t('apps.chatwoot.conversations.markAsRead.off')"
+      />
+    </div>
+
+    <div class="field">
+      <label for="conversations-outgoing">
+        {{ t('apps.chatwoot.conversations.outgoing.label') }}
+        <i
+            class="pi pi-info-circle"
+            v-tooltip="t('apps.chatwoot.conversations.outgoing.tooltip')"
+        />
+      </label>
+      <Dropdown
+          id="conversations-outgoing"
+          v-model="config.conversations.outgoing"
+          :options="conversationOutgoingOptions"
+          optionLabel="label"
+          optionValue="value"
       />
     </div>
 
