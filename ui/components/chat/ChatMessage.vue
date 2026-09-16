@@ -77,6 +77,15 @@ const mediaType = computed(() => {
 
 const isFile = computed(() => !!(mediaFilename.value || props.message?.media?.filename))
 
+function thumbToBase64(thumb) {
+  if (!thumb) return null
+  // GOWS/WEBJS - plain base64 string
+  if (typeof thumb === 'string') return thumb
+  // NOWEB - buffers serialized as { type: 'Buffer', data: base64 }
+  if (thumb.type === 'Buffer' && typeof thumb.data === 'string') return thumb.data
+  return null
+}
+
 function initThumbnail() {
   if (!props.message?.hasMedia) return
   // WEBJS: _data.body is always a JPEG thumbnail for image/video types.
@@ -98,16 +107,16 @@ function initThumbnail() {
   const audMsg = rawMsg.audioMessage
   if (imgMsg) {
     mediaMimetype.value = imgMsg.mimetype || 'image/jpeg'
-    const thumb = imgMsg.JPEGThumbnail || imgMsg.jpegThumbnail
+    const thumb = thumbToBase64(imgMsg.JPEGThumbnail || imgMsg.jpegThumbnail)
     if (thumb) mediaThumbnailUrl.value = `data:image/jpeg;base64,${thumb}`
   } else if (vidMsg) {
     mediaMimetype.value = vidMsg.mimetype || 'video/mp4'
-    const thumb = vidMsg.JPEGThumbnail || vidMsg.jpegThumbnail
+    const thumb = thumbToBase64(vidMsg.JPEGThumbnail || vidMsg.jpegThumbnail)
     if (thumb) mediaThumbnailUrl.value = `data:image/jpeg;base64,${thumb}`
   } else if (docMsg) {
     mediaMimetype.value = docMsg.mimetype || 'application/octet-stream'
     if (docMsg.fileName) mediaFilename.value = docMsg.fileName
-    const thumb = docMsg.JPEGThumbnail || docMsg.jpegThumbnail
+    const thumb = thumbToBase64(docMsg.JPEGThumbnail || docMsg.jpegThumbnail)
     if (thumb) mediaThumbnailUrl.value = `data:image/jpeg;base64,${thumb}`
   } else if (audMsg) {
     mediaMimetype.value = audMsg.mimetype || 'audio/ogg'
