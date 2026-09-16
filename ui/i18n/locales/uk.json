@@ -593,6 +593,8 @@
   "apps.enabled.off": "Вимкнено",
   "chat.message.download": "Завантажити",
   "chat.message.save": "Зберегти",
+  "chat.message.downloadFailedTitle": "Не вдалося завантажити медіафайл",
+  "chat.message.downloadFailedNoUrl": "API не повернув URL медіафайлу для цього повідомлення.",
   "chat.send.attach.audio": "Аудіо",
   "chat.send.attach.file": "Файл",
   "chat.send.attach.image": "Зображення",

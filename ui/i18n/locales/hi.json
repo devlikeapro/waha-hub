@@ -593,6 +593,8 @@
   "apps.enabled.off": "अक्षम",
   "chat.message.download": "डाउनलोड",
   "chat.message.save": "सहेजें",
+  "chat.message.downloadFailedTitle": "मीडिया डाउनलोड नहीं हो सका",
+  "chat.message.downloadFailedNoUrl": "API ने इस संदेश के लिए कोई मीडिया URL नहीं लौटाया।",
   "chat.send.attach.audio": "ऑडियो",
   "chat.send.attach.file": "फ़ाइल",
   "chat.send.attach.image": "छवि",

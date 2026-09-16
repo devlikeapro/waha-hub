@@ -593,6 +593,8 @@
   "apps.enabled.off": "מושבת",
   "chat.message.download": "הורדה",
   "chat.message.save": "שמור",
+  "chat.message.downloadFailedTitle": "הורדת המדיה נכשלה",
+  "chat.message.downloadFailedNoUrl": "ה-API לא החזיר כתובת מדיה עבור הודעה זו.",
   "chat.send.attach.audio": "שמע",
   "chat.send.attach.file": "קובץ",
   "chat.send.attach.image": "תמונה",

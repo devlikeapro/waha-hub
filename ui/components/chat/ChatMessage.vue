@@ -5,8 +5,10 @@ import {useI18nDate} from '../../composables/useI18nDate'
 import JsonDataViewer from "../common/JsonDataViewer.vue";
 import InlineMessage from "primevue/inlinemessage";
 import {useI18n} from "vue-i18n";
+import {useToast} from "primevue/usetoast";
 
 const {t} = useI18n();
+const toast = useToast();
 
 const props = defineProps({
   message: Object,
@@ -112,6 +114,16 @@ function initThumbnail() {
   }
 }
 
+function mediaDownloadFailed(detail) {
+  mediaFailed.value = true
+  toast.add({
+    severity: 'error',
+    summary: t('chat.message.downloadFailedTitle'),
+    detail: detail,
+    life: 5000,
+  })
+}
+
 async function downloadMedia() {
   if (!props.message?.hasMedia || !props.serverId || !props.sessionName) return
   if (mediaBlobUrl.value || mediaLoading.value) return
@@ -134,7 +146,10 @@ async function downloadMedia() {
     const mime = fullMessage?.media?.mimetype
     const filename = fullMessage?.media?.filename
     if (!url) {
-      mediaFailed.value = true
+      // media.error is a serialized Error - "details" holds the stack, first line is "Name: message"
+      const error = fullMessage?.media?.error
+      const detail = error?.message || error?.details?.split('\n')[0]
+      mediaDownloadFailed(detail || t('chat.message.downloadFailedNoUrl'))
       return
     }
     mediaMimetype.value = mime || ''
@@ -147,13 +162,14 @@ async function downloadMedia() {
     }
     const response = await fetch(url, {headers: headers})
     if (!response.ok) {
-      mediaFailed.value = true
+      mediaDownloadFailed(`${response.status} ${response.statusText}`.trim())
       return
     }
     const blob = await response.blob()
     mediaBlobUrl.value = URL.createObjectURL(blob)
   } catch (e) {
-    mediaFailed.value = true
+    console.error('Failed to download media', e)
+    mediaDownloadFailed(e?.response?.data?.message || e?.message || String(e))
   } finally {
     mediaLoading.value = false
   }

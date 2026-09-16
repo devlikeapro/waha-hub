@@ -22,6 +22,8 @@
   "chat.message.media": "Open on phone to view full media.",
   "chat.message.download": "Download",
   "chat.message.save": "Save",
+  "chat.message.downloadFailedTitle": "Failed to download media",
+  "chat.message.downloadFailedNoUrl": "The API returned no media URL for this message.",
   "chat.send.attach.image": "Image",
   "chat.send.attach.video": "Video",
   "chat.send.attach.audio": "Audio",

@@ -593,6 +593,8 @@
   "apps.enabled.off": "নিষ্ক্রিয়",
   "chat.message.download": "ডাউনলোড",
   "chat.message.save": "সেভ করুন",
+  "chat.message.downloadFailedTitle": "মিডিয়া ডাউনলোড করা যায়নি",
+  "chat.message.downloadFailedNoUrl": "API এই বার্তার জন্য কোনো মিডিয়া URL ফেরত দেয়নি।",
   "chat.send.attach.audio": "অডিও",
   "chat.send.attach.file": "ফাইল",
   "chat.send.attach.image": "ছবি",

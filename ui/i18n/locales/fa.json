@@ -593,6 +593,8 @@
   "apps.enabled.off": "غیرفعال",
   "chat.message.download": "دانلود",
   "chat.message.save": "ذخیره",
+  "chat.message.downloadFailedTitle": "دانلود رسانه ناموفق بود",
+  "chat.message.downloadFailedNoUrl": "API هیچ آدرس رسانه‌ای برای این پیام برنگرداند.",
   "chat.send.attach.audio": "صدا",
   "chat.send.attach.file": "فایل",
   "chat.send.attach.image": "تصویر",

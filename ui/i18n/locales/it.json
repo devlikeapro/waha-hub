@@ -593,6 +593,8 @@
   "serverStore.failedToRefreshServer": "Impossibile aggiornare il server - {serverId}",
   "chat.message.download": "Scarica",
   "chat.message.save": "Salva",
+  "chat.message.downloadFailedTitle": "Impossibile scaricare il file multimediale",
+  "chat.message.downloadFailedNoUrl": "L'API non ha restituito alcun URL multimediale per questo messaggio.",
   "chat.send.attach.audio": "Audio",
   "chat.send.attach.file": "File",
   "chat.send.attach.image": "Immagine",

@@ -593,6 +593,8 @@
   "apps.enabled.off": "Отключено",
   "chat.message.download": "Скачать",
   "chat.message.save": "Сохранить",
+  "chat.message.downloadFailedTitle": "Не удалось скачать медиафайл",
+  "chat.message.downloadFailedNoUrl": "API не вернул URL медиафайла для этого сообщения.",
   "chat.send.attach.audio": "Аудио",
   "chat.send.attach.file": "Файл",
   "chat.send.attach.image": "Изображение",

@@ -593,6 +593,8 @@
   "apps.enabled.off": "Désactivé",
   "chat.message.download": "Télécharger",
   "chat.message.save": "Enregistrer",
+  "chat.message.downloadFailedTitle": "Échec du téléchargement du média",
+  "chat.message.downloadFailedNoUrl": "L'API n'a renvoyé aucune URL de média pour ce message.",
   "chat.send.attach.audio": "Audio",
   "chat.send.attach.file": "Fichier",
   "chat.send.attach.image": "Image",

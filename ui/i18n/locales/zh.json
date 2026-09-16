@@ -593,6 +593,8 @@
   "apps.enabled.off": "禁用",
   "chat.message.download": "下载",
   "chat.message.save": "保存",
+  "chat.message.downloadFailedTitle": "下载媒体失败",
+  "chat.message.downloadFailedNoUrl": "API 未返回此消息的媒体 URL。",
   "chat.send.attach.audio": "音频",
   "chat.send.attach.file": "文件",
   "chat.send.attach.image": "图片",

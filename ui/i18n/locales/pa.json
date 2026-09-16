@@ -593,6 +593,8 @@
   "apps.enabled.off": "ਅਯੋਗ",
   "chat.message.download": "ਡਾਊਨਲੋਡ",
   "chat.message.save": "ਸੇਵ ਕਰੋ",
+  "chat.message.downloadFailedTitle": "ਮੀਡੀਆ ਡਾਊਨਲੋਡ ਨਹੀਂ ਹੋ ਸਕਿਆ",
+  "chat.message.downloadFailedNoUrl": "API ਨੇ ਇਸ ਸੁਨੇਹੇ ਲਈ ਕੋਈ ਮੀਡੀਆ URL ਵਾਪਸ ਨਹੀਂ ਕੀਤਾ।",
   "chat.send.attach.audio": "ਆਡੀਓ",
   "chat.send.attach.file": "ਫ਼ਾਈਲ",
   "chat.send.attach.image": "ਤਸਵੀਰ",
