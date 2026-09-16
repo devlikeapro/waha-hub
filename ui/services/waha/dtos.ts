@@ -197,6 +197,7 @@ export interface ChatWootConversationsConfig {
     status?: ConversationStatus[] | null;
     // process message.ack events to mark ChatWoot conversations as read
     markAsRead?: boolean;
+    syncMessageStatus?: boolean;
     // how to mirror messages sent from WhatsApp (not by ChatWoot): private note or public outgoing message
     outgoing?: ChatWootOutgoingMode;
 }

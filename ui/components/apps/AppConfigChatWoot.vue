@@ -55,6 +55,7 @@ const defaults: ChatWootAppConfig = {
     sort: 'created_newest' as ConversationSort,
     status: null,
     markAsRead: true,
+    syncMessageStatus: false,
     outgoing: 'private-note' as ChatWootOutgoingMode,
   }
 };
@@ -314,6 +315,23 @@ async function loadLocales() {
           offIcon="pi pi-times"
           :onLabel="t('apps.chatwoot.conversations.markAsRead.on')"
           :offLabel="t('apps.chatwoot.conversations.markAsRead.off')"
+      />
+    </div>
+
+    <div class="field">
+      <label class="block mb-2">
+        {{ t('apps.chatwoot.conversations.syncMessageStatus.label') }}
+        <i
+            class="pi pi-info-circle"
+            v-tooltip="t('apps.chatwoot.conversations.syncMessageStatus.tooltip')"
+        />
+      </label>
+      <ToggleButton
+          v-model="config.conversations.syncMessageStatus"
+          onIcon="pi pi-check"
+          offIcon="pi pi-times"
+          :onLabel="t('apps.chatwoot.conversations.syncMessageStatus.on')"
+          :offLabel="t('apps.chatwoot.conversations.syncMessageStatus.off')"
       />
     </div>
 
