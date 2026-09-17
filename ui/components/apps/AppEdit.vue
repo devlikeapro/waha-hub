@@ -178,7 +178,7 @@ function cancel() {
 </script>
 
 <template>
-  <Dialog 
+  <Dialog :dismissableMask="true" 
     v-model:visible="isVisible" 
     :modal="true" 
     class="p-fluid" 

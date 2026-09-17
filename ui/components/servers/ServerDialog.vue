@@ -65,7 +65,7 @@ const isCurrentConnectionSecure = computed(() => {
 </script>
 
 <template>
-  <Dialog v-model:visible="visible" :header="t('servers.server')" :modal="true" class="p-fluid">
+  <Dialog :dismissableMask="true" v-model:visible="visible" :header="t('servers.server')" :modal="true" class="p-fluid">
     <div class="mb-4">
       <InlineMessage severity="info">
         {{ t('servers.workersDataSaved') }}

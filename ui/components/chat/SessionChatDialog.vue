@@ -278,7 +278,7 @@ const showPromo = ref(false)
 </script>
 
 <template>
-  <Dialog
+  <Dialog :dismissableMask="true"
       v-model:visible="visible"
       :modal="true"
       maximizable

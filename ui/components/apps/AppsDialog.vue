@@ -17,7 +17,7 @@ const isStopped = computed(() => {
 </script>
 
 <template>
-  <Dialog
+  <Dialog :dismissableMask="true"
     v-model:visible="visible"
     :modal="true"
     class="p-fluid"
