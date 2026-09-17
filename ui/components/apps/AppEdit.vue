@@ -197,6 +197,7 @@ function cancel() {
           :placeholder="t('apps.selectAppType')"
           :class="{'p-invalid': submitted && !app.app}"
           :disabled="!props.isNewApp"
+          scrollHeight="600px"
         >
           <template #value="slotProps">
             <div v-if="slotProps.value">
