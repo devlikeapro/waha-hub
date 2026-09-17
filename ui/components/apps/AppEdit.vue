@@ -182,20 +182,10 @@ function cancel() {
     v-model:visible="isVisible" 
     :modal="true" 
     class="p-fluid" 
+    :style="app.app ? { minWidth: '50%' } : { width: '28rem' }"
     :header="props.isNewApp ? t('apps.addAppTitle') : t('apps.editAppTitle')"
   >
     <div class="app-edit">
-      <div class="field">
-        <label for="id"><b>{{ t('apps.appId') }}</b></label>
-        <InputText 
-          id="id" 
-          v-model="app.id" 
-          :disabled="!props.isNewApp"
-          placeholder="Automatically generated"
-        />
-        <small class="p-error" v-if="submitted && !app.id">{{ t('apps.appIdRequired') }}</small>
-      </div>
-
       <div class="field">
         <label for="app-type"><b>{{ t('apps.appType') }}</b></label>
         <Dropdown 
@@ -235,7 +225,18 @@ function cancel() {
         <small class="p-error" v-if="submitted && !app.app">{{ t('apps.appTypeRequired') }}</small>
       </div>
 
-      <div class="field">
+      <div class="field" v-if="!props.isNewApp || app.app">
+        <label for="id"><b>{{ t('apps.appId') }}</b></label>
+        <InputText 
+          id="id" 
+          v-model="app.id" 
+          :disabled="!props.isNewApp"
+          placeholder="Automatically generated"
+        />
+        <small class="p-error" v-if="submitted && !app.id">{{ t('apps.appIdRequired') }}</small>
+      </div>
+
+      <div class="field" v-if="!props.isNewApp || app.app">
         <label><b>{{ t('apps.enabled.label.edit') }}</b></label>
         <div>
           <ToggleButton
