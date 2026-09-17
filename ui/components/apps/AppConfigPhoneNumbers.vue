@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, watch } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import lodash from 'lodash';
 import { PhoneNumbersAppConfig } from '../../services/waha/dtos';
@@ -53,6 +53,18 @@ watch(
   { deep: true, immediate: true },
 );
 
+// Rules stay hidden until the user opts in, no rules means every number is checked
+const filterByRules = ref((config.rules ?? []).length > 0);
+const applyToAll = computed({
+  get: () => !filterByRules.value,
+  set: (val: boolean) => {
+    filterByRules.value = !val;
+    if (val) {
+      config.rules = [];
+    }
+  },
+});
+
 // Inverted toggle - "send best guess" is the green state, strict reject the grey one
 const bestGuess = computed({
   get: () => !config.strict,
@@ -65,11 +77,25 @@ const bestGuess = computed({
 <template>
   <div class="phone-numbers-config">
     <div v-if="props.rules">
-      <h4 class="text-center">{{ t('apps.phoneNumbers.rules.title') }}</h4>
       <div class="field">
-        <AppConfigPhoneNumbersRules v-model="config.rules" />
+        <label class="block mb-2">
+          {{ t('apps.phoneNumbers.rules.label') }}
+        </label>
+        <ToggleButton
+          v-model="applyToAll"
+          onIcon="pi pi-globe"
+          offIcon="pi pi-filter"
+          :onLabel="t('apps.phoneNumbers.rules.on')"
+          :offLabel="t('apps.phoneNumbers.rules.off')"
+        />
         <small class="p-message-secondary block mt-1">
           {{ t('apps.phoneNumbers.rules.help') }}
+        </small>
+      </div>
+      <div class="field" v-if="!applyToAll">
+        <AppConfigPhoneNumbersRules v-model="config.rules" />
+        <small class="p-message-secondary block mt-1">
+          {{ t('apps.phoneNumbers.rules.hint') }}
         </small>
       </div>
       <hr />
