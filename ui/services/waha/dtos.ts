@@ -247,3 +247,4 @@ export interface PhoneNumbersAppConfig extends PhoneNumbersBaseConfig {
 
 export type BrazilianPhoneNumbersAppConfig = PhoneNumbersBaseConfig;
 export type ArgentinePhoneNumbersAppConfig = PhoneNumbersBaseConfig;
+export type MexicanPhoneNumbersAppConfig = PhoneNumbersBaseConfig;

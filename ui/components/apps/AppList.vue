@@ -11,6 +11,7 @@ import McpLabel from '../common/McpLabel.vue';
 import BrazilianPhoneNumbersLabel from '../common/BrazilianPhoneNumbersLabel.vue';
 import PhoneNumbersLabel from '../common/PhoneNumbersLabel.vue';
 import ArgentinePhoneNumbersLabel from '../common/ArgentinePhoneNumbersLabel.vue';
+import MexicanPhoneNumbersLabel from '../common/MexicanPhoneNumbersLabel.vue';
 import { useI18n } from 'vue-i18n';
 
 const toast = useToast();
@@ -248,6 +249,8 @@ function getAppTypeLabel(appType: string) {
       return `🇧🇷 ${t('apps.brazilianPhoneNumbers.name')}`;
     case 'argentine-phone-numbers':
       return `🇦🇷 ${t('apps.argentinePhoneNumbers.name')}`;
+    case 'mexican-phone-numbers':
+      return `🇲🇽 ${t('apps.mexicanPhoneNumbers.name')}`;
     default:
       return appType;
   }
@@ -299,6 +302,7 @@ function getAppTypeLabel(appType: string) {
           <PhoneNumbersLabel v-else-if="data.app === 'phone-numbers'" />
           <BrazilianPhoneNumbersLabel v-else-if="data.app === 'brazilian-phone-numbers'" />
           <ArgentinePhoneNumbersLabel v-else-if="data.app === 'argentine-phone-numbers'" />
+          <MexicanPhoneNumbersLabel v-else-if="data.app === 'mexican-phone-numbers'" />
           <template v-else>{{ getAppTypeLabel(data.app) }}</template>
         </template>
       </Column>

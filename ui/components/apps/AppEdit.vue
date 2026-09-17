@@ -12,6 +12,7 @@ import AppFAQMcp from './AppFAQMcp.vue';
 import AppFAQBrazilianPhoneNumbers from './AppFAQBrazilianPhoneNumbers.vue';
 import AppFAQPhoneNumbers from './AppFAQPhoneNumbers.vue';
 import AppFAQArgentinePhoneNumbers from './AppFAQArgentinePhoneNumbers.vue';
+import AppFAQMexicanPhoneNumbers from './AppFAQMexicanPhoneNumbers.vue';
 import useShowToastOnResult from '../../composables/useShowToastOnResult';
 import { generateRandomId } from '../../utils/ids';
 import ChatWootLabel from '../common/ChatWootLabel.vue';
@@ -20,6 +21,7 @@ import McpLabel from '../common/McpLabel.vue';
 import BrazilianPhoneNumbersLabel from '../common/BrazilianPhoneNumbersLabel.vue';
 import PhoneNumbersLabel from '../common/PhoneNumbersLabel.vue';
 import ArgentinePhoneNumbersLabel from '../common/ArgentinePhoneNumbersLabel.vue';
+import MexicanPhoneNumbersLabel from '../common/MexicanPhoneNumbersLabel.vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
@@ -110,6 +112,11 @@ const appTypes = computed(() => [
     name: `🇦🇷 ${t('apps.argentinePhoneNumbers.name')}`,
     value: 'argentine-phone-numbers',
     label: 'argentine-phone-numbers'
+  },
+  {
+    name: `🇲🇽 ${t('apps.mexicanPhoneNumbers.name')}`,
+    value: 'mexican-phone-numbers',
+    label: 'mexican-phone-numbers'
   }
 ]);
 
@@ -207,6 +214,7 @@ function cancel() {
               <PhoneNumbersLabel v-else-if="slotProps.value === 'phone-numbers'" />
               <BrazilianPhoneNumbersLabel v-else-if="slotProps.value === 'brazilian-phone-numbers'" />
               <ArgentinePhoneNumbersLabel v-else-if="slotProps.value === 'argentine-phone-numbers'" />
+              <MexicanPhoneNumbersLabel v-else-if="slotProps.value === 'mexican-phone-numbers'" />
               <span v-else>{{ slotProps.value }}</span>
             </div>
             <span v-else>
@@ -220,6 +228,7 @@ function cancel() {
             <PhoneNumbersLabel v-else-if="slotProps.option.value === 'phone-numbers'" />
             <BrazilianPhoneNumbersLabel v-else-if="slotProps.option.value === 'brazilian-phone-numbers'" />
             <ArgentinePhoneNumbersLabel v-else-if="slotProps.option.value === 'argentine-phone-numbers'" />
+            <MexicanPhoneNumbersLabel v-else-if="slotProps.option.value === 'mexican-phone-numbers'" />
             <span v-else>{{ slotProps.option.name }}</span>
           </template>
         </Dropdown>
@@ -278,6 +287,10 @@ function cancel() {
           <label><b>{{ t('apps.appFAQ') }}</b></label>
           <AppFAQArgentinePhoneNumbers />
         </div>
+        <div v-else-if="app.app === 'mexican-phone-numbers'">
+          <label><b>{{ t('apps.appFAQ') }}</b></label>
+          <AppFAQMexicanPhoneNumbers />
+        </div>
 
         <label><b>{{ t('apps.appConfiguration') }}</b></label>
         <div class="card app-config">
@@ -310,6 +323,11 @@ function cancel() {
           />
           <AppConfigPhoneNumbers
             v-else-if="app.app === 'argentine-phone-numbers'"
+            v-model="app.config"
+            :submitted="submitted"
+          />
+          <AppConfigPhoneNumbers
+            v-else-if="app.app === 'mexican-phone-numbers'"
             v-model="app.config"
             :submitted="submitted"
           />
