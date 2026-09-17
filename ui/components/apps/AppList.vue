@@ -9,6 +9,8 @@ import ChatWootLabel from '../common/ChatWootLabel.vue';
 import CallsLabel from '../common/CallsLabel.vue';
 import McpLabel from '../common/McpLabel.vue';
 import BrazilianPhoneNumbersLabel from '../common/BrazilianPhoneNumbersLabel.vue';
+import PhoneNumbersLabel from '../common/PhoneNumbersLabel.vue';
+import ArgentinePhoneNumbersLabel from '../common/ArgentinePhoneNumbersLabel.vue';
 import { useI18n } from 'vue-i18n';
 
 const toast = useToast();
@@ -240,8 +242,12 @@ function getAppTypeLabel(appType: string) {
       return `📞 ${t('apps.calls.name')}`;
     case 'mcp':
       return `🤖 ${t('apps.mcp.name')}`;
+    case 'phone-numbers':
+      return `📱 ${t('apps.phoneNumbers.name')}`;
     case 'brazilian-phone-numbers':
       return `🇧🇷 ${t('apps.brazilianPhoneNumbers.name')}`;
+    case 'argentine-phone-numbers':
+      return `🇦🇷 ${t('apps.argentinePhoneNumbers.name')}`;
     default:
       return appType;
   }
@@ -290,7 +296,9 @@ function getAppTypeLabel(appType: string) {
           <ChatWootLabel v-if="data.app === 'chatwoot'" />
           <CallsLabel v-else-if="data.app === 'calls'" />
           <McpLabel v-else-if="data.app === 'mcp'" />
+          <PhoneNumbersLabel v-else-if="data.app === 'phone-numbers'" />
           <BrazilianPhoneNumbersLabel v-else-if="data.app === 'brazilian-phone-numbers'" />
+          <ArgentinePhoneNumbersLabel v-else-if="data.app === 'argentine-phone-numbers'" />
           <template v-else>{{ getAppTypeLabel(data.app) }}</template>
         </template>
       </Column>

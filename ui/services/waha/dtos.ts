@@ -220,15 +220,30 @@ export interface McpAppConfig {
     key?: string;
 }
 
-export interface BrazilianPhoneNumbersCacheConfig {
+export interface PhoneNumbersCacheConfig {
     // Duration strings, e.g. '24h', '31d'
     memoryTtl?: string;
     persistent?: boolean;
     persistentTtl?: string;
 }
 
-export interface BrazilianPhoneNumbersAppConfig {
+export interface PhoneNumbersBaseConfig {
     strict?: boolean;
     lookup?: boolean;
-    cache?: BrazilianPhoneNumbersCacheConfig;
+    cache?: PhoneNumbersCacheConfig;
 }
+
+export interface PhoneNumbersRuleConfig {
+    // Regexp on digits only, no + or @c.us
+    regexp: string;
+    // Also check the replaced form, e.g. "^52(\d{10})$" => "521$1"
+    replace?: string;
+}
+
+export interface PhoneNumbersAppConfig extends PhoneNumbersBaseConfig {
+    // First matching rule wins, no rules - every number is resolved
+    rules?: PhoneNumbersRuleConfig[];
+}
+
+export type BrazilianPhoneNumbersAppConfig = PhoneNumbersBaseConfig;
+export type ArgentinePhoneNumbersAppConfig = PhoneNumbersBaseConfig;

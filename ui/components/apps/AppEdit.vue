@@ -5,17 +5,21 @@ import { App } from '../../services/waha/dtos';
 import AppConfigChatWoot from './AppConfigChatWoot.vue';
 import AppConfigCalls from './AppConfigCalls.vue';
 import AppConfigMcp from './AppConfigMcp.vue';
-import AppConfigBrazilianPhoneNumbers from './AppConfigBrazilianPhoneNumbers.vue';
+import AppConfigPhoneNumbers from './AppConfigPhoneNumbers.vue';
 import AppFAQChatWoot from './AppFAQChatWoot.vue';
 import AppFAQCalls from './AppFAQCalls.vue';
 import AppFAQMcp from './AppFAQMcp.vue';
 import AppFAQBrazilianPhoneNumbers from './AppFAQBrazilianPhoneNumbers.vue';
+import AppFAQPhoneNumbers from './AppFAQPhoneNumbers.vue';
+import AppFAQArgentinePhoneNumbers from './AppFAQArgentinePhoneNumbers.vue';
 import useShowToastOnResult from '../../composables/useShowToastOnResult';
 import { generateRandomId } from '../../utils/ids';
 import ChatWootLabel from '../common/ChatWootLabel.vue';
 import CallsLabel from '../common/CallsLabel.vue';
 import McpLabel from '../common/McpLabel.vue';
 import BrazilianPhoneNumbersLabel from '../common/BrazilianPhoneNumbersLabel.vue';
+import PhoneNumbersLabel from '../common/PhoneNumbersLabel.vue';
+import ArgentinePhoneNumbersLabel from '../common/ArgentinePhoneNumbersLabel.vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
@@ -93,9 +97,19 @@ const appTypes = computed(() => [
     label: 'mcp'
   },
   {
+    name: `📱 ${t('apps.phoneNumbers.name')}`,
+    value: 'phone-numbers',
+    label: 'phone-numbers'
+  },
+  {
     name: `🇧🇷 ${t('apps.brazilianPhoneNumbers.name')}`,
     value: 'brazilian-phone-numbers',
     label: 'brazilian-phone-numbers'
+  },
+  {
+    name: `🇦🇷 ${t('apps.argentinePhoneNumbers.name')}`,
+    value: 'argentine-phone-numbers',
+    label: 'argentine-phone-numbers'
   }
 ]);
 
@@ -199,7 +213,9 @@ function cancel() {
               <ChatWootLabel v-if="slotProps.value === 'chatwoot'" />
               <CallsLabel v-else-if="slotProps.value === 'calls'" />
               <McpLabel v-else-if="slotProps.value === 'mcp'" />
+              <PhoneNumbersLabel v-else-if="slotProps.value === 'phone-numbers'" />
               <BrazilianPhoneNumbersLabel v-else-if="slotProps.value === 'brazilian-phone-numbers'" />
+              <ArgentinePhoneNumbersLabel v-else-if="slotProps.value === 'argentine-phone-numbers'" />
               <span v-else>{{ slotProps.value }}</span>
             </div>
             <span v-else>
@@ -210,7 +226,9 @@ function cancel() {
             <ChatWootLabel v-if="slotProps.option.value === 'chatwoot'" />
             <CallsLabel v-else-if="slotProps.option.value === 'calls'" />
             <McpLabel v-else-if="slotProps.option.value === 'mcp'" />
+            <PhoneNumbersLabel v-else-if="slotProps.option.value === 'phone-numbers'" />
             <BrazilianPhoneNumbersLabel v-else-if="slotProps.option.value === 'brazilian-phone-numbers'" />
+            <ArgentinePhoneNumbersLabel v-else-if="slotProps.option.value === 'argentine-phone-numbers'" />
             <span v-else>{{ slotProps.option.name }}</span>
           </template>
         </Dropdown>
@@ -246,9 +264,17 @@ function cancel() {
           <label><b>{{ t('apps.appFAQ') }}</b></label>
           <AppFAQMcp :app="app" :server="server" />
         </div>
+        <div v-else-if="app.app === 'phone-numbers'">
+          <label><b>{{ t('apps.appFAQ') }}</b></label>
+          <AppFAQPhoneNumbers />
+        </div>
         <div v-else-if="app.app === 'brazilian-phone-numbers'">
           <label><b>{{ t('apps.appFAQ') }}</b></label>
           <AppFAQBrazilianPhoneNumbers />
+        </div>
+        <div v-else-if="app.app === 'argentine-phone-numbers'">
+          <label><b>{{ t('apps.appFAQ') }}</b></label>
+          <AppFAQArgentinePhoneNumbers />
         </div>
 
         <label><b>{{ t('apps.appConfiguration') }}</b></label>
@@ -269,8 +295,19 @@ function cancel() {
             v-model="app.config"
             :submitted="submitted"
           />
-          <AppConfigBrazilianPhoneNumbers
+          <AppConfigPhoneNumbers
+            v-else-if="app.app === 'phone-numbers'"
+            v-model="app.config"
+            :submitted="submitted"
+            :rules="true"
+          />
+          <AppConfigPhoneNumbers
             v-else-if="app.app === 'brazilian-phone-numbers'"
+            v-model="app.config"
+            :submitted="submitted"
+          />
+          <AppConfigPhoneNumbers
+            v-else-if="app.app === 'argentine-phone-numbers'"
             v-model="app.config"
             :submitted="submitted"
           />
