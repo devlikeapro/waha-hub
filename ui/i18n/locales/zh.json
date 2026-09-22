@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "标记为已读",
   "apps.chatwoot.conversations.markAsRead.off": "保持未读",
   "apps.chatwoot.conversations.syncMessageStatus.label": "在 WhatsApp ack 时同步消息状态",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "在 ChatWoot 中为从 ChatWoot 发送的消息显示已送达和已读标记。默认关闭。",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "在 ChatWoot 中为从 ChatWoot 发送的消息显示已送达和已读标记。",
   "apps.chatwoot.conversations.syncMessageStatus.on": "同步状态",
   "apps.chatwoot.conversations.syncMessageStatus.off": "保持为已发送",
   "apps.chatwoot.conversations.outgoing.label": "从 WhatsApp 发送的消息",

@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "पढ़ा चिह्नित करें",
   "apps.chatwoot.conversations.markAsRead.off": "अपठित रहने दें",
   "apps.chatwoot.conversations.syncMessageStatus.label": "WhatsApp ack पर संदेश स्थिति सिंक करें",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "ChatWoot से भेजे गए संदेशों पर ChatWoot में डिलीवर और पढ़ा गया के निशान दिखाता है। डिफ़ॉल्ट रूप से बंद।",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "ChatWoot से भेजे गए संदेशों पर ChatWoot में डिलीवर और पढ़ा गया के निशान दिखाता है।",
   "apps.chatwoot.conversations.syncMessageStatus.on": "स्थिति सिंक करें",
   "apps.chatwoot.conversations.syncMessageStatus.off": "भेजा गया ही रहने दें",
   "apps.chatwoot.conversations.outgoing.label": "WhatsApp से भेजे गए संदेश",

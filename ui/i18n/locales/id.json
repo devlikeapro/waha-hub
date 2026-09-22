@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "Tandai telah dibaca",
   "apps.chatwoot.conversations.markAsRead.off": "Biarkan belum dibaca",
   "apps.chatwoot.conversations.syncMessageStatus.label": "Sinkronkan status pesan saat ack WhatsApp",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Menampilkan tanda terkirim dan dibaca di ChatWoot pada pesan yang dikirim dari ChatWoot. Nonaktif secara default.",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Menampilkan tanda terkirim dan dibaca di ChatWoot pada pesan yang dikirim dari ChatWoot.",
   "apps.chatwoot.conversations.syncMessageStatus.on": "Sinkronkan status",
   "apps.chatwoot.conversations.syncMessageStatus.off": "Biarkan sebagai terkirim",
   "apps.chatwoot.conversations.outgoing.label": "Pesan yang dikirim dari WhatsApp",

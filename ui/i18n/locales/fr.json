@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "Marquer comme lu",
   "apps.chatwoot.conversations.markAsRead.off": "Laisser non lu",
   "apps.chatwoot.conversations.syncMessageStatus.label": "Synchroniser le statut du message à l'ack WhatsApp",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Affiche les coches distribué et lu dans ChatWoot sur les messages envoyés depuis ChatWoot. Désactivé par défaut.",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Affiche les coches distribué et lu dans ChatWoot sur les messages envoyés depuis ChatWoot.",
   "apps.chatwoot.conversations.syncMessageStatus.on": "Synchroniser le statut",
   "apps.chatwoot.conversations.syncMessageStatus.off": "Laisser comme envoyé",
   "apps.chatwoot.conversations.outgoing.label": "Messages envoyés depuis WhatsApp",

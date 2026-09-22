@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "علّم كمقروء",
   "apps.chatwoot.conversations.markAsRead.off": "اتركه غير مقروء",
   "apps.chatwoot.conversations.syncMessageStatus.label": "مزامنة حالة الرسالة عند ack واتساب",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "يعرض علامات التسليم والقراءة في ChatWoot على الرسائل المرسلة من ChatWoot. معطّل افتراضيًا.",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "يعرض علامات التسليم والقراءة في ChatWoot على الرسائل المرسلة من ChatWoot.",
   "apps.chatwoot.conversations.syncMessageStatus.on": "مزامنة الحالة",
   "apps.chatwoot.conversations.syncMessageStatus.off": "الإبقاء كمُرسلة",
   "apps.chatwoot.conversations.outgoing.label": "الرسائل المرسلة من واتساب",

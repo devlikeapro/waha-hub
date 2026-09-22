@@ -299,6 +299,7 @@ function cancel() {
             v-model="app.config"
             :server="server"
             :submitted="submitted"
+            :is-new-app="props.isNewApp"
           />
           <AppConfigCalls
             v-else-if="app.app === 'calls'"

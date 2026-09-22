@@ -138,7 +138,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "Mark as read",
   "apps.chatwoot.conversations.markAsRead.off": "Leave unread",
   "apps.chatwoot.conversations.syncMessageStatus.label": "Sync message status on WhatsApp ack",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Show delivered and read ticks in ChatWoot on messages sent from ChatWoot. Disabled by default.",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Show delivered and read ticks in ChatWoot on messages sent from ChatWoot.",
   "apps.chatwoot.conversations.syncMessageStatus.on": "Sync status",
   "apps.chatwoot.conversations.syncMessageStatus.off": "Keep as sent",
   "apps.chatwoot.conversations.outgoing.label": "Messages sent from WhatsApp",

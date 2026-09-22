@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "علامت به‌عنوان خوانده",
   "apps.chatwoot.conversations.markAsRead.off": "خوانده نشده بماند",
   "apps.chatwoot.conversations.syncMessageStatus.label": "همگام‌سازی وضعیت پیام با ack واتساپ",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "تیک‌های تحویل و خوانده‌شدن را در ChatWoot برای پیام‌های ارسال‌شده از ChatWoot نشان می‌دهد. به‌طور پیش‌فرض غیرفعال است.",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "تیک‌های تحویل و خوانده‌شدن را در ChatWoot برای پیام‌های ارسال‌شده از ChatWoot نشان می‌دهد.",
   "apps.chatwoot.conversations.syncMessageStatus.on": "همگام‌سازی وضعیت",
   "apps.chatwoot.conversations.syncMessageStatus.off": "به‌عنوان ارسال‌شده بماند",
   "apps.chatwoot.conversations.outgoing.label": "پیام‌های ارسال‌شده از واتساپ",

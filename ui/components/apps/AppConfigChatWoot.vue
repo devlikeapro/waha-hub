@@ -30,6 +30,10 @@ const props = defineProps({
   submitted: {
     type: Boolean,
     default: false
+  },
+  isNewApp: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -38,7 +42,7 @@ const emit = defineEmits(['update:modelValue']);
 const store = useServerStore();
 const req = useShowToastOnResult();
 
-const defaults: ChatWootAppConfig = {
+const getDefaults = (): ChatWootAppConfig => ({
   url: '',
   accountId: null,
   accountToken: '',
@@ -55,14 +59,15 @@ const defaults: ChatWootAppConfig = {
     sort: 'created_newest' as ConversationSort,
     status: null,
     markAsRead: true,
-    syncMessageStatus: false,
+    // on for apps created from the dashboard, API default stays off
+    syncMessageStatus: props.isNewApp,
     outgoing: 'private-note' as ChatWootOutgoingMode,
   }
-};
+});
 
 
 const config = reactive<ChatWootAppConfig>(
-    lodash.defaultsDeep({}, lodash.cloneDeep(props.modelValue ?? {}), defaults)
+    lodash.defaultsDeep({}, lodash.cloneDeep(props.modelValue ?? {}), getDefaults())
 )
 watch(
     config,

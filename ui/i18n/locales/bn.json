@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "পড়া হিসেবে চিহ্নিত করুন",
   "apps.chatwoot.conversations.markAsRead.off": "অপাঠিত রাখুন",
   "apps.chatwoot.conversations.syncMessageStatus.label": "WhatsApp ack-এ বার্তার স্ট্যাটাস সিঙ্ক করুন",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "ChatWoot থেকে পাঠানো বার্তায় ChatWoot-এ ডেলিভারড ও পঠিত টিক দেখায়। ডিফল্টভাবে বন্ধ।",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "ChatWoot থেকে পাঠানো বার্তায় ChatWoot-এ ডেলিভারড ও পঠিত টিক দেখায়।",
   "apps.chatwoot.conversations.syncMessageStatus.on": "স্ট্যাটাস সিঙ্ক করুন",
   "apps.chatwoot.conversations.syncMessageStatus.off": "পাঠানো হিসেবে রাখুন",
   "apps.chatwoot.conversations.outgoing.label": "WhatsApp থেকে পাঠানো বার্তা",

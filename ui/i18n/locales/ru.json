@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "Отметить как прочитанное",
   "apps.chatwoot.conversations.markAsRead.off": "Оставить непрочитанным",
   "apps.chatwoot.conversations.syncMessageStatus.label": "Синхронизировать статус сообщения по WhatsApp ack",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Показывает галочки «доставлено» и «прочитано» в ChatWoot для сообщений, отправленных из ChatWoot. По умолчанию выключено.",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Показывает галочки «доставлено» и «прочитано» в ChatWoot для сообщений, отправленных из ChatWoot.",
   "apps.chatwoot.conversations.syncMessageStatus.on": "Синхронизировать статус",
   "apps.chatwoot.conversations.syncMessageStatus.off": "Оставить как отправлено",
   "apps.chatwoot.conversations.outgoing.label": "Сообщения, отправленные из WhatsApp",

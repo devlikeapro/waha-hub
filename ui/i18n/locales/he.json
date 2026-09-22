@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "סמן כנקראו",
   "apps.chatwoot.conversations.markAsRead.off": "השאר כלא נקראו",
   "apps.chatwoot.conversations.syncMessageStatus.label": "סנכרון סטטוס ההודעה לפי ack של WhatsApp",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "מציג סימוני נמסרה ונקראה ב-ChatWoot על הודעות שנשלחו מ-ChatWoot. כבוי כברירת מחדל.",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "מציג סימוני נמסרה ונקראה ב-ChatWoot על הודעות שנשלחו מ-ChatWoot.",
   "apps.chatwoot.conversations.syncMessageStatus.on": "סנכרן סטטוס",
   "apps.chatwoot.conversations.syncMessageStatus.off": "השאר כנשלחה",
   "apps.chatwoot.conversations.outgoing.label": "הודעות שנשלחו מ-WhatsApp",

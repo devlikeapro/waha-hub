@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "Marcar como leído",
   "apps.chatwoot.conversations.markAsRead.off": "Mantener como no leído",
   "apps.chatwoot.conversations.syncMessageStatus.label": "Sincronizar el estado del mensaje al recibir el ack de WhatsApp",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Muestra las marcas de entregado y leído en ChatWoot en los mensajes enviados desde ChatWoot. Desactivado por defecto.",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Muestra las marcas de entregado y leído en ChatWoot en los mensajes enviados desde ChatWoot.",
   "apps.chatwoot.conversations.syncMessageStatus.on": "Sincronizar estado",
   "apps.chatwoot.conversations.syncMessageStatus.off": "Mantener como enviado",
   "apps.chatwoot.conversations.outgoing.label": "Mensajes enviados desde WhatsApp",

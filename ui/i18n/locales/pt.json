@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "Marcar como lida",
   "apps.chatwoot.conversations.markAsRead.off": "Manter como não lida",
   "apps.chatwoot.conversations.syncMessageStatus.label": "Sincronizar o status da mensagem no ack do WhatsApp",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Mostra os tiques de entregue e lida no ChatWoot nas mensagens enviadas pelo ChatWoot. Desativado por padrão.",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Mostra os tiques de entregue e lida no ChatWoot nas mensagens enviadas pelo ChatWoot.",
   "apps.chatwoot.conversations.syncMessageStatus.on": "Sincronizar status",
   "apps.chatwoot.conversations.syncMessageStatus.off": "Manter como enviada",
   "apps.chatwoot.conversations.outgoing.label": "Mensagens enviadas do WhatsApp",

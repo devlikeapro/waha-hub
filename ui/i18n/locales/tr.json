@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "Okundu olarak işaretle",
   "apps.chatwoot.conversations.markAsRead.off": "Okunmadı bırak",
   "apps.chatwoot.conversations.syncMessageStatus.label": "WhatsApp ack ile mesaj durumunu eşitle",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "ChatWoot'tan gönderilen mesajlarda iletildi ve okundu tiklerini ChatWoot'ta gösterir. Varsayılan olarak kapalı.",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "ChatWoot'tan gönderilen mesajlarda iletildi ve okundu tiklerini ChatWoot'ta gösterir.",
   "apps.chatwoot.conversations.syncMessageStatus.on": "Durumu eşitle",
   "apps.chatwoot.conversations.syncMessageStatus.off": "Gönderildi olarak bırak",
   "apps.chatwoot.conversations.outgoing.label": "WhatsApp'tan gönderilen mesajlar",

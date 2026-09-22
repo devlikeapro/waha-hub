@@ -130,7 +130,7 @@
   "apps.chatwoot.conversations.markAsRead.on": "Als gelesen markieren",
   "apps.chatwoot.conversations.markAsRead.off": "Als ungelesen lassen",
   "apps.chatwoot.conversations.syncMessageStatus.label": "Nachrichtenstatus bei WhatsApp-Ack synchronisieren",
-  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Zeigt Zugestellt- und Gelesen-Haken in ChatWoot bei aus ChatWoot gesendeten Nachrichten. Standardmäßig deaktiviert.",
+  "apps.chatwoot.conversations.syncMessageStatus.tooltip": "Zeigt Zugestellt- und Gelesen-Haken in ChatWoot bei aus ChatWoot gesendeten Nachrichten.",
   "apps.chatwoot.conversations.syncMessageStatus.on": "Status synchronisieren",
   "apps.chatwoot.conversations.syncMessageStatus.off": "Als gesendet belassen",
   "apps.chatwoot.conversations.outgoing.label": "Von WhatsApp gesendete Nachrichten",
