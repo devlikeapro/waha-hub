@@ -232,6 +232,22 @@ export class WahaAPI {
         });
     }
 
+    findPNByLid(serverId: ServerId, sessionName: string, lid: string): Promise<{ lid: string, pn: string | null }> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/lids/${lid}`,
+            params: {},
+        });
+    }
+
+    findLIDByPhoneNumber(serverId: ServerId, sessionName: string, phoneNumber: string): Promise<{ lid: string | null, pn: string }> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/lids/pn/${phoneNumber}`,
+            params: {},
+        });
+    }
+
     getChatMessage(serverId: ServerId, sessionName: string, messageId: string, chatId: string = 'all'): Promise<any> {
         return this.api.call(serverId, {
             method: 'GET',

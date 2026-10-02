@@ -100,16 +100,64 @@ function startClient() {
   client.on("event", handleEvent)
 }
 
+// Lazy cache of "merged" counterpart ids: "123@lid" <-> "123@c.us".
+// Filled only on demand (when an event doesn't match the opened chat directly),
+// never on chat selection. Only known (non-null) mappings are cached so an
+// unknown one gets retried on the next event.
+let chatIdAliases = new Map()
+
+async function resolveChatAlias(chatId) {
+  const cached = chatIdAliases.get(chatId)
+  if (cached) {
+    return cached
+  }
+  const serverId = session.value.server.id
+  const sessionName = session.value.name
+  let alias = null
+  try {
+    if (chatId.endsWith('@lid')) {
+      const result = await store.findPNByLid(serverId, sessionName, chatId)
+      alias = result?.pn || null
+    } else if (chatId.endsWith('@c.us')) {
+      const result = await store.findLIDByPhoneNumber(serverId, sessionName, chatId)
+      alias = result?.lid || null
+    }
+  } catch (e) {
+    console.warn('Failed to resolve lid/pn alias for chat', chatId, e)
+    return null
+  }
+  if (alias) {
+    chatIdAliases.set(chatId, alias)
+  }
+  return alias
+}
+
 async function handleEvent(event) {
   await sleep(1000)
+  refreshChats()
   const chatId = selectedChat.value?.id
   if (!chatId) {
     return
   }
-  if (event.payload.from === chatId || event.payload.to === chatId) {
+  const from = event.payload?.from
+  const to = event.payload?.to
+  if (from === chatId || to === chatId) {
+    fetchMessages()
+    return
+  }
+  // The overview merges @lid and @c.us chats of the same contact, so the opened
+  // chat may be "447@c.us" while the event arrives from "265@lid" (or vice versa).
+  const alias = await resolveChatAlias(chatId)
+  if (!alias) {
+    return
+  }
+  // The user may have switched chats while we were resolving
+  if (selectedChat.value?.id !== chatId) {
+    return
+  }
+  if (from === alias || to === alias) {
     fetchMessages()
   }
-  refreshChats()
 }
 
 function restartClient() {
@@ -177,6 +225,7 @@ function initializeDialog() {
     return;
   }
   mergeOverview.value = true
+  chatIdAliases = new Map()
   stopClient()
   startClient()
   refreshChats()

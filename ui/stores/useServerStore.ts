@@ -303,6 +303,14 @@ export const useServerStore = defineStore('serverStore', () => {
         return wahaAPI.getChatsMessages(serverId, sessionName, chatId, limit, offset, media, merge)
     }
 
+    async function findPNByLid(serverId: ServerId, sessionName: string, lid: string): Promise<{ lid: string, pn: string | null }> {
+        return wahaAPI.findPNByLid(serverId, sessionName, lid)
+    }
+
+    async function findLIDByPhoneNumber(serverId: ServerId, sessionName: string, phoneNumber: string): Promise<{ lid: string | null, pn: string }> {
+        return wahaAPI.findLIDByPhoneNumber(serverId, sessionName, phoneNumber)
+    }
+
     async function getChatMessage(
         serverId: ServerId,
         sessionName: string,
@@ -458,6 +466,8 @@ export const useServerStore = defineStore('serverStore', () => {
         confirmPasskey,
         getChatsOverview,
         getChatsMessages,
+        findPNByLid,
+        findLIDByPhoneNumber,
         getChatMessage,
         readChatMessages,
         sendImage,
