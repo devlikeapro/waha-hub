@@ -370,6 +370,8 @@ const showPromo = ref(false)
         <ChatList
             :chats="chats"
             :pending="pending"
+            :serverId="session.server.id"
+            :sessionName="session.name"
             :merge="mergeOverview"
             :loadMoreChats="loadMoreChats"
             :loadingMoreChats="loadingMoreChats"
@@ -383,6 +385,8 @@ const showPromo = ref(false)
           <template v-if="selectedChat">
             <ChatHeader
                 :chat="selectedChat"
+                :serverId="session.server.id"
+                :sessionName="session.name"
                 :me="session.me"
                 :mePicture="profilePicture"
                 :fetch="fetchMessages"

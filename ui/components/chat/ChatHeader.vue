@@ -1,6 +1,8 @@
 <script setup>
 const props = defineProps({
   chat: Object,
+  serverId: String,
+  sessionName: String,
   me: Object,
   mePicture: Object,
   fetching: Boolean,
@@ -8,15 +10,21 @@ const props = defineProps({
 })
 
 import ContactChip from "../sessions/ContactChip.vue";
+import ChatLabels from "./ChatLabels.vue";
 </script>
 
 <template>
   <div class="chat-header my-2">
-    <div class="flex align-items-center">
+    <div class="flex align-items-center gap-2 flex-wrap">
       <ContactChip
           :id="chat.id"
           :name="chat.name"
           :image="chat.picture"
+      />
+      <ChatLabels
+          :serverId="serverId"
+          :sessionName="sessionName"
+          :chatId="chat.id"
       />
     </div>
     <div class="flex justify-content-center align-items-center">

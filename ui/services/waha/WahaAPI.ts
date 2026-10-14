@@ -1,5 +1,5 @@
 import {ServerId} from "../hub/IHubServerAPI";
-import {ApiKeyDTO, ApiKeyRequest, App, Locale, Session, SessionConfig, SessionStartRequest} from "./dtos";
+import {ApiKeyDTO, ApiKeyRequest, App, Label, Locale, Session, SessionConfig, SessionStartRequest} from "./dtos";
 import {IWahaAPIClient} from "./IWahaAPIClient";
 import {HTTPRequest} from "./HTTPRequest";
 
@@ -229,6 +229,14 @@ export class WahaAPI {
             method: 'GET',
             uri: `/api/${sessionName}/chats/${chatId}/messages`,
             params,
+        });
+    }
+
+    getChatLabels(serverId: ServerId, sessionName: string, chatId: string): Promise<Label[]> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/labels/chats/${chatId}`,
+            params: {},
         });
     }
 

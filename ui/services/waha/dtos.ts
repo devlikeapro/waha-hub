@@ -106,6 +106,13 @@ export interface Session {
     me?: SessionMe;
 }
 
+export interface Label {
+    id: string;
+    name: string;
+    color: number;
+    colorHex: string;
+}
+
 export interface SessionStartRequest {
     name?: SessionName;
     config: SessionConfig;

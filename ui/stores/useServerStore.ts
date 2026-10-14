@@ -2,7 +2,7 @@ import {defineStore} from 'pinia'
 import {watchEffect} from '@vue/runtime-core';
 import {reactive, ref} from "vue"
 import type {IHubServerAPI, ServerId, ServerInfo} from "../services/hub/IHubServerAPI";
-import type {ApiKeyRequest, Session, SessionConfig, SessionStartRequest} from "../services/waha/dtos";
+import type {ApiKeyRequest, Label, Session, SessionConfig, SessionStartRequest} from "../services/waha/dtos";
 import {computed} from "../.nuxt/imports";
 // @ts-ignore
 import lodash from "lodash";
@@ -303,6 +303,10 @@ export const useServerStore = defineStore('serverStore', () => {
         return wahaAPI.getChatsMessages(serverId, sessionName, chatId, limit, offset, media, merge)
     }
 
+    async function getChatLabels(serverId: ServerId, sessionName: string, chatId: string): Promise<Label[]> {
+        return wahaAPI.getChatLabels(serverId, sessionName, chatId)
+    }
+
     async function findPNByLid(serverId: ServerId, sessionName: string, lid: string): Promise<{ lid: string, pn: string | null }> {
         return wahaAPI.findPNByLid(serverId, sessionName, lid)
     }
@@ -466,6 +470,7 @@ export const useServerStore = defineStore('serverStore', () => {
         confirmPasskey,
         getChatsOverview,
         getChatsMessages,
+        getChatLabels,
         findPNByLid,
         findLIDByPhoneNumber,
         getChatMessage,

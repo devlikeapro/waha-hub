@@ -8,6 +8,8 @@ const props = defineProps({
       },
       loadMoreChats: Function,
       loadingMoreChats: Boolean,
+      serverId: String,
+      sessionName: String,
     }
 )
 const emit = defineEmits(['clickOnChat',
@@ -58,6 +60,8 @@ const emit = defineEmits(['clickOnChat',
               :name="data.name"
               :picture="data.picture"
               :message="data.lastMessage"
+              :serverId="serverId"
+              :sessionName="sessionName"
           />
         </template>
       </Column>
