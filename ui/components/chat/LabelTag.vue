@@ -33,13 +33,8 @@ const tooltip = computed(() => {
 
 <style scoped lang="scss">
 .label-remove {
-  display: none;
   cursor: pointer;
   margin-left: 0.25rem;
   font-size: 0.75rem;
-}
-
-.p-tag:hover .label-remove {
-  display: inline;
 }
 </style>

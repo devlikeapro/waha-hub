@@ -50,12 +50,4 @@ import ChatLabels from "./ChatLabels.vue";
   align-items: center;
   gap: 0.5rem;
 }
-
-.chat-header-contact :deep(.label-picker-add) {
-  visibility: hidden;
-}
-
-.chat-header-contact:hover :deep(.label-picker-add) {
-  visibility: visible;
-}
 </style>
