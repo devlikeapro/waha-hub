@@ -32,9 +32,15 @@ const tooltip = computed(() => {
 </template>
 
 <style scoped lang="scss">
+.p-tag {
+  display: inline-flex;
+  align-items: center;
+}
+
 .label-remove {
   cursor: pointer;
   margin-left: 0.25rem;
   font-size: 0.75rem;
+  line-height: 1;
 }
 </style>
