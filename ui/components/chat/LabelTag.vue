@@ -10,10 +10,18 @@ const style = computed(() => ({
   border: '2px solid ' + props.label.colorHex,
   color: props.label.colorHex,
 }))
+
+const tooltip = computed(() => {
+  const parts = ['id: ' + props.label.id]
+  if (props.label.type != null) {
+    parts.push('type: ' + props.label.type)
+  }
+  return parts.join(', ')
+})
 </script>
 
 <template>
-  <Tag :style="style" v-tooltip.top="'id: ' + label.id">
+  <Tag :style="style" v-tooltip.top="tooltip">
     <span>{{ label.name }}</span>
     <i
         v-if="removable"

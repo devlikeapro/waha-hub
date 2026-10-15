@@ -111,6 +111,8 @@ export interface Label {
     name: string;
     color: number;
     colorHex: string;
+    type?: number;
+    isActive?: boolean;
 }
 
 export interface SessionStartRequest {
