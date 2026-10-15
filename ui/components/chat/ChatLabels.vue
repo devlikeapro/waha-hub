@@ -1,44 +1,46 @@
 <script setup>
+import {toRef} from "vue";
+import LabelTag from "./LabelTag.vue";
+import LabelPicker from "./LabelPicker.vue";
+
 const props = defineProps({
   serverId: String,
   sessionName: String,
   chatId: String,
+  editable: Boolean,
 })
 
-const store = useServerStore()
-const labels = ref([])
+const {labels, allLabels, saving, loadAll, has, add, remove} = useChatLabels(
+    toRef(props, 'serverId'),
+    toRef(props, 'sessionName'),
+    toRef(props, 'chatId'),
+)
 
-// Labels are keyed by @lid, so resolve the phone number first
-async function resolveLid(chatId) {
-  if (!chatId.endsWith('@c.us')) {
-    return chatId
-  }
-  const result = await store.findLIDByPhoneNumber(props.serverId, props.sessionName, chatId)
-  return result?.lid || chatId
-}
-
-async function fetchLabels() {
-  labels.value = []
-  if (!props.serverId || !props.chatId) {
-    return
-  }
-  try {
-    const chatId = await resolveLid(props.chatId)
-    labels.value = await store.getChatLabels(props.serverId, props.sessionName, chatId) || []
-  } catch (e) {
-    console.warn('Failed to fetch chat labels', props.chatId, e)
+function toggle(label) {
+  if (has(label)) {
+    remove(label)
+  } else {
+    add(label)
   }
 }
-
-watch(() => props.chatId, fetchLabels, {immediate: true})
 </script>
 
 <template>
-  <Tag
-      v-for="label in labels"
-      :key="label.id"
-      :value="label.name"
-      :style="{background: 'transparent', border: '2px solid ' + label.colorHex, color: label.colorHex}"
-      v-tooltip.top="'id: ' + label.id"
-  />
+  <span class="chat-labels flex align-items-center gap-2 flex-wrap">
+    <LabelTag
+        v-for="label in labels"
+        :key="label.id"
+        :label="label"
+        :removable="editable"
+        @remove="remove"
+    />
+    <LabelPicker
+        v-if="editable"
+        :labels="allLabels"
+        :selected="labels"
+        :disabled="saving"
+        @open="loadAll"
+        @toggle="toggle"
+    />
+  </span>
 </template>

@@ -15,7 +15,7 @@ import ChatLabels from "./ChatLabels.vue";
 
 <template>
   <div class="chat-header my-2">
-    <div class="flex align-items-center gap-2 flex-wrap">
+    <div class="chat-header-contact flex align-items-center gap-2 flex-wrap">
       <ContactChip
           :id="chat.id"
           :name="chat.name"
@@ -25,6 +25,7 @@ import ChatLabels from "./ChatLabels.vue";
           :serverId="serverId"
           :sessionName="sessionName"
           :chatId="chat.id"
+          editable
       />
     </div>
     <div class="flex justify-content-center align-items-center">
@@ -48,5 +49,13 @@ import ChatLabels from "./ChatLabels.vue";
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 0.5rem;
+}
+
+.chat-header-contact :deep(.label-picker-add) {
+  visibility: hidden;
+}
+
+.chat-header-contact:hover :deep(.label-picker-add) {
+  visibility: visible;
 }
 </style>

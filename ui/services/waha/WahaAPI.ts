@@ -232,11 +232,28 @@ export class WahaAPI {
         });
     }
 
+    getLabels(serverId: ServerId, sessionName: string): Promise<Label[]> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/labels`,
+            params: {},
+        });
+    }
+
     getChatLabels(serverId: ServerId, sessionName: string, chatId: string): Promise<Label[]> {
         return this.api.call(serverId, {
             method: 'GET',
             uri: `/api/${sessionName}/labels/chats/${chatId}`,
             params: {},
+        });
+    }
+
+    setChatLabels(serverId: ServerId, sessionName: string, chatId: string, labelIds: string[]): Promise<void> {
+        return this.api.call(serverId, {
+            method: 'PUT',
+            uri: `/api/${sessionName}/labels/chats/${chatId}`,
+            params: {},
+            body: {labels: labelIds.map((id) => ({id}))},
         });
     }
 

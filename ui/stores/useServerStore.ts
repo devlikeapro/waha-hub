@@ -303,8 +303,16 @@ export const useServerStore = defineStore('serverStore', () => {
         return wahaAPI.getChatsMessages(serverId, sessionName, chatId, limit, offset, media, merge)
     }
 
+    async function getLabels(serverId: ServerId, sessionName: string): Promise<Label[]> {
+        return wahaAPI.getLabels(serverId, sessionName)
+    }
+
     async function getChatLabels(serverId: ServerId, sessionName: string, chatId: string): Promise<Label[]> {
         return wahaAPI.getChatLabels(serverId, sessionName, chatId)
+    }
+
+    async function setChatLabels(serverId: ServerId, sessionName: string, chatId: string, labelIds: string[]): Promise<void> {
+        return wahaAPI.setChatLabels(serverId, sessionName, chatId, labelIds)
     }
 
     async function findPNByLid(serverId: ServerId, sessionName: string, lid: string): Promise<{ lid: string, pn: string | null }> {
@@ -470,7 +478,9 @@ export const useServerStore = defineStore('serverStore', () => {
         confirmPasskey,
         getChatsOverview,
         getChatsMessages,
+        getLabels,
         getChatLabels,
+        setChatLabels,
         findPNByLid,
         findLIDByPhoneNumber,
         getChatMessage,
