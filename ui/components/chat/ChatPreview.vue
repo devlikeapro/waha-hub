@@ -22,22 +22,21 @@ const textPreview = computed(() => {
 </script>
 
 <template>
-  <div class="flex align-items-center gap-2 flex-wrap">
-    <ContactChip
-        :id="props.id"
-        :name="props.name"
-        :image="props.picture"
-    />
-    <ChatLabels
-        :serverId="serverId"
-        :sessionName="sessionName"
-        :chatId="props.id"
-    />
-  </div>
-  <div class="flex gap-1 mt-1">
-    <MessageAck v-if="textPreview && message.fromMe" :ack="message.ack" class="pb-2"/>
+  <ContactChip
+      :id="props.id"
+      :name="props.name"
+      :image="props.picture"
+  />
+  <div v-if="textPreview" class="flex gap-1 mt-1">
+    <MessageAck v-if="message.fromMe" :ack="message.ack" class="pb-2"/>
     {{ textPreview }}
   </div>
+  <ChatLabels
+      :serverId="serverId"
+      :sessionName="sessionName"
+      :chatId="props.id"
+      class="mt-2"
+  />
 </template>
 
 <style scoped lang="scss">

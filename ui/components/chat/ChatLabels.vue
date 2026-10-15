@@ -26,7 +26,7 @@ function toggle(label) {
 </script>
 
 <template>
-  <span class="chat-labels flex align-items-center gap-2 flex-wrap">
+  <span v-if="labels.length || editable" class="chat-labels flex align-items-center gap-2 flex-wrap">
     <LabelTag
         v-for="label in labels"
         :key="label.id"
