@@ -5,6 +5,8 @@ import type {Label} from '../services/waha/dtos';
 import type {ServerId} from '../services/hub/IHubServerAPI';
 import {useServerStore} from '../stores/useServerStore';
 
+const REFRESH_AFTER_SAVE_MS = 1000
+
 /**
  * Labels of one chat: fetch, add, remove. Refetches when chatId changes.
  */
@@ -27,19 +29,30 @@ export const useChatLabels = (serverId: Ref<ServerId>, sessionName: Ref<string>,
     }
 
     async function refresh() {
-        labels.value = []
-        if (!serverId.value || !chatId.value) {
+        const id = chatId.value
+        if (!serverId.value || !id) {
+            labels.value = []
             return
         }
         try {
-            resolvedChatId.value = await resolveLid(chatId.value)
-            labels.value = await store.getChatLabels(serverId.value, sessionName.value, resolvedChatId.value) || []
+            const resolved = await resolveLid(id)
+            const result = await store.getChatLabels(serverId.value, sessionName.value, resolved) || []
+            // Chat changed while we were fetching, drop the stale result
+            if (chatId.value !== id) {
+                return
+            }
+            resolvedChatId.value = resolved
+            labels.value = result
         } catch (e) {
-            console.warn('Failed to fetch chat labels', chatId.value, e)
+            console.warn('Failed to fetch chat labels', id, e)
         }
     }
 
-    watch(chatId, refresh, {immediate: true})
+    watch(chatId, () => {
+        labels.value = []
+        resolvedChatId.value = null
+        refresh()
+    }, {immediate: true})
 
     async function loadAll() {
         try {
@@ -64,6 +77,7 @@ export const useChatLabels = (serverId: Ref<ServerId>, sessionName: Ref<string>,
             })
         } finally {
             saving.value = false
+            await new Promise((resolve) => setTimeout(resolve, REFRESH_AFTER_SAVE_MS))
             await refresh()
         }
     }
