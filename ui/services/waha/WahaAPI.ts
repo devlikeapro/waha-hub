@@ -273,6 +273,14 @@ export class WahaAPI {
         });
     }
 
+    getGroupParticipantTag(serverId: ServerId, sessionName: string, groupId: string, participantId: string): Promise<GroupParticipantTag> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/groups/${groupId}/participants/v2/tags/${participantId}`,
+            params: {},
+        });
+    }
+
     getMyGroupParticipantTag(serverId: ServerId, sessionName: string, groupId: string): Promise<GroupParticipantTag> {
         return this.api.call(serverId, {
             method: 'GET',

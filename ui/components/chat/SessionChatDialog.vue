@@ -71,6 +71,7 @@ const myTag = ref(null)
 const showMyTagDialog = ref(false)
 const savingMyTag = ref(false)
 
+// Tags are requested per participant, the engine resolves lid vs phone number itself
 async function fetchParticipantTags() {
   if (!isGroupChat.value) {
     participantTags.value = null
@@ -78,17 +79,27 @@ async function fetchParticipantTags() {
     return
   }
   const groupId = selectedChat.value.id
+  const serverId = session.value.server.id
+  const sessionName = session.value.name
+  const known = participantTags.value || {}
+  const participants = [...new Set(
+      messages.value
+          .filter((message) => !message.fromMe && message.participant)
+          .map((message) => message.participant),
+  )].filter((participant) => !(participant in known))
   try {
-    const [tags, mine] = await Promise.all([
-      store.getGroupParticipantTags(session.value.server.id, session.value.name, groupId),
-      store.getMyGroupParticipantTag(session.value.server.id, session.value.name, groupId),
+    const [mine, ...tags] = await Promise.all([
+      store.getMyGroupParticipantTag(serverId, sessionName, groupId),
+      ...participants.map((participant) =>
+          store.getGroupParticipantTag(serverId, sessionName, groupId, participant),
+      ),
     ])
     // The user may have switched chats while loading
     if (selectedChat.value?.id !== groupId) return
-    const byId = {}
-    for (const tag of tags || []) {
-      byId[tag.id] = tag.tag
-    }
+    const byId = {...known}
+    participants.forEach((participant, index) => {
+      byId[participant] = tags[index]?.tag || null
+    })
     participantTags.value = byId
     myTag.value = mine?.tag || null
   } catch (e) {
@@ -108,6 +119,7 @@ async function saveMyTag(tag) {
   try {
     await store.setMyGroupParticipantTag(session.value.server.id, session.value.name, selectedChat.value.id, tag)
     showMyTagDialog.value = false
+    participantTags.value = null
     await fetchParticipantTags()
   } catch (e) {
     toast.add({
@@ -126,8 +138,8 @@ watch(selectedChat, () => {
   if (!selectedChat.value) {
     return
   }
+  participantTags.value = null
   fetchMessages()
-  fetchParticipantTags()
 })
 const fetchingMessages = ref(false)
 const loadingEarly = ref(false)
@@ -193,6 +205,7 @@ async function resolveChatAlias(chatId) {
 async function handleEvent(event) {
   if (event.event === 'group.v2.participants.tag') {
     if (event.payload?.group?.id === selectedChat.value?.id) {
+      participantTags.value = null
       fetchParticipantTags()
     }
     return
@@ -248,6 +261,7 @@ function fetchMessages() {
       mergeOverview.value,
   ).then((data) => {
     messages.value = data.reverse()
+    fetchParticipantTags()
   }).finally(() => {
         fetchingMessages.value = false
       }
@@ -271,6 +285,7 @@ async function loadEarlyMessages() {
     if (data.length > 0) {
       offset.value = nextOffset
       messages.value = [...data.reverse(), ...messages.value]
+      fetchParticipantTags()
     } else {
       hasEarlierMessages.value = false
     }

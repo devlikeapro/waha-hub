@@ -323,6 +323,10 @@ export const useServerStore = defineStore('serverStore', () => {
         return wahaAPI.getGroupParticipantTags(serverId, sessionName, groupId)
     }
 
+    async function getGroupParticipantTag(serverId: ServerId, sessionName: string, groupId: string, participantId: string): Promise<GroupParticipantTag> {
+        return wahaAPI.getGroupParticipantTag(serverId, sessionName, groupId, participantId)
+    }
+
     async function getMyGroupParticipantTag(serverId: ServerId, sessionName: string, groupId: string): Promise<GroupParticipantTag> {
         return wahaAPI.getMyGroupParticipantTag(serverId, sessionName, groupId)
     }
@@ -499,6 +503,7 @@ export const useServerStore = defineStore('serverStore', () => {
         setChatLabels,
         getGroupParticipants,
         getGroupParticipantTags,
+        getGroupParticipantTag,
         getMyGroupParticipantTag,
         setMyGroupParticipantTag,
         findPNByLid,
