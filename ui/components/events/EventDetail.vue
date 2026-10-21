@@ -79,6 +79,12 @@ const values = computed(() => {
         payload.action,
         payload.requesterId,
       ]
+    case "group.v2.participants.tag":
+      return [
+        payload.group.id,
+        payload.participant.id,
+        payload.tag,
+      ]
     case "event.response":
     case "event.response.failed":
       return [
