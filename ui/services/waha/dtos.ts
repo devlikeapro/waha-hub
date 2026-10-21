@@ -115,6 +115,12 @@ export interface Label {
     isActive?: boolean;
 }
 
+export interface GroupParticipantTag {
+    id: string;
+    tag: string | null;
+    timestamp: number | null;
+}
+
 export interface SessionStartRequest {
     name?: SessionName;
     config: SessionConfig;

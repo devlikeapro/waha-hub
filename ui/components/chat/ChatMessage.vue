@@ -14,6 +14,14 @@ const props = defineProps({
   message: Object,
   serverId: String,
   sessionName: String,
+  participantTags: Object,
+  myTag: String,
+  editMyTag: Function,
+})
+
+const participantTag = computed(() => {
+  if (!props.participantTags || !props.message?.participant) return null
+  return props.participantTags[props.message.participant] || null
 })
 
 const Ack = {
@@ -219,6 +227,16 @@ onUnmounted(() => {
         <!-- From -->
         <div v-if="!message.fromMe && message.participant">
           <div class="p-text-secondary my-1" style="font-size: 0.9rem">{{ message.participant }}</div>
+          <div v-if="participantTag" class="p-text-secondary my-1" style="font-size: 0.8rem">
+            <span v-tooltip.top="t('chat.tags.memberTag')">{{ participantTag }}</span>
+          </div>
+        </div>
+        <!-- My tag in the group -->
+        <div v-if="message.fromMe && editMyTag" class="my-1" style="font-size: 0.8rem">
+          <a href="#" class="p-text-secondary" v-tooltip.top="t('chat.tags.clickToEdit')" @click.prevent="editMyTag">
+            <template v-if="myTag">{{ myTag }}</template>
+            <template v-else><i class="pi pi-tag" style="font-size: 0.7rem"></i> {{ t('chat.tags.add') }}</template>
+          </a>
         </div>
 
         <!-- Body + ACK -->

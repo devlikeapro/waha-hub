@@ -2,7 +2,7 @@ import {defineStore} from 'pinia'
 import {watchEffect} from '@vue/runtime-core';
 import {reactive, ref} from "vue"
 import type {IHubServerAPI, ServerId, ServerInfo} from "../services/hub/IHubServerAPI";
-import type {ApiKeyRequest, Label, Session, SessionConfig, SessionStartRequest} from "../services/waha/dtos";
+import type {ApiKeyRequest, GroupParticipantTag, Label, Session, SessionConfig, SessionStartRequest} from "../services/waha/dtos";
 import {computed} from "../.nuxt/imports";
 // @ts-ignore
 import lodash from "lodash";
@@ -315,6 +315,18 @@ export const useServerStore = defineStore('serverStore', () => {
         return wahaAPI.setChatLabels(serverId, sessionName, chatId, labelIds)
     }
 
+    async function getGroupParticipantTags(serverId: ServerId, sessionName: string, groupId: string): Promise<GroupParticipantTag[]> {
+        return wahaAPI.getGroupParticipantTags(serverId, sessionName, groupId)
+    }
+
+    async function getMyGroupParticipantTag(serverId: ServerId, sessionName: string, groupId: string): Promise<GroupParticipantTag> {
+        return wahaAPI.getMyGroupParticipantTag(serverId, sessionName, groupId)
+    }
+
+    async function setMyGroupParticipantTag(serverId: ServerId, sessionName: string, groupId: string, tag: string): Promise<boolean> {
+        return wahaAPI.setMyGroupParticipantTag(serverId, sessionName, groupId, tag)
+    }
+
     async function findPNByLid(serverId: ServerId, sessionName: string, lid: string): Promise<{ lid: string, pn: string | null }> {
         return wahaAPI.findPNByLid(serverId, sessionName, lid)
     }
@@ -481,6 +493,9 @@ export const useServerStore = defineStore('serverStore', () => {
         getLabels,
         getChatLabels,
         setChatLabels,
+        getGroupParticipantTags,
+        getMyGroupParticipantTag,
+        setMyGroupParticipantTag,
         findPNByLid,
         findLIDByPhoneNumber,
         getChatMessage,

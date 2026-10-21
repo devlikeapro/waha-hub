@@ -1,5 +1,5 @@
 import {ServerId} from "../hub/IHubServerAPI";
-import {ApiKeyDTO, ApiKeyRequest, App, Label, Locale, Session, SessionConfig, SessionStartRequest} from "./dtos";
+import {ApiKeyDTO, ApiKeyRequest, App, Label, Locale, Session, SessionConfig, SessionStartRequest, GroupParticipantTag} from './dtos';
 import {IWahaAPIClient} from "./IWahaAPIClient";
 import {HTTPRequest} from "./HTTPRequest";
 
@@ -254,6 +254,31 @@ export class WahaAPI {
             uri: `/api/${sessionName}/labels/chats/${chatId}`,
             params: {},
             body: {labels: labelIds.map((id) => ({id}))},
+        });
+    }
+
+    getGroupParticipantTags(serverId: ServerId, sessionName: string, groupId: string): Promise<GroupParticipantTag[]> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/groups/${groupId}/participants/v2/tags`,
+            params: {},
+        });
+    }
+
+    getMyGroupParticipantTag(serverId: ServerId, sessionName: string, groupId: string): Promise<GroupParticipantTag> {
+        return this.api.call(serverId, {
+            method: 'GET',
+            uri: `/api/${sessionName}/groups/${groupId}/participants/v2/tags/my`,
+            params: {},
+        });
+    }
+
+    setMyGroupParticipantTag(serverId: ServerId, sessionName: string, groupId: string, tag: string): Promise<boolean> {
+        return this.api.call(serverId, {
+            method: 'PUT',
+            uri: `/api/${sessionName}/groups/${groupId}/participants/v2/tags/my`,
+            params: {},
+            body: {tag: tag},
         });
     }
 

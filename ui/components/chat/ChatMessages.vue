@@ -8,6 +8,9 @@ const props = defineProps({
   hasEarlierMessages: Boolean,
   serverId: String,
   sessionName: String,
+  participantTags: Object,
+  myTag: String,
+  editMyTag: Function,
 })
 const scroll = ref(null)
 const isLoadingEarlier = ref(false)
@@ -60,6 +63,9 @@ async function handleLoadEarlier() {
               :message="message"
               :serverId="serverId"
               :sessionName="sessionName"
+              :participantTags="participantTags"
+              :myTag="myTag"
+              :editMyTag="editMyTag"
           />
         </div>
       </template>

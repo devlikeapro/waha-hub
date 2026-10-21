@@ -5,6 +5,7 @@ import ChatMessages from "./ChatMessages.vue";
 import ChatHeader from "./ChatHeader.vue";
 import ChatList from "./ChatList.vue";
 import ChatInputFooter from "./ChatInputFooter.vue";
+import GroupMemberTagDialog from "./GroupMemberTagDialog.vue";
 import {ClientStatus, WebSocketClient} from "../../services/WebSocketService";
 import {ref} from "vue";
 import WebSocketStatus from "../events/WebSocketStatus.vue";
@@ -64,12 +65,69 @@ async function loadMoreChats() {
 const selectedChat = ref(null)
 const messages = ref([])
 
+const isGroupChat = computed(() => !!selectedChat.value?.id?.endsWith('@g.us'))
+const participantTags = ref(null)
+const myTag = ref(null)
+const showMyTagDialog = ref(false)
+const savingMyTag = ref(false)
+
+async function fetchParticipantTags() {
+  if (!isGroupChat.value) {
+    participantTags.value = null
+    myTag.value = null
+    return
+  }
+  const groupId = selectedChat.value.id
+  try {
+    const [tags, mine] = await Promise.all([
+      store.getGroupParticipantTags(session.value.server.id, session.value.name, groupId),
+      store.getMyGroupParticipantTag(session.value.server.id, session.value.name, groupId),
+    ])
+    // The user may have switched chats while loading
+    if (selectedChat.value?.id !== groupId) return
+    const byId = {}
+    for (const tag of tags || []) {
+      byId[tag.id] = tag.tag
+    }
+    participantTags.value = byId
+    myTag.value = mine?.tag || null
+  } catch (e) {
+    // Engines without member tags - keep the chat usable
+    console.warn('Failed to load group member tags', e)
+    participantTags.value = null
+    myTag.value = null
+  }
+}
+
+function editMyTag() {
+  showMyTagDialog.value = true
+}
+
+async function saveMyTag(tag) {
+  savingMyTag.value = true
+  try {
+    await store.setMyGroupParticipantTag(session.value.server.id, session.value.name, selectedChat.value.id, tag)
+    showMyTagDialog.value = false
+    await fetchParticipantTags()
+  } catch (e) {
+    toast.add({
+      severity: 'error',
+      summary: t('chat.tags.updateFailedTitle'),
+      detail: e?.response?.data?.message || e?.message || String(e),
+      life: 5000,
+    })
+  } finally {
+    savingMyTag.value = false
+  }
+}
+
 const profilePicture = ref(null)
 watch(selectedChat, () => {
   if (!selectedChat.value) {
     return
   }
   fetchMessages()
+  fetchParticipantTags()
 })
 const fetchingMessages = ref(false)
 const loadingEarly = ref(false)
@@ -82,7 +140,7 @@ const clientStatus = ref(ClientStatus.DISCONNECTED)
 
 function startClient() {
   const server = store.getServer(session.value.server.id)
-  const listenEvents = ['message.any']
+  const listenEvents = ['message.any', 'group.v2.participants.tag']
   client = new WebSocketClient(server, listenEvents, session.value.name)
   client.connect()
   clientStatus.value = ClientStatus.CONNECTING
@@ -133,6 +191,12 @@ async function resolveChatAlias(chatId) {
 }
 
 async function handleEvent(event) {
+  if (event.event === 'group.v2.participants.tag') {
+    if (event.payload?.group?.id === selectedChat.value?.id) {
+      fetchParticipantTags()
+    }
+    return
+  }
   await sleep(1000)
   refreshChats()
   const chatId = selectedChat.value?.id
@@ -402,7 +466,16 @@ const showPromo = ref(false)
                 :hasEarlierMessages="hasEarlierMessages"
                 :serverId="session.server.id"
                 :sessionName="session.name"
+                :participantTags="participantTags"
+                :myTag="myTag"
+                :editMyTag="isGroupChat ? editMyTag : undefined"
             ></ChatMessages>
+            <GroupMemberTagDialog
+                v-model:visible="showMyTagDialog"
+                :tag="myTag"
+                :saving="savingMyTag"
+                @save="saveMyTag"
+            />
 
             <ChatInputFooter
                 :disabled="!selectedChat || fetchingMessages"
