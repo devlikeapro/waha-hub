@@ -115,6 +115,12 @@ export interface Label {
     isActive?: boolean;
 }
 
+export interface GroupParticipant {
+    id: string;
+    pn: string | null;
+    role: string;
+}
+
 export interface GroupParticipantTag {
     id: string;
     tag: string | null;

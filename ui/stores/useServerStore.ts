@@ -2,7 +2,7 @@ import {defineStore} from 'pinia'
 import {watchEffect} from '@vue/runtime-core';
 import {reactive, ref} from "vue"
 import type {IHubServerAPI, ServerId, ServerInfo} from "../services/hub/IHubServerAPI";
-import type {ApiKeyRequest, GroupParticipantTag, Label, Session, SessionConfig, SessionStartRequest} from "../services/waha/dtos";
+import type {ApiKeyRequest, GroupParticipant, GroupParticipantTag, Label, Session, SessionConfig, SessionStartRequest} from "../services/waha/dtos";
 import {computed} from "../.nuxt/imports";
 // @ts-ignore
 import lodash from "lodash";
@@ -315,6 +315,10 @@ export const useServerStore = defineStore('serverStore', () => {
         return wahaAPI.setChatLabels(serverId, sessionName, chatId, labelIds)
     }
 
+    async function getGroupParticipants(serverId: ServerId, sessionName: string, groupId: string): Promise<GroupParticipant[]> {
+        return wahaAPI.getGroupParticipants(serverId, sessionName, groupId)
+    }
+
     async function getGroupParticipantTags(serverId: ServerId, sessionName: string, groupId: string): Promise<GroupParticipantTag[]> {
         return wahaAPI.getGroupParticipantTags(serverId, sessionName, groupId)
     }
@@ -493,6 +497,7 @@ export const useServerStore = defineStore('serverStore', () => {
         getLabels,
         getChatLabels,
         setChatLabels,
+        getGroupParticipants,
         getGroupParticipantTags,
         getMyGroupParticipantTag,
         setMyGroupParticipantTag,
