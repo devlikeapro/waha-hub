@@ -36,6 +36,7 @@ const isWEBJS = computed(() => server.value?.version?.engine === 'WEBJS')
 const metadataKeyValue = ref([])
 
 const clientDeviceOptions = ["Mac OS", "Windows", "Android", "Ubuntu"]
+const proxySchemeOptions = ["http", "https", "socks5"]
 const clientBrowserOptions = ["Chrome", "Firefox", "IE", "Opera", "Safari"]
 
 const proxyEnabled = ref(!!session.value.config?.proxy?.server)
@@ -568,18 +569,32 @@ async function copyRequest(event) {
       </div>
 
       <div v-if="proxyEnabled" class="card mb-4">
-        <div class="field">
-          <label for="proxy-server">{{ t('sessions.server') }}</label>
-          <InputText
-              id="proxy-server"
-              v-model.trim="session.config.proxy.server"
-              required="true"
-              :invalid="submitted && !session.config.proxy.server"
-              :placeholder="t('sessions.hostPort')"
-          />
-          <small class="p-invalid" v-if="submitted && !session.config.proxy.server">{{
-              t('sessions.serverRequired')
-            }}</small>
+        <div class="flex gap-3">
+          <div class="field w-4">
+            <label for="proxy-scheme">{{ t('sessions.proxyScheme') }}</label>
+            <Dropdown
+                id="proxy-scheme"
+                v-model="session.config.proxy.scheme"
+                :options="proxySchemeOptions"
+                showClear
+                :placeholder="proxySchemeOptions[0]"
+                class="w-full"
+            />
+          </div>
+          <div class="field w-full">
+            <label for="proxy-server">{{ t('sessions.server') }}</label>
+            <InputText
+                id="proxy-server"
+                v-model.trim="session.config.proxy.server"
+                required="true"
+                :invalid="submitted && !session.config.proxy.server"
+                :placeholder="t('sessions.hostPort')"
+                class="w-full"
+            />
+            <small class="p-invalid" v-if="submitted && !session.config.proxy.server">{{
+                t('sessions.serverRequired')
+              }}</small>
+          </div>
         </div>
         <div class="flex gap-3">
           <div class="field w-full">
