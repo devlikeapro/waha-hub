@@ -7,7 +7,7 @@ const props = defineProps([
     "disabled"
 ])
 
-const emit = defineEmits(['view', 'apps'])
+const emit = defineEmits(['view', 'apps', 'proxy'])
 
 
 const store = useServerStore()
@@ -111,6 +111,7 @@ defineExpose({
         :name="`'${session.name}' ${t('sessions.session')}`"
         @view="$emit('view', session)"
         @apps="$emit('apps', session)"
+        @proxy="$emit('proxy', session)"
         @start="startSession"
         @restart="restartSession"
         @stop="stopSession"

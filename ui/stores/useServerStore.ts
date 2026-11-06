@@ -386,6 +386,26 @@ export const useServerStore = defineStore('serverStore', () => {
         return wahaAPI.sendText(serverId, sessionName, chatId, text)
     }
 
+    async function getProxyInfo(serverId: ServerId, sessionName: string | null, body: any): Promise<any> {
+        return wahaAPI.getProxyInfo(serverId, sessionName, body)
+    }
+
+    async function probeProxyConnect(serverId: ServerId, sessionName: string | null, body: any): Promise<any> {
+        return wahaAPI.probeProxyConnect(serverId, sessionName, body)
+    }
+
+    async function probeProxyExitIp(serverId: ServerId, sessionName: string | null, body: any): Promise<any> {
+        return wahaAPI.probeProxyExitIp(serverId, sessionName, body)
+    }
+
+    async function probeProxyHttp(serverId: ServerId, sessionName: string | null, body: any): Promise<any> {
+        return wahaAPI.probeProxyHttp(serverId, sessionName, body)
+    }
+
+    async function probeProxyWebSocket(serverId: ServerId, sessionName: string | null, body: any): Promise<any> {
+        return wahaAPI.probeProxyWebSocket(serverId, sessionName, body)
+    }
+
     async function getPairingCode(serverId: ServerId, sessionName: string, phone): Promise<string> {
         return wahaAPI.getPairingCode(serverId, sessionName, phone)
     }
@@ -484,6 +504,11 @@ export const useServerStore = defineStore('serverStore', () => {
         stopServer,
         createSession,
         updateSession,
+        getProxyInfo,
+        probeProxyConnect,
+        probeProxyExitIp,
+        probeProxyHttp,
+        probeProxyWebSocket,
         deleteSession,
         startSession,
         stopSession,

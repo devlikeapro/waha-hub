@@ -1,4 +1,5 @@
 <script setup>
+import SessionProxyFields from "./SessionProxyFields.vue";
 import {useServerStore} from "../stores/useServerStore";
 import {ref, computed, watch} from "vue";
 import lodash from "lodash";
@@ -36,10 +37,10 @@ const isWEBJS = computed(() => server.value?.version?.engine === 'WEBJS')
 const metadataKeyValue = ref([])
 
 const clientDeviceOptions = ["Mac OS", "Windows", "Android", "Ubuntu"]
-const proxySchemeOptions = ["http", "https", "socks5"]
 const clientBrowserOptions = ["Chrome", "Firefox", "IE", "Opera", "Safari"]
 
 const proxyEnabled = ref(!!session.value.config?.proxy?.server)
+const proxyCheckVisible = ref(false)
 const clientEnabled = ref(session.value.config?.client != null)
 const chatsFilterEnabled = ref(session.value.config?.ignore != null)
 const includeStatus = ref(!session.value.config?.ignore?.status)
@@ -569,50 +570,16 @@ async function copyRequest(event) {
       </div>
 
       <div v-if="proxyEnabled" class="card mb-4">
-        <div class="flex gap-3">
-          <div class="field w-4">
-            <label for="proxy-scheme">{{ t('sessions.proxyScheme') }}</label>
-            <Dropdown
-                id="proxy-scheme"
-                v-model="session.config.proxy.scheme"
-                :options="proxySchemeOptions"
-                showClear
-                :placeholder="proxySchemeOptions[0]"
-                class="w-full"
-            />
-          </div>
-          <div class="field w-full">
-            <label for="proxy-server">{{ t('sessions.server') }}</label>
-            <InputText
-                id="proxy-server"
-                v-model.trim="session.config.proxy.server"
-                required="true"
-                :invalid="submitted && !session.config.proxy.server"
-                :placeholder="t('sessions.hostPort')"
-                class="w-full"
-            />
-            <small class="p-invalid" v-if="submitted && !session.config.proxy.server">{{
-                t('sessions.serverRequired')
-              }}</small>
-          </div>
-        </div>
-        <div class="flex gap-3">
-          <div class="field w-full">
-            <label for="proxy-username">{{ t('sessions.usernameOptional') }}</label>
-            <InputText
-                id="proxy-username"
-                v-model.trim="session.config.proxy.username"
-            />
-          </div>
-          <div class="field w-full">
-            <label for="proxy-password">{{ t('sessions.passwordOptional') }}</label>
-            <Password
-                id="proxy-password"
-                v-model.trim="session.config.proxy.password"
-                :feedback="false"
-                toggleMask
-            />
-          </div>
+        <SessionProxyFields v-model:proxy="session.config.proxy" :submitted="submitted"/>
+        <!-- w-auto: the dialog is p-fluid, which stretches every button to a full line -->
+        <div class="flex justify-content-end">
+          <Button
+              :label="t('sessions.proxyChecks.test')"
+              icon="pi pi-play"
+              severity="success"
+              class="w-auto"
+              @click="proxyCheckVisible = true"
+          />
         </div>
       </div>
     </div>
@@ -686,6 +653,14 @@ async function copyRequest(event) {
       </div>
     </template>
   </Dialog>
+  <!-- v-if: the table clears the session after a save while this dialog is still mounted -->
+  <SessionProxyChecksDialog
+      v-if="session"
+      v-model:visible="proxyCheckVisible"
+      :server="session.server"
+      :session-name="modeUpdate ? session.name : null"
+      :proxy="proxyEnabled ? session.config.proxy : null"
+  ></SessionProxyChecksDialog>
 </template>
 
 <style scoped lang="scss">

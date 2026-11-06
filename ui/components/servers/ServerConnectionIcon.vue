@@ -1,17 +1,17 @@
 <script setup>
-defineProps(['connected'])
+import StatusIcon from "../common/StatusIcon.vue";
 
+// undefined = still checking, true = connected, false = not connected
+const props = defineProps(['connected'])
+
+function status() {
+  if (props.connected === undefined) return 'running'
+  return props.connected ? 'ok' : 'fail'
+}
 </script>
 
 <template>
-  <i
-      class="pi"
-      :class="{
-        'pi pi-spin pi-spinner': connected===undefined,
-        'text-green-500 pi-check-circle': connected === true,
-        'text-pink-500 pi-times-circle': connected === false,
-  }">
-  </i>
+  <StatusIcon :status="status()"/>
 </template>
 
 <style scoped lang="scss">

@@ -43,9 +43,42 @@ export class WahaAPIMockClient implements IWahaAPIClient {
         } else if (request.uri.startsWith('/api/keys/') && request.method === 'DELETE') {
             const id = request.uri.replace('/api/keys/', '')
             return this.deleteApiKey(serverId, id)
+        } else if (request.uri.includes('/proxy/') && request.method === 'POST') {
+            return this.proxyProbe(request)
         } else {
             throw new Error(`Unknown request ${request.method} ${request.uri}`)
         }
+    }
+
+    private async proxyProbe(request: HTTPRequest): Promise<any> {
+        await sleep(500)
+        const proxy = request.body?.proxy
+        if (request.uri.endsWith('/proxy/info')) {
+            return {source: proxy ? 'request' : 'session', url: 'http://proxy.example.com:3128/', username: proxy?.username ?? null}
+        }
+        if (request.uri.endsWith('/probe/connect')) {
+            return {ok: true, latency: random(10, 80), address: '203.0.113.5', port: 3128, error: null}
+        }
+        if (request.uri.endsWith('/probe/http')) {
+            return {ok: true, url: request.body?.url ?? 'https://web.whatsapp.com/', method: request.body?.method ?? 'HEAD', status: 200, latency: random(100, 400), body: '', error: null}
+        }
+        if (request.uri.endsWith('/probe/websocket')) {
+            // Drops after 12 seconds - shows the milestones in the dialog
+            const alive = 12_000
+            await sleep(alive)
+            return {
+                ok: false,
+                url: request.body?.url ?? 'wss://echo.websocket.org',
+                duration: alive,
+                sent: 0,
+                received: 0,
+                error: {code: 'PROXY_DISCONNECTED', message: `The connection closed after ${alive} ms (code 1006)`},
+            }
+        }
+        if (request.uri.endsWith('/probe/exit-ip')) {
+            return {ok: true, ip: '203.0.113.10', url: request.body?.url ?? 'https://ifconfig.me/ip', error: null}
+        }
+        return {ok: true, latency: random(100, 400), error: null}
     }
 
     async getSessions(id: ServerId): Promise<Session[]> {

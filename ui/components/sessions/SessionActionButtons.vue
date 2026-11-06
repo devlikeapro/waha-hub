@@ -24,8 +24,35 @@ const emit = defineEmits([
   "stop",
   "logout",
   "delete",
-  "apps"
+  "apps",
+  "proxy",
 ])
+
+// Three-dots menu; the delete confirmation pops up next to the dots button
+const menuRef = ref(null)
+let menuEvent = null
+const menuItems = computed(() => {
+  const items = []
+  if (shouldShowProxy.value) {
+    items.push({
+      label: t('sessions.proxyChecks.run'),
+      icon: 'pi pi-globe',
+      command: () => emit('proxy'),
+    })
+  }
+  items.push({
+    label: t('sessions.delete'),
+    icon: 'pi pi-trash',
+    class: 'text-red-500',
+    command: () => confirmRemoveSession(menuEvent),
+  })
+  return items
+})
+
+function toggleMenu(event) {
+  menuEvent = event
+  menuRef.value.toggle(event)
+}
 
 function shouldConfirm(action) {
   if (!props.skipConfirmation) {
@@ -69,6 +96,13 @@ const shouldShowApps = computed(() => {
     return true
   }
   return !props.hideActions.includes('apps')
+})
+
+const shouldShowProxy = computed(() => {
+  if (!props.hideActions) {
+    return true
+  }
+  return !props.hideActions.includes('proxy')
 })
 
 function confirmRestartSession(event) {
@@ -126,9 +160,10 @@ function confirmLogoutSession(event) {
   });
 }
 
+// Always the centered dialog (rendered once by the table): a popup anchored to the menu button closes with the menu
 function confirmRemoveSession(event) {
   confirm.require({
-    group: props.group,
+    group: 'delete',
     target: event.target,
     message: t('sessions.deleteConfirm', { name: props.name }),
     icon: 'pi pi-exclamation-triangle',
@@ -214,18 +249,27 @@ function confirmRemoveSession(event) {
       />
     </div>
     <Divider layout="vertical" class="mx-1"/>
-    <!-- Right group: destroy the session entry -->
+    <!-- Right group: the rest, behind three dots -->
     <div class="flex flex-row gap-2">
       <Button
-          icon="pi pi-trash"
-          v-tooltip.top="t('sessions.delete')"
-          severity="danger"
+          icon="pi pi-ellipsis-v"
+          v-tooltip.top="t('sessions.moreActions')"
+          severity="secondary"
           rounded
           outlined
-          @click="confirmRemoveSession($event)"
+          @click="toggleMenu($event)"
           :loading="isRemoving"
           :disabled="allDisabled"
       />
+      <Menu ref="menuRef" :model="menuItems" popup>
+        <!-- The theme colors the icon and label spans, so the item class has to land on them -->
+        <template #item="{ item, props }">
+          <a v-bind="props.action">
+            <span v-bind="props.icon" :class="item.class"/>
+            <span v-bind="props.label" :class="item.class">{{ item.label }}</span>
+          </a>
+        </template>
+      </Menu>
     </div>
   </div>
   <ConfirmPopup

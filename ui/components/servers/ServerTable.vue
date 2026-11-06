@@ -10,6 +10,7 @@ import OverlayLink from "../common/OverlayLink.vue";
 import WorkerNoApiKeyWarning from "./WorkerNoApiKeyWarning.vue";
 import ApiKeysDialog from "../apikeys/ApiKeysDialog.vue";
 import {useI18n} from 'vue-i18n';
+import SessionProxyChecksDialog from "../sessions/SessionProxyChecksDialog.vue";
 
 
 const {t} = useI18n();
@@ -25,6 +26,37 @@ const serverControlDialog = ref(false)
 const apikeyDialog = ref(false)
 const forceRestart = ref(false)
 const linksOverlayPanel = ref(null)
+const proxyChecksDialog = ref(false)
+const proxyChecksServer = ref(null)
+
+// Three-dots menu, one for the table: the row it was opened for drives the items
+const menuRef = ref(null)
+const menuServer = ref(null)
+const menuItems = computed(() => [
+  {
+    label: t('sessions.proxyChecks.run'),
+    icon: 'pi pi-globe',
+    disabled: !menuServer.value?.connected,
+    command: () => showProxyChecks(menuServer.value),
+  },
+  {
+    label: t('servers.disconnectWorker'),
+    icon: 'pi pi-times',
+    class: 'text-red-500',
+    command: () => confirmDeleteServer(menuServer.value),
+  },
+])
+
+function toggleMenu(event, selected) {
+  menuServer.value = selected
+  menuRef.value.toggle(event)
+}
+
+// Any proxy typed into the modal, checked from this worker through the /api/proxy endpoints
+function showProxyChecks(selected) {
+  proxyChecksServer.value = selected
+  proxyChecksDialog.value = true
+}
 
 const toggleLinksPanel = (event, server) => {
   linksOverlayPanel.value.toggle(event, server);
@@ -67,10 +99,10 @@ function editServer(selected) {
   serverDialog.value = true;
 }
 
-function confirmDeleteServer(event, server) {
+// The centered dialog: a popup anchored to the menu button closes together with the menu
+function confirmDeleteServer(server) {
   confirm.require({
-    group: "popup",
-    target: event.target,
+    group: "disconnect",
     message: t('servers.disconnectWorkerConfirm', {worker: server.name}),
     icon: 'pi pi-exclamation-triangle',
     rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
@@ -262,8 +294,8 @@ function refreshServers() {
                 v-tooltip.top="t('servers.editWorker')"
                 icon="pi pi-pencil" severity="success" rounded outlined @click="editServer(data)"/>
             <Button
-                v-tooltip.top="t('servers.disconnectWorker')"
-                icon="pi pi-times" severity="danger" rounded outlined @click="confirmDeleteServer($event, data)"/>
+                v-tooltip.top="t('servers.moreActions')"
+                icon="pi pi-ellipsis-v" severity="secondary" rounded outlined @click="toggleMenu($event, data)"/>
           </div>
         </div>
       </template>
@@ -282,7 +314,25 @@ function refreshServers() {
       v-model:visible="apikeyDialog"
       v-model:server="server"
   />
-  <ConfirmPopup group="popup"></ConfirmPopup>
+  <Menu ref="menuRef" :model="menuItems" popup>
+    <!-- The theme colors the icon and label spans, so the item class has to land on them -->
+    <template #item="{ item, props }">
+      <a v-bind="props.action">
+        <span v-bind="props.icon" :class="item.class"/>
+        <span v-bind="props.label" :class="item.class">{{ item.label }}</span>
+      </a>
+    </template>
+  </Menu>
+  <SessionProxyChecksDialog
+      v-if="proxyChecksServer"
+      v-model:visible="proxyChecksDialog"
+      :server="proxyChecksServer.id"
+      :session-name="null"
+      :subject="proxyChecksServer.name"
+      editable
+      :auto-run="false"
+  ></SessionProxyChecksDialog>
+  <ConfirmDialog group="disconnect"></ConfirmDialog>
   <ConfirmDialog group="restart">
     <template #message="slotProps">
       <div>

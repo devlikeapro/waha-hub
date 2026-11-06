@@ -1,4 +1,5 @@
 <script setup>
+import IntegerInput from "../common/IntegerInput.vue";
 import {ref, watch} from "vue";
 import {convertKeyValueToList} from "../../utils/objects";
 import {WAHAEvents} from "../../services/WAHAEvents";
@@ -95,42 +96,22 @@ watch(customHeadersEnabled, (value, oldValue) => {
         <div class="flex gap-3">
           <div class="field" style="width: 10em">
             <label for="retries-attempts">{{ t('sessions.webhooks.attempts') }}</label>
-            <InputNumber
+            <IntegerInput
                 v-model="webhook.retries.attempts"
                 inputId="retries-delay-attempts"
-                showButtons
-                buttonLayout="horizontal"
                 :min="1"
-                :step="1"
                 :disabled="disabled"
-            >
-              <template #incrementbuttonicon>
-                <span class="pi pi-plus"/>
-              </template>
-              <template #decrementbuttonicon>
-                <span class="pi pi-minus"/>
-              </template>
-            </InputNumber>
+            />
           </div>
 
           <div class="field" style="width: 10em">
             <label for="retries-delay-seconds">{{ t('sessions.webhooks.delaySeconds') }}</label>
-            <InputNumber
+            <IntegerInput
                 v-model="webhook.retries.delaySeconds"
                 inputId="retries-delay-seconds"
-                showButtons
-                buttonLayout="horizontal"
                 :min="1"
-                :step="1"
                 :disabled="disabled"
-            >
-              <template #incrementbuttonicon>
-                <span class="pi pi-plus"/>
-              </template>
-              <template #decrementbuttonicon>
-                <span class="pi pi-minus"/>
-              </template>
-            </InputNumber>
+            />
           </div>
 
           <div class="field">

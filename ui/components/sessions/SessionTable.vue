@@ -22,6 +22,8 @@ const session = ref({
   },
 })
 const sessionDialog = ref(false)
+const proxyChecksDialog = ref(false)
+const proxyChecksSession = ref(null)
 const sessionDialogMode = ref(undefined)
 const sessionControlDialog = ref(false)
 const sessionChatsDialog = ref(false)
@@ -222,6 +224,12 @@ function openSessionControl(data) {
 function openSessionChats(data) {
   session.value = data
   sessionChatsDialog.value = true;
+}
+
+// The checks run on the saved config, so no proxy override is passed
+function showProxyChecks(data) {
+  proxyChecksSession.value = data
+  proxyChecksDialog.value = true
 }
 
 function showApps(data) {
@@ -472,7 +480,7 @@ const globalFilterFields = computed(
               group="dialog"
               :name="`'${selectedVisibleSessions.length}' sessions`"
               :all-disabled="selectedVisibleSessions.length===0"
-              :hide-actions="['view', 'apps']"
+              :hide-actions="['view', 'apps', 'proxy']"
               :is-starting="isBatchStarting"
               :is-restarting="isBatchRestarting"
               :is-stopping="isBatchStopping"
@@ -493,11 +501,13 @@ const globalFilterFields = computed(
             :disabled="selectedVisibleSessions.length!==0"
             @view="showSessionConfig"
             @apps="showApps"
+            @proxy="showProxyChecks"
         />
       </template>
     </Column>
   </DataTable>
   <ConfirmPopup></ConfirmPopup>
+  <ConfirmDialog group="delete"></ConfirmDialog>
   <SessionChatDialog
       v-model:visible="sessionChatsDialog"
       v-model:session="session"
@@ -511,6 +521,12 @@ const globalFilterFields = computed(
       v-model:session="session"
       :mode="sessionDialogMode"
   ></SessionDialog>
+  <SessionProxyChecksDialog
+      v-if="proxyChecksSession"
+      v-model:visible="proxyChecksDialog"
+      :server="proxyChecksSession.server.id"
+      :session-name="proxyChecksSession.name"
+  ></SessionProxyChecksDialog>
   <AppsDialog
       v-model:visible="appsDialog"
       v-model:session="session"

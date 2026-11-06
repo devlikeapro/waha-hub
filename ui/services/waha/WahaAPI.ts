@@ -26,6 +26,14 @@ function makeFilterCompatible(metadata: any): string {
     return result.join(';')
 }
 
+// Session proxy endpoints when the session exists, the admin-only /api/proxy ones for a not yet created session
+function proxyUri(sessionName: string | null, path: string): string {
+    if (sessionName) {
+        return `/api/sessions/${sessionName}/${path}`
+    }
+    return `/api/${path}`
+}
+
 export class WahaAPI {
     private api: IWahaAPIClient;
 
@@ -122,6 +130,51 @@ export class WahaAPI {
             method: 'GET',
             uri: `/api/sessions/${sessionName}`,
             params: {},
+        });
+    }
+
+    getProxyInfo(serverId: ServerId, sessionName: string | null, body: any): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: proxyUri(sessionName, 'proxy/info'),
+            params: {},
+            body: body,
+        });
+    }
+
+    probeProxyConnect(serverId: ServerId, sessionName: string | null, body: any): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: proxyUri(sessionName, 'proxy/probe/connect'),
+            params: {},
+            body: body,
+        });
+    }
+
+    probeProxyExitIp(serverId: ServerId, sessionName: string | null, body: any): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: proxyUri(sessionName, 'proxy/probe/exit-ip'),
+            params: {},
+            body: body,
+        });
+    }
+
+    probeProxyHttp(serverId: ServerId, sessionName: string | null, body: any): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: proxyUri(sessionName, 'proxy/probe/http'),
+            params: {},
+            body: body,
+        });
+    }
+
+    probeProxyWebSocket(serverId: ServerId, sessionName: string | null, body: any): Promise<any> {
+        return this.api.call(serverId, {
+            method: 'POST',
+            uri: proxyUri(sessionName, 'proxy/probe/websocket'),
+            params: {},
+            body: body,
         });
     }
 

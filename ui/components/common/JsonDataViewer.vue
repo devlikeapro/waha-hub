@@ -12,6 +12,11 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  // Off when the caller places its own copy button, next to a heading
+  copyButton: {
+    type: Boolean,
+    default: true,
+  },
 });
 const {t} = useI18n();
 
@@ -30,7 +35,7 @@ async function copy(event) {
 
 <template>
   <div class="flex gap-2">
-    <div style="margin-top: -0.75rem">
+    <div v-if="copyButton" style="margin-top: -0.75rem">
       <Button
           rounded
           text=""
