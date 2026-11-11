@@ -1,6 +1,8 @@
 <script setup>
 import {sleep} from "../../services/utils";
 
+const QR_SIZE = "20rem"
+
 const store = useServerStore()
 const props = defineProps({
   session: Object,
@@ -27,22 +29,22 @@ const {
       <RefreshButton @click="refresh"></RefreshButton>
     </div>
     <div class="m-auto w-full">
-      <template v-if="pending">
-        <ProgressBar mode="indeterminate" style="height: 3px"></ProgressBar>
-        <Skeleton
-            v-if="!data && !error"
-            width="100%"
-            height="20rem"
-        ></Skeleton>
-      </template>
+      <ProgressBar v-if="pending" mode="indeterminate" style="height: 3px"></ProgressBar>
       <div class="flex justify-content-center">
+        <!-- Same box for the skeleton and the QR, also on refresh -->
+        <Skeleton
+            v-if="pending"
+            :width="QR_SIZE"
+            :height="QR_SIZE"
+        ></Skeleton>
         <Base64Img
-            v-if="data"
+            v-else-if="data"
             :data="data.data"
             :mimetype="data.mimetype"
+            :style="{width: QR_SIZE, height: QR_SIZE, imageRendering: 'pixelated'}"
         ></Base64Img>
         <pre
-            v-if="error"
+            v-else-if="error"
             style="background-color: #f8f9fa; padding: 1rem; color: red; white-space: pre-wrap;"
         >
 {{ error.cause.response.data.message || error.cause.response.data || error }}
